@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--toolbar-->
+    <color name="colorPrimary">#38B44A</color>
+    <color name="colorPrimaryDark">#38B44A</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="user_name_text_bg">#FFCE44</color>
+    <color name="app_text_color">#ffffff</color>
+</resources>
