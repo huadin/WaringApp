@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/login_fragment_parent_margin"
+    android:orientation="vertical">
+
+    <!--手机号码-->
+    <LinearLayout
+        style="@style/register_edit_text_layout">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_phone_80"/>
+
+        <com.huadin.widget.ClearEditText
+            android:id="@+id/register_login_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/register_edit_text_margin_left"
+            android:maxLength="11"/>
+    </LinearLayout>
+
+    <!--密码-->
+    <LinearLayout
+        style="@style/register_edit_text_layout">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_password_80"/>
+
+        <com.huadin.widget.ClearEditText
+            android:id="@+id/register_login_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/register_edit_text_margin_left"
+            android:inputType="textPassword"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/register_app"
+        style="@style/login_register_submit_button"
+        android:text="@string/register_app"/>
+
+
+</LinearLayout>

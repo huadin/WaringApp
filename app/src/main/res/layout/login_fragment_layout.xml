@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/login_fragment_parent_margin"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/to_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:padding="@dimen/to_register_padding"
+        android:text="@string/register_app"
+        android:textSize="@dimen/text_size_18"/>
+
+
+    <com.huadin.widget.ClearEditText
+        android:id="@+id/login_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_phone"
+        android:maxLength="11"/>
+
+    <com.huadin.widget.ClearEditText
+        android:id="@+id/login_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/login_fragment_margin_top"
+        android:hint="@string/hint_password"
+        android:inputType="textPassword"/>
+
+    <Button
+        android:id="@+id/login_app"
+        style="@style/login_register_submit_button"
+        android:text="@string/login_app"/>
+
+</LinearLayout>

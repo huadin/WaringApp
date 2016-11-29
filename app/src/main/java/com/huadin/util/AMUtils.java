@@ -27,15 +27,16 @@ public class AMUtils
 
   /**
    * 隐藏软键盘
+   *
    * @param context context
-   * @param e editText
+   * @param e       editText
    */
   public static void onInactive(Context context, EditText e)
   {
     if (e == null) return;
 
     InputMethodManager manager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-    manager.hideSoftInputFromWindow(e.getWindowToken(),0);
+    manager.hideSoftInputFromWindow(e.getWindowToken(), 0);
   }
 
   /**
@@ -49,7 +50,35 @@ public class AMUtils
     if (et == null) return;
 
     InputMethodManager manager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-    manager.showSoftInput(et,0);
+    manager.showSoftInput(et, 0);
+  }
+
+  /**
+   * 判断是否为空
+   *
+   * @param str String
+   * @return boolean
+   */
+  public static boolean isEmpty(String str)
+  {
+    if (str == null || str.length() == 0 || str.equalsIgnoreCase("null") || str.isEmpty() || str.equals(""))
+    {
+      return true;
+    } else
+    {
+      return false;
+    }
+  }
+
+  public static boolean validatePassword(String str)
+  {
+    if (str == null || str.length() < 6 || str.length() > 20)
+    {
+      return true;
+    } else
+    {
+      return false;
+    }
   }
 
 }

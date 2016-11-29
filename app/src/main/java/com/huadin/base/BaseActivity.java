@@ -1,13 +1,15 @@
-package com.huadin.base_ui;
+package com.huadin.base;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.huadin.eventbus.EventCenter;
 import com.huadin.util.ToastUtil;
 import com.zhy.autolayout.AutoLayoutActivity;
 
-import butterknife.ButterKnife;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 public abstract class BaseActivity extends AutoLayoutActivity
 {
@@ -25,6 +27,7 @@ public abstract class BaseActivity extends AutoLayoutActivity
     mContext = this;
     LOG_TAG = this.getClass().getSimpleName();
     mToast = new ToastUtil(mContext);
+    EventBus.getDefault().register(this);
 
     if (getContentViewLayoutID() != 0)
     {
@@ -49,4 +52,24 @@ public abstract class BaseActivity extends AutoLayoutActivity
     startActivity(intent);
   }
 
+  @Override
+  protected void onDestroy()
+  {
+    super.onDestroy();
+    EventBus.getDefault().unregister(this);
+  }
+
+  @Subscribe()
+  public void defaultOnEvent(EventCenter eventCenter)
+  {
+    if (eventCenter != null)
+    {
+      onEventComming(eventCenter);
+    }
+  }
+
+  protected void onEventComming(EventCenter eventCenter)
+  {
+
+  }
 }

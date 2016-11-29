@@ -14,4 +14,14 @@
     <dimen name="text_size_18">18sp</dimen>
     <dimen name="text_size_22">22sp</dimen>
 
+    <!--LoadDialog-->
+    <dimen name="load_dialog_width">50dp</dimen>
+    <dimen name="load_dialog_margin">10dp</dimen>
+
+    <!--loginFragment layout-->
+    <dimen name="login_fragment_parent_margin">16dp</dimen>
+    <dimen name="login_fragment_margin_top">20dp</dimen>
+    <dimen name="register_edit_text_margin_left">16dp</dimen>
+    <dimen name="to_register_padding">5dp</dimen>
+
 </resources>

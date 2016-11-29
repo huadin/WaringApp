@@ -6,12 +6,11 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.huadin.base_ui.BaseActivity;
+import com.huadin.base.BaseActivity;
 import com.huadin.bean.Person;
 import com.huadin.login.LoginActivity;
 import com.huadin.util.MD5util;
@@ -94,7 +93,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     int id = item.getItemId();
     if (id == R.id.action_settings)
     {
-      testBmob();
       return true;
     }
     return super.onOptionsItemSelected(item);
@@ -137,39 +135,5 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
   {
     super.onPause();
     mToast.onPause();
-  }
-
-  private void testBmob()
-  {
-    Person p = new Person();
-    p.setLogin_name("HuaDin_1");
-    p.setUser_name("HD");
-    p.setUser_password(MD5util.getMD5("123456"));
-    p.setUser_address("海淀");
-    p.setUser_phone("18600000000");
-    p.setCreate_date("2016-11-26");
-    p.setUser_permission(true);
-
-    p.save(new SaveListener<String>()
-    {
-      @Override
-      public void done(String objectId, BmobException e)
-      {
-        if (e == null)
-        {
-          mToast.showMessage("添加数据成功，返回objectId为：", 1000);
-        } else
-        {
-          int errorCode = e.getErrorCode();
-          if (errorCode == 401)
-          {
-            mToast.showMessage(R.string.register_name_exist,1000);
-          }else
-          {
-            mToast.showMessage("创建数据失败：" + e.getMessage(), 1000);
-          }
-        }
-      }
-    });
   }
 }
