@@ -14,7 +14,7 @@ public interface RegisterContract
 
     void registerSuccess();
 
-    void registerError(String errorMsg);
+    void registerError(int errorCode);
 
     String userName();
 
@@ -22,10 +22,12 @@ public interface RegisterContract
 
     void inputError(int errorRes);
 
+    String registerCode();
+
   }
 
   interface Presenter extends BasePresenter
   {
-
+    void getRegisterCode();
   }
 }

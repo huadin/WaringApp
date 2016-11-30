@@ -4,6 +4,11 @@
     <color name="colorPrimary">#38B44A</color>
     <color name="colorPrimaryDark">#38B44A</color>
     <color name="colorAccent">#FF4081</color>
+    <!--显示用户名后一个字的背景色-->
     <color name="user_name_text_bg">#FFCE44</color>
+    <!--控件字体颜色-->
     <color name="app_text_color">#ffffff</color>
+    <!--注册账号-->
+    <color name="register_account_text_color">#cc000000</color>
+    
 </resources>

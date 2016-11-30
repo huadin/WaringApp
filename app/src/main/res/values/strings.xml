@@ -36,6 +36,18 @@
     <string name="login_password_not_null">密码不能为空</string>
     <string name="login_password_length_error">请输入6~20位的密码</string>
     <string name="register_loading">正在注册...</string>
-    <string name="register_app">注册</string>
+    <string name="register_app">注册账号</string>
     <string name="register_success">注册成功</string>
+    <!--登录,注册异常-->
+    <string name="error_code_101">用户名或密码不正确</string>
+    <string name="error_code_202">用户名已存在</string>
+    <string name="error_code_205">用户名不存在</string>
+    <string name="error_code_207">验证码错误</string>
+    <string name="error_code_209">该手机号码 已存在</string>
+    <string name="error_code_210">旧密码不正确</string>
+    <string name="error_code_9010">网络超时</string>
+    <string name="error_code_9016">无网络连接，请检查您的手机网络</string>
+    <string name="to_forget_password">忘记密码?</string>
+    <string name="request_register_code">获取验证码</string>
+    <string name="register_code_not_null">请输入验证码</string>
 </resources>

@@ -93,14 +93,14 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, T
   public void loginSuccess()
   {
     //登录成功
-    mToast.showMessage(R.string.login_success, 1000);
+    mToast.showMessage(R.string.login_success, 500);
   }
 
   @Override
   public void loginError(int errorMsg)
   {
     //登录异常
-    mToast.showMessage(errorMsg, 1000);
+    mToast.showMessage(errorMsg, 500);
   }
 
   @Override

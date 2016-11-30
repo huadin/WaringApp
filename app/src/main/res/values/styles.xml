@@ -41,4 +41,13 @@
         <item name="android:textSize">@dimen/text_size_18</item>
     </style>
 
+    <!--忘记密码,注册账号-->
+    <style name="forget_password_layout">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/to_register_padding</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
+
 </resources>

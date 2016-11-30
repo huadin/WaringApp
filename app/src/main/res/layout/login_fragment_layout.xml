@@ -6,17 +6,6 @@
     android:layout_margin="@dimen/login_fragment_parent_margin"
     android:orientation="vertical">
 
-
-    <TextView
-        android:id="@+id/to_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:padding="@dimen/to_register_padding"
-        android:text="@string/register_app"
-        android:textSize="@dimen/text_size_18"/>
-
-
     <com.huadin.widget.ClearEditText
         android:id="@+id/login_name"
         android:layout_width="match_parent"
@@ -36,5 +25,26 @@
         android:id="@+id/login_app"
         style="@style/login_register_submit_button"
         android:text="@string/login_app"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/login_fragment_register_margin_top"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/to_forget_password"
+            style="@style/forget_password_layout"
+            android:text="@string/to_forget_password"/>
+
+        <TextView
+            android:id="@+id/to_register"
+            style="@style/forget_password_layout"
+            android:gravity="right"
+            android:text="@string/register_app"
+            android:textColor="@color/register_account_text_color"/>
+    </LinearLayout>
+
 
 </LinearLayout>

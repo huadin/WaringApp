@@ -31,7 +31,7 @@ public class LoginActivity extends BaseActivity
   private void initToolBar()
   {
     mToolbar.setNavigationIcon(R.drawable.icon_bg_left);
-    mToolbar.setTitle(getString(R.string.back));
+//    mToolbar.setTitle(getString(R.string.back));
     mToolbar.setNavigationOnClickListener(new View.OnClickListener()
     {
       @Override
@@ -63,7 +63,7 @@ public class LoginActivity extends BaseActivity
     return R.layout.activity_login;
   }
 
-
+  //eventBus回调
   @Override
   protected void onEventComming(EventCenter eventCenter)
   {
