@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.huadin.eventbus.EventCenter;
+import com.huadin.util.NetworkUtil;
 import com.huadin.util.ToastUtil;
 import com.zhy.autolayout.AutoLayoutActivity;
 
@@ -19,6 +20,7 @@ public abstract class BaseActivity extends AutoLayoutActivity
   protected static String LOG_TAG = null;
   protected Context mContext;
   protected ToastUtil mToast;
+  protected boolean isNetwork;
 
   @Override
   protected void onCreate(Bundle savedInstanceState)
@@ -28,6 +30,7 @@ public abstract class BaseActivity extends AutoLayoutActivity
     LOG_TAG = this.getClass().getSimpleName();
     mToast = new ToastUtil(mContext);
     EventBus.getDefault().register(this);
+    isNetwork = NetworkUtil.getNetworkState(mContext);
 
     if (getContentViewLayoutID() != 0)
     {

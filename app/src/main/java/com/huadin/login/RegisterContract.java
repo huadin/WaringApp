@@ -24,6 +24,19 @@ public interface RegisterContract
 
     String registerCode();
 
+    boolean networkIsAvailable();
+
+    /**
+     * 重新获取验证码
+     */
+    void codeOnFinish();
+
+    /**
+     * 显示验证码剩余时间
+     * @param m 6000
+     */
+    void codeOnTick(long m);
+
   }
 
   interface Presenter extends BasePresenter

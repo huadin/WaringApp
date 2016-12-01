@@ -23,5 +23,7 @@ public interface LoginContract
     String getLoginName();
 
     String getLoginPassword();
+
+    boolean networkIsAvailable();
   }
 }

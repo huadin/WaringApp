@@ -43,6 +43,7 @@ public class LoginPresenter implements LoginContract.Presenter
     int errorRes = 0;
     String loginName = mLoginView.getLoginName();
     String loginPassword = mLoginView.getLoginPassword();
+    boolean isNetwork = mLoginView.networkIsAvailable();
 
     if (AMUtils.isEmpty(loginName))
     {
@@ -56,6 +57,9 @@ public class LoginPresenter implements LoginContract.Presenter
     } else if (AMUtils.validatePassword(loginPassword))
     {
       errorRes = R.string.login_password_length_error;
+    }else if (!isNetwork)
+    {
+      errorRes = R.string.no_network;
     }
 
     if (errorRes != 0)

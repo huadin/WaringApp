@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.huadin.base.BaseFragment;
 import com.huadin.util.AMUtils;
@@ -28,7 +29,9 @@ public class RegisterFragment extends BaseFragment implements RegisterContract.V
   @BindView(R.id.register_login_password)
   ClearEditText mRegisterPassword;
   @BindView(R.id.register_code)
-  ClearEditText mRegsiterCode;
+  ClearEditText mRegister;
+  @BindView(R.id.request_register_code)
+  TextView codeText;
 
   private RegisterContract.Presenter mPresenter;
 
@@ -108,7 +111,26 @@ public class RegisterFragment extends BaseFragment implements RegisterContract.V
   @Override
   public String registerCode()
   {
-    return mRegsiterCode.getText().toString();
+    return mRegister.getText().toString();
+  }
+
+  @Override
+  public boolean networkIsAvailable()
+  {
+    return isNetwork;
+  }
+
+  @Override
+  public void codeOnFinish()
+  {
+    codeText.setEnabled(true);
+    codeText.setText(R.string.send_phone_code);
+  }
+
+  @Override
+  public void codeOnTick(long m)
+  {
+    codeText.setText(m + "秒");
   }
 
   @Override
@@ -130,6 +152,7 @@ public class RegisterFragment extends BaseFragment implements RegisterContract.V
     switch (view.getId())
     {
       case R.id.request_register_code:
+        codeText.setEnabled(false);
         mPresenter.getRegisterCode();
         break;
       case R.id.register_app:

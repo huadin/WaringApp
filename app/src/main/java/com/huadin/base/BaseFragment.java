@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.huadin.eventbus.EventCenter;
 import com.huadin.util.ToastUtil;
 import com.huadin.widget.LoadDialog;
 
@@ -19,6 +20,7 @@ public abstract class BaseFragment extends Fragment
 {
   protected ToastUtil mToast;
   protected BaseActivity mContext;
+  protected boolean isNetwork;
 
   @Override
   public void onAttach(Context context)
@@ -33,6 +35,7 @@ public abstract class BaseFragment extends Fragment
     super.onCreate(savedInstanceState);
     EventBus.getDefault().register(this);
     mToast = new ToastUtil(mContext);
+    isNetwork = mContext.isNetwork;
   }
 
   /**
@@ -70,8 +73,17 @@ public abstract class BaseFragment extends Fragment
   }
 
   @Subscribe()
-  public void defaultOnEvent(String s)
+  public void defaultOnEvent(EventCenter eventCenter)
+  {
+    if (eventCenter != null)
+    {
+      fragmentOnEvent(eventCenter);
+    }
+  }
+
+  private void fragmentOnEvent(EventCenter eventCenter)
   {
 
   }
+
 }

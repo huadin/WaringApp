@@ -50,4 +50,12 @@
         <item name="android:textSize">@dimen/text_size_14</item>
     </style>
 
+    <!--注册 fragment 的下划线-->
+    <style name="view_bg_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_marginTop">@dimen/view_top_5dp</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
 </resources>

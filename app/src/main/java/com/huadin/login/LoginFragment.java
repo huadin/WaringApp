@@ -115,6 +115,12 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, T
     return mPasswordET.getText().toString();
   }
 
+  @Override
+  public boolean networkIsAvailable()
+  {
+    return isNetwork;
+  }
+
   @OnClick({R.id.login_app, R.id.to_register})
   public void onClick(View view)
   {
