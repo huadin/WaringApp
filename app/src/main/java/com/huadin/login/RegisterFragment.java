@@ -130,12 +130,13 @@ public class RegisterFragment extends BaseFragment implements RegisterContract.V
   @Override
   public void codeOnTick(long m)
   {
-    codeText.setText(m + "秒");
+    codeText.setText(String.valueOf(m));
   }
 
   @Override
   public void inputError(int errorRes)
   {
+    codeText.setEnabled(true);
     mToast.showMessage(errorRes,500);
   }
 

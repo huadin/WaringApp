@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<com.zhy.autolayout.AutoLinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,19 +19,18 @@
 
         <com.huadin.widget.ClearEditText
             android:id="@+id/register_login_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/register_edit_text_margin_left"
-            android:background="@null"
+            style="@style/register_input_layout_style"
             android:hint="@string/login_name_not_null"
             android:maxLength="11"/>
+
     </LinearLayout>
 
     <View style="@style/view_bg_style"/>
 
     <!--密码-->
     <LinearLayout
-        style="@style/register_edit_text_layout">
+        style="@style/register_edit_text_layout"
+        android:layout_marginTop="@dimen/view_top_5dp">
 
         <ImageView
             android:id="@+id/imageView2"
@@ -42,20 +41,19 @@
 
         <com.huadin.widget.ClearEditText
             android:id="@+id/register_login_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/register_edit_text_margin_left"
-            android:background="@null"
+            style="@style/register_input_layout_style"
             android:hint="@string/login_password_length_error"
             android:inputType="textPassword"/>
     </LinearLayout>
 
     <View style="@style/view_bg_style"/>
     <!--验证码-->
-    <com.zhy.autolayout.AutoLinearLayout
-        style="@style/register_edit_text_layout">
+    <LinearLayout
+        style="@style/register_edit_text_layout"
+        android:layout_marginTop="@dimen/view_top_5dp">
 
         <ImageView
+            android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/icon_phone_code_80"
@@ -64,7 +62,7 @@
         <com.huadin.widget.ClearEditText
             android:id="@+id/register_code"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginStart="@dimen/register_edit_text_margin_left"
             android:layout_weight="1"
             android:background="@null">
@@ -77,10 +75,10 @@
             android:layout_marginStart="@dimen/register_code_margin_left"
             android:background="@drawable/register_fragment_phone_code_bg"
             android:gravity="center"
-            android:textColor="@color/app_text_color"
             android:text="@string/request_register_code"
+            android:textColor="@color/app_text_color"
             android:textSize="@dimen/text_size_14"/>
-    </com.zhy.autolayout.AutoLinearLayout>
+    </LinearLayout>
 
     <View style="@style/view_bg_style"/>
 
@@ -90,4 +88,4 @@
         android:text="@string/register_app"/>
 
 
-</LinearLayout>
+</com.zhy.autolayout.AutoLinearLayout>

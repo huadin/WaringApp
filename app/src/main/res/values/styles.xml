@@ -25,7 +25,7 @@
     <!--注册输入框-->
     <style name="register_edit_text_layout">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">@dimen/login_register_button_height_96px</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:layout_marginTop">@dimen/login_fragment_margin_top</item>
         <item name="android:orientation">horizontal</item>
@@ -34,7 +34,7 @@
     <!--登录，注册 button-->
     <style name="login_register_submit_button">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">@dimen/login_register_button_height_96px</item>
         <item name="android:layout_marginTop">@dimen/login_fragment_margin_top</item>
         <item name="android:background">@drawable/fault_input_bg</item>
         <item name="android:textColor">@color/app_text_color</item>
@@ -56,6 +56,14 @@
         <item name="android:layout_height">1dp</item>
         <item name="android:layout_marginTop">@dimen/view_top_5dp</item>
         <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <!--注册输入框-->
+    <style name="register_input_layout_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginStart">@dimen/register_edit_text_margin_left</item>
+        <item name="android:background">@null</item>
     </style>
 
 </resources>

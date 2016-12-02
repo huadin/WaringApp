@@ -88,6 +88,7 @@ public class RegisterPresenter implements RegisterContract.Presenter
       return;
     }
 
+    /* 注册 */
     Person person = new Person();
     person.setUsername(registerPhone);
     person.setMobilePhoneNumber(registerPhone);

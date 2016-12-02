@@ -30,5 +30,6 @@
     <dimen name="register_phone_code_padding">10dp</dimen>
     <dimen name="view_top_5dp">5dp</dimen>
     <dimen name="register_phone_code_width">180px</dimen>
+    <dimen name="login_register_button_height_96px">96px</dimen>
 
 </resources>
