@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,6 @@ import com.huadin.eventbus.EventCenter;
 import com.huadin.util.AMUtils;
 import com.huadin.waringapp.R;
 import com.huadin.widget.ClearEditText;
-import com.huadin.widget.LoadDialog;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -22,9 +22,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 import static cn.bmob.v3.Bmob.getApplicationContext;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static org.greenrobot.eventbus.EventBus.TAG;
 
 public class LoginFragment extends BaseFragment implements LoginContract.View, TextWatcher
 {
@@ -68,6 +68,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, T
   {
     super.onResume();
     mToast.onResume();
+    Log.i(LOG_TAG, "onResume: ");
   }
 
   @Override

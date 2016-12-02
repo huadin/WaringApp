@@ -31,10 +31,10 @@ public class LoginActivity extends BaseActivity
   private void initToolBar()
   {
     //登录
-    mToolbar.setTitle(R.string.action_sign_in);
 
     setSupportActionBar(mToolbar);
 
+    //自定义返回图标及事件
     mToolbar.setNavigationIcon(R.drawable.icon_bg_left);
 //    mToolbar.setTitle(getString(R.string.back));
     mToolbar.setNavigationOnClickListener(new View.OnClickListener()
@@ -42,9 +42,25 @@ public class LoginActivity extends BaseActivity
       @Override
       public void onClick(View view)
       {
-        finish();
+//        finish();
+        popFragmentBackStack();
       }
     });
+
+    /*返回图标及事件*/
+//    if (getSupportActionBar() != null)
+//    {
+//      getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//    }
+//    mToolbar.setNavigationOnClickListener(new View.OnClickListener()
+//    {
+//      @Override
+//      public void onClick(View view)
+//      {
+//        finish();
+//      }
+//    });
+
   }
 
   private void initFragment()
@@ -56,11 +72,12 @@ public class LoginActivity extends BaseActivity
     {
       loginFragment = LoginFragment.newInstance();
       ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
-              loginFragment, R.id.fragment_ground);
+              loginFragment, R.id.fragment_ground, false);
     }
 
     new LoginPresenter(loginFragment);
   }
+
 
   @Override
   protected int getContentViewLayoutID()
@@ -79,9 +96,15 @@ public class LoginActivity extends BaseActivity
       mToolbar.setTitle(R.string.action_sign_up);
       RegisterFragment registerFragment = RegisterFragment.newInstance();
       ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
-              registerFragment, R.id.fragment_ground);
+              registerFragment, R.id.fragment_ground, true);
       new RegisterPresenter(registerFragment);
     }
+  }
+
+  private void  popFragmentBackStack()
+  {
+//    getSupportFragmentManager().popBackStackImmediate("RegisterFragment",0);
+
   }
 }
 

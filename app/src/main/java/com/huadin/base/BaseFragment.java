@@ -21,6 +21,7 @@ public abstract class BaseFragment extends Fragment
   protected ToastUtil mToast;
   protected BaseActivity mContext;
   protected boolean isNetwork;
+  protected String LOG_TAG;
 
   @Override
   public void onAttach(Context context)
@@ -36,6 +37,7 @@ public abstract class BaseFragment extends Fragment
     EventBus.getDefault().register(this);
     mToast = new ToastUtil(mContext);
     isNetwork = mContext.isNetwork;
+    LOG_TAG = getClass().getSimpleName();
   }
 
   /**

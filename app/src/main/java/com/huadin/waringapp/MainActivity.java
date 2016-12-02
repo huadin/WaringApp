@@ -3,9 +3,12 @@ package com.huadin.waringapp;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +22,7 @@ import butterknife.ButterKnife;
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener
 {
 
+  private static final String TAG = "MainActivity";
   @BindView(R.id.toolbar)
   Toolbar mToolbar;
   @BindView(R.id.drawer_layout)
@@ -54,7 +58,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
       }
     });
 
-
   }
 
   @Override
@@ -80,6 +83,25 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
   public boolean onCreateOptionsMenu(Menu menu)
   {
     getMenuInflater().inflate(R.menu.main, menu);
+    MenuItem menuItem = menu.findItem(R.id.action_search_view);
+    SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+
+    searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
+    {
+      @Override
+      public boolean onQueryTextSubmit(String query)
+      {
+        Log.i(TAG, "onQueryTextSubmit: ");
+        return false;
+      }
+
+      @Override
+      public boolean onQueryTextChange(String newText)
+      {
+        Log.i(TAG, "onQueryTextChange: ");
+        return false;
+      }
+    });
     return true;
   }
 
