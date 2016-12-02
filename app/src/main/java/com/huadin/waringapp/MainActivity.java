@@ -11,14 +11,10 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.huadin.base.BaseActivity;
-import com.huadin.bean.Person;
 import com.huadin.login.LoginActivity;
-import com.huadin.util.MD5util;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.SaveListener;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener
 {

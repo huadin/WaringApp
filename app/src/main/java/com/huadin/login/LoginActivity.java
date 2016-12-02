@@ -30,6 +30,11 @@ public class LoginActivity extends BaseActivity
 
   private void initToolBar()
   {
+    //登录
+    mToolbar.setTitle(R.string.action_sign_in);
+
+    setSupportActionBar(mToolbar);
+
     mToolbar.setNavigationIcon(R.drawable.icon_bg_left);
 //    mToolbar.setTitle(getString(R.string.back));
     mToolbar.setNavigationOnClickListener(new View.OnClickListener()
@@ -70,7 +75,8 @@ public class LoginActivity extends BaseActivity
     super.onEventComming(eventCenter);
     if (eventCenter.getEventCode() == EventCenter.EVENT_CODE_LOAD_REGISTER)
     {
-
+      //注册
+      mToolbar.setTitle(R.string.action_sign_up);
       RegisterFragment registerFragment = RegisterFragment.newInstance();
       ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
               registerFragment, R.id.fragment_ground);
