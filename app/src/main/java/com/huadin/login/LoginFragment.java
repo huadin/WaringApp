@@ -3,6 +3,7 @@ package com.huadin.login;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -22,6 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 import static cn.bmob.v3.Bmob.getApplicationContext;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static org.greenrobot.eventbus.EventBus.TAG;
@@ -33,6 +35,9 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, T
   ClearEditText mNameET;
   @BindView(R.id.login_password)
   ClearEditText mPasswordET;
+  @BindView(R.id.top_toolbar)
+  Toolbar mToolbar;
+
 
   private LoginContract.Presenter mPresenter;
 
@@ -44,7 +49,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, T
   @Override
   public void setPresenter(@NonNull LoginContract.Presenter presenter)
   {
-    mPresenter = checkNotNull(presenter);
+    mPresenter = checkNotNull(presenter, "presenter cannot null");
   }
 
   @Override
@@ -59,6 +64,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, T
   {
     View view = getViewResId(inflater, container, R.layout.login_fragment_layout);
     ButterKnife.bind(this, view);
+    initToolbar(mToolbar, R.string.action_sign_in);
     mNameET.addTextChangedListener(this);
     return view;
   }
@@ -68,7 +74,6 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, T
   {
     super.onResume();
     mToast.onResume();
-    Log.i(LOG_TAG, "onResume: ");
   }
 
   @Override

@@ -9,7 +9,7 @@ android {
     buildToolsVersion "25.0.0"
     defaultConfig {
         applicationId "com.huadin.waringapp"
-        minSdkVersion 19
+        minSdkVersion 15
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -40,7 +40,7 @@ dependencies {
     /* gson */
 //    compile 'com.google.code.gson:gson:2.7'
     /*okHttpUtil*/
-    compile 'com.zhy:okhttputils:2.6.2'
+//    compile 'com.zhy:okhttputils:2.6.2'
     /*本地数据库*/
     compile 'org.litepal.android:core:1.4.0'
     /*eventBus*/
@@ -56,8 +56,6 @@ dependencies {
     compile 'cn.bmob.android:bmob-push:0.8'
     //bmob-sms ：Bmob单独为短信服务提供的包
     compile 'cn.bmob.android:bmob-sms:1.0.1'
-
-
 
     compile "com.google.guava:guava:18.0"
 

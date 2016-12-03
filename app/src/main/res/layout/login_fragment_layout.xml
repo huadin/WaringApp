@@ -3,48 +3,63 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/login_fragment_parent_margin"
     android:orientation="vertical">
 
-    <com.huadin.widget.ClearEditText
-        android:id="@+id/login_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_phone"
-        android:maxLength="11"/>
+    <include layout="@layout/top_bar_layout"/>
 
-    <com.huadin.widget.ClearEditText
-        android:id="@+id/login_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/login_fragment_margin_top"
-        android:hint="@string/hint_password"
-        android:inputType="textPassword"/>
-
-    <Button
-        android:id="@+id/login_app"
-        style="@style/login_register_submit_button"
-        android:text="@string/login_app"/>
-
-
+    <!--注册登录-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/login_fragment_register_margin_top"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/login_fragment_parent_margin"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/to_forget_password"
-            style="@style/forget_password_layout"
-            android:text="@string/to_forget_password"/>
+        <!--账号-->
+        <com.huadin.widget.ClearEditText
+            android:id="@+id/login_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_phone"
+            android:maxLength="11"/>
 
-        <TextView
-            android:id="@+id/to_register"
-            style="@style/forget_password_layout"
-            android:gravity="right"
-            android:text="@string/register_app"
-            android:textColor="@color/register_account_text_color"/>
+        <!--密码-->
+        <com.huadin.widget.ClearEditText
+            android:id="@+id/login_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/login_fragment_margin_top"
+            android:hint="@string/hint_password"
+            android:inputType="textPassword"/>
+
+        <!--登录-->
+        <Button
+            android:id="@+id/login_app"
+            style="@style/login_register_submit_button"
+            android:text="@string/login_app"/>
+
+        <!--忘记密码及注册-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/login_fragment_register_margin_top"
+            android:orientation="horizontal">
+
+            <!--忘记密码-->
+            <TextView
+                android:id="@+id/to_forget_password"
+                style="@style/forget_password_layout"
+                android:text="@string/to_forget_password"/>
+
+            <!--注册-->
+            <TextView
+                android:id="@+id/to_register"
+                style="@style/forget_password_layout"
+                android:gravity="end"
+                android:text="@string/register_app"
+                android:textColor="@color/register_account_text_color"/>
+
+        </LinearLayout>
+
     </LinearLayout>
-
 
 </LinearLayout>

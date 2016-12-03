@@ -6,8 +6,6 @@
               android:orientation="vertical"
               tools:context="com.huadin.login.LoginActivity">
 
-    <include layout="@layout/top_bar_layout"/>
-
     <FrameLayout
         android:id="@+id/fragment_ground"
         android:layout_width="match_parent"

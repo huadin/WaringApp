@@ -1,91 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zhy.autolayout.AutoLinearLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/login_fragment_parent_margin"
     android:orientation="vertical">
 
-    <!--手机号码-->
-    <LinearLayout
-        style="@style/register_edit_text_layout">
+    <include layout="@layout/top_bar_layout"/>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_phone_80"
-            tools:ignore="ContentDescription"/>
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/login_fragment_parent_margin"
+        android:orientation="vertical">
 
-        <com.huadin.widget.ClearEditText
-            android:id="@+id/register_login_name"
-            style="@style/register_input_layout_style"
-            android:hint="@string/login_name_not_null"
-            android:maxLength="11"/>
+        <!--手机号码-->
+        <LinearLayout
+            style="@style/register_edit_text_layout">
 
-    </LinearLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_phone_80"
+                tools:ignore="ContentDescription"/>
 
-    <View style="@style/view_bg_style"/>
+            <com.huadin.widget.ClearEditText
+                android:id="@+id/register_login_name"
+                style="@style/register_input_layout_style"
+                android:hint="@string/login_name_not_null"
+                android:maxLength="11"/>
 
-    <!--密码-->
-    <LinearLayout
-        style="@style/register_edit_text_layout"
-        android:layout_marginTop="@dimen/view_top_5dp">
+        </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_password_80"
-            tools:ignore="ContentDescription"/>
+        <View style="@style/view_bg_style"/>
 
-        <com.huadin.widget.ClearEditText
-            android:id="@+id/register_login_password"
-            style="@style/register_input_layout_style"
-            android:hint="@string/login_password_length_error"
-            android:inputType="textPassword"/>
-    </LinearLayout>
+        <!--密码-->
+        <LinearLayout
+            style="@style/register_edit_text_layout"
+            android:layout_marginTop="@dimen/view_top_5dp">
 
-    <View style="@style/view_bg_style"/>
-    <!--验证码-->
-    <LinearLayout
-        style="@style/register_edit_text_layout"
-        android:layout_marginTop="@dimen/view_top_5dp">
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_password_80"
+                tools:ignore="ContentDescription"/>
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_phone_code_80"
-            tools:ignore="ContentDescription"/>
+            <com.huadin.widget.ClearEditText
+                android:id="@+id/register_login_password"
+                style="@style/register_input_layout_style"
+                android:hint="@string/login_password_length_error"
+                android:inputType="textPassword"/>
+        </LinearLayout>
 
-        <com.huadin.widget.ClearEditText
-            android:id="@+id/register_code"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/register_edit_text_margin_left"
-            android:layout_weight="1"
-            android:background="@null">
-        </com.huadin.widget.ClearEditText>
+        <View style="@style/view_bg_style"/>
+        <!--验证码-->
+        <LinearLayout
+            style="@style/register_edit_text_layout"
+            android:layout_marginTop="@dimen/view_top_5dp">
 
-        <TextView
-            android:id="@+id/request_register_code"
-            android:layout_width="@dimen/register_phone_code_width"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/register_code_margin_left"
-            android:background="@drawable/register_fragment_phone_code_bg"
-            android:gravity="center"
-            android:text="@string/request_register_code"
-            android:textColor="@color/app_text_color"
-            android:textSize="@dimen/text_size_14"/>
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_phone_code_80"
+                tools:ignore="ContentDescription"/>
 
-    <View style="@style/view_bg_style"/>
+            <com.huadin.widget.ClearEditText
+                android:id="@+id/register_code"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/register_edit_text_margin_left"
+                android:layout_weight="1"
+                android:background="@null">
+            </com.huadin.widget.ClearEditText>
 
-    <Button
-        android:id="@+id/register_app"
-        style="@style/login_register_submit_button"
-        android:text="@string/register_app"/>
+            <TextView
+                android:id="@+id/request_register_code"
+                android:layout_width="@dimen/register_phone_code_width"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/register_code_margin_left"
+                android:background="@drawable/register_fragment_phone_code_bg"
+                android:gravity="center"
+                android:text="@string/request_register_code"
+                android:textColor="@color/app_text_color"
+                android:textSize="@dimen/text_size_14"/>
+        </LinearLayout>
+
+        <View style="@style/view_bg_style"/>
+
+        <Button
+            android:id="@+id/register_app"
+            style="@style/login_register_submit_button"
+            android:text="@string/register_app"/>
+
+    </com.zhy.autolayout.AutoLinearLayout>
 
 
-</com.zhy.autolayout.AutoLinearLayout>
+</LinearLayout>

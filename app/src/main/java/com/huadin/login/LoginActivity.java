@@ -16,51 +16,12 @@ import butterknife.ButterKnife;
 public class LoginActivity extends BaseActivity
 {
 
-  @BindView(R.id.login_toolbar)
-  Toolbar mToolbar;
-
   @Override
   protected void onCreate(Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
     ButterKnife.bind(this);
-    initToolBar();
     initFragment();
-  }
-
-  private void initToolBar()
-  {
-    //登录
-
-    setSupportActionBar(mToolbar);
-
-    //自定义返回图标及事件
-    mToolbar.setNavigationIcon(R.drawable.icon_bg_left);
-//    mToolbar.setTitle(getString(R.string.back));
-    mToolbar.setNavigationOnClickListener(new View.OnClickListener()
-    {
-      @Override
-      public void onClick(View view)
-      {
-//        finish();
-        popFragmentBackStack();
-      }
-    });
-
-    /*返回图标及事件*/
-//    if (getSupportActionBar() != null)
-//    {
-//      getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//    }
-//    mToolbar.setNavigationOnClickListener(new View.OnClickListener()
-//    {
-//      @Override
-//      public void onClick(View view)
-//      {
-//        finish();
-//      }
-//    });
-
   }
 
   private void initFragment()
@@ -92,8 +53,6 @@ public class LoginActivity extends BaseActivity
     super.onEventComming(eventCenter);
     if (eventCenter.getEventCode() == EventCenter.EVENT_CODE_LOAD_REGISTER)
     {
-      //注册
-      mToolbar.setTitle(R.string.action_sign_up);
       RegisterFragment registerFragment = RegisterFragment.newInstance();
       ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
               registerFragment, R.id.fragment_ground, true);
@@ -101,10 +60,5 @@ public class LoginActivity extends BaseActivity
     }
   }
 
-  private void  popFragmentBackStack()
-  {
-//    getSupportFragmentManager().popBackStackImmediate("RegisterFragment",0);
-
-  }
 }
 

@@ -2,18 +2,25 @@ package com.huadin.base;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.huadin.eventbus.EventCenter;
 import com.huadin.util.ToastUtil;
+import com.huadin.waringapp.R;
 import com.huadin.widget.LoadDialog;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+import static org.greenrobot.eventbus.EventBus.TAG;
 
 
 public abstract class BaseFragment extends Fragment
@@ -39,6 +46,22 @@ public abstract class BaseFragment extends Fragment
     isNetwork = mContext.isNetwork;
     LOG_TAG = getClass().getSimpleName();
   }
+
+  protected void initToolbar (@NonNull Toolbar toolbar, int toolbarTitleResId)
+  {
+    checkNotNull(toolbar,"toolbar cannot null");
+    toolbar.setTitle(toolbarTitleResId);
+    toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
+    toolbar.setNavigationOnClickListener(new View.OnClickListener()
+    {
+      @Override
+      public void onClick(View view)
+      {
+        Log.i(LOG_TAG, "onClick: Tag = " + LOG_TAG);
+      }
+    });
+  }
+
 
   /**
    *  获取 Fragment 的 View

@@ -3,6 +3,7 @@ package com.huadin.login;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -33,6 +34,8 @@ public class RegisterFragment extends BaseFragment implements RegisterContract.V
   ClearEditText mRegister;
   @BindView(R.id.request_register_code)
   TextView codeText;
+  @BindView(R.id.top_toolbar)
+  Toolbar mToolbar;
 
   private RegisterContract.Presenter mPresenter;
 
@@ -53,6 +56,7 @@ public class RegisterFragment extends BaseFragment implements RegisterContract.V
   {
     View view = getViewResId(inflater, container, R.layout.register_fragmnet_layout);
     ButterKnife.bind(this, view);
+    initToolbar(mToolbar,R.string.action_sign_up);
     mRegisterName.addTextChangedListener(this);
     return view;
   }
@@ -88,7 +92,6 @@ public class RegisterFragment extends BaseFragment implements RegisterContract.V
   {
     //注册成功
     mToast.showMessage(R.string.register_success,500);
-    getActivity().finish();
   }
 
   @Override
@@ -145,7 +148,7 @@ public class RegisterFragment extends BaseFragment implements RegisterContract.V
   @Override
   public void setPresenter(RegisterContract.Presenter presenter)
   {
-    mPresenter = checkNotNull(presenter);
+    mPresenter = checkNotNull(presenter,"presenter cannot null");
   }
 
   @OnClick({R.id.register_app,R.id.request_register_code})

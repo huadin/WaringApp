@@ -69,7 +69,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
   @Override
   public void onBackPressed()
   {
-//    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     if (mDrawer.isDrawerOpen(GravityCompat.START))
     {
       mDrawer.closeDrawer(GravityCompat.START);
@@ -136,7 +135,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         break;
     }
 
-//    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     mDrawer.closeDrawer(GravityCompat.START);
     return true;
   }
@@ -153,5 +151,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
   {
     super.onPause();
     mToast.onPause();
+  }
+
+  @Override
+  protected void onStop()
+  {
+    super.onStop();
+    if (mDrawer.isDrawerOpen(GravityCompat.START))
+    {
+      mDrawer.closeDrawer(GravityCompat.START);
+    }
   }
 }
