@@ -41,6 +41,9 @@ public interface RegisterContract
 
   interface Presenter extends BasePresenter
   {
+    /**
+     * 获取验证码
+     */
     void getRegisterCode();
   }
 }

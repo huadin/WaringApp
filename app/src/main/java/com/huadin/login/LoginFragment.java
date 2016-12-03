@@ -127,17 +127,26 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, T
     return isNetwork;
   }
 
-  @OnClick({R.id.login_app, R.id.to_register})
+  @OnClick({R.id.login_app, R.id.to_register,R.id.to_forget_password})
   public void onClick(View view)
   {
     switch (view.getId())
     {
+      //登录
       case R.id.login_app:
         mPresenter.start();
         break;
-
+      //注册
       case R.id.to_register:
-        EventBus.getDefault().post(new EventCenter(EventCenter.EVENT_CODE_LOAD_REGISTER));
+        RegisterFragment registerFragment = RegisterFragment.newInstance(RegisterFragment.REGISTER_FLAG);
+        new RegisterPresenter(registerFragment);
+        start(registerFragment);
+        break;
+      //重置密码
+      case R.id.to_forget_password:
+        RegisterFragment _registerFragment = RegisterFragment.newInstance(RegisterFragment.RESET_FLAG);
+        new ResetPresenter(_registerFragment);
+        start(_registerFragment);
         break;
     }
   }

@@ -20,7 +20,7 @@ public class ActivityUtils
     FragmentTransaction transaction = fragmentManager.beginTransaction();
     // TODO: 2016/11/30 暂时改为替换
     transaction.replace(frameId, fragment, fragment.getClass().getSimpleName());
-    if (isAddToBackStack)
+    if (!isAddToBackStack)
     {
       transaction.addToBackStack(String.valueOf(frameId));
     }

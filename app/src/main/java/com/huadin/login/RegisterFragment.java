@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.huadin.base.BaseFragment;
@@ -36,11 +37,25 @@ public class RegisterFragment extends BaseFragment implements RegisterContract.V
   TextView codeText;
   @BindView(R.id.top_toolbar)
   Toolbar mToolbar;
+  @BindView(R.id.register_app)
+  Button mButton;
 
   private RegisterContract.Presenter mPresenter;
+  protected static final int REGISTER_FLAG = 0x123;
+  protected static final int RESET_FLAG = 0x124;
+  private static int mFlag;
+  private StringBuilder mSB;
+  private String _code;
 
-  public static RegisterFragment newInstance()
+  /**
+   * 初始化
+   *
+   * @param flag 用来区分是注册还是重置
+   * @return RegisterFragment
+   */
+  public static RegisterFragment newInstance(int flag)
   {
+    mFlag = flag;
     return new RegisterFragment();
   }
 
@@ -48,6 +63,7 @@ public class RegisterFragment extends BaseFragment implements RegisterContract.V
   public void onCreate(@Nullable Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
+    _code = getString(R.string.show_send_code_text);
   }
 
   @Nullable
@@ -56,9 +72,27 @@ public class RegisterFragment extends BaseFragment implements RegisterContract.V
   {
     View view = getViewResId(inflater, container, R.layout.register_fragmnet_layout);
     ButterKnife.bind(this, view);
-    initToolbar(mToolbar,R.string.action_sign_up);
+    initToolbar(mToolbar, getTitleResId());
     mRegisterName.addTextChangedListener(this);
     return view;
+  }
+
+
+  private int getTitleResId()
+  {
+    int titleResId = 0;
+    switch (mFlag)
+    {
+      case REGISTER_FLAG:
+        titleResId = R.string.action_sign_up;
+        mButton.setText(R.string.register_app);
+        break;
+      case RESET_FLAG:
+        titleResId = R.string.action_reset_password;
+        mButton.setText(R.string.button_reset_complete);
+        break;
+    }
+    return titleResId;
   }
 
   @Override
@@ -91,7 +125,13 @@ public class RegisterFragment extends BaseFragment implements RegisterContract.V
   public void registerSuccess()
   {
     //注册成功
-    mToast.showMessage(R.string.register_success,500);
+    if (mFlag == REGISTER_FLAG)
+    {
+      mToast.showMessage(R.string.register_success, 500);
+    } else if (mFlag == RESET_FLAG)
+    {
+      mToast.showMessage(R.string.password_reset_success, 500);
+    }
   }
 
   @Override
@@ -134,24 +174,31 @@ public class RegisterFragment extends BaseFragment implements RegisterContract.V
   @Override
   public void codeOnTick(long m)
   {
-    codeText.setText(String.valueOf(m));
+    if (mSB == null)
+    {
+      mSB = new StringBuilder();
+    }
+    mSB.append(String.valueOf(m));
+    mSB.append(_code);
+    codeText.setText(mSB.toString());
+    mSB.delete(0, mSB.length());
   }
 
   @Override
   public void inputError(int errorRes)
   {
     codeText.setEnabled(true);
-    mToast.showMessage(errorRes,500);
+    mToast.showMessage(errorRes, 500);
   }
 
 
   @Override
   public void setPresenter(RegisterContract.Presenter presenter)
   {
-    mPresenter = checkNotNull(presenter,"presenter cannot null");
+    mPresenter = checkNotNull(presenter, "presenter cannot null");
   }
 
-  @OnClick({R.id.register_app,R.id.request_register_code})
+  @OnClick({R.id.register_app, R.id.request_register_code})
   public void onClick(View view)
   {
     switch (view.getId())

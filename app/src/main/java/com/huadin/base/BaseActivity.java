@@ -7,12 +7,13 @@ import android.os.Bundle;
 import com.huadin.eventbus.EventCenter;
 import com.huadin.util.NetworkUtil;
 import com.huadin.util.ToastUtil;
-import com.zhy.autolayout.AutoLayoutActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-public abstract class BaseActivity extends AutoLayoutActivity
+import me.yokeyword.fragmentation.SupportActivity;
+
+public abstract class BaseActivity extends SupportActivity
 {
   /**
    * log tag
@@ -26,7 +27,7 @@ public abstract class BaseActivity extends AutoLayoutActivity
   protected void onCreate(Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
-    mContext = this;
+    mContext = getApplicationContext();
     LOG_TAG = this.getClass().getSimpleName();
     mToast = new ToastUtil(mContext);
     EventBus.getDefault().register(this);

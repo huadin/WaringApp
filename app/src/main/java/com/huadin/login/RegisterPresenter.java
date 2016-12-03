@@ -1,10 +1,9 @@
 package com.huadin.login;
 
-import android.util.Log;
-
 import com.huadin.bean.Person;
 import com.huadin.util.AMUtils;
 import com.huadin.util.CountDownTimer;
+import com.huadin.util.LogUtil;
 import com.huadin.util.MD5util;
 import com.huadin.waringapp.R;
 
@@ -110,14 +109,13 @@ public class RegisterPresenter implements RegisterContract.Presenter
         {
           // TODO: 2016/12/1 用户注册异常和验证码异常处理
           int code = e.getErrorCode();
-          Log.i(TAG, "done: error = " + e.getMessage() + "/ code = " + e.getErrorCode());
+          LogUtil.i(TAG, "done: error = " + e.getMessage() + "/ code = " + e.getErrorCode());
           showErrorCode(code);
         }
       }
     });
 
   }
-
 
   @Override
   public void getRegisterCode()
@@ -129,7 +127,11 @@ public class RegisterPresenter implements RegisterContract.Presenter
     if (AMUtils.isEmpty(registerPhone))
     {
       errorRes = R.string.login_name_not_null;
-    } else if (!isNetwork)
+    }else if (!AMUtils.isMobile(registerPhone))
+    {
+      errorRes = R.string.login_name_error;
+    }
+    else if (!isNetwork)
     {
       errorRes = R.string.no_network;
     }
@@ -139,28 +141,27 @@ public class RegisterPresenter implements RegisterContract.Presenter
       mRegisterView.inputError(errorRes);
       return;
     }
+
     String SMS_TEMPLATE_NAME = "短信验证";
 
     mTimer.start();
-//    BmobSMS.requestSMSCode(registerPhone, SMS_TEMPLATE_NAME, new QueryListener<Integer>()
-//    {
-//      @Override
-//      public void done(Integer smsId, BmobException e)
-//      {
-//        // TODO: 2016/12/1 短信验证码获取异常处理
-//        if (e == null)
-//        {
-//          Log.i(TAG, "done: smsId = " + smsId);
-//          mRegisterView.registerSuccess();
-//
-//        } else
-//        {
-//          Log.i(TAG, "done: error = " + e.getMessage());
-//          int code = e.getErrorCode();
-//          showErrorCode(code);
-//        }
-//      }
-//    });
+    BmobSMS.requestSMSCode(registerPhone, SMS_TEMPLATE_NAME, new QueryListener<Integer>()
+    {
+      @Override
+      public void done(Integer smsId, BmobException e)
+      {
+        if (e == null)
+        {
+          //验证码获取成功
+          LogUtil.i(TAG, "done: smsId = " + smsId);
+        } else
+        {
+          LogUtil.i(TAG, "done: error = " + e.getMessage());
+          int code = e.getErrorCode();
+          showErrorCode(code);
+        }
+      }
+    });
   }
 
   private void showErrorCode(int code)

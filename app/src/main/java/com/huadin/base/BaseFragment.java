@@ -6,12 +6,12 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.huadin.eventbus.EventCenter;
+import com.huadin.util.LogUtil;
 import com.huadin.util.ToastUtil;
 import com.huadin.waringapp.R;
 import com.huadin.widget.LoadDialog;
@@ -19,11 +19,13 @@ import com.huadin.widget.LoadDialog;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import me.yokeyword.fragmentation.SupportActivity;
+import me.yokeyword.fragmentation.SupportFragment;
+
 import static com.google.common.base.Preconditions.checkNotNull;
-import static org.greenrobot.eventbus.EventBus.TAG;
 
 
-public abstract class BaseFragment extends Fragment
+public abstract class BaseFragment extends SupportFragment
 {
   protected ToastUtil mToast;
   protected BaseActivity mContext;
@@ -34,7 +36,7 @@ public abstract class BaseFragment extends Fragment
   public void onAttach(Context context)
   {
     super.onAttach(context);
-    mContext = (BaseActivity)context;
+    mContext = (BaseActivity) context;
   }
 
   @Override
@@ -47,6 +49,11 @@ public abstract class BaseFragment extends Fragment
     LOG_TAG = getClass().getSimpleName();
   }
 
+  /**
+   * 初始化toolbar
+   * @param toolbar Toolbar
+   * @param toolbarTitleResId 标题
+   */
   protected void initToolbar (@NonNull Toolbar toolbar, int toolbarTitleResId)
   {
     checkNotNull(toolbar,"toolbar cannot null");
@@ -57,7 +64,7 @@ public abstract class BaseFragment extends Fragment
       @Override
       public void onClick(View view)
       {
-        Log.i(LOG_TAG, "onClick: Tag = " + LOG_TAG);
+        pop();
       }
     });
   }
@@ -84,6 +91,9 @@ public abstract class BaseFragment extends Fragment
     LoadDialog.show(mContext,getString(resId));
   }
 
+  /**
+   * 关闭 dialog
+   */
   protected void dismissLoading()
   {
     LoadDialog.dismiss(mContext);
@@ -106,6 +116,10 @@ public abstract class BaseFragment extends Fragment
     }
   }
 
+  /**
+   * eventBus 回调
+   * @param eventCenter EventCenter
+   */
   private void fragmentOnEvent(EventCenter eventCenter)
   {
 

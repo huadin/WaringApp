@@ -48,10 +48,6 @@
             android:value="1280" >
         </meta-data>
 
-        <activity
-            android:name="com.huadin.login.LoginActivity"
-            android:label="@string/title_activity_login" >
-        </activity>
     </application>
 
 </manifest>

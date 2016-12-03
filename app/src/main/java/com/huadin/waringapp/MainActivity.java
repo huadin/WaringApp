@@ -5,26 +5,26 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.huadin.base.BaseActivity;
-import com.huadin.login.LoginActivity;
+import com.huadin.login.LoginFragment;
+import com.huadin.login.LoginPresenter;
+import com.huadin.login.MapFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener,
+        MapFragment.OnFragmentOpenDrawerListener
+
 {
 
   private static final String TAG = "MainActivity";
-  @BindView(R.id.toolbar)
-  Toolbar mToolbar;
   @BindView(R.id.drawer_layout)
   DrawerLayout mDrawer;
   @BindView(R.id.nav_view)
@@ -38,15 +38,19 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     ButterKnife.bind(this);
     //初始化View
     initView();
+    initFragment(savedInstanceState);
+  }
+
+  private void initFragment(Bundle savedInstanceState)
+  {
+    if (savedInstanceState == null)
+    {
+      loadRootFragment(R.id.fragment_ground, MapFragment.newInstance());
+    }
   }
 
   private void initView()
   {
-    setSupportActionBar(mToolbar);
-    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-            this, mDrawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-    mDrawer.addDrawerListener(toggle);
-    toggle.syncState();
     mNavigationView.setNavigationItemSelectedListener(this);
     View nameAfter = mNavigationView.getHeaderView(0).findViewById(R.id.user_name_after);
     nameAfter.setOnClickListener(new View.OnClickListener()
@@ -54,7 +58,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
       @Override
       public void onClick(View view)
       {
-        toActivity(mContext, LoginActivity.class);
+        closeDrawer();
+        LoginFragment loginFragment = LoginFragment.newInstance();
+        new LoginPresenter(loginFragment);
+        start(loginFragment);
       }
     });
 
@@ -66,17 +73,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     return R.layout.activity_main;
   }
 
-  @Override
-  public void onBackPressed()
-  {
-    if (mDrawer.isDrawerOpen(GravityCompat.START))
-    {
-      mDrawer.closeDrawer(GravityCompat.START);
-    } else
-    {
-      super.onBackPressed();
-    }
-  }
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu)
@@ -157,9 +153,26 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
   protected void onStop()
   {
     super.onStop();
+    closeDrawer();
+  }
+
+  //地图回调方法,打开抽屉
+  @Override
+  public void onOpenDrawer()
+  {
+    if (!mDrawer.isDrawerOpen(GravityCompat.START))
+    {
+      mDrawer.openDrawer(GravityCompat.START);
+    }
+  }
+
+  /*关闭抽屉*/
+  private void closeDrawer()
+  {
     if (mDrawer.isDrawerOpen(GravityCompat.START))
     {
       mDrawer.closeDrawer(GravityCompat.START);
     }
   }
+
 }

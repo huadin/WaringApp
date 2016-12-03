@@ -1,10 +1,9 @@
 package com.huadin.login;
 
 
-import android.util.Log;
-
 import com.huadin.bean.Person;
 import com.huadin.util.AMUtils;
+import com.huadin.util.LogUtil;
 import com.huadin.util.MD5util;
 import com.huadin.waringapp.R;
 
@@ -57,7 +56,7 @@ public class LoginPresenter implements LoginContract.Presenter
     } else if (AMUtils.validatePassword(loginPassword))
     {
       errorRes = R.string.login_password_length_error;
-    }else if (!isNetwork)
+    } else if (!isNetwork)
     {
       errorRes = R.string.no_network;
     }
@@ -78,7 +77,7 @@ public class LoginPresenter implements LoginContract.Presenter
       @Override
       public void onCompleted()
       {
-        Log.i(TAG, "onCompleted: ");
+
       }
 
       @Override
@@ -101,7 +100,7 @@ public class LoginPresenter implements LoginContract.Presenter
               break;
           }
         }
-        Log.e(TAG, "onError: errorMsg = " + errorMsg);
+        LogUtil.e(TAG, "onError: errorMsg = " + errorMsg);
       }
 
       @Override
@@ -112,6 +111,5 @@ public class LoginPresenter implements LoginContract.Presenter
       }
     });
   }
-
 
 }
