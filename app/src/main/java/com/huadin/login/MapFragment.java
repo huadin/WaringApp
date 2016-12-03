@@ -13,6 +13,10 @@ import com.huadin.waringapp.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import me.yokeyword.fragmentation.SupportActivity;
+import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
+import me.yokeyword.fragmentation.anim.DefaultNoAnimator;
+import me.yokeyword.fragmentation.anim.DefaultVerticalAnimator;
 
 /**
  * 地图定位
@@ -40,6 +44,12 @@ public class MapFragment extends BaseFragment
       //打开 DrawerLayout
       mListener = (OnFragmentOpenDrawerListener) context;
     }
+    //设置fragment横向动画
+    _mActivity.setFragmentAnimator(new DefaultHorizontalAnimator());
+    //设置竖向动画
+//    _mActivity.setFragmentAnimator(new DefaultVerticalAnimator());
+    //全局无动画
+//    _mActivity.setFragmentAnimator(new DefaultNoAnimator());
   }
 
   @Nullable
