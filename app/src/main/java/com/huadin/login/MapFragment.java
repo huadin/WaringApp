@@ -8,15 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.amap.api.maps.AMap;
+import com.amap.api.maps.MapView;
+import com.amap.api.maps.SupportMapFragment;
 import com.huadin.base.BaseFragment;
 import com.huadin.waringapp.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import me.yokeyword.fragmentation.SupportActivity;
 import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
-import me.yokeyword.fragmentation.anim.DefaultNoAnimator;
-import me.yokeyword.fragmentation.anim.DefaultVerticalAnimator;
 
 /**
  * 地图定位
@@ -27,6 +27,11 @@ public class MapFragment extends BaseFragment
 
   @BindView(R.id.top_toolbar)
   Toolbar mToolbar;
+  @BindView(R.id.map)
+  MapView mMapView;
+
+  AMap aMap;
+
   private OnFragmentOpenDrawerListener mListener;
 
 
@@ -52,20 +57,56 @@ public class MapFragment extends BaseFragment
 //    _mActivity.setFragmentAnimator(new DefaultNoAnimator());
   }
 
+
   @Nullable
   @Override
   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
   {
     View view = getViewResId(inflater, container, R.layout.map_fragment_layout);
     ButterKnife.bind(this, view);
+    mMapView.onCreate(savedInstanceState);
+
     initView();
     return view;
+  }
+
+  @Override
+  public void onResume()
+  {
+    super.onResume();
+    mMapView.onResume();
+  }
+
+  @Override
+  public void onPause()
+  {
+    super.onPause();
+    mMapView.onPause();
+  }
+
+  @Override
+  public void onDestroy()
+  {
+    super.onDestroy();
+    mMapView.onDestroy();
+  }
+
+  @Override
+  public void onSaveInstanceState(Bundle outState)
+  {
+    super.onSaveInstanceState(outState);
+    mMapView.onSaveInstanceState(outState);
   }
 
   private void initView()
   {
     mToolbar.setTitle(R.string.map_location);
     initToolbarNav(mToolbar);
+    if (aMap == null)
+    {
+      aMap = mMapView.getMap();
+    }
+
   }
 
   private void initToolbarNav(Toolbar mToolbar)

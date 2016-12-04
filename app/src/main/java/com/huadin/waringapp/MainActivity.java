@@ -58,6 +58,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
       @Override
       public void onClick(View view)
       {
+        // TODO: 2016/12/3 判断是否已经登录,已登录则无需跳转
         closeDrawer();
         LoginFragment loginFragment = LoginFragment.newInstance();
         new LoginPresenter(loginFragment);
