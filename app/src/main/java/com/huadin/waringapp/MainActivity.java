@@ -1,7 +1,12 @@
 package com.huadin.waringapp;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -23,7 +28,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         MapFragment.OnFragmentOpenDrawerListener
 
 {
-
   private static final String TAG = "MainActivity";
   @BindView(R.id.drawer_layout)
   DrawerLayout mDrawer;
@@ -38,7 +42,21 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     ButterKnife.bind(this);
     //初始化View
     initView();
+    //申请定位权限
+    checkLocationPermission();
     initFragment(savedInstanceState);
+  }
+
+  private void checkLocationPermission()
+  {
+    if (ContextCompat.checkSelfPermission(this, Manifest.permission_group.LOCATION) !=
+            PackageManager.PERMISSION_GRANTED)
+    {
+      //申请授权
+      int PERMISSION_REQUEST_CODE = 0x127;
+      ActivityCompat.requestPermissions(this,
+              new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_CODE);
+    }
   }
 
   private void initFragment(Bundle savedInstanceState)
@@ -107,6 +125,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     int id = item.getItemId();
     if (id == R.id.action_settings)
     {
+
       return true;
     }
     return super.onOptionsItemSelected(item);
@@ -114,7 +133,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
   @SuppressWarnings("StatementWithEmptyBody")
   @Override
-  public boolean onNavigationItemSelected(MenuItem item)
+  public boolean onNavigationItemSelected(@NonNull MenuItem item)
   {
     switch (item.getItemId())
     {

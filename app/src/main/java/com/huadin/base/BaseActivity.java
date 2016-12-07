@@ -13,6 +13,8 @@ import org.greenrobot.eventbus.Subscribe;
 
 import me.yokeyword.fragmentation.SupportActivity;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
+
 public abstract class BaseActivity extends SupportActivity
 {
   /**
@@ -76,4 +78,11 @@ public abstract class BaseActivity extends SupportActivity
   {
 
   }
+
+  protected void startActivity (Class<?> cls)
+  {
+    Intent intent = new Intent(this,cls);
+    startActivity(intent);
+  }
+
 }

@@ -2,6 +2,7 @@ package com.huadin;
 
 import com.huadin.waringapp.R;
 
+import org.litepal.LitePal;
 import org.litepal.LitePalApplication;
 
 import cn.bmob.v3.Bmob;
@@ -13,7 +14,8 @@ public class MyApplication extends LitePalApplication
   public void onCreate()
   {
     super.onCreate();
-    LitePalApplication.initialize(this);
+
+    LitePal.initialize(this);
 
     configBmob();
   }

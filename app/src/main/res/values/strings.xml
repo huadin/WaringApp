@@ -64,4 +64,12 @@
     <string name="button_register_submit">注册</string>
     <string name="password_reset_success">密码重置成功</string>
 
+    <!--权限显示-->
+    <string name="location_permission_show_text">定位权限被拒绝,无法准确获取您的地理位置</string>
+    <string name="permission_dialog_key">PERMISSION_DIALOG_KEY</string>
+    <string name="permission_dialog_title">提示</string>
+    <string name="permission_dialog_positive">确定</string>
+    <string name="permission_dialog_negative">取消</string>
+    <string name="permission_storage_message">本软件需要存储权限,是否去设置</string>
+
 </resources>
