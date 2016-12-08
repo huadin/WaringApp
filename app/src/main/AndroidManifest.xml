@@ -35,7 +35,9 @@
         <activity
             android:name=".WelcomeActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -58,8 +60,15 @@
             android:value="b792668a5836e28035a12cdece18fa7c">
         </meta-data>
 
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait">
+
         </activity>
+        <!--高德-->
+        <service android:name="com.amap.api.location.APSService"/>
+
     </application>
 
 </manifest>

@@ -2,37 +2,33 @@ package com.huadin.waringapp;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.RelativeLayout;
 
 import com.huadin.base.BaseActivity;
 import com.huadin.dialog.PermissionDialogFragment;
-import com.huadin.util.LogUtil;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class WelcomeActivity extends BaseActivity implements PermissionDialogFragment.OnPermissionListener, Animation.AnimationListener
+public class WelcomeActivity extends BaseActivity implements PermissionDialogFragment.OnPermissionListener
 {
-  private final int PERMISSION_READ_STORAGE = 0x11;
+  private String[] needPermissions = {
+          Manifest.permission.ACCESS_COARSE_LOCATION,
+          Manifest.permission.ACCESS_FINE_LOCATION,
+          Manifest.permission.WRITE_EXTERNAL_STORAGE,
+          Manifest.permission.READ_EXTERNAL_STORAGE,
+          Manifest.permission.READ_PHONE_STATE
+  };
 
-  @BindView(R.id.activity_welcome)
-  RelativeLayout mRelativeLayout;
+  private int permissionCode[] = {0x11,0x12,0x13,0x14,0x15};
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
     ButterKnife.bind(this);
-    initAnim();
   }
 
   @Override
@@ -41,58 +37,13 @@ public class WelcomeActivity extends BaseActivity implements PermissionDialogFra
     return R.layout.activity_welcome;
   }
 
-  private void initAnim()
-  {
-    Animation anim = AnimationUtils.loadAnimation(this, R.anim.welcome_anim);
-    mRelativeLayout.startAnimation(anim);
-    anim.setAnimationListener(this);
-  }
 
   private void checkStoragePermission()
   {
-    if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
-            PackageManager.PERMISSION_GRANTED)
-    {
-      if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-              Manifest.permission.WRITE_EXTERNAL_STORAGE))
-      {
-        try
-        {
-          Bundle bundle = new Bundle();
-          bundle.putString(getString(R.string.permission_dialog_key), getString(R.string.permission_storage_message));
-          PermissionDialogFragment dialogFragment = PermissionDialogFragment.newInstance();
-          dialogFragment.setOnPermissionListener(this);
-          dialogFragment.setArguments(bundle);
-          dialogFragment.show(getSupportFragmentManager(), getClass().getSimpleName());
-        } catch (Exception e)
-        {
-          e.printStackTrace();
-        }
+    // TODO: 2016/12/8 设置请求权限
 
-      } else
-      {
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                PERMISSION_READ_STORAGE);
-      }
-    } else
-    {
-      //有权限启动动画
-      initAnim();
-    }
   }
 
-  @Override
-  public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
-  {
-    if (requestCode == PERMISSION_READ_STORAGE)
-    {
-      if (grantResults[0] != PackageManager.PERMISSION_GRANTED)
-      {
-        checkStoragePermission();
-      }
-    }
-    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-  }
 
   @Override
   protected void onResume()
@@ -125,22 +76,4 @@ public class WelcomeActivity extends BaseActivity implements PermissionDialogFra
     finish();
   }
 
-  @Override
-  public void onAnimationStart(Animation animation)
-  {
-    //检查权限
-  }
-
-  @Override
-  public void onAnimationEnd(Animation animation)
-  {
-    startActivity(MainActivity.class);
-    finish();
-  }
-
-  @Override
-  public void onAnimationRepeat(Animation animation)
-  {
-
-  }
 }
