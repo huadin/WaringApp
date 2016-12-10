@@ -6,27 +6,21 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.huadin.base.BaseFragment;
-import com.huadin.eventbus.EventCenter;
 import com.huadin.util.AMUtils;
 import com.huadin.waringapp.R;
 import com.huadin.widget.ClearEditText;
-
-import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 import static cn.bmob.v3.Bmob.getApplicationContext;
 import static com.google.common.base.Preconditions.checkNotNull;
-import static org.greenrobot.eventbus.EventBus.TAG;
 
 public class LoginFragment extends BaseFragment implements LoginContract.View, TextWatcher
 {
@@ -127,7 +121,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, T
     return isNetwork;
   }
 
-  @OnClick({R.id.login_app, R.id.to_register,R.id.to_forget_password})
+  @OnClick({R.id.login_app, R.id.to_register, R.id.to_forget_password})
   public void onClick(View view)
   {
     switch (view.getId())

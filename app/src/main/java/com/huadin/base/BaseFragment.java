@@ -4,14 +4,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.huadin.eventbus.EventCenter;
-import com.huadin.util.LogUtil;
+import com.huadin.util.NetworkUtil;
 import com.huadin.util.ToastUtil;
 import com.huadin.waringapp.R;
 import com.huadin.widget.LoadDialog;
@@ -19,7 +18,6 @@ import com.huadin.widget.LoadDialog;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import me.yokeyword.fragmentation.SupportActivity;
 import me.yokeyword.fragmentation.SupportFragment;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -45,18 +43,19 @@ public abstract class BaseFragment extends SupportFragment
     super.onCreate(savedInstanceState);
     EventBus.getDefault().register(this);
     mToast = new ToastUtil(mContext);
-    isNetwork = mContext.isNetwork;
+    isNetwork = NetworkUtil.getNetworkState(mContext);
     LOG_TAG = getClass().getSimpleName();
   }
 
   /**
    * 初始化toolbar
-   * @param toolbar Toolbar
+   *
+   * @param toolbar           Toolbar
    * @param toolbarTitleResId 标题
    */
-  protected void initToolbar (@NonNull Toolbar toolbar, int toolbarTitleResId)
+  protected void initToolbar(@NonNull Toolbar toolbar, int toolbarTitleResId)
   {
-    checkNotNull(toolbar,"toolbar cannot null");
+    checkNotNull(toolbar, "toolbar cannot null");
     toolbar.setTitle(toolbarTitleResId);
     toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
     toolbar.setNavigationOnClickListener(new View.OnClickListener()
@@ -71,24 +70,26 @@ public abstract class BaseFragment extends SupportFragment
 
 
   /**
-   *  获取 Fragment 的 View
-   * @param inflater LayoutInflater
+   * 获取 Fragment 的 View
+   *
+   * @param inflater  LayoutInflater
    * @param container ViewGroup
-   * @param resId int
+   * @param resId     int
    * @return view
    */
-  protected  View getViewResId (LayoutInflater inflater,@Nullable ViewGroup container,int resId)
+  protected View getViewResId(LayoutInflater inflater, @Nullable ViewGroup container, int resId)
   {
-    return inflater.inflate(resId,container,false);
+    return inflater.inflate(resId, container, false);
   }
 
   /**
    * 显示 dialog
+   *
    * @param resId int
    */
   protected void showLoading(int resId)
   {
-    LoadDialog.show(mContext,getString(resId));
+    LoadDialog.show(mContext, getString(resId));
   }
 
   /**
@@ -118,6 +119,7 @@ public abstract class BaseFragment extends SupportFragment
 
   /**
    * eventBus 回调
+   *
    * @param eventCenter EventCenter
    */
   private void fragmentOnEvent(EventCenter eventCenter)

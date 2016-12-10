@@ -18,7 +18,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * 重置密码
  */
 
-public class ResetPresenter implements RegisterContract.Presenter
+class ResetPresenter implements RegisterContract.Presenter
 {
   private static final String TAG = "ResetPresenter";
   private RegisterContract.View mResetView;
@@ -39,7 +39,7 @@ public class ResetPresenter implements RegisterContract.Presenter
   };
 
 
-  public ResetPresenter(RegisterContract.View resetView)
+  ResetPresenter(RegisterContract.View resetView)
   {
     this.mResetView = resetView;
     mResetView = checkNotNull(resetView, "resetView cannot null");
