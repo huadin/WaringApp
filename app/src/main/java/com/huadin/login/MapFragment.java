@@ -15,7 +15,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.amap.api.maps.AMap;
+import com.amap.api.maps.AMapOptions;
+import com.amap.api.maps.CameraUpdate;
+import com.amap.api.maps.CameraUpdateFactory;
+import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
+import com.amap.api.maps.UiSettings;
 import com.huadin.base.BaseFragment;
 import com.huadin.permission.PermissionListener;
 import com.huadin.permission.PermissionManager;
@@ -33,7 +38,7 @@ import static com.huadin.waringapp.R.id.map;
  * 地图定位
  */
 
-public class MapFragment extends BaseFragment implements PermissionListener, MapContract.View
+public class MapFragment extends BaseFragment implements PermissionListener, MapContract.View, LocationSource
 {
 
   @BindView(R.id.top_toolbar)
@@ -72,8 +77,7 @@ public class MapFragment extends BaseFragment implements PermissionListener, Map
   public void onCreate(@Nullable Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
-    //初始化控制器,在权限检测之前
-    new MapPresenter(this, mContext);
+    checkPermission();
   }
 
   @Nullable
@@ -84,7 +88,7 @@ public class MapFragment extends BaseFragment implements PermissionListener, Map
     ButterKnife.bind(this, view);
     mMapView.onCreate(savedInstanceState);
     initView();
-    checkPermission();
+//    checkPermission();
     return view;
   }
 
@@ -116,7 +120,7 @@ public class MapFragment extends BaseFragment implements PermissionListener, Map
   {
     super.onStop();
     //停止定位
-    mPresenter.stopLocation();
+    deactivate();
   }
 
   @Override
@@ -141,8 +145,30 @@ public class MapFragment extends BaseFragment implements PermissionListener, Map
     if (aMap == null)
     {
       aMap = mMapView.getMap();
+      setUpMap();
     }
+  }
 
+  //设置交互控件参数
+  private void setUpMap()
+  {
+    //设置放大级别
+    CameraUpdate update = CameraUpdateFactory.zoomTo(16);
+    aMap.moveCamera(update);
+    //设置交互控件
+    UiSettings mSetting = aMap.getUiSettings();
+    //缩放按钮位置
+    mSetting.setZoomPosition(AMapOptions.ZOOM_POSITION_RIGHT_CENTER);
+    //指南针
+    mSetting.setCompassEnabled(true);
+    //显示比例尺控件
+    mSetting.setScaleControlsEnabled(true);
+    //显示默认的定位按钮
+    mSetting.setMyLocationButtonEnabled(true);
+    //设置定位源
+    aMap.setLocationSource(this);
+    // 可触发定位并显示定位层
+    aMap.setMyLocationEnabled(true);
   }
 
   private void initToolbarNav(Toolbar mToolbar)
@@ -161,6 +187,7 @@ public class MapFragment extends BaseFragment implements PermissionListener, Map
     });
   }
 
+  //授权成功回调
   @Override
   public void onGranted()
   {
@@ -168,7 +195,8 @@ public class MapFragment extends BaseFragment implements PermissionListener, Map
     if (isNetwork)
     {
       // TODO: 2016/12/10 检测GPS是否开启 ,未开启则提示用户
-      mPresenter.startLocation();
+      //初始化控制器,在权限检测之前
+      new MapPresenter(this, mContext);
     } else
     {
       //无网络
@@ -176,6 +204,7 @@ public class MapFragment extends BaseFragment implements PermissionListener, Map
     }
   }
 
+  //显示权限解释及设置权限
   @Override
   public void onShowRationale(String permissions)
   {
@@ -214,6 +243,19 @@ public class MapFragment extends BaseFragment implements PermissionListener, Map
     mPresenter = checkNotNull(presenter, "presenter cannot null");
   }
 
+  //激活定位
+  @Override
+  public void activate(OnLocationChangedListener onLocationChangedListener)
+  {
+    mPresenter.startLocation(onLocationChangedListener);
+  }
+
+  //停止定位
+  @Override
+  public void deactivate()
+  {
+    mPresenter.stopLocation();
+  }
 
   //打开抽屉回调接口
   public interface OnFragmentOpenDrawerListener

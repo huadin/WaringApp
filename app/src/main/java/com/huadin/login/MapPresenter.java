@@ -5,6 +5,7 @@ import android.content.Context;
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.maps.LocationSource;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -14,19 +15,18 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 class MapPresenter implements MapContract.MapListener
 {
-  private MapContract.View mMapView;
+  private MapContract.View mView;
   private AMapLocationClient mClient;
+  private Context mContext;
+  private LocationSource.OnLocationChangedListener mListener;
 
   MapPresenter(MapContract.View view, Context context)
   {
-    this.mMapView = view;
-    mMapView = checkNotNull(view, "view cannot null");
-    mMapView.setPresenter(this);
-    checkNotNull(context, "context cannot null");
-
-    mClient = new AMapLocationClient(context.getApplicationContext());
-    mClient.setLocationOption(getDefaultOption());
-    mClient.setLocationListener(this);
+    this.mView = view;
+    this.mContext = context;
+    mContext = checkNotNull(context, "context cannot null");
+    mView = checkNotNull(view, "view cannot null");
+    mView.setPresenter(this);
   }
 
   /**
@@ -37,14 +37,16 @@ class MapPresenter implements MapContract.MapListener
   @Override
   public void onLocationChanged(AMapLocation aMapLocation)
   {
-    if (aMapLocation != null)
+    if (mListener != null && aMapLocation != null)
     {
       if (aMapLocation.getErrorCode() == 0)
       {
-        mMapView.latLng(aMapLocation.getLatitude(), aMapLocation.getLongitude());
+        mView.latLng(aMapLocation.getLatitude(), aMapLocation.getLongitude());
+        //显示系统小蓝点
+        mListener.onLocationChanged(aMapLocation);
       } else
       {
-        mMapView.locationError(aMapLocation.getErrorCode(), aMapLocation.getErrorInfo());
+        mView.locationError(aMapLocation.getErrorCode(), aMapLocation.getErrorInfo());
       }
     }
   }
@@ -82,9 +84,14 @@ class MapPresenter implements MapContract.MapListener
    * 开启定位
    */
   @Override
-  public void startLocation()
+  public void startLocation(LocationSource.OnLocationChangedListener listener)
   {
-    mClient = checkNotNull(mClient, "AMapLocationClient null");
+    this.mListener = listener;
+    mListener = checkNotNull(listener, "OnLocationChangedListener cannot null");
+    mClient = new AMapLocationClient(mContext.getApplicationContext());
+    mClient.setLocationOption(getDefaultOption());
+    mClient.setLocationListener(this);
+
     mClient.startLocation();
   }
 

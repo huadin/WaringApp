@@ -1,6 +1,7 @@
 package com.huadin.login;
 
 import com.amap.api.location.AMapLocationListener;
+import com.amap.api.maps.LocationSource;
 import com.huadin.base.BaseView;
 
 /**
@@ -33,7 +34,7 @@ interface MapContract
     /**
      * 开启定位
      */
-    void startLocation();
+    void startLocation(LocationSource.OnLocationChangedListener onLocationChangedListener);
 
     /**
      * 停止定位
