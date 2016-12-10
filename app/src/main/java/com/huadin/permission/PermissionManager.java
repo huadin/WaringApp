@@ -3,14 +3,13 @@ package com.huadin.permission;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 public class PermissionManager
@@ -74,7 +73,7 @@ public class PermissionManager
   }
 
   /**
-   * 请求权限
+   * 拒绝后再次请求权限
    *
    * @return PermissionManager
    */
@@ -84,28 +83,18 @@ public class PermissionManager
     return this;
   }
 
-  private void request(Object object, String[] permissions, int requestCode)
+  private void request(@NonNull Object object, String[] permissions, int requestCode)
   {
-    Map<String, List<String>> maps = findDeniedPermissions(getActivity(object), permissions);
-    List<String> deniedPermissions = maps.get("deny");
-    List<String> rationales = maps.get("rationale");
-    if (deniedPermissions.size() > 0)
+    List<String> permissionList = findDeniedPermissions(getActivity(object), permissions);
+    if (null != permissionList && permissionList.size() > 0)
     {
-      if (rationales.size() > 0 && !mIsPositive)
-      {
-        if (mListener != null)
-        {
-          mListener.onShowRationale(rationales.toArray(new String[deniedPermissions.size()]));
-        }
-        return;
-      }
       if (object instanceof Activity)
       {
         ActivityCompat.requestPermissions((Activity) object,
-                deniedPermissions.toArray(new String[deniedPermissions.size()]), requestCode);
+                permissionList.toArray(new String[permissionList.size()]), requestCode);
       } else if (object instanceof Fragment)
       {
-        ((Fragment) object).requestPermissions(deniedPermissions.toArray(new String[deniedPermissions.size()]), requestCode);
+        ((Fragment) object).requestPermissions(permissionList.toArray(new String[permissionList.size()]), requestCode);
       } else
       {
         throw new IllegalArgumentException(object.getClass().getName() + " is not supported");
@@ -117,7 +106,32 @@ public class PermissionManager
         mListener.onGranted();
       }
     }
+
   }
+
+
+  /**
+   * 查看被拒绝的权限
+   *
+   * @param activity    Activity
+   * @param permissions String[]
+   * @return List<String>
+   */
+  private List<String> findDeniedPermissions(Activity activity, String[] permissions)
+  {
+    List<String> needRequestPermissionList = new ArrayList<>();
+    for (String perm : permissions)
+    {
+      if (ContextCompat.checkSelfPermission(activity, perm) != PackageManager.PERMISSION_GRANTED
+              || ActivityCompat.shouldShowRequestPermissionRationale(
+              activity, perm))
+      {
+        needRequestPermissionList.add(perm);
+      }
+    }
+    return needRequestPermissionList;
+  }
+
 
   /**
    * 是否点击对话框
@@ -129,46 +143,6 @@ public class PermissionManager
     this.mIsPositive = isPositive;
   }
 
-  private Map<String, List<String>> findDeniedPermissions(Activity activity, String... permissions)
-  {
-    Map<String, List<String>> map = new HashMap<>();
-    List<String> denyList = new ArrayList<>();//未授权的权限
-    List<String> rationaleList = new ArrayList<>();//需要显示提示框的权限
-
-    for (String permission : permissions)
-    {
-      if (ContextCompat.checkSelfPermission(activity, permission) !=
-              PackageManager.PERMISSION_GRANTED)
-      {
-        //申请劝降
-        denyList.add(permission);
-        //是否显示弹窗
-        if (shouldShowRequestPermissionRationale(permission))
-        {
-          rationaleList.add(permission);
-        }
-      }
-    }
-
-    map.put("deny", denyList);
-    map.put("rationale", rationaleList);
-    return map;
-  }
-
-  /* 显示弹窗的权限 ,给予用户解释 */
-  private boolean shouldShowRequestPermissionRationale(String permission)
-  {
-    if (mObject instanceof Activity)
-    {
-      return ActivityCompat.shouldShowRequestPermissionRationale((Activity) mObject, permission);
-    } else if (mObject instanceof Fragment)
-    {
-      return ((Fragment) mObject).shouldShowRequestPermissionRationale(permission);
-    } else
-    {
-      throw new IllegalArgumentException(mObject.getClass().getName() + " is not supported");
-    }
-  }
 
   /**
    * 根据 requestCode 处理响应的权限
@@ -178,32 +152,23 @@ public class PermissionManager
    */
   public void onPermissionResult(String[] permissions, int[] results)
   {
-    List<String> deniedPermissions = new ArrayList<>();
-    for (int i = 0; i < permissions.length; i++)
+
+    for (int i = 0; i < results.length; i++)
     {
       if (results[i] != PackageManager.PERMISSION_GRANTED)
       {
-        deniedPermissions.add(permissions[i]);
-      }
-    }
-
-    if (deniedPermissions.size() > 0)
-    {
-      if (mListener != null)
-      {
-        mListener.onDenied();
-      }
-    } else
-    {
-      if (mListener != null)
-      {
-        mListener.onGranted();
+        if (mListener != null)
+        {
+          mListener.onShowRationale(permissions[i]);
+          break;
+        }
       }
     }
   }
 
+
   /*检测 object 类型*/
-  private Activity getActivity(Object object)
+  private Activity getActivity(@NonNull Object object)
   {
     if (object instanceof Fragment)
     {
@@ -214,6 +179,5 @@ public class PermissionManager
     }
     return null;
   }
-
 
 }
