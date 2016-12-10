@@ -18,8 +18,6 @@ public class PermissionManager
   private String[] mPermissions;
   private int mRequestCode;
   private PermissionListener mListener;
-  // 用户是否确认了解释框的
-  private boolean mIsPositive = false;
 
   public static PermissionManager with(Activity activity)
   {
@@ -134,17 +132,6 @@ public class PermissionManager
 
 
   /**
-   * 是否点击对话框
-   *
-   * @param isPositive boolean
-   */
-  public void setIsPositive(boolean isPositive)
-  {
-    this.mIsPositive = isPositive;
-  }
-
-
-  /**
    * 根据 requestCode 处理响应的权限
    *
    * @param permissions 权限组
@@ -165,7 +152,6 @@ public class PermissionManager
       }
     }
   }
-
 
   /*检测 object 类型*/
   private Activity getActivity(@NonNull Object object)

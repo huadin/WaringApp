@@ -13,13 +13,9 @@ import org.greenrobot.eventbus.Subscribe;
 
 import me.yokeyword.fragmentation.SupportActivity;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
-
 public abstract class BaseActivity extends SupportActivity
 {
-  /**
-   * log tag
-   */
+
   protected static String LOG_TAG = null;
   protected Context mContext;
   protected ToastUtil mToast;
@@ -52,11 +48,6 @@ public abstract class BaseActivity extends SupportActivity
    */
   protected abstract int getContentViewLayoutID();
 
-  protected void toActivity(Context context, Class<?> cls)
-  {
-    Intent intent = new Intent(context, cls);
-    startActivity(intent);
-  }
 
   @Override
   protected void onDestroy()
@@ -74,14 +65,16 @@ public abstract class BaseActivity extends SupportActivity
     }
   }
 
+  //eventBus 调用
   protected void onEventComming(EventCenter eventCenter)
   {
 
   }
 
-  protected void startActivity (Class<?> cls)
+  //启动 Activity
+  protected void startActivity(Class<?> cls)
   {
-    Intent intent = new Intent(this,cls);
+    Intent intent = new Intent(this, cls);
     startActivity(intent);
   }
 

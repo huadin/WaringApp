@@ -8,16 +8,25 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.RelativeLayout;
 
 import com.huadin.base.BaseActivity;
 import com.huadin.permission.PermissionListener;
 import com.huadin.permission.PermissionManager;
 import com.huadin.util.LogUtil;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class WelcomeActivity extends BaseActivity implements PermissionListener
+public class WelcomeActivity extends BaseActivity implements PermissionListener, Animation.AnimationListener
 {
+  @BindView(R.id.activity_welcome)
+  RelativeLayout mRelativeLayout;
+
+  private static final String TAG = "WelcomeActivity";
+
   private String[] needPermissions = {
           Manifest.permission.ACCESS_COARSE_LOCATION,
           Manifest.permission.ACCESS_FINE_LOCATION,
@@ -26,7 +35,9 @@ public class WelcomeActivity extends BaseActivity implements PermissionListener
   };
 
   private final int permissionCode = 0x11;
-
+  /**
+   * 反正重复弹出 dialog
+   */
   private boolean isNeedCheck = true;
   private PermissionManager manager;
 
@@ -44,6 +55,9 @@ public class WelcomeActivity extends BaseActivity implements PermissionListener
   }
 
 
+  /**
+   * 检查权限
+   */
   private void checkStoragePermission()
   {
     manager = PermissionManager.with(this)
@@ -85,20 +99,23 @@ public class WelcomeActivity extends BaseActivity implements PermissionListener
     }
   }
 
+  /**
+   * 授权后回调
+   */
   @Override
   public void onGranted()
   {
     //应用授权
+    LogUtil.i(TAG, "onGranted");
+    //开启动画
+    initAnimation();
   }
 
-  @Override
-  public void onDenied()
-  {
-    //被拒绝
-    LogUtil.i(LOG_TAG, "--- onDenied ---");
-    showDialogPermission();
-  }
-
+  /**
+   * 显示去设置权限的 dialog
+   *
+   * @param permissions 返回需要显示说明的权限数组
+   */
   @Override
   public void onShowRationale(String permissions)
   {
@@ -142,7 +159,8 @@ public class WelcomeActivity extends BaseActivity implements PermissionListener
                   finish();
                 }
               });
-      dialog.setCanceledOnTouchOutside(true);
+
+      dialog.setCancelable(false);
       dialog.show();
     } catch (Exception e)
     {
@@ -150,4 +168,30 @@ public class WelcomeActivity extends BaseActivity implements PermissionListener
     }
   }
 
+  //初始化动画
+  private void initAnimation()
+  {
+    Animation animation = AnimationUtils.loadAnimation(this, R.anim.welcome_anim);
+    animation.setAnimationListener(this);
+    mRelativeLayout.startAnimation(animation);
+  }
+
+  @Override
+  public void onAnimationStart(Animation animation)
+  {
+    // TODO: 2016/12/10 开启服务,加载网络数据
+  }
+
+  @Override
+  public void onAnimationEnd(Animation animation)
+  {
+    startActivity(MainActivity.class);
+    finish();
+}
+
+  @Override
+  public void onAnimationRepeat(Animation animation)
+  {
+
+  }
 }

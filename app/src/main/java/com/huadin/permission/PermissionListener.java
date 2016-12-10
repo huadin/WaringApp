@@ -7,10 +7,10 @@ public interface PermissionListener
    */
   void onGranted();
 
-  /**
-   * 用户禁止后调用
-   */
-  void onDenied();
+//  /**
+//   * 用户禁止后调用
+//   */
+//  void onDenied();
 
   /**
    * 是否显示阐述性说明

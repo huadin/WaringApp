@@ -11,7 +11,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +19,7 @@ import com.huadin.base.BaseActivity;
 import com.huadin.login.LoginFragment;
 import com.huadin.login.LoginPresenter;
 import com.huadin.login.MapFragment;
+import com.huadin.util.LogUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -105,14 +105,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
       @Override
       public boolean onQueryTextSubmit(String query)
       {
-        Log.i(TAG, "onQueryTextSubmit: ");
+        LogUtil.i(TAG, "onQueryTextSubmit: ");
         return false;
       }
 
       @Override
       public boolean onQueryTextChange(String newText)
       {
-        Log.i(TAG, "onQueryTextChange: ");
+        LogUtil.i(TAG, "onQueryTextChange: ");
         return false;
       }
     });
