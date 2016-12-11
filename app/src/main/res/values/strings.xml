@@ -56,7 +56,7 @@
     <string name="show_send_code_text">S后重发</string>
     <string name="toolbar_search_view">搜索</string>
     <string name="share">数据共享</string>
-    <string name="map_location">地图</string>
+    <string name="map_location">附近信息</string>
 
     <!--重置密码-->
     <string name="action_reset_password">重置</string>
@@ -71,5 +71,13 @@
     <string name="permission_dialog_positive">去设置</string>
     <string name="permission_dialog_negative">取消</string>
     <string name="permission_storage_message">本软件需要数据存储、定位、电话权限,是否去设置</string>
+    <string name="blackout_repair">停电报修</string>
+    <string name="fault_info">故障信息</string>
+    <string name="blackout_search">停电搜索</string>
+    <string name="message_notify">消息通知</string>
+    <string name="setting">设置</string>
+    <string name="warning_address">预警地址</string>
+    <string name="contact_us">联系我们</string>
+    <string name="feedback">意见反馈</string>
 
 </resources>

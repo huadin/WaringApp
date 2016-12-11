@@ -8,12 +8,12 @@
         app:showAsAction="never"/>
 
     <!--搜索-->
-    <item
-        android:id="@+id/action_search_view"
-        android:icon="@drawable/icon_search"
-        android:title="@string/toolbar_search_view"
-        app:actionViewClass="android.support.v7.widget.SearchView"
-        app:showAsAction="ifRoom|collapseActionView"/>
+    <!--<item-->
+        <!--android:id="@+id/action_search_view"-->
+        <!--android:icon="@drawable/icon_search"-->
+        <!--android:title="@string/toolbar_search_view"-->
+        <!--app:actionViewClass="android.support.v7.widget.SearchView"-->
+        <!--app:showAsAction="ifRoom|collapseActionView"/>-->
 
     <!--数据共享-->
     <!--<item-->

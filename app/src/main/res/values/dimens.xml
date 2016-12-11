@@ -32,4 +32,7 @@
     <dimen name="register_phone_code_width">180px</dimen>
     <dimen name="login_register_button_height_96px">96px</dimen>
 
+    <!--自定义范围-->
+    <dimen name="map_fab_margin_10dp">10dp</dimen>
+
 </resources>

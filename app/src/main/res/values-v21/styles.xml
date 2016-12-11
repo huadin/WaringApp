@@ -12,4 +12,5 @@
         <!--底部导航颜色，21版本以后生效-->
         <item name="android:navigationBarColor">@color/navigation_bar_color</item>
     </style>
+
 </resources>

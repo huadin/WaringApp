@@ -94,6 +94,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, T
   {
     //登录成功
     mToast.showMessage(R.string.login_success, 500);
+    pop();
   }
 
   @Override

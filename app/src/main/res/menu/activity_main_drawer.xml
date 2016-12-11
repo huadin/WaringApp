@@ -1,36 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!--主菜单-->
     <group android:checkableBehavior="single">
+        <!--停电报修-->
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import"/>
+            android:id="@+id/blackout_repair"
+            android:icon="@drawable/icon_submit_72px"
+            android:title="@string/blackout_repair"/>
+        <!--故障信息-->
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery"/>
+            android:id="@+id/fault_info"
+            android:icon="@drawable/icon_fault_72px"
+            android:title="@string/fault_info"/>
+        <!--停电搜索-->
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow"/>
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools"/>
-    </group>
+            android:id="@+id/info_search"
+            android:icon="@drawable/icon_search_72px"
+            android:title="@string/blackout_search"/>
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share"/>
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send"/>
-        </menu>
-    </item>
+        <!--消息通知-->
+        <item
+            android:id="@+id/message_notify"
+            android:icon="@drawable/icon_notify_72px"
+            android:title="@string/message_notify"/>
+        <!--消息设置-->
+
+        <!--预警地址-->
+        <item
+            android:id="@+id/warning_address"
+            android:icon="@drawable/icon_address_72px"
+            android:title="@string/warning_address"/>
+
+        <!--联系我们-->
+        <item
+            android:id="@+id/contact_us"
+            android:icon="@drawable/icon_contacts_72px"
+            android:title="@string/contact_us"/>
+
+        <!--意见反馈-->
+        <item
+            android:id="@+id/feedback"
+            android:icon="@drawable/icon_feedback_72px"
+            android:title="@string/feedback"/>
+
+        <!--设置-->
+        <item
+            android:id="@+id/setting"
+            android:icon="@drawable/icon_setting_72px"
+            android:title="@string/setting"/>
+    </group>
 
 </menu>

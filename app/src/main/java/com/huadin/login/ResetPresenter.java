@@ -70,7 +70,7 @@ class ResetPresenter implements RegisterContract.Presenter
       mResetView.inputError(errorRes);
       return;
     }
-    String SMS_TEMPLATE_NAME = "短信验证";
+    String SMS_TEMPLATE_NAME = "重置密码";
     mTimer.start();
     BmobSMS.requestSMSCode(resetPhone, SMS_TEMPLATE_NAME, new QueryListener<Integer>()
     {

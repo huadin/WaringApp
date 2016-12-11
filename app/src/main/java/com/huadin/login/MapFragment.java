@@ -145,8 +145,8 @@ public class MapFragment extends BaseFragment implements PermissionListener, Map
     if (aMap == null)
     {
       aMap = mMapView.getMap();
-      setUpMap();
     }
+    setUpMap();
   }
 
   //设置交互控件参数
@@ -308,4 +308,14 @@ public class MapFragment extends BaseFragment implements PermissionListener, Map
     }
   }
 
+  @Override
+  public void onHiddenChanged(boolean hidden)
+  {
+    super.onHiddenChanged(hidden);
+    //地图不再前台时，停止定位
+    if (hidden)
+    {
+      mPresenter.stopLocation();
+    }
+  }
 }

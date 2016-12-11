@@ -69,4 +69,5 @@ dependencies {
     // compile 'me.yokeyword:fragmentation-swipeback:0.7.9'
     compile 'com.google.guava:guava:18.0'
     testCompile 'junit:junit:4.12'
+    compile 'com.google.android.gms:play-services-appindexing:8.4.0'
 }

@@ -8,31 +8,46 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.widget.SearchView;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.huadin.base.BaseActivity;
+import com.huadin.bean.Person;
 import com.huadin.login.LoginFragment;
 import com.huadin.login.LoginPresenter;
 import com.huadin.login.MapFragment;
-import com.huadin.util.LogUtil;
+import com.huadin.userinfo.UserInfoFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.bmob.v3.BmobUser;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener,
         MapFragment.OnFragmentOpenDrawerListener
 
 {
-  private static final String TAG = "MainActivity";
+
+//  int[][] status = new int[][]{
+//          new int[]{-android.R.attr.state_checked},
+//          new int[]{android.R.attr.state_checked}};
+//
+//  int[] colors = new int[]{getResources().getColor(R.color.colorPrimaryDark),
+//          getResources().getColor(R.color.test_color)};
+
+
   @BindView(R.id.drawer_layout)
   DrawerLayout mDrawer;
   @BindView(R.id.nav_view)
   NavigationView mNavigationView;
+  private Person mUser;
+  //用户名字后一位
+  private TextView nameAfter;
+  //用户名
+  private TextView userName;
+//  private ColorStateList cls;
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState)
@@ -40,6 +55,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     super.onCreate(savedInstanceState);
 //    setContentView(R.layout.activity_main);
     ButterKnife.bind(this);
+    mUser = BmobUser.getCurrentUser(Person.class);
+//    cls = getResources().getColorStateList(R.color.colorPrimaryDark);
+
     //初始化View
     initView();
     //申请定位权限
@@ -70,7 +88,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
   private void initView()
   {
     mNavigationView.setNavigationItemSelectedListener(this);
-    View nameAfter = mNavigationView.getHeaderView(0).findViewById(R.id.user_name_after);
+
+    nameAfter = (TextView) mNavigationView.getHeaderView(0).findViewById(R.id.user_name_after);
+    userName = (TextView) mNavigationView.getHeaderView(0).findViewById(R.id.user_name);
     nameAfter.setOnClickListener(new View.OnClickListener()
     {
       @Override
@@ -78,9 +98,18 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
       {
         // TODO: 2016/12/3 判断是否已经登录,已登录则无需跳转
         closeDrawer();
-        LoginFragment loginFragment = LoginFragment.newInstance();
-        new LoginPresenter(loginFragment);
-        start(loginFragment);
+        if (mUser != null)
+        {
+          //进入个人信息
+          UserInfoFragment infoFragment = UserInfoFragment.newInstance();
+          start(infoFragment);
+        } else
+        {
+          //登录注册
+          LoginFragment loginFragment = LoginFragment.newInstance();
+          new LoginPresenter(loginFragment);
+          start(loginFragment);
+        }
       }
     });
 
@@ -92,63 +121,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     return R.layout.activity_main;
   }
 
-
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu)
-  {
-    getMenuInflater().inflate(R.menu.main, menu);
-    MenuItem menuItem = menu.findItem(R.id.action_search_view);
-    SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
-
-    searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
-    {
-      @Override
-      public boolean onQueryTextSubmit(String query)
-      {
-        LogUtil.i(TAG, "onQueryTextSubmit: ");
-        return false;
-      }
-
-      @Override
-      public boolean onQueryTextChange(String newText)
-      {
-        LogUtil.i(TAG, "onQueryTextChange: ");
-        return false;
-      }
-    });
-    return true;
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item)
-  {
-    int id = item.getItemId();
-    if (id == R.id.action_settings)
-    {
-
-      return true;
-    }
-    return super.onOptionsItemSelected(item);
-  }
-
-  @SuppressWarnings("StatementWithEmptyBody")
   @Override
   public boolean onNavigationItemSelected(@NonNull MenuItem item)
   {
+
     switch (item.getItemId())
     {
-      case R.id.nav_camera:
-        break;
-      case R.id.nav_gallery:
-        break;
-      case R.id.nav_slideshow:
-        break;
-      case R.id.nav_manage:
-        break;
-      case R.id.nav_share:
-        break;
-      case R.id.nav_send:
-        break;
+      // TODO: 2016/12/11 设置点击Item 的样式
     }
 
     mDrawer.closeDrawer(GravityCompat.START);
@@ -182,6 +161,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
   {
     if (!mDrawer.isDrawerOpen(GravityCompat.START))
     {
+      if (mUser != null)
+      {
+        String personName = mUser.getUsername();
+        userName.setText(personName);
+        int startLength = personName.length() - 1;
+        String nameEnd = personName.substring(startLength);
+        nameAfter.setText(nameEnd);
+      }
       mDrawer.openDrawer(GravityCompat.START);
     }
   }
@@ -194,5 +181,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
       mDrawer.closeDrawer(GravityCompat.START);
     }
   }
+
 
 }

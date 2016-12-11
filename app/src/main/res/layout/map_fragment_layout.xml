@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <include layout="@layout/top_bar_layout"/>
@@ -17,6 +18,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/map_range_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/map_fab_margin_10dp"
+            app:backgroundTint="@color/colorPrimaryDark"
+            app:srcCompat="@android:drawable/ic_menu_edit"/>
     </FrameLayout>
 
 </LinearLayout>
