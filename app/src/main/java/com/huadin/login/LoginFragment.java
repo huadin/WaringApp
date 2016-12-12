@@ -119,7 +119,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, T
   @Override
   public boolean networkIsAvailable()
   {
-    return isNetwork;
+    return isNetwork();
   }
 
   @OnClick({R.id.login_app, R.id.to_register, R.id.to_forget_password})

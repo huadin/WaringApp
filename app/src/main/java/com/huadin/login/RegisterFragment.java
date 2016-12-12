@@ -161,7 +161,7 @@ public class RegisterFragment extends BaseFragment implements RegisterContract.V
   @Override
   public boolean networkIsAvailable()
   {
-    return isNetwork;
+    return isNetwork();
   }
 
   @Override

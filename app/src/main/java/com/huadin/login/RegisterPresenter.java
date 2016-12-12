@@ -142,7 +142,7 @@ public class RegisterPresenter implements RegisterContract.Presenter
       return;
     }
 
-    String SMS_TEMPLATE_NAME = "短信验证";
+    String SMS_TEMPLATE_NAME = "注册验证";
 
     mTimer.start();
     BmobSMS.requestSMSCode(registerPhone, SMS_TEMPLATE_NAME, new QueryListener<Integer>()

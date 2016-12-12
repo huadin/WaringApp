@@ -24,11 +24,11 @@
     <!-- 允许程序访问CellID或WiFi热点来获取粗略的位置 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <!--用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
+    <!-- 用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <!--用于申请调用A-GPS模块-->
+    <!-- 用于申请调用A-GPS模块 -->
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
-    <!--用于申请获取蓝牙信息进行室内定位-->
+    <!-- 用于申请获取蓝牙信息进行室内定位 -->
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
 
@@ -66,19 +66,14 @@
             android:name="com.amap.api.v2.apikey"
             android:value="b792668a5836e28035a12cdece18fa7c">
         </meta-data>
-        <!--主界面-->
+        <!-- 主界面 -->
         <activity
-            android:name=".MainActivity"
+            android:name="com.huadin.login.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait">
-
         </activity>
-        <!--高德-->
-        <service android:name="com.amap.api.location.APSService"/><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version"/>
+        <!-- 高德 -->
+        <service android:name="com.amap.api.location.APSService"/>
 
     </application>
 

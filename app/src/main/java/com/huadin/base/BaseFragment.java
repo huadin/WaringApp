@@ -27,7 +27,6 @@ public abstract class BaseFragment extends SupportFragment
 {
   protected ToastUtil mToast;
   protected BaseActivity mContext;
-  protected boolean isNetwork;
   protected String LOG_TAG;
 
   @Override
@@ -43,7 +42,6 @@ public abstract class BaseFragment extends SupportFragment
     super.onCreate(savedInstanceState);
     EventBus.getDefault().register(this);
     mToast = new ToastUtil(mContext);
-    isNetwork = NetworkUtil.getNetworkState(mContext);
     LOG_TAG = getClass().getSimpleName();
   }
 
@@ -125,6 +123,15 @@ public abstract class BaseFragment extends SupportFragment
   private void fragmentOnEvent(EventCenter eventCenter)
   {
 
+  }
+
+  /**
+   * 查看网络状态
+   * @return boolean
+   */
+  protected boolean isNetwork()
+  {
+    return NetworkUtil.getNetworkState(mContext);
   }
 
 }

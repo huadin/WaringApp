@@ -1,7 +1,8 @@
-package com.huadin.waringapp;
+package com.huadin.login;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -15,10 +16,10 @@ import android.widget.TextView;
 
 import com.huadin.base.BaseActivity;
 import com.huadin.bean.Person;
-import com.huadin.login.LoginFragment;
-import com.huadin.login.LoginPresenter;
-import com.huadin.login.MapFragment;
+import com.huadin.fault.ReportFragment;
+import com.huadin.fault.ReportPresenter;
 import com.huadin.userinfo.UserInfoFragment;
+import com.huadin.waringapp.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,13 +30,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
 {
 
-//  int[][] status = new int[][]{
-//          new int[]{-android.R.attr.state_checked},
-//          new int[]{android.R.attr.state_checked}};
-//
-//  int[] colors = new int[]{getResources().getColor(R.color.colorPrimaryDark),
-//          getResources().getColor(R.color.test_color)};
-
+  private int[][] status = new int[][]{
+          new int[]{-android.R.attr.state_checked},
+          new int[]{android.R.attr.state_checked}};
 
   @BindView(R.id.drawer_layout)
   DrawerLayout mDrawer;
@@ -46,7 +43,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
   private TextView nameAfter;
   //用户名
   private TextView userName;
-//  private ColorStateList cls;
+  private ColorStateList cls;
 
 
   @Override
@@ -56,13 +53,20 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //    setContentView(R.layout.activity_main);
     ButterKnife.bind(this);
     mUser = BmobUser.getCurrentUser(Person.class);
-//    cls = getResources().getColorStateList(R.color.colorPrimaryDark);
-
+    //初始化item菜单样式
+    initColorStatsList();
     //初始化View
     initView();
     //申请定位权限
     checkLocationPermission();
     initFragment(savedInstanceState);
+  }
+
+  private void initColorStatsList()
+  {
+    int colors[] = new int[]{getResources().getColor(R.color.item_menu_color),
+            getResources().getColor(R.color.colorPrimaryDark)};
+    cls = new ColorStateList(status, colors);
   }
 
   private void checkLocationPermission()
@@ -127,9 +131,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     switch (item.getItemId())
     {
-      // TODO: 2016/12/11 设置点击Item 的样式
+      case R.id.blackout_repair:
+        ReportFragment fragment = ReportFragment.newInstance();
+        new ReportPresenter(fragment);
+        start(fragment);
+        break;
     }
 
+    mNavigationView.setItemTextColor(cls);
+    mNavigationView.setItemIconTintList(cls);
     mDrawer.closeDrawer(GravityCompat.START);
     return true;
   }

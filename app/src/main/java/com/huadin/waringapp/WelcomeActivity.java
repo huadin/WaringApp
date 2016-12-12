@@ -13,6 +13,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 
 import com.huadin.base.BaseActivity;
+import com.huadin.login.MainActivity;
 import com.huadin.permission.PermissionListener;
 import com.huadin.permission.PermissionManager;
 import com.huadin.util.LogUtil;

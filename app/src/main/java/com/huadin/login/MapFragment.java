@@ -192,7 +192,7 @@ public class MapFragment extends BaseFragment implements PermissionListener, Map
   public void onGranted()
   {
     //开启定位
-    if (isNetwork)
+    if (isNetwork())
     {
       // TODO: 2016/12/10 检测GPS是否开启 ,未开启则提示用户
       //初始化控制器,在权限检测之前

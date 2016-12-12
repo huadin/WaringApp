@@ -35,4 +35,11 @@
     <!--自定义范围-->
     <dimen name="map_fab_margin_10dp">10dp</dimen>
 
+    <!--故障提交-->
+    <dimen name="report_title_margin_left_16dp">16dp</dimen>
+    <dimen name="report_title_margin_top_10dp">10dp</dimen>
+    <dimen name="report_text_size_18sp">18sp</dimen>
+    <dimen name="report_button_margit_top_30dp">30dp</dimen>
+
+
 </resources>

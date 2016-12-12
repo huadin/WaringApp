@@ -71,6 +71,8 @@
     <string name="permission_dialog_positive">去设置</string>
     <string name="permission_dialog_negative">取消</string>
     <string name="permission_storage_message">本软件需要数据存储、定位、电话权限,是否去设置</string>
+
+    <!--item 菜单-->
     <string name="blackout_repair">停电报修</string>
     <string name="fault_info">故障信息</string>
     <string name="blackout_search">停电搜索</string>
@@ -79,5 +81,19 @@
     <string name="warning_address">预警地址</string>
     <string name="contact_us">联系我们</string>
     <string name="feedback">意见反馈</string>
+    <string name="report_title">请输入标题</string>
+    <string name="report_submit">提交</string>
+
+    <!--故障提交-->
+    <string name="report_content">请输入详细信息</string>
+    <string name="report_user">请输入联系人姓名</string>
+    <string name="report_phone">请输入联系电话</string>
+    <string name="report_address">请输入详细地址</string>
+    <string name="report_submit_loading">提交中#8230</string>
+    <string name="report_title_cannot_be_null">请输入标题</string>
+    <string name="report_content_cannot_be_null">请输入内容</string>
+    <string name="report_user_cannot_be_null">请输入联系人</string>
+    <string name="report_format_error">联系电话格式有误,请检查</string>
+    <string name="report_address_cannot_be_null">请输入详细地址</string>
 
 </resources>

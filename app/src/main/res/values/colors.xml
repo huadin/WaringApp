@@ -16,6 +16,11 @@
     <color name="navigation_bar_color">#cc000000</color>
     <!--窗口主背景色-->
     <color name="window_bg">#2B2B2B</color>
+    <!--侧滑item 菜单-->
+    <color name="item_menu_color">#2C2C2C</color>
+    <!--故障提交内容字体-->
+    <color name="report_text_color">#cc000000</color>
+    <color name="report_button_color">#ffffff</color>
 
     <color name="test_color">#1D96F4</color>
     

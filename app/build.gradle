@@ -6,7 +6,7 @@ apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.0"
+    buildToolsVersion "25.0.1"
     defaultConfig {
         applicationId "com.huadin.waringapp"
         minSdkVersion 15
@@ -14,6 +14,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+//        jackOptions.enabled = true;
     }
     buildTypes {
         release {
@@ -23,10 +24,14 @@ android {
     }
 
     sourceSets {
-        main{
+        main {
             jniLibs.srcDirs = ['libs']
         }
     }
+//    compileOptions {
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//        targetCompatibility JavaVersion.VERSION_1_8
+//    }
 
 }
 
@@ -68,6 +73,7 @@ dependencies {
     // 如果想使用SwipeBack 滑动边缘退出Fragment/Activity功能，请再添加下面的库
     // compile 'me.yokeyword:fragmentation-swipeback:0.7.9'
     compile 'com.google.guava:guava:18.0'
+
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
     testCompile 'junit:junit:4.12'
-    compile 'com.google.android.gms:play-services-appindexing:8.4.0'
 }
