@@ -3,6 +3,14 @@
 
     <!--主菜单-->
     <group android:checkableBehavior="single">
+
+        <!--地图-->
+        <item
+            android:id="@+id/map_home"
+            android:checked="true"
+            android:icon="@drawable/icon_address_72px"
+            android:title="@string/map_home"/>
+
         <!--停电报修-->
         <item
             android:id="@+id/blackout_repair"
@@ -28,9 +36,9 @@
 
         <!--预警地址-->
         <!--<item-->
-            <!--android:id="@+id/warning_address"-->
-            <!--android:icon="@drawable/icon_address_72px"-->
-            <!--android:title="@string/warning_address"/>-->
+        <!--android:id="@+id/warning_address"-->
+        <!--android:icon="@drawable/icon_address_72px"-->
+        <!--android:title="@string/warning_address"/>-->
 
         <!--联系我们-->
         <item

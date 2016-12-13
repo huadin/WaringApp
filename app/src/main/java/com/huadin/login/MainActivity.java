@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.huadin.base.BaseActivity;
+import com.huadin.base.BaseFragment;
 import com.huadin.bean.Person;
 import com.huadin.fault.ReportFragment;
 import com.huadin.fault.ReportPresenter;
@@ -24,6 +26,7 @@ import com.huadin.waringapp.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.bmob.v3.BmobUser;
+import me.yokeyword.fragmentation.SupportFragment;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener,
         MapFragment.OnFragmentOpenDrawerListener
@@ -44,7 +47,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
   //用户名
   private TextView userName;
   private ColorStateList cls;
-
+  // 再点一次退出程序时间设置
+  private static final long WAIT_TIME = 2000L;
+  private long TOUCH_TIME = 0;
 
   @Override
   protected void onCreate(Bundle savedInstanceState)
@@ -85,6 +90,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
   {
     if (savedInstanceState == null)
     {
+      //加载根Fragment
       loadRootFragment(R.id.fragment_ground, MapFragment.newInstance());
     }
   }
@@ -92,6 +98,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
   private void initView()
   {
     mNavigationView.setNavigationItemSelectedListener(this);
+    mNavigationView.setCheckedItem(R.id.map_home);
+    mNavigationView.setItemTextColor(cls);
+    mNavigationView.setItemIconTintList(cls);
 
     nameAfter = (TextView) mNavigationView.getHeaderView(0).findViewById(R.id.user_name_after);
     userName = (TextView) mNavigationView.getHeaderView(0).findViewById(R.id.user_name);
@@ -132,14 +141,22 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     switch (item.getItemId())
     {
       case R.id.blackout_repair:
-        ReportFragment fragment = ReportFragment.newInstance();
-        new ReportPresenter(fragment);
-        start(fragment);
+        ReportFragment fragment = findFragment(ReportFragment.class);
+        if (fragment == null)
+        {
+          fragment = ReportFragment.newInstance();
+          new ReportPresenter(fragment);
+        }
+        start(fragment, SupportFragment.SINGLETASK);
         break;
+      case R.id.map_home:
+        MapFragment mapFragment = findFragment(MapFragment.class);
+        start(mapFragment, SupportFragment.SINGLETASK);
+        break;
+
     }
 
-    mNavigationView.setItemTextColor(cls);
-    mNavigationView.setItemIconTintList(cls);
+
     mDrawer.closeDrawer(GravityCompat.START);
     return true;
   }
@@ -192,5 +209,35 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
   }
 
-
+  /*回退或退出程序*/
+  @Override
+  public void onBackPressedSupport()
+  {
+    //关闭抽屉
+    if (mDrawer.isDrawerOpen(GravityCompat.START))
+    {
+      mDrawer.closeDrawer(GravityCompat.START);
+    } else
+    {
+      Fragment topFragment = getTopFragment();
+      if (topFragment instanceof BaseFragment)
+      {
+        mNavigationView.setCheckedItem(R.id.map_home);
+      }
+      if (getSupportFragmentManager().getBackStackEntryCount() > 1)
+      {
+        pop();
+      } else
+      {
+        if (System.currentTimeMillis() - TOUCH_TIME < WAIT_TIME)
+        {
+          finish();
+        } else
+        {
+          TOUCH_TIME = System.currentTimeMillis();
+          mToast.showMessage(R.string.press_again_exit, 500);
+        }
+      }
+    }
+  }
 }

@@ -83,6 +83,7 @@
     <string name="feedback">意见反馈</string>
     <string name="report_title">请输入标题</string>
     <string name="report_submit">提交</string>
+    <string name="map_home">首页</string>
 
     <!--故障提交-->
     <string name="report_content">请输入详细信息</string>
@@ -95,5 +96,8 @@
     <string name="report_user_cannot_be_null">请输入联系人</string>
     <string name="report_format_error">联系电话格式有误,请检查</string>
     <string name="report_address_cannot_be_null">请输入详细地址</string>
+
+    <!--退出-->
+    <string name="press_again_exit">再按一次退出</string>
 
 </resources>

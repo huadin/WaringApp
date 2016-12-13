@@ -55,10 +55,34 @@ public class ReportFragment extends BaseFragment implements ReportContract.View
   {
     View view = getViewResId(inflater, container, R.layout.report_fragment_layout);
     ButterKnife.bind(this, view);
-    initToolbar(mToolBar, R.string.blackout_repair);
+//    initToolbar(mToolBar, R.string.blackout_repair);
+
+    mToolBar.setTitle(R.string.blackout_repair);
+    mToolBar.setNavigationIcon(R.drawable.icon_home_72px);
+    mToolBar.setNavigationOnClickListener(new View.OnClickListener()
+    {
+      @Override
+      public void onClick(View view)
+      {
+        // TODO: 2016/12/13 打开抽屉
+      }
+    });
     return view;
   }
 
+  @Override
+  public void onResume()
+  {
+    super.onResume();
+    mToast.onResume();
+  }
+
+  @Override
+  public void onPause()
+  {
+    super.onPause();
+    mToast.onPause();
+  }
 
   @Override
   public void submitSuccess()

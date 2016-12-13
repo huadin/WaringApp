@@ -14,66 +14,61 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-//        jackOptions.enabled = true;
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+        buildTypes {
+            release {
+                minifyEnabled false
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            }
+        }
+
+        sourceSets {
+            main {
+                jniLibs.srcDirs = ['libs']
+            }
         }
     }
 
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ['libs']
-        }
+    dependencies {
+        compile fileTree(include: ['*.jar'], dir: 'libs')
+        androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+            exclude group: 'com.android.support', module: 'support-annotations'
+        })
+        compile 'com.android.support:appcompat-v7:25.0.1'
+        compile 'com.android.support:design:25.0.1'
+        /* 百分比布局 */
+        compile 'com.android.support:percent:25.0.1'
+        /* autoLayout布局 */
+        compile 'com.zhy:autolayout:1.4.5'
+        /* butterKnife */
+        compile 'com.jakewharton:butterknife:8.4.0'
+        apt 'com.jakewharton:butterknife-compiler:8.4.0'
+        /* gson */
+        //    compile 'com.google.code.gson:gson:2.7'
+        /*okHttpUtil*/
+        //    compile 'com.zhy:okhttputils:2.6.2'
+        /*本地数据库*/
+        compile 'org.litepal.android:core:1.4.0'
+        /*eventBus*/
+        compile 'org.greenrobot:eventbus:3.0.0'
+        /*运行时权限*/
+        apt 'com.zhy:mpermission-compiler:1.0.0'
+        compile 'com.zhy:mpermission-api:1.0.0'
+        /*bmob bmob-sdk：Bmob的android sdk包，包含了Bmob的数据存储、文件等服务*/
+        compile 'cn.bmob.android:bmob-sdk:3.5.0'
+        /*bmob 兼容6.0必须*/
+        compile 'cn.bmob.android:http-legacy:1.0'
+        //bmob-push：Bmob的推送包
+        compile 'cn.bmob.android:bmob-push:0.8'
+        //bmob-sms ：Bmob单独为短信服务提供的包
+        compile 'cn.bmob.android:bmob-sms:1.0.1'
+        //fragment
+        compile 'me.yokeyword:fragmentation:0.8.2'
+        // 如果想使用SwipeBack 滑动边缘退出Fragment/Activity功能，请再添加下面的库
+        // compile 'me.yokeyword:fragmentation-swipeback:0.7.9'
+        compile 'com.google.guava:guava:18.0'
+
+        compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
+        testCompile 'junit:junit:4.12'
     }
-//    compileOptions {
-//        sourceCompatibility JavaVersion.VERSION_1_8
-//        targetCompatibility JavaVersion.VERSION_1_8
-//    }
-
-}
-
-dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support:appcompat-v7:25.0.1'
-    compile 'com.android.support:design:25.0.1'
-    /* 百分比布局 */
-    compile 'com.android.support:percent:25.0.1'
-    /* autoLayout布局 */
-    compile 'com.zhy:autolayout:1.4.5'
-    /* butterKnife */
-    compile 'com.jakewharton:butterknife:8.4.0'
-    apt 'com.jakewharton:butterknife-compiler:8.4.0'
-    /* gson */
-    //    compile 'com.google.code.gson:gson:2.7'
-    /*okHttpUtil*/
-    //    compile 'com.zhy:okhttputils:2.6.2'
-    /*本地数据库*/
-    compile 'org.litepal.android:core:1.4.0'
-    /*eventBus*/
-    compile 'org.greenrobot:eventbus:3.0.0'
-    /*运行时权限*/
-    apt 'com.zhy:mpermission-compiler:1.0.0'
-    compile 'com.zhy:mpermission-api:1.0.0'
-    /*bmob bmob-sdk：Bmob的android sdk包，包含了Bmob的数据存储、文件等服务*/
-    compile 'cn.bmob.android:bmob-sdk:3.5.0'
-    /*bmob 兼容6.0必须*/
-    compile 'cn.bmob.android:http-legacy:1.0'
-    //bmob-push：Bmob的推送包
-    compile 'cn.bmob.android:bmob-push:0.8'
-    //bmob-sms ：Bmob单独为短信服务提供的包
-    compile 'cn.bmob.android:bmob-sms:1.0.1'
-    //fragment
-    compile 'me.yokeyword:fragmentation:0.8.2'
-    // 如果想使用SwipeBack 滑动边缘退出Fragment/Activity功能，请再添加下面的库
-    // compile 'me.yokeyword:fragmentation-swipeback:0.7.9'
-    compile 'com.google.guava:guava:18.0'
-
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
-    testCompile 'junit:junit:4.12'
 }
