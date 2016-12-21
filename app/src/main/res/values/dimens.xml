@@ -41,5 +41,15 @@
     <dimen name="report_text_size_18sp">18sp</dimen>
     <dimen name="report_button_margit_top_30dp">30dp</dimen>
 
+    <!--分割线-->
+    <dimen name="linear_view_height_1px">1px</dimen>
+    <!--设置-->
+    <dimen name="setting_margin_left_16dp">16dp</dimen>
+    <dimen name="setting_margin_left_10dp">10dp</dimen>
+    <dimen name="setting_linear_layout_height">96px</dimen>
+    <dimen name="setting_linear_margin_top">20dp</dimen>
+    <!--退出按钮-->
+    <dimen name="app_out_button_top">128px</dimen>
+    <dimen name="app_out_button_height">96px</dimen>
 
 </resources>

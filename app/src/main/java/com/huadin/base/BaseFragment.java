@@ -4,12 +4,14 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.huadin.eventbus.EventCenter;
+import com.huadin.interf.OnFragmentOpenDrawerListener;
 import com.huadin.util.NetworkUtil;
 import com.huadin.util.ToastUtil;
 import com.huadin.waringapp.R;
@@ -18,6 +20,7 @@ import com.huadin.widget.LoadDialog;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import me.yokeyword.fragmentation.SupportActivity;
 import me.yokeyword.fragmentation.SupportFragment;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -62,6 +65,29 @@ public abstract class BaseFragment extends SupportFragment
       public void onClick(View view)
       {
         pop();
+      }
+    });
+  }
+
+  /**
+   * 打开抽屉
+   */
+  protected void initToolbarHome(@NonNull Toolbar toolbar, int toolbarTitleResId,
+                                 final FragmentActivity activity)
+  {
+    checkNotNull(toolbar, "toolbar cannot null");
+    checkNotNull(activity, "activity cannot null");
+    toolbar.setTitle(toolbarTitleResId);
+    toolbar.setNavigationIcon(R.drawable.icon_home_72px);
+    toolbar.setNavigationOnClickListener(new View.OnClickListener()
+    {
+      @Override
+      public void onClick(View view)
+      {
+        if (activity instanceof OnFragmentOpenDrawerListener)
+        {
+          ((OnFragmentOpenDrawerListener) activity).onOpenDrawer();
+        }
       }
     });
   }
@@ -127,6 +153,7 @@ public abstract class BaseFragment extends SupportFragment
 
   /**
    * 查看网络状态
+   *
    * @return boolean
    */
   protected boolean isNetwork()

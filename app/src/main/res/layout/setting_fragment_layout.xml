@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/layout_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/top_bar_layout"/>
+
+
+    <!--预警地址-->
+    <LinearLayout
+        android:id="@+id/address_linear_layout"
+        style="@style/setting_linear_layout_style">
+
+        <TextView
+            style="@style/setting_linear_layout_text_view_style"
+            android:drawableLeft="@drawable/icon_address_72px"
+            android:drawablePadding="@dimen/setting_margin_left_16dp"
+            android:text="@string/warning_address"/>
+
+    </LinearLayout>
+
+    <!--消息设置-->
+    <LinearLayout
+        android:id="@+id/msg_linear_layout"
+        style="@style/setting_linear_layout_style"
+        android:layout_marginTop="0dp">
+
+        <TextView
+            style="@style/setting_linear_layout_text_view_style"
+            android:drawableLeft="@drawable/icon_msg_72px"
+            android:drawablePadding="@dimen/setting_margin_left_16dp"
+            android:text="@string/msg_setting"/>
+    </LinearLayout>
+
+    <!--密码更改-->
+    <LinearLayout
+        android:id="@+id/password_linear_layout"
+        style="@style/setting_linear_layout_style"
+        android:layout_marginTop="0dp">
+
+        <TextView
+            style="@style/setting_linear_layout_text_view_style"
+            android:drawableLeft="@drawable/icon_password_72px"
+            android:drawablePadding="@dimen/setting_margin_left_16dp"
+            android:text="@string/password_modify"/>
+    </LinearLayout>
+
+    <!--联系我们-->
+    <LinearLayout
+        android:id="@+id/contact_us_linear_layout"
+        style="@style/setting_linear_layout_style"
+        android:layout_marginTop="0dp">
+
+        <TextView
+            style="@style/setting_linear_layout_text_view_style"
+            android:drawableLeft="@drawable/icon_contacts_72px"
+            android:drawablePadding="@dimen/setting_margin_left_16dp"
+            android:text="@string/contact_us"/>
+    </LinearLayout>
+
+    <!--意见反馈-->
+    <LinearLayout
+        android:id="@+id/feedback_linear_layout"
+        style="@style/setting_linear_layout_style"
+        android:layout_marginTop="0dp">
+
+        <TextView
+            style="@style/setting_linear_layout_text_view_style"
+            android:drawableLeft="@drawable/icon_feedback_72px"
+            android:drawablePadding="@dimen/setting_margin_left_16dp"
+            android:text="@string/feedback"/>
+    </LinearLayout>
+
+    <!--退出-->
+    <Button
+        android:id="@+id/app_out"
+        style="@style/app_out_button_style"
+        android:text="@string/app_out_text"/>
+
+</LinearLayout>

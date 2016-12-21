@@ -41,16 +41,16 @@
         <!--android:title="@string/warning_address"/>-->
 
         <!--联系我们-->
-        <item
-            android:id="@+id/contact_us"
-            android:icon="@drawable/icon_contacts_72px"
-            android:title="@string/contact_us"/>
+        <!--<item-->
+            <!--android:id="@+id/contact_us"-->
+            <!--android:icon="@drawable/icon_contacts_72px"-->
+            <!--android:title="@string/contact_us"/>-->
 
         <!--意见反馈-->
-        <item
-            android:id="@+id/feedback"
-            android:icon="@drawable/icon_feedback_72px"
-            android:title="@string/feedback"/>
+        <!--<item-->
+            <!--android:id="@+id/feedback"-->
+            <!--android:icon="@drawable/icon_feedback_72px"-->
+            <!--android:title="@string/feedback"/>-->
 
         <!--设置-->
         <item

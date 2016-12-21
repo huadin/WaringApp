@@ -22,6 +22,7 @@ import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.UiSettings;
 import com.huadin.base.BaseFragment;
+import com.huadin.interf.OnFragmentOpenDrawerListener;
 import com.huadin.permission.PermissionListener;
 import com.huadin.permission.PermissionManager;
 import com.huadin.util.LogUtil;
@@ -30,6 +31,8 @@ import com.huadin.waringapp.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
+import me.yokeyword.fragmentation.anim.DefaultNoAnimator;
+import me.yokeyword.fragmentation.anim.DefaultVerticalAnimator;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.huadin.waringapp.R.id.map;
@@ -38,7 +41,8 @@ import static com.huadin.waringapp.R.id.map;
  * 地图定位
  */
 
-public class MapFragment extends BaseFragment implements PermissionListener, MapContract.View, LocationSource
+public class MapFragment extends BaseFragment implements PermissionListener,
+        MapContract.View, LocationSource
 {
 
   @BindView(R.id.top_toolbar)
@@ -47,7 +51,6 @@ public class MapFragment extends BaseFragment implements PermissionListener, Map
   MapView mMapView;
 
   private AMap aMap;
-  private OnFragmentOpenDrawerListener mListener;
   private MapContract.MapListener mPresenter;
 
   public static MapFragment newInstance()
@@ -59,15 +62,10 @@ public class MapFragment extends BaseFragment implements PermissionListener, Map
   public void onAttach(Context context)
   {
     super.onAttach(context);
-    if (context instanceof OnFragmentOpenDrawerListener)
-    {
-      //打开 DrawerLayout
-      mListener = (OnFragmentOpenDrawerListener) context;
-    }
     //设置fragment横向动画
-    _mActivity.setFragmentAnimator(new DefaultHorizontalAnimator());
+//    _mActivity.setFragmentAnimator(new DefaultHorizontalAnimator());
     //设置竖向动画
-//    _mActivity.setFragmentAnimator(new DefaultVerticalAnimator());
+    _mActivity.setFragmentAnimator(new DefaultVerticalAnimator());
     //全局无动画
 //    _mActivity.setFragmentAnimator(new DefaultNoAnimator());
   }
@@ -140,8 +138,8 @@ public class MapFragment extends BaseFragment implements PermissionListener, Map
 
   private void initView()
   {
-    mToolbar.setTitle(R.string.map_location);
-    initToolbarNav(mToolbar);
+    initToolbarHome(mToolbar, R.string.map_location, getActivity());
+
     if (aMap == null)
     {
       aMap = mMapView.getMap();
@@ -171,21 +169,6 @@ public class MapFragment extends BaseFragment implements PermissionListener, Map
     aMap.setMyLocationEnabled(true);
   }
 
-  private void initToolbarNav(Toolbar mToolbar)
-  {
-    mToolbar.setNavigationIcon(R.drawable.icon_home_72px);
-    mToolbar.setNavigationOnClickListener(new View.OnClickListener()
-    {
-      @Override
-      public void onClick(View view)
-      {
-        if (mListener != null)
-        {
-          mListener.onOpenDrawer();
-        }
-      }
-    });
-  }
 
   //授权成功回调
   @Override
@@ -257,12 +240,6 @@ public class MapFragment extends BaseFragment implements PermissionListener, Map
     mPresenter.stopLocation();
   }
 
-  //打开抽屉回调接口
-  public interface OnFragmentOpenDrawerListener
-  {
-    void onOpenDrawer();
-  }
-
   private void showDialogPermission()
   {
     try
@@ -318,4 +295,5 @@ public class MapFragment extends BaseFragment implements PermissionListener, Map
       mPresenter.stopLocation();
     }
   }
+
 }

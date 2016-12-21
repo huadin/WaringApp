@@ -20,6 +20,8 @@ import com.huadin.base.BaseFragment;
 import com.huadin.bean.Person;
 import com.huadin.fault.ReportFragment;
 import com.huadin.fault.ReportPresenter;
+import com.huadin.interf.OnFragmentOpenDrawerListener;
+import com.huadin.setting.SettingFragment;
 import com.huadin.userinfo.UserInfoFragment;
 import com.huadin.waringapp.R;
 
@@ -29,7 +31,7 @@ import cn.bmob.v3.BmobUser;
 import me.yokeyword.fragmentation.SupportFragment;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener,
-        MapFragment.OnFragmentOpenDrawerListener
+        OnFragmentOpenDrawerListener
 
 {
 
@@ -135,31 +137,82 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
   }
 
   @Override
-  public boolean onNavigationItemSelected(@NonNull MenuItem item)
+  public boolean onNavigationItemSelected(@NonNull final MenuItem item)
   {
-
-    switch (item.getItemId())
-    {
-      case R.id.blackout_repair:
-        ReportFragment fragment = findFragment(ReportFragment.class);
-        if (fragment == null)
-        {
-          fragment = ReportFragment.newInstance();
-          new ReportPresenter(fragment);
-        }
-        start(fragment, SupportFragment.SINGLETASK);
-        break;
-      case R.id.map_home:
-        MapFragment mapFragment = findFragment(MapFragment.class);
-        start(mapFragment, SupportFragment.SINGLETASK);
-        break;
-
-    }
-
-
     mDrawer.closeDrawer(GravityCompat.START);
+    // TODO: 2016/12/15 停电报修和设置进出栈有bug,会先进栈后出栈，有动画残留
+    mDrawer.postDelayed(new Runnable()
+    {
+      @Override
+      public void run()
+      {
+        switch (item.getItemId())
+        {
+          case R.id.blackout_repair:
+            startReportFragment();
+            break;
+          case R.id.map_home:
+            MapFragment mapFragment = findFragment(MapFragment.class);
+            start(mapFragment, SupportFragment.SINGLETASK);
+            break;
+          case R.id.setting:
+            startSettingFragment();
+            break;
+        }
+      }
+    }, 200);
+
     return true;
   }
+
+  /**
+   * 启动设置Fragment
+   */
+  private void startSettingFragment()
+  {
+    SettingFragment settingFragment = findFragment(SettingFragment.class);
+    if (settingFragment == null)
+    {
+      settingFragment = SettingFragment.newInstance();
+      // TODO: 2016/12/15 没有添加 Presenter
+
+      popTo(settingFragment);
+    } else
+    {
+      start(settingFragment, SupportFragment.SINGLETASK);
+    }
+  }
+
+  /**
+   * 启动停电报修
+   */
+  private void startReportFragment()
+  {
+    ReportFragment reportFragment = findFragment(ReportFragment.class);
+    if (reportFragment == null)
+    {
+      reportFragment = ReportFragment.newInstance();
+      new ReportPresenter(reportFragment);
+      popTo(reportFragment);
+    } else
+    {
+      start(reportFragment, SupportFragment.SINGLETASK);
+    }
+  }
+
+  //启动Fragment
+  private void popTo(final SupportFragment fragment)
+  {
+    popTo(MapFragment.class, false, new Runnable()
+    {
+      @Override
+      public void run()
+      {
+        start(fragment);
+      }
+    });
+  }
+
 
   @Override
   protected void onResume()

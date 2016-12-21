@@ -99,5 +99,8 @@
 
     <!--退出-->
     <string name="press_again_exit">再按一次退出</string>
+    <string name="msg_setting">消息设置</string>
+    <string name="password_modify">密码修改</string>
+    <string name="app_out_text">退出</string>
 
 </resources>

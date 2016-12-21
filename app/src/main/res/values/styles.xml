@@ -34,8 +34,8 @@
         <item name="android:textColor">@color/test_color</item>
         <item name="android:background">@color/colorPrimary</item>
     </style>
-    
-    
+
+
     <!--注册输入框-->
     <style name="register_edit_text_layout">
         <item name="android:layout_width">match_parent</item>
@@ -90,6 +90,51 @@
         <item name="android:textColor">@color/report_text_color</item>
         <item name="android:textSize">@dimen/report_text_size_18sp</item>
         <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <!--分割线-->
+    <style name="linear_view_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/linear_view_height_1px</item>
+        <item name="android:background">@color/linear_view_color</item>
+    </style>
+
+    <!--设置中item layout 样式-->
+    <style name="setting_linear_layout_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/setting_linear_layout_height</item>
+        <item name="android:layout_marginTop">@dimen/setting_linear_margin_top</item>
+        <!--TODO 点击没有改变背景色-->
+        <item name="android:background">@drawable/setting_layout_item_selector</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <!--设置中 imageView 样式-->
+    <!--<style name="setting_linear_layout_img_style">-->
+    <!--<item name="android:layout_width">wrap_content</item>-->
+    <!--<item name="android:layout_height">match_parent</item>-->
+    <!--<item name="android:layout_marginLeft">@dimen/setting_margin_left_16dp</item>-->
+    <!--</style>-->
+
+    <!--设置张 textView 样式-->
+    <style name="setting_linear_layout_text_view_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginLeft">@dimen/setting_margin_left_16dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">@dimen/text_size_18</item>
+    </style>
+
+    <!--退出按钮样式-->
+    <style name="app_out_button_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/app_out_button_height</item>
+        <item name="android:layout_marginLeft">@dimen/setting_margin_left_16dp</item>
+        <item name="android:layout_marginRight">@dimen/setting_margin_left_16dp</item>
+        <item name="android:layout_marginTop">@dimen/app_out_button_top</item>
+        <item name="android:textColor">@color/app_text_color</item>
+        <item name="android:background">@drawable/setting_out_button_shape</item>
+        <item name="android:textSize">@dimen/text_size_22</item>
     </style>
 
 

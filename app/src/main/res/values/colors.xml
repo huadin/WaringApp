@@ -21,6 +21,14 @@
     <!--故障提交内容字体-->
     <color name="report_text_color">#cc000000</color>
     <color name="report_button_color">#ffffff</color>
+    <!--线view颜色-->
+    <color name="linear_view_color">#3C3F41</color>
+    <!--设置中item layout 颜色-->
+    <color name="linea_item_color">#FFFFFFFF</color>
+    <!--layout bg-->
+    <color name="layout_bg">#15323232</color>
+    <color name="layout_item_selector_check_true">#CBCBCB</color>
+
 
     <color name="test_color">#1D96F4</color>
     
