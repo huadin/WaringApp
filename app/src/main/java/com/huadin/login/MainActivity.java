@@ -22,6 +22,8 @@ import com.huadin.fault.ReportFragment;
 import com.huadin.fault.ReportPresenter;
 import com.huadin.interf.OnFragmentOpenDrawerListener;
 import com.huadin.setting.SettingFragment;
+import com.huadin.urgent.UrgentFragment;
+import com.huadin.urgent.UrgentPresenter;
 import com.huadin.userinfo.UserInfoFragment;
 import com.huadin.waringapp.R;
 
@@ -158,11 +160,33 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
           case R.id.setting:
             startSettingFragment();
             break;
+
+          case R.id.urgent_info:
+            startUrgentFragment();
+            break;
         }
       }
     }, 200);
 
     return true;
+  }
+
+  /**
+   * 紧急信息
+   */
+  private void startUrgentFragment()
+  {
+    UrgentFragment urgentFragment = findFragment(UrgentFragment.class);
+
+    if (urgentFragment == null)
+    {
+      urgentFragment = UrgentFragment.newInstance();
+      new UrgentPresenter(urgentFragment);
+      popTo(urgentFragment);
+    } else
+    {
+      start(urgentFragment, SupportFragment.SINGLETASK);
+    }
   }
 
   /**

@@ -51,5 +51,10 @@
     <!--退出按钮-->
     <dimen name="app_out_button_top">128px</dimen>
     <dimen name="app_out_button_height">96px</dimen>
+    <!--紧急信息-->
+    <dimen name="urgent_card_view_radius">10dp</dimen>
+    <dimen name="urgent_card_view_elevation">5dp</dimen>
+    <dimen name="urgent_card_view_margin_left">16dp</dimen>
+    <dimen name="urgent_card_view_margin_top">5dp</dimen>
 
 </resources>

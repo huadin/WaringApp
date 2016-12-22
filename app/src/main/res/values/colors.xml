@@ -28,6 +28,8 @@
     <!--layout bg-->
     <color name="layout_bg">#15323232</color>
     <color name="layout_item_selector_check_true">#CBCBCB</color>
+    <!--紧急信息-->
+
 
 
     <color name="test_color">#1D96F4</color>

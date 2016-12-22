@@ -78,6 +78,7 @@ public abstract class BaseFragment extends SupportFragment
     checkNotNull(toolbar, "toolbar cannot null");
     checkNotNull(activity, "activity cannot null");
     toolbar.setTitle(toolbarTitleResId);
+    toolbar.setTitleTextColor(getResources().getColor(R.color.app_text_color));
     toolbar.setNavigationIcon(R.drawable.icon_home_72px);
     toolbar.setNavigationOnClickListener(new View.OnClickListener()
     {

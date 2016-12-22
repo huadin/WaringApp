@@ -18,7 +18,7 @@
             android:title="@string/blackout_repair"/>
         <!--故障信息-->
         <item
-            android:id="@+id/fault_info"
+            android:id="@+id/urgent_info"
             android:icon="@drawable/icon_fault_72px"
             android:title="@string/fault_info"/>
         <!--停电搜索-->
