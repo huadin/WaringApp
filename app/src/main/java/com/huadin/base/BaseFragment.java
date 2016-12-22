@@ -125,6 +125,19 @@ public abstract class BaseFragment extends SupportFragment
     LoadDialog.dismiss(mContext);
   }
 
+  @Override
+  public void onResume()
+  {
+    super.onResume();
+    mToast.onResume();
+  }
+
+  @Override
+  public void onPause()
+  {
+    super.onPause();
+    mToast.onPause();
+  }
 
   @Override
   public void onDestroy()

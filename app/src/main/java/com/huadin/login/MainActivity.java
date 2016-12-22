@@ -239,20 +239,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
 
   @Override
-  protected void onResume()
-  {
-    super.onResume();
-    mToast.onResume();
-  }
-
-  @Override
-  protected void onPause()
-  {
-    super.onPause();
-    mToast.onPause();
-  }
-
-  @Override
   protected void onStop()
   {
     super.onStop();

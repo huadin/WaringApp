@@ -44,19 +44,6 @@ public class SettingFragment extends BaseFragment
     return view;
   }
 
-  @Override
-  public void onResume()
-  {
-    super.onResume();
-    mToast.onResume();
-  }
-
-  @Override
-  public void onPause()
-  {
-    super.onPause();
-    mToast.onPause();
-  }
 
   @OnClick({R.id.address_linear_layout, R.id.msg_linear_layout,
           R.id.password_linear_layout, R.id.contact_us_linear_layout,

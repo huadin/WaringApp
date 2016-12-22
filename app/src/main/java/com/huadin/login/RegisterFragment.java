@@ -96,20 +96,6 @@ public class RegisterFragment extends BaseFragment implements RegisterContract.V
   }
 
   @Override
-  public void onResume()
-  {
-    super.onResume();
-    mToast.onResume();
-  }
-
-  @Override
-  public void onPause()
-  {
-    super.onPause();
-    mToast.onPause();
-  }
-
-  @Override
   public void showLoading()
   {
     showLoading(R.string.register_loading);

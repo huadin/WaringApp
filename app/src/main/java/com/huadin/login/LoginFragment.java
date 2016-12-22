@@ -63,19 +63,6 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, T
     return view;
   }
 
-  @Override
-  public void onResume()
-  {
-    super.onResume();
-    mToast.onResume();
-  }
-
-  @Override
-  public void onPause()
-  {
-    super.onPause();
-    mToast.onPause();
-  }
 
   @Override
   public void showLoading()

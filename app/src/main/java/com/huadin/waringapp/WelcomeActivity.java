@@ -73,18 +73,10 @@ public class WelcomeActivity extends BaseActivity implements PermissionListener,
   {
     super.onResume();
     //检查权限
-    mToast.onResume();
     if (isNeedCheck)
     {
       checkStoragePermission();
     }
-  }
-
-  @Override
-  protected void onPause()
-  {
-    super.onPause();
-    mToast.onPause();
   }
 
 
@@ -188,7 +180,7 @@ public class WelcomeActivity extends BaseActivity implements PermissionListener,
   {
     startActivity(MainActivity.class);
     finish();
-}
+  }
 
   @Override
   public void onAnimationRepeat(Animation animation)

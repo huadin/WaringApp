@@ -48,6 +48,19 @@ public abstract class BaseActivity extends SupportActivity
    */
   protected abstract int getContentViewLayoutID();
 
+  @Override
+  protected void onResume()
+  {
+    super.onResume();
+    mToast.onResume();
+  }
+
+  @Override
+  protected void onPause()
+  {
+    super.onPause();
+    mToast.onPause();
+  }
 
   @Override
   protected void onDestroy()

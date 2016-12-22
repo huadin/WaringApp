@@ -70,20 +70,6 @@ public class UrgentFragment extends BaseFragment implements UrgentContract.View
   }
 
   @Override
-  public void onResume()
-  {
-    super.onResume();
-    mToast.onResume();
-  }
-
-  @Override
-  public void onPause()
-  {
-    super.onPause();
-    mToast.onPause();
-  }
-
-  @Override
   public void showLoading()
   {
 
