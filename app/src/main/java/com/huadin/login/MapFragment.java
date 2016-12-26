@@ -22,7 +22,6 @@ import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.UiSettings;
 import com.huadin.base.BaseFragment;
-import com.huadin.interf.OnFragmentOpenDrawerListener;
 import com.huadin.permission.PermissionListener;
 import com.huadin.permission.PermissionManager;
 import com.huadin.util.LogUtil;
@@ -30,8 +29,6 @@ import com.huadin.waringapp.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
-import me.yokeyword.fragmentation.anim.DefaultNoAnimator;
 import me.yokeyword.fragmentation.anim.DefaultVerticalAnimator;
 
 import static com.google.common.base.Preconditions.checkNotNull;

@@ -21,7 +21,9 @@ import butterknife.ButterKnife;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-
+/**
+ * 故障信息，查看管理人员发布的紧急信息
+ */
 public class UrgentFragment extends BaseFragment implements UrgentContract.View
 {
 

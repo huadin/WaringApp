@@ -22,8 +22,10 @@ public class LoadDialog extends Dialog
 
   private boolean canNotCancel;
 
+  @SuppressWarnings("FieldCanBeLocal")
   private String tipMsg;
 
+  @SuppressWarnings("FieldCanBeLocal")
   private TextView mTextView;
 
 

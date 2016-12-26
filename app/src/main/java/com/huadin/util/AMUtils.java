@@ -61,24 +61,12 @@ public class AMUtils
    */
   public static boolean isEmpty(String str)
   {
-    if (str == null || str.length() == 0 || str.equalsIgnoreCase("null") || str.isEmpty() || str.equals(""))
-    {
-      return true;
-    } else
-    {
-      return false;
-    }
+    return str == null || str.length() == 0 || str.equalsIgnoreCase("null") || str.isEmpty() || str.equals("");
   }
 
   public static boolean validatePassword(String str)
   {
-    if (str == null || str.length() < 6 || str.length() > 20)
-    {
-      return true;
-    } else
-    {
-      return false;
-    }
+    return str == null || str.length() < 6 || str.length() > 20;
   }
 
 }

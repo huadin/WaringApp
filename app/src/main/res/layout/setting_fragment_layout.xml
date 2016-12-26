@@ -35,18 +35,6 @@
             android:text="@string/msg_setting"/>
     </LinearLayout>
 
-    <!--密码更改-->
-    <LinearLayout
-        android:id="@+id/password_linear_layout"
-        style="@style/setting_linear_layout_style"
-        android:layout_marginTop="0dp">
-
-        <TextView
-            style="@style/setting_linear_layout_text_view_style"
-            android:drawableLeft="@drawable/icon_password_72px"
-            android:drawablePadding="@dimen/setting_margin_left_16dp"
-            android:text="@string/password_modify"/>
-    </LinearLayout>
 
     <!--联系我们-->
     <LinearLayout
@@ -74,10 +62,23 @@
             android:text="@string/feedback"/>
     </LinearLayout>
 
+    <!--检查更新-->
+    <LinearLayout
+        android:id="@+id/app_update"
+        style="@style/setting_linear_layout_style"
+        android:layout_marginTop="0dp">
+
+        <TextView
+            style="@style/setting_linear_layout_text_view_style"
+            android:drawableLeft="@drawable/icon_password_72px"
+            android:drawablePadding="@dimen/setting_margin_left_16dp"
+            android:text="@string/app_update"/>
+    </LinearLayout>
+
     <!--退出-->
-    <Button
-        android:id="@+id/app_out"
-        style="@style/app_out_button_style"
-        android:text="@string/app_out_text"/>
+    <!--<Button-->
+        <!--android:id="@+id/app_out"-->
+        <!--style="@style/app_out_button_style"-->
+        <!--android:text="@string/app_out_text"/>-->
 
 </LinearLayout>
