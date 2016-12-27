@@ -11,9 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.huadin.base.BaseFragment;
+import com.huadin.eventbus.EventCenter;
 import com.huadin.util.AMUtils;
 import com.huadin.waringapp.R;
 import com.huadin.widget.ClearEditText;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -81,6 +84,8 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, T
   {
     //登录成功
     mToast.showMessage(R.string.login_success, 500);
+    //发送订阅事件,改变 DrawerLayout 上用户名
+    EventBus.getDefault().post(new EventCenter(EventCenter.EVENT_CODE_LOGIN_SUCCESS));
     pop();
   }
 

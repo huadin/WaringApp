@@ -70,7 +70,8 @@
         <activity
             android:name="com.huadin.login.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <!-- 高德 -->
         <service android:name="com.amap.api.location.APSService"/>

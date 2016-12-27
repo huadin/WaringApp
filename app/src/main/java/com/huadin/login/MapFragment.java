@@ -29,6 +29,7 @@ import com.huadin.waringapp.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
 import me.yokeyword.fragmentation.anim.DefaultVerticalAnimator;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -60,9 +61,9 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   {
     super.onAttach(context);
     //设置fragment横向动画
-//    _mActivity.setFragmentAnimator(new DefaultHorizontalAnimator());
+    _mActivity.setFragmentAnimator(new DefaultHorizontalAnimator());
     //设置竖向动画
-    _mActivity.setFragmentAnimator(new DefaultVerticalAnimator());
+//    _mActivity.setFragmentAnimator(new DefaultVerticalAnimator());
     //全局无动画
 //    _mActivity.setFragmentAnimator(new DefaultNoAnimator());
   }

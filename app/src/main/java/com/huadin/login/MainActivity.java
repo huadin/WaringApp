@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.huadin.base.BaseActivity;
 import com.huadin.base.BaseFragment;
 import com.huadin.bean.Person;
+import com.huadin.eventbus.EventCenter;
 import com.huadin.fault.ReportFragment;
 import com.huadin.fault.ReportPresenter;
 import com.huadin.interf.OnFragmentOpenDrawerListener;
@@ -115,21 +116,42 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
       {
         // TODO: 2016/12/3 判断是否已经登录,已登录则无需跳转
         closeDrawer();
-        if (mUser != null)
+        mDrawer.postDelayed(new Runnable()
         {
-          //进入个人信息
-          UserInfoFragment infoFragment = UserInfoFragment.newInstance();
-          start(infoFragment);
-        } else
-        {
-          //登录注册
-          LoginFragment loginFragment = LoginFragment.newInstance();
-          new LoginPresenter(loginFragment);
-          start(loginFragment);
-        }
+          @Override
+          public void run()
+          {
+            if (mUser != null)
+            {
+              //进入个人信息
+              startUserInfoFragment();
+            } else
+            {
+              //登录注册
+              startLoginFragment();
+            }
+          }
+        }, 250);
       }
     });
 
+  }
+
+  /**
+   * 个人信息
+   */
+  private void startUserInfoFragment()
+  {
+    UserInfoFragment userInfoFragment = findFragment(UserInfoFragment.class);
+    if (userInfoFragment == null)
+    {
+      userInfoFragment = UserInfoFragment.newInstance();
+      // TODO: 2016/12/27 没有添加 userInfoFragment 的presenter
+      popTo(userInfoFragment);
+    } else
+    {
+      start(userInfoFragment, SupportFragment.SINGLETASK);
+    }
   }
 
   @Override
@@ -166,9 +188,26 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             break;
         }
       }
-    }, 200);
+    }, 250);
 
     return true;
+  }
+
+  /**
+   * 登录
+   */
+  private void startLoginFragment()
+  {
+    LoginFragment loginFragment = findFragment(LoginFragment.class);
+    if (loginFragment == null)
+    {
+      loginFragment = LoginFragment.newInstance();
+      new LoginPresenter(loginFragment);
+      popTo(loginFragment);
+    } else
+    {
+      start(loginFragment, SupportFragment.SINGLETASK);
+    }
   }
 
   /**
@@ -224,7 +263,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
   }
 
-  //启动Fragment
+  /**
+   * 启动Fragment
+   */
   private void popTo(final SupportFragment fragment)
   {
     popTo(MapFragment.class, false, new Runnable()
@@ -245,21 +286,38 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     closeDrawer();
   }
 
+  @Override
+  protected void onEventComming(EventCenter eventCenter)
+  {
+    int code = eventCenter.getEventCode();
+    if (code == EventCenter.EVENT_CODE_LOGIN_SUCCESS)
+    {
+      mUser = BmobUser.getCurrentUser(Person.class);
+      setUserName();
+    }
+  }
+
   //地图回调方法,打开抽屉
   @Override
   public void onOpenDrawer()
   {
     if (!mDrawer.isDrawerOpen(GravityCompat.START))
     {
-      if (mUser != null)
-      {
-        String personName = mUser.getUsername();
-        userName.setText(personName);
-        int startLength = personName.length() - 1;
-        String nameEnd = personName.substring(startLength);
-        nameAfter.setText(nameEnd);
-      }
+      setUserName();
       mDrawer.openDrawer(GravityCompat.START);
+    }
+  }
+
+  //显示用户姓名
+  private void setUserName()
+  {
+    if (mUser != null)
+    {
+      String personName = mUser.getUsername();
+      userName.setText(personName);
+      int startLength = personName.length() - 1;
+      String nameEnd = personName.substring(startLength);
+      nameAfter.setText(nameEnd);
     }
   }
 

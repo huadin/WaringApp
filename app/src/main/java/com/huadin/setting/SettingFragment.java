@@ -46,8 +46,7 @@ public class SettingFragment extends BaseFragment
 
 
   @OnClick({R.id.address_linear_layout, R.id.msg_linear_layout,
-          R.id.password_linear_layout, R.id.contact_us_linear_layout,
-          R.id.feedback_linear_layout, R.id.app_out})
+          R.id.contact_us_linear_layout, R.id.feedback_linear_layout})
   public void onClick(View view)
   {
     switch (view.getId())
@@ -56,14 +55,11 @@ public class SettingFragment extends BaseFragment
         break;
       case R.id.msg_linear_layout:
         break;
-      case R.id.password_linear_layout:
-        break;
       case R.id.contact_us_linear_layout:
         break;
       case R.id.feedback_linear_layout:
         break;
-      case R.id.app_out:
-        break;
+
     }
   }
 }
