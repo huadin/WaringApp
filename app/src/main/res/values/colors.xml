@@ -30,8 +30,12 @@
     <color name="layout_item_selector_check_true">#CBCBCB</color>
     <!--紧急信息-->
 
+    <!--个人信息-->
+    <color name="user_info_item_text_color">#666666</color>
+    <color name="user_info_item_layout_shape_true">#eeeeee</color>
+    <color name="user_info_item_layout_shape_false">#fff</color>
 
 
     <color name="test_color">#1D96F4</color>
-    
+
 </resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/user_info_item_margin"
+
+    android:background="@drawable/user_info_item_layout_shape"
+    android:orientation="vertical">
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/user_info_item_height"
+        android:orientation="horizontal">
+
+
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <!--退出登录-->
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/user_info_out"
+        style="@style/user_info_item_layout_style">
+
+        <TextView
+            style="@style/user_info_item_style"
+            android:text="@string/user_info_out"/>
+
+    </com.zhy.autolayout.AutoLinearLayout>
+
+</LinearLayout>
