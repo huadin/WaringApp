@@ -1,7 +1,6 @@
 package com.huadin.login;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
@@ -26,7 +25,7 @@ import com.huadin.interf.OnFragmentOpenDrawerListener;
 import com.huadin.setting.SettingFragment;
 import com.huadin.urgent.UrgentFragment;
 import com.huadin.urgent.UrgentPresenter;
-import com.huadin.userinfo.UserInfoFragment;
+import com.huadin.userinfo.UserInfoActivity;
 import com.huadin.waringapp.R;
 
 import butterknife.BindView;
@@ -125,7 +124,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             if (mUser != null)
             {
               //进入个人信息
-              startUserInfoFragment();
+              startUserInfoActivity();
             } else
             {
               //登录注册
@@ -141,18 +140,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
   /**
    * 个人信息
    */
-  private void startUserInfoFragment()
+  private void startUserInfoActivity()
   {
-    UserInfoFragment userInfoFragment = findFragment(UserInfoFragment.class);
-    if (userInfoFragment == null)
-    {
-      userInfoFragment = UserInfoFragment.newInstance();
-      // TODO: 2016/12/27 没有添加 userInfoFragment 的presenter
-      popTo(userInfoFragment);
-    } else
-    {
-      start(userInfoFragment, SupportFragment.SINGLETASK);
-    }
+    startActivity(UserInfoActivity.class);
   }
 
   @Override

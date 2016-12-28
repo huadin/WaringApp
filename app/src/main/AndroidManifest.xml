@@ -76,6 +76,14 @@
         <!-- 高德 -->
         <service android:name="com.amap.api.location.APSService"/>
 
+        <!--个人信息-->
+        <activity
+            android:name="com.huadin.userinfo.UserInfoActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_user_info"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

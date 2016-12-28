@@ -32,7 +32,8 @@
 
     <!--个人信息-->
     <color name="user_info_item_text_color">#666666</color>
-    <color name="user_info_item_layout_shape_true">#eeeeee</color>
+    <color name="user_info_item_text_color_9">#999999</color>
+    <color name="user_info_item_layout_shape_true">#90f0f0f0</color>
     <color name="user_info_item_layout_shape_false">#fff</color>
 
 

@@ -92,7 +92,7 @@ public class RegisterPresenter implements RegisterContract.Presenter
     person.setUsername(registerPhone);
     person.setMobilePhoneNumber(registerPhone);
     person.setPassword(MD5util.getMD5(registerPassword));//密码加密
-    person.setUserPermisson(false);
+    person.setUserPermission(false);
     mRegisterView.showLoading();
 
     person.signOrLogin(registerCode, new SaveListener<Person>()

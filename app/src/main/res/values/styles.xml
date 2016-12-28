@@ -144,7 +144,7 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">@color/user_info_item_text_color</item>
         <item name="android:textSize">@dimen/report_text_size_18sp</item>
-        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginLeft">@dimen/user_info_item_margin</item>
     </style>
     <!--个人信息 layout-->
     <style name="user_info_item_layout_style">
@@ -154,8 +154,36 @@
         <item name="android:background">@drawable/user_info_item_layout_selector</item>
         <item name="android:focusable">true</item>
         <item name="android:orientation">horizontal</item>
+        <!--<item name="android:layout_marginTop">@dimen/user_info_item_margin_top_5dp</item>-->
+        <!--<item name="android:layout_marginBottom">@dimen/user_info_item_margin_top_5dp</item>-->
     </style>
 
+    <!--个人信息 layout 根布局-->
+    <style name="user_info_item_layout_parent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/user_info_item_margin</item>
+        <item name="android:background">@drawable/user_info_item_layout_shape</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <!--个人信息 title-->
+    <style name="user_info_item_title_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/user_info_item_margin</item>
+        <item name="android:layout_marginTop">@dimen/user_info_item_margin_top_10dp</item>
+        <item name="android:layout_marginBottom">@dimen/user_info_item_margin_top_5dp</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="android:textColor">@color/user_info_item_text_color_9</item>
+    </style>
+
+    <!--个人信息 view-->
+    <style name="user_info_item_view">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/user_info_item_margin_1dp</item>
+        <item name="android:background">@color/user_info_item_text_color_9</item>
+    </style>
 
 
 </resources>

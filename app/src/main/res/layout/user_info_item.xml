@@ -3,28 +3,168 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/user_info_item_margin"
-
-    android:background="@drawable/user_info_item_layout_shape"
+    android:background="@color/layout_bg"
     android:orientation="vertical">
 
-    <com.zhy.autolayout.AutoLinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/user_info_item_height"
-        android:orientation="horizontal">
 
-
-    </com.zhy.autolayout.AutoLinearLayout>
-
-    <!--退出登录-->
-    <com.zhy.autolayout.AutoLinearLayout
-        android:id="@+id/user_info_out"
-        style="@style/user_info_item_layout_style">
-
+    <!--账户信息-->
+    <LinearLayout
+        style="@style/user_info_item_layout_parent"
+        android:elevation="@dimen/user_info_item_margin_2dp">
+        <!--title-->
         <TextView
-            style="@style/user_info_item_style"
-            android:text="@string/user_info_out"/>
+            style="@style/user_info_item_title_style"
+            android:text="@string/user_info_message"/>
 
-    </com.zhy.autolayout.AutoLinearLayout>
+        <View
+            style="@style/user_info_item_view"/>
+
+        <!--用户信息-->
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/user_info_item_user"
+            style="@style/user_info_item_layout_style">
+
+            <TextView
+                style="@style/user_info_item_style"
+                android:text="@string/user_info_user"/>
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <!--地址信息-->
+        <!--<com.zhy.autolayout.AutoLinearLayout-->
+        <!--android:id="@+id/user_info_item_address"-->
+        <!--style="@style/user_info_item_layout_style">-->
+
+        <!--<TextView-->
+        <!--style="@style/user_info_item_style"-->
+        <!--android:text="@string/user_info_address"/>-->
+        <!--</com.zhy.autolayout.AutoLinearLayout>-->
+
+        <!--预警地址-->
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/user_info_item_waring_address"
+            style="@style/user_info_item_layout_style"
+            android:background="@drawable/user_info_item_layout_bottom_circle_selector">
+
+            <TextView
+                style="@style/user_info_item_style"
+                android:text="@string/user_info_waring_address"/>
+        </com.zhy.autolayout.AutoLinearLayout>
+
+    </LinearLayout>
+
+    <!--管理员-->
+    <LinearLayout
+        android:id="@+id/user_admin_info"
+        style="@style/user_info_item_layout_parent"
+        android:elevation="@dimen/user_info_item_margin_2dp">
+        <!--title-->
+        <TextView
+            style="@style/user_info_item_title_style"
+            android:text="@string/system_info_message"/>
+
+        <View
+            style="@style/user_info_item_view"/>
+
+        <!--人员-->
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/person_info_message"
+            style="@style/user_info_item_layout_style"
+            android:background="@drawable/user_info_item_layout_bottom_circle_selector">
+
+            <TextView
+                style="@style/user_info_item_style"
+                android:text="@string/person_info"/>
+
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <!--故障信息,查看用户提交-->
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/fault_info_message"
+            style="@style/user_info_item_layout_style"
+            android:background="@drawable/user_info_item_layout_bottom_circle_selector">
+
+            <TextView
+                style="@style/user_info_item_style"
+                android:text="@string/fault_info"/>
+
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <!--紧急信息发布-->
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/release_info_message"
+            style="@style/user_info_item_layout_style"
+            android:background="@drawable/user_info_item_layout_bottom_circle_selector">
+
+            <TextView
+                style="@style/user_info_item_style"
+                android:text="@string/release_info"/>
+
+        </com.zhy.autolayout.AutoLinearLayout>
+
+    </LinearLayout>
+
+    <!--安全信息-->
+    <LinearLayout
+        style="@style/user_info_item_layout_parent"
+        android:elevation="@dimen/user_info_item_margin_2dp">
+        <!--title-->
+        <TextView
+            style="@style/user_info_item_title_style"
+            android:text="@string/safe_info_message"/>
+
+        <View
+            style="@style/user_info_item_view"/>
+
+        <!--用户信息-->
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/user_info_item_phone"
+            style="@style/user_info_item_layout_style">
+
+            <TextView
+                style="@style/user_info_item_style"
+                android:text="@string/user_info_phone"/>
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <!--密码更改-->
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/user_info_item_password"
+            style="@style/user_info_item_layout_style"
+            android:background="@drawable/user_info_item_layout_bottom_circle_selector">
+
+            <TextView
+                style="@style/user_info_item_style"
+                android:text="@string/password_modify"/>
+
+        </com.zhy.autolayout.AutoLinearLayout>
+
+
+    </LinearLayout>
+
+    <!--其他信息-->
+    <LinearLayout
+        style="@style/user_info_item_layout_parent"
+        android:elevation="@dimen/user_info_item_margin_2dp">
+        <!--title-->
+        <TextView
+            style="@style/user_info_item_title_style"
+            android:text="@string/other_info_message"/>
+
+        <View
+            style="@style/user_info_item_view"/>
+
+        <!--退出-->
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/user_info_out"
+            style="@style/user_info_item_layout_style"
+            android:background="@drawable/user_info_item_layout_bottom_circle_selector">
+
+            <TextView
+                style="@style/user_info_item_style"
+                android:text="@string/user_info_out"/>
+
+        </com.zhy.autolayout.AutoLinearLayout>
+
+    </LinearLayout>
+
 
 </LinearLayout>
