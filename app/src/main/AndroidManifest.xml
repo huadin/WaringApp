@@ -61,18 +61,19 @@
             android:name="design_height"
             android:value="1280">
         </meta-data>
-        <!-- 开发者申请的key高德 start-->
-        <!--笔记本-->
-        <!--<meta-data-->
-        <!--android:name="com.amap.api.v2.apikey"-->
-        <!--android:value="@string/map_key_home">-->
-        <!--</meta-data>-->
-        <!--台式-->
+        <!-- 开发者申请的key高德 start -->
+        <!-- 笔记本 -->
+        <!-- <meta-data -->
+        <!-- android:name="com.amap.api.v2.apikey" -->
+        <!-- android:value="@string/map_key_home"> -->
+        <!-- </meta-data> -->
+        <!-- 台式 -->
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="@string/map_key_company">
         </meta-data>
-        <!-- 开发者申请的key高德 end-->
+        <!-- 开发者申请的key高德 end -->
+
 
         <!-- 主界面 -->
         <activity
@@ -84,13 +85,15 @@
         <!-- 高德 -->
         <service android:name="com.amap.api.location.APSService"/>
 
-        <!--个人信息-->
+        <!-- 个人信息 -->
         <activity
             android:name="com.huadin.userinfo.UserInfoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_user_info"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name="com.huadin.userinfo.UpdateUserInfoActivity">
         </activity>
     </application>
 

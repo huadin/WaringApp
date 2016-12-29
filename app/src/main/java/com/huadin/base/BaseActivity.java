@@ -3,19 +3,25 @@ package com.huadin.base;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.huadin.eventbus.EventCenter;
 import com.huadin.util.NetworkUtil;
 import com.huadin.util.ToastUtil;
+import com.huadin.waringapp.R;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import me.yokeyword.fragmentation.SupportActivity;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 public abstract class BaseActivity extends SupportActivity
 {
 
+  protected static final String TITLE_KEY = "TITLE_KEY";
   protected static String LOG_TAG = null;
   protected Context mContext;
   protected ToastUtil mToast;
@@ -85,7 +91,17 @@ public abstract class BaseActivity extends SupportActivity
   //启动 Activity
   protected void startActivity(Class<?> cls)
   {
+    startActivity(cls, 0);
+  }
+
+  /**
+   * @param cls        目标Activity
+   * @param titleResId Toolbar title resId
+   */
+  protected void startActivity(Class<?> cls, int titleResId)
+  {
     Intent intent = new Intent(this, cls);
+    intent.putExtra(TITLE_KEY, titleResId);
     startActivity(intent);
   }
 
@@ -95,4 +111,19 @@ public abstract class BaseActivity extends SupportActivity
     return NetworkUtil.getNetworkState(mContext);
   }
 
+  protected void initToolbar(Toolbar toolbar, int titleResId)
+  {
+    checkNotNull(toolbar, "toolbar cannot be null");
+    toolbar.setTitle(titleResId);
+    toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
+    toolbar.setNavigationOnClickListener(new View.OnClickListener()
+    {
+      @Override
+      public void onClick(View v)
+      {
+        finish();
+      }
+    });
+
+  }
 }

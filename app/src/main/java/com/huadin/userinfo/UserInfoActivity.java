@@ -22,6 +22,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.bmob.v3.BmobUser;
 
+import static com.huadin.waringapp.R.string.password_modify;
+
 public class UserInfoActivity extends BaseActivity implements PromptFragment.PromptListener
 {
 
@@ -106,7 +108,7 @@ public class UserInfoActivity extends BaseActivity implements PromptFragment.Pro
       case R.id.user_info_item_phone:
         break;
       case R.id.user_info_item_password:
-
+        startActivity(UpdateUserInfoActivity.class, R.string.password_modify);
         break;
       case R.id.user_info_out:
         //退出登录
