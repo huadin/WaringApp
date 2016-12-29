@@ -1,14 +1,10 @@
 package com.huadin.login;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
@@ -267,14 +263,20 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
   protected void onEventComming(EventCenter eventCenter)
   {
     int code = eventCenter.getEventCode();
-    if (code == EventCenter.EVENT_CODE_LOGIN_SUCCESS)
+    mUser = BmobUser.getCurrentUser(Person.class);
+    switch (code)
     {
-      mUser = BmobUser.getCurrentUser(Person.class);
-      setUserName();
+      case EventCenter.EVENT_CODE_LOGIN_SUCCESS:
+        setUserName();
+        break;
+
+      case EventCenter.EVENT_CODE_OUT_SUCCESS:
+        clearUserName();
+        break;
     }
   }
 
-  //地图回调方法,打开抽屉
+  /*地图回调方法,打开抽屉*/
   @Override
   public void onOpenDrawer()
   {
@@ -285,7 +287,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
   }
 
-  //显示用户姓名
+  /*显示用户姓名*/
   private void setUserName()
   {
     if (mUser != null)
@@ -296,6 +298,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
       String nameEnd = personName.substring(startLength);
       nameAfter.setText(nameEnd);
     }
+  }
+
+  /*清除用户名设置*/
+  private void clearUserName()
+  {
+    nameAfter.setText(R.string.user_name);
+    userName.setText(R.string.user_name_1);
   }
 
   /*关闭抽屉*/

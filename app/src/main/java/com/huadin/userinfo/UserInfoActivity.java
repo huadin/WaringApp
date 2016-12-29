@@ -10,14 +10,19 @@ import android.widget.LinearLayout;
 
 import com.huadin.base.BaseActivity;
 import com.huadin.bean.Person;
+import com.huadin.dialog.PromptFragment;
+import com.huadin.eventbus.EventCenter;
+import com.huadin.util.LogUtil;
 import com.huadin.waringapp.R;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.bmob.v3.BmobUser;
 
-public class UserInfoActivity extends BaseActivity
+public class UserInfoActivity extends BaseActivity implements PromptFragment.PromptListener
 {
 
   @BindView(R.id.user_info_toolbar)
@@ -115,6 +120,22 @@ public class UserInfoActivity extends BaseActivity
    */
   private void outCurrentUser()
   {
+    PromptFragment fragment = PromptFragment.newInstance(getString(R.string.is_out_current_user));
+    fragment.setOnPromptListener(this);
+    fragment.show(getSupportFragmentManager(), getClass().getSimpleName());
+  }
 
+  //退出确认回调
+  @Override
+  public void promptOk()
+  {
+    Person.logOut();
+    Person user = BmobUser.getCurrentUser(Person.class);
+    if (user == null)
+    {
+      LogUtil.i(LOG_TAG, "退出成功");
+      EventBus.getDefault().post(new EventCenter(EventCenter.EVENT_CODE_OUT_SUCCESS));
+      finish();
+    }
   }
 }

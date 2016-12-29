@@ -7,10 +7,12 @@ package com.huadin.eventbus;
 public class EventCenter<T>
 {
 
-//  // 关闭所有Activity
+  //  // 关闭所有Activity
 //  public static final int EVENT_CODE_CLOSE_ALL_ACTIVITY = -1;
   // 登录成功
   public static final int EVENT_CODE_LOGIN_SUCCESS = 100;
+  //退出成功
+  public static final int EVENT_CODE_OUT_SUCCESS = 106;
   // 注册成功
   public static final int EVENT_CODE_REGISTER_SUCCESS = 101;
   // 修改密码成功
