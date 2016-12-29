@@ -55,7 +55,7 @@
 
         <View style="@style/view_bg_style"/>
         <!--验证码-->
-        <LinearLayout
+        <com.zhy.autolayout.AutoLinearLayout
             style="@style/register_edit_text_layout"
             android:layout_marginTop="@dimen/view_top_5dp">
 
@@ -85,7 +85,7 @@
                 android:text="@string/request_register_code"
                 android:textColor="@color/app_text_color"
                 android:textSize="@dimen/text_size_14"/>
-        </LinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
 
         <View style="@style/view_bg_style"/>
 
