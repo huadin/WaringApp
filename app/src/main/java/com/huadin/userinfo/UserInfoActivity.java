@@ -34,7 +34,6 @@ public class UserInfoActivity extends BaseActivity
     super.onCreate(savedInstanceState);
     ButterKnife.bind(this);
     initViews();
-    // TODO: 2016/12/28 背景色不一样
   }
 
   private void initViews()
@@ -102,9 +101,20 @@ public class UserInfoActivity extends BaseActivity
       case R.id.user_info_item_phone:
         break;
       case R.id.user_info_item_password:
+
         break;
       case R.id.user_info_out:
+        //退出登录
+        outCurrentUser();
         break;
     }
+  }
+
+  /**
+   * 退出登录
+   */
+  private void outCurrentUser()
+  {
+
   }
 }

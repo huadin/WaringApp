@@ -18,7 +18,7 @@ import butterknife.OnClick;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * 上报故障信息
+ * 停电报修，上报故障信息
  */
 
 public class ReportFragment extends BaseFragment implements ReportContract.View

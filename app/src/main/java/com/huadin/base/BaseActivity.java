@@ -19,7 +19,6 @@ public abstract class BaseActivity extends SupportActivity
   protected static String LOG_TAG = null;
   protected Context mContext;
   protected ToastUtil mToast;
-  protected boolean isNetwork;
 
   @Override
   protected void onCreate(Bundle savedInstanceState)
@@ -29,7 +28,6 @@ public abstract class BaseActivity extends SupportActivity
     LOG_TAG = this.getClass().getSimpleName();
     mToast = new ToastUtil(mContext);
     EventBus.getDefault().register(this);
-    isNetwork = NetworkUtil.getNetworkState(mContext);
 
     if (getContentViewLayoutID() != 0)
     {
@@ -89,6 +87,12 @@ public abstract class BaseActivity extends SupportActivity
   {
     Intent intent = new Intent(this, cls);
     startActivity(intent);
+  }
+
+  //获取网络是否连接
+  protected boolean isNetwork()
+  {
+    return NetworkUtil.getNetworkState(mContext);
   }
 
 }

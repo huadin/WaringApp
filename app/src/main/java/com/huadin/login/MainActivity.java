@@ -67,8 +67,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     initColorStatsList();
     //初始化View
     initView();
-    //申请定位权限
-    checkLocationPermission();
     initFragment(savedInstanceState);
   }
 
@@ -77,18 +75,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     int colors[] = new int[]{getResources().getColor(R.color.item_menu_color),
             getResources().getColor(R.color.colorPrimaryDark)};
     cls = new ColorStateList(status, colors);
-  }
-
-  private void checkLocationPermission()
-  {
-    if (ContextCompat.checkSelfPermission(this, Manifest.permission_group.LOCATION) !=
-            PackageManager.PERMISSION_GRANTED)
-    {
-      //申请授权
-      int PERMISSION_REQUEST_CODE = 0x127;
-      ActivityCompat.requestPermissions(this,
-              new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_CODE);
-    }
   }
 
   private void initFragment(Bundle savedInstanceState)

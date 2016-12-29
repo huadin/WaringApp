@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">停电预警</string>
 
+    <string name="map_key_company">16e1d3f3ddbd9067fd1ff8e64888f877</string>
+    <string name="map_key_home">b792668a5836e28035a12cdece18fa7c</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 

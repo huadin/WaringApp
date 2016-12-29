@@ -60,7 +60,7 @@
     <!--个人信息-->
     <dimen name="user_info_app_bar_layout_height">250dp</dimen>
     <dimen name="text_margin">16dp</dimen>
-    <dimen name="user_info_item_height">96px</dimen>
+    <dimen name="user_info_item_height">48dp</dimen>
     <dimen name="user_info_item_margin">16dp</dimen>
     <dimen name="app_bar_height">180dp</dimen>
     <dimen name="user_info_item_margin_top_10dp">10dp</dimen>

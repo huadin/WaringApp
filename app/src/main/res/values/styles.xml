@@ -48,7 +48,8 @@
     <!--登录，注册 button-->
     <style name="login_register_submit_button">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/login_register_button_height_96px</item>
+        <!--<item name="android:layout_height">@dimen/login_register_button_height_96px</item>-->
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">@dimen/login_fragment_margin_top</item>
         <item name="android:background">@drawable/fault_input_bg</item>
         <item name="android:textColor">@color/app_text_color</item>

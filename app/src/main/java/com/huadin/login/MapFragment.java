@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -30,9 +31,9 @@ import com.huadin.waringapp.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
-import me.yokeyword.fragmentation.anim.DefaultVerticalAnimator;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.huadin.permission.PermissionManager.with;
 import static com.huadin.waringapp.R.id.map;
 
 /**
@@ -47,9 +48,10 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   Toolbar mToolbar;
   @BindView(map)
   MapView mMapView;
-
+  private final int permissionCode = 0x11;
   private AMap aMap;
   private MapContract.MapListener mPresenter;
+  private PermissionManager permissionManager;
 
   public static MapFragment newInstance()
   {
@@ -90,12 +92,24 @@ public class MapFragment extends BaseFragment implements PermissionListener,
 
   private void checkPermission()
   {
-    PermissionManager.with(this)
+    permissionManager = PermissionManager.with(this)
+            .addRequestCode(permissionCode)
             .permissions(Manifest.permission.ACCESS_FINE_LOCATION)
             .setPermissionListener(this)
             .request();
   }
 
+  @Override
+  public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+  {
+    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    switch (requestCode)
+    {
+      case permissionCode:
+        permissionManager.onPermissionResult(permissions, grantResults);
+        break;
+    }
+  }
 
   @Override
   public void onResume()
@@ -124,7 +138,10 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   {
     super.onDestroy();
     mMapView.onDestroy();
-    mPresenter.destroyLocation();
+    if (mPresenter != null)
+    {
+      mPresenter.destroyLocation();
+    }
   }
 
   @Override
@@ -172,15 +189,16 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   @Override
   public void onGranted()
   {
-    //开启定位
-    if (isNetwork())
+    LogUtil.i(LOG_TAG,"onGranted = " + System.currentTimeMillis());
+
+    //初始化控制器,在权限检测之前?
+    new MapPresenter(this, mContext);
+
+    if (!isNetwork())
     {
       // TODO: 2016/12/10 检测GPS是否开启 ,未开启则提示用户
-      //初始化控制器,在权限检测之前
-      new MapPresenter(this, mContext);
-    } else
-    {
       //无网络
+      // TODO: 2016/12/29 有网络后,重新开启定位服务
       mToast.showMessage(R.string.error_code_9016, 1000);
     }
   }
@@ -228,6 +246,7 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   @Override
   public void activate(OnLocationChangedListener onLocationChangedListener)
   {
+    LogUtil.i(LOG_TAG,"activate = " + System.currentTimeMillis());
     mPresenter.startLocation(onLocationChangedListener);
   }
 
@@ -235,7 +254,10 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   @Override
   public void deactivate()
   {
-    mPresenter.stopLocation();
+    if (mPresenter != null)
+    {
+      mPresenter.stopLocation();
+    }
   }
 
   private void showDialogPermission()
