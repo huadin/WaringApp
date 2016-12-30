@@ -67,5 +67,9 @@
     <dimen name="user_info_item_margin_top_5dp">5dp</dimen>
     <dimen name="user_info_item_margin_1dp">1dp</dimen>
     <dimen name="user_info_item_margin_2dp">2dp</dimen>
+    <dimen name="user_info_phone_layout_height">96px</dimen>
+
+    <!--验证码-->
+    <dimen name="user_info_code_height">80px</dimen>
 
 </resources>

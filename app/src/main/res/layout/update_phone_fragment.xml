@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/user_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/user_info_item_margin"
+        android:gravity="center"
+        android:text="@string/hint_system_phone"
+        android:textColor="@color/register_account_text_color"
+        android:textSize="@dimen/text_size_18"/>
+
+    <EditText
+        android:id="@+id/user_info_phone"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/user_info_phone_layout_height"
+        android:layout_marginLeft="@dimen/user_info_item_margin"
+        android:layout_marginRight="@dimen/user_info_item_margin"
+        android:background="@null"
+        android:gravity="bottom"
+        android:hint="@string/hint_new_phone"
+        android:inputType="phone"/>
+
+    <View
+        style="@style/view_bg_style"
+        android:layout_marginLeft="@dimen/user_info_item_margin"
+        android:layout_marginRight="@dimen/user_info_item_margin"/>
+
+    <!--验证码-->
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/user_info_phone_layout_height"
+        android:layout_marginTop="5dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/user_info_code_edit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/register_edit_text_margin_left"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="bottom"
+            android:hint="@string/user_info_code">
+        </EditText>
+
+        <TextView
+            android:id="@+id/user_info_code_text"
+            android:layout_width="@dimen/register_phone_code_width"
+            android:layout_height="@dimen/user_info_code_height"
+            android:layout_marginLeft="@dimen/user_info_item_margin"
+            android:layout_marginRight="@dimen/user_info_item_margin"
+            android:background="@drawable/register_fragment_phone_code_bg"
+            android:gravity="center"
+            android:text="@string/request_register_code"
+            android:textColor="@color/app_text_color"
+            android:textSize="@dimen/text_size_14"/>
+
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <View
+        style="@style/view_bg_style"
+        android:layout_marginLeft="@dimen/user_info_item_margin"
+        android:layout_marginRight="@dimen/user_info_item_margin"/>
+
+    <Button
+        android:id="@+id/next_step"
+        style="@style/login_register_submit_button"
+        android:layout_margin="@dimen/user_info_item_margin"
+        android:text="@string/string_ok"/>
+
+</com.zhy.autolayout.AutoLinearLayout>

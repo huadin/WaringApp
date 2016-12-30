@@ -106,6 +106,7 @@ public class UserInfoActivity extends BaseActivity implements PromptFragment.Pro
       case R.id.release_info_message:
         break;
       case R.id.user_info_item_phone:
+        startActivity(UpdateUserInfoActivity.class,R.string.user_info_phone);
         break;
       case R.id.user_info_item_password:
         startActivity(UpdateUserInfoActivity.class, R.string.password_modify);

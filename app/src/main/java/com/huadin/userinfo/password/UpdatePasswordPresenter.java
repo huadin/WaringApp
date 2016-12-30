@@ -31,7 +31,7 @@ public class UpdatePasswordPresenter implements UpdatePasswordContract.Presenter
   @Override
   public void start()
   {
-    // TODO: 2016/12/29 检验数据平获取密码
+
     int errorId = 0;
 
     String oldPassword = mPasswordView.oldPassword();

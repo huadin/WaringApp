@@ -6,6 +6,8 @@ import android.support.v7.widget.Toolbar;
 import com.huadin.base.BaseActivity;
 import com.huadin.userinfo.password.UpdatePasswordFragment;
 import com.huadin.userinfo.password.UpdatePasswordPresenter;
+import com.huadin.userinfo.phone.UpdatePhoneFragment;
+import com.huadin.userinfo.phone.UpdatePhonePresenter;
 import com.huadin.waringapp.R;
 
 import butterknife.BindView;
@@ -38,6 +40,13 @@ public class UpdateUserInfoActivity extends BaseActivity
         loadRootFragment(R.id.update_user_info_fragment_ground, updateFragment);
         new UpdatePasswordPresenter(updateFragment);
         break;
+
+      case R.string.user_info_phone:
+        UpdatePhoneFragment phoneFragment = UpdatePhoneFragment.newInstance();
+        loadRootFragment(R.id.update_user_info_fragment_ground,phoneFragment);
+        new UpdatePhonePresenter(phoneFragment);
+        break;
+
     }
     initToolbar(mToolbar, mTitleResId);
   }
