@@ -126,4 +126,24 @@ public abstract class BaseActivity extends SupportActivity
     });
 
   }
+
+  /**
+   * 显示信息
+   *
+   * @param resId 资源ID
+   */
+  protected void showMessage(int resId)
+  {
+    mToast.showMessage(resId, 500);
+  }
+
+  /**
+   * 显示信息
+   *
+   * @param msg 消息
+   */
+  protected void showMessage(String msg)
+  {
+    mToast.showMessage(msg, 500);
+  }
 }

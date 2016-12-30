@@ -112,17 +112,17 @@ public class RegisterFragment extends BaseFragment implements RegisterContract.V
     //注册成功
     if (mFlag == REGISTER_FLAG)
     {
-      mToast.showMessage(R.string.register_success, 500);
+      showMessage(R.string.register_success);
     } else if (mFlag == RESET_FLAG)
     {
-      mToast.showMessage(R.string.password_reset_success, 500);
+      showMessage(R.string.password_reset_success);
     }
   }
 
   @Override
   public void registerError(int errorCode)
   {
-    mToast.showMessage(errorCode, 500);
+    showMessage(errorCode);
   }
 
   @Override

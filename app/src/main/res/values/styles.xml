@@ -152,7 +152,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/user_info_item_height</item>
         <item name="android:clickable">true</item>
-        <item name="android:background">@drawable/user_info_item_layout_selector</item>
+        <item name="android:background">@drawable/layout_ripple_selector</item>
         <item name="android:focusable">true</item>
         <item name="android:orientation">horizontal</item>
         <!--<item name="android:layout_marginTop">@dimen/user_info_item_margin_top_5dp</item>-->

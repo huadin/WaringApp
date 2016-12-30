@@ -5,7 +5,7 @@
     <!--顶部状态栏颜色-->
     <color name="colorPrimaryDark">#38B44A</color>
     <!--各种空间被选中或勾选的颜色-->
-    <color name="colorAccent">#000000</color>
+    <color name="colorAccent">#FFCE44</color>
     <!--显示用户名后一个字的背景色-->
     <color name="user_name_text_bg">#FFCE44</color>
     <!--控件字体颜色-->
@@ -23,6 +23,8 @@
     <color name="report_button_color">#ffffff</color>
     <!--线view颜色-->
     <color name="linear_view_color">#3C3F41</color>
+    <!--ripple-->
+    <color name="ripple_bg_color">#3038B44A</color>
     <!--设置中item layout 颜色-->
     <color name="linea_item_color">#FFFFFFFF</color>
     <!--layout bg-->

@@ -49,7 +49,7 @@
     <string name="error_code_205">用户名不存在</string>
     <string name="error_code_207">验证码错误</string>
     <string name="error_code_209">该手机号码 已存在</string>
-    <string name="error_code_210">旧密码不正确</string>
+    <string name="error_code_210">原密码不正确</string>
     <string name="error_code_9010">网络超时</string>
     <string name="error_code_9016">无网络连接，请检查您的网络</string>
     <string name="to_forget_password">忘记密码?</string>
@@ -131,6 +131,7 @@
     <string name="user_info_old_password">请输入原密码</string>
     <string name="user_info_new_password">请输入新密码</string>
     <string name="update_password_submit">提交</string>
+    <string name="update_password_success">修改成功</string>
 
 
 </resources>

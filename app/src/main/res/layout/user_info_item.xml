@@ -42,11 +42,12 @@
         <com.zhy.autolayout.AutoLinearLayout
             android:id="@+id/user_info_item_waring_address"
             style="@style/user_info_item_layout_style"
-            android:background="@drawable/user_info_item_layout_bottom_circle_selector">
+            android:background="@drawable/layout_bottom_ripple_selector">
 
             <TextView
                 style="@style/user_info_item_style"
-                android:text="@string/user_info_waring_address"/>
+                android:text="@string/user_info_waring_address"
+                android:id="@+id/textView"/>
         </com.zhy.autolayout.AutoLinearLayout>
 
     </LinearLayout>
@@ -67,8 +68,7 @@
         <!--人员-->
         <com.zhy.autolayout.AutoLinearLayout
             android:id="@+id/person_info_message"
-            style="@style/user_info_item_layout_style"
-            android:background="@drawable/user_info_item_layout_bottom_circle_selector">
+            style="@style/user_info_item_layout_style">
 
             <TextView
                 style="@style/user_info_item_style"
@@ -79,8 +79,7 @@
         <!--故障信息,查看用户提交-->
         <com.zhy.autolayout.AutoLinearLayout
             android:id="@+id/fault_info_message"
-            style="@style/user_info_item_layout_style"
-            android:background="@drawable/user_info_item_layout_bottom_circle_selector">
+            style="@style/user_info_item_layout_style">
 
             <TextView
                 style="@style/user_info_item_style"
@@ -92,7 +91,7 @@
         <com.zhy.autolayout.AutoLinearLayout
             android:id="@+id/release_info_message"
             style="@style/user_info_item_layout_style"
-            android:background="@drawable/user_info_item_layout_bottom_circle_selector">
+            android:background="@drawable/layout_bottom_ripple_selector">
 
             <TextView
                 style="@style/user_info_item_style"
@@ -128,7 +127,7 @@
         <com.zhy.autolayout.AutoLinearLayout
             android:id="@+id/user_info_item_password"
             style="@style/user_info_item_layout_style"
-            android:background="@drawable/user_info_item_layout_bottom_circle_selector">
+            android:background="@drawable/layout_bottom_ripple_selector">
 
             <TextView
                 style="@style/user_info_item_style"
@@ -155,7 +154,7 @@
         <com.zhy.autolayout.AutoLinearLayout
             android:id="@+id/user_info_out"
             style="@style/user_info_item_layout_style"
-            android:background="@drawable/user_info_item_layout_bottom_circle_selector">
+            android:background="@drawable/layout_bottom_ripple_selector">
 
             <TextView
                 style="@style/user_info_item_style"

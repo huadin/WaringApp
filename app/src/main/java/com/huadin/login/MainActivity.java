@@ -58,11 +58,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     super.onCreate(savedInstanceState);
 //    setContentView(R.layout.activity_main);
     ButterKnife.bind(this);
+
     mUser = BmobUser.getCurrentUser(Person.class);
+
     //初始化item菜单样式
     initColorStatsList();
+
     //初始化View
     initView();
+
     initFragment(savedInstanceState);
   }
 
@@ -117,6 +121,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
       }
     });
 
+    setUserName();
   }
 
   /**
@@ -342,7 +347,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         } else
         {
           TOUCH_TIME = System.currentTimeMillis();
-          mToast.showMessage(R.string.press_again_exit, 500);
+          showMessage(R.string.press_again_exit);
         }
       }
     }

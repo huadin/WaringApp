@@ -83,7 +83,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, T
   public void loginSuccess()
   {
     //登录成功
-    mToast.showMessage(R.string.login_success, 500);
+    showMessage(R.string.login_success);
     //发送订阅事件,改变 DrawerLayout 上用户名
     EventBus.getDefault().post(new EventCenter(EventCenter.EVENT_CODE_LOGIN_SUCCESS));
     pop();
@@ -93,7 +93,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, T
   public void loginError(int errorMsg)
   {
     //登录异常
-    mToast.showMessage(errorMsg, 500);
+    showMessage(errorMsg);
   }
 
   @Override

@@ -199,7 +199,7 @@ public class MapFragment extends BaseFragment implements PermissionListener,
       // TODO: 2016/12/10 检测GPS是否开启 ,未开启则提示用户
       //无网络
       // TODO: 2016/12/29 有网络后,重新开启定位服务
-      mToast.showMessage(R.string.error_code_9016, 1000);
+      showMessage(R.string.error_code_9016);
     }
   }
 

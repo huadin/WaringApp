@@ -79,6 +79,7 @@ public class UpdatePasswordFragment extends BaseFragment implements UpdatePasswo
   public void updateSuccess()
   {
     //更新成功
+    showMessage(R.string.update_password_success);
     mContext.finish();
   }
 
@@ -86,6 +87,7 @@ public class UpdatePasswordFragment extends BaseFragment implements UpdatePasswo
   public void updateError(int errorId)
   {
     //更新失败,显示失败原因
+    showMessage(errorId);
   }
 
 

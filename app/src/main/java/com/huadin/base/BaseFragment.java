@@ -20,7 +20,6 @@ import com.huadin.widget.LoadDialog;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import me.yokeyword.fragmentation.SupportActivity;
 import me.yokeyword.fragmentation.SupportFragment;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -145,6 +144,27 @@ public abstract class BaseFragment extends SupportFragment
     super.onDestroy();
     EventBus.getDefault().unregister(this);
   }
+
+  /**
+   * 显示信息
+   *
+   * @param resId 资源ID
+   */
+  protected void showMessage(int resId)
+  {
+    mToast.showMessage(resId, 500);
+  }
+
+  /**
+   * 显示信息
+   *
+   * @param msg 消息
+   */
+  protected void showMessage(String msg)
+  {
+    mToast.showMessage(msg, 500);
+  }
+
 
   @Subscribe()
   public void defaultOnEvent(EventCenter eventCenter)

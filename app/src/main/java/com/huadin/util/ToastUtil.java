@@ -4,10 +4,7 @@ import android.content.Context;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
-import android.view.animation.ScaleAnimation;
-import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -83,11 +80,11 @@ public class ToastUtil extends Toast
   public void show()
   {
     super.show();
-    Animation scaleAnimation = new ScaleAnimation(1.1f, 1f, 1.1f, 1f);
-    Animation translateAnimation = new TranslateAnimation(-10f, 0f, -10f, 0f);
+//    Animation scaleAnimation = new ScaleAnimation(1.1f, 1f, 1.1f, 1f);
+//    Animation translateAnimation = new TranslateAnimation(0f, 0f, 0f, 0f);
     AnimationSet animationSet = new AnimationSet(true);
-    animationSet.addAnimation(scaleAnimation);
-    animationSet.addAnimation(translateAnimation);
+//    animationSet.addAnimation(scaleAnimation);
+//    animationSet.addAnimation(translateAnimation);
     animationSet.setDuration(200);
     relMsgLayout.startAnimation(animationSet);
   }

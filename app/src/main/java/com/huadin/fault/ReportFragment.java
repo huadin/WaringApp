@@ -64,7 +64,7 @@ public class ReportFragment extends BaseFragment implements ReportContract.View
   public void submitSuccess()
   {
     // TODO: 2016/12/13 成功后操作
-    mToast.showMessage("提交成功", 500);
+
   }
 
   @Override
