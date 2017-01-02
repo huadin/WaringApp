@@ -63,7 +63,7 @@ public class RegisterPresenter implements RegisterContract.Presenter
     boolean isNetwork = mRegisterView.networkIsAvailable();
     if (AMUtils.isEmpty(registerPhone))
     {
-      errorRes = R.string.login_name_not_null;
+      errorRes = R.string.register_name_not_null;
     } else if (!AMUtils.isMobile(registerPhone))
     {
       errorRes = R.string.login_name_error;

@@ -15,8 +15,9 @@
     <dimen name="text_size_22">22sp</dimen>
 
     <!--LoadDialog-->
-    <dimen name="load_dialog_width">50dp</dimen>
+    <dimen name="load_dialog_width">40dp</dimen>
     <dimen name="load_dialog_margin">10dp</dimen>
+    <dimen name="load_dialog_layout_height">50dp</dimen>
 
     <!--loginFragment layout-->
     <dimen name="login_fragment_parent_margin">16dp</dimen>
@@ -71,5 +72,10 @@
 
     <!--验证码-->
     <dimen name="user_info_code_height">80px</dimen>
+
+    <!--用户信息-->
+    <dimen name="user_layout_margin">16dp</dimen>
+    <dimen name="user_fragment_layout_height">48dp</dimen>
+    <dimen name="user_fragment_view_margin">1dp</dimen>
 
 </resources>

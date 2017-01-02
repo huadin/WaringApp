@@ -33,7 +33,6 @@ import butterknife.ButterKnife;
 import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static com.huadin.permission.PermissionManager.with;
 import static com.huadin.waringapp.R.id.map;
 
 /**
@@ -189,7 +188,7 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   @Override
   public void onGranted()
   {
-    LogUtil.i(LOG_TAG,"onGranted = " + System.currentTimeMillis());
+    LogUtil.i(LOG_TAG, "onGranted = " + System.currentTimeMillis());
 
     //初始化控制器,在权限检测之前?
     new MapPresenter(this, mContext);
@@ -246,7 +245,7 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   @Override
   public void activate(OnLocationChangedListener onLocationChangedListener)
   {
-    LogUtil.i(LOG_TAG,"activate = " + System.currentTimeMillis());
+    LogUtil.i(LOG_TAG, "activate = " + System.currentTimeMillis());
     mPresenter.startLocation(onLocationChangedListener);
   }
 

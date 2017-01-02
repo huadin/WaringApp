@@ -194,5 +194,25 @@
         <item name="android:inputType">textPassword</item>
     </style>
 
+    <style name="user_fragment_text_content_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center_vertical|end</item>
+    </style>
+
+    <style name="user_fragment_text_title_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">@dimen/text_size_18</item>
+    </style>
+
+    <style name="user_fragment_item_layout_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/user_fragment_layout_height</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
 
 </resources>

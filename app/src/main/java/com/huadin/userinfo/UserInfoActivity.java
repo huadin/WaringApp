@@ -96,19 +96,27 @@ public class UserInfoActivity extends BaseActivity implements PromptFragment.Pro
     switch (view.getId())
     {
       case R.id.user_info_item_user:
+        //用户信息
+        startActivity(UpdateUserInfoActivity.class,R.string.user_info_user);
         break;
       case R.id.user_info_item_waring_address:
+        startActivity(UpdateUserInfoActivity.class,R.string.user_info_waring_address);
         break;
       case R.id.person_info_message:
+        startActivity(UpdateUserInfoActivity.class,R.string.person_info);
         break;
       case R.id.fault_info_message:
+        startActivity(UpdateUserInfoActivity.class,R.string.fault_info);
         break;
       case R.id.release_info_message:
+        startActivity(UpdateUserInfoActivity.class,R.string.release_info);
         break;
       case R.id.user_info_item_phone:
+        //更换手机号
         startActivity(UpdateUserInfoActivity.class,R.string.user_info_phone);
         break;
       case R.id.user_info_item_password:
+        //更改密码
         startActivity(UpdateUserInfoActivity.class, R.string.password_modify);
         break;
       case R.id.user_info_out:

@@ -34,23 +34,36 @@ public class LoginPresenter implements LoginContract.Presenter
   @Override
   public void start()
   {
-    login();
-  }
-
-  private void login()
-  {
-    int errorRes = 0;
     String loginName = mLoginView.getLoginName();
-    String loginPassword = mLoginView.getLoginPassword();
-    boolean isNetwork = mLoginView.networkIsAvailable();
+    int errorResId = 0;
 
     if (AMUtils.isEmpty(loginName))
     {
-      errorRes = R.string.login_name_not_null;
-    } else if (!AMUtils.isMobile(loginName))
+      errorResId = R.string.login_name_not_null;
+    }else if (!AMUtils.isMobile(loginName) && !AMUtils.isUserName(loginName))
     {
-      errorRes = R.string.login_name_error;
-    } else if (AMUtils.isEmpty(loginPassword))
+      errorResId = R.string.login_name_error;
+    }
+
+    if (errorResId != 0)
+    {
+      mLoginView.loginError(errorResId);
+      return;
+    }
+
+    login(loginName);
+  }
+
+  private void login(String loginName)
+  {
+    int errorRes = 0;
+
+    String loginPassword = mLoginView.getLoginPassword();
+    boolean isNetwork = mLoginView.networkIsAvailable();
+
+    // TODO: 2017/1/2 未区分用户名和手机号,暂时未手机号
+
+    if (AMUtils.isEmpty(loginPassword))
     {
       errorRes = R.string.login_password_not_null;
     } else if (AMUtils.validatePassword(loginPassword))

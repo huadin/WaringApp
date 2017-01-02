@@ -12,6 +12,9 @@ public class AMUtils
   /*手机号码正则表达式*/
   private static final String MOBILE_PHONE_PATTERN = "^((13[0-9])|(15[0-9])|(18[0-9])|(14[7])|(17[0|6|7|8]))\\d{8}$";
 
+  /*字母加数字*/
+  private static final String USER_NAME = "[A-Za-z0-9_\\-\\u4e00-\\u9fa5]{6,20}";
+
   /**
    * 检测手机号码是否符合格式
    *
@@ -67,6 +70,13 @@ public class AMUtils
   public static boolean validatePassword(String str)
   {
     return str == null || str.length() < 6 || str.length() > 20;
+  }
+
+  public static boolean isUserName(String loginName)
+  {
+    Pattern patter = Pattern.compile(USER_NAME);
+    Matcher m = patter.matcher(loginName);
+    return m.matches();
   }
 
 }

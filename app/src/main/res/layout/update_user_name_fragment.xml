@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/user_layout_margin"
+    android:orientation="vertical">
+
+    <com.huadin.widget.ClearEditText
+        android:id="@+id/update_user_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:hint="@string/user_login_account"
+        android:maxLength="20"
+        android:textCursorDrawable="@drawable/edit_text_drawable"
+        android:maxLines="1"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/user_name_change_prompt"
+        android:textSize="12sp"/>
+
+    <Button
+        android:id="@+id/submit_user_name"
+        style="@style/login_register_submit_button"
+        android:text="@string/string_ok"/>
+
+</LinearLayout>

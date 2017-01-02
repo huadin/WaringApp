@@ -8,6 +8,7 @@ import com.huadin.userinfo.password.UpdatePasswordFragment;
 import com.huadin.userinfo.password.UpdatePasswordPresenter;
 import com.huadin.userinfo.phone.UpdatePhoneFragment;
 import com.huadin.userinfo.phone.UpdatePhonePresenter;
+import com.huadin.userinfo.user.UserFragment;
 import com.huadin.waringapp.R;
 
 import butterknife.BindView;
@@ -45,6 +46,11 @@ public class UpdateUserInfoActivity extends BaseActivity
         UpdatePhoneFragment phoneFragment = UpdatePhoneFragment.newInstance();
         loadRootFragment(R.id.update_user_info_fragment_ground,phoneFragment);
         new UpdatePhonePresenter(phoneFragment);
+        break;
+
+      case R.string.user_info_user:
+        UserFragment userFragment = UserFragment.newInstance();
+        loadRootFragment(R.id.update_user_info_fragment_ground,userFragment);
         break;
 
     }

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/user_layout_margin"
+    android:orientation="vertical">
+
+    <!--登录号-->
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/user_login_account"
+        style="@style/user_fragment_item_layout_style">
+
+        <TextView
+            style="@style/user_fragment_text_title_style"
+            android:text="@string/user_login_account"/>
+
+        <TextView
+            android:id="@+id/user_login_account_content"
+            style="@style/user_fragment_text_content_style"
+            android:text="@string/hint_system_phone"/>
+
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <View
+        style="@style/user_info_item_view"
+        android:layout_marginBottom="@dimen/user_fragment_view_margin"
+        android:layout_marginTop="@dimen/user_fragment_view_margin"/>
+
+    <!--手机号-->
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/user_binding_phone"
+        style="@style/user_fragment_item_layout_style">
+
+        <TextView
+            style="@style/user_fragment_text_title_style"
+            android:text="@string/user_binding_phone"/>
+
+        <TextView
+            android:id="@+id/user_binding_phone_content"
+            style="@style/user_fragment_text_content_style"
+            android:text="@string/hint_system_phone"/>
+
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <!--地址信息-->
+
+
+</LinearLayout>

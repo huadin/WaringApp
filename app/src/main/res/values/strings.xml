@@ -35,10 +35,11 @@
     <string name="login_success">登录成功</string>
     <string name="back">返回</string>
     <string name="login_app">登录</string>
-    <string name="hint_phone">手机号码</string>
+    <string name="hint_phone">用户名/手机号码</string>
     <string name="hint_password">密码</string>
-    <string name="login_name_error">手机号码格式有误</string>
-    <string name="login_name_not_null">请输入手机号码</string>
+    <string name="login_name_error">登陆用户输入有误</string>
+    <string name="login_name_not_null">请输入用户名或手机号</string>
+    <string name="register_name_not_null">请输入手机号码</string>
     <string name="login_password_not_null">密码不能为空</string>
     <string name="login_password_length_error">请输入6~20位的密码</string>
     <string name="register_loading">提交中...</string>
@@ -135,6 +136,9 @@
     <string name="update_password_success">修改成功</string>
     <string name="hint_new_phone">新手机号</string>
     <string name="user_info_code">验证码</string>
+    <string name="user_login_account">登录号</string>
+    <string name="user_binding_phone">手机号</string>
+    <string name="user_name_change_prompt">登录名由字母和数字组成,并且只能该改一次</string>
 
 
 </resources>
