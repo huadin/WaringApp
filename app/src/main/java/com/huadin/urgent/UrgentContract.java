@@ -7,7 +7,7 @@ import com.huadin.base.BaseView;
  * 紧急信息
  */
 
-public interface UrgentContract
+interface UrgentContract
 {
   interface View extends BaseView<Presenter>
   {

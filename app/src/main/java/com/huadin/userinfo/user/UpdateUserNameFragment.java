@@ -2,6 +2,8 @@ package com.huadin.userinfo.user;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,7 @@ import android.widget.EditText;
 
 import com.huadin.base.BaseFragment;
 import com.huadin.userinfo.UpdateContract;
+import com.huadin.util.AMUtils;
 import com.huadin.waringapp.R;
 
 import butterknife.BindView;
@@ -20,7 +23,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * 更改用户名
  */
-public class UpdateUserNameFragment extends BaseFragment implements UserContract.View
+public class UpdateUserNameFragment extends BaseFragment implements UserContract.View, TextWatcher
 {
 
   @BindView(R.id.update_user_name)
@@ -43,6 +46,7 @@ public class UpdateUserNameFragment extends BaseFragment implements UserContract
   {
     View view = getViewResId(inflater, container, R.layout.update_user_name_fragment);
     ButterKnife.bind(this, view);
+    mUserName.addTextChangedListener(this);
     return view;
   }
 
@@ -68,6 +72,7 @@ public class UpdateUserNameFragment extends BaseFragment implements UserContract
   public void updateSuccess()
   {
     //更新成功
+    showMessage(R.string.update_password_success);
     pop();
   }
 
@@ -88,5 +93,30 @@ public class UpdateUserNameFragment extends BaseFragment implements UserContract
   public void onClick()
   {
     mPresenter.start();
+  }
+
+  @Override
+  public void beforeTextChanged(CharSequence s, int start, int count, int after)
+  {
+
+  }
+
+  @Override
+  public void onTextChanged(CharSequence s, int start, int before, int count)
+  {
+    //过滤汉字
+    String userName = mUserName.getText().toString();
+    String stringFilter = AMUtils.stringFilter(userName);
+    if (!userName.equals(stringFilter))
+    {
+      mUserName.setText(stringFilter);
+      mUserName.setSelection(stringFilter.length());
+    }
+  }
+
+  @Override
+  public void afterTextChanged(Editable s)
+  {
+
   }
 }

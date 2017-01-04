@@ -31,7 +31,7 @@
     <string name="user_name_1">Android Studio</string>
     <!--登录  注册-->
     <string name="register_name_exist">用户名已被注册</string>
-    <string name="loading_login">登录中...</string>
+    <string name="loading_login">登录中&#8230;</string>
     <string name="login_success">登录成功</string>
     <string name="back">返回</string>
     <string name="login_app">登录</string>
@@ -42,7 +42,7 @@
     <string name="register_name_not_null">请输入手机号码</string>
     <string name="login_password_not_null">密码不能为空</string>
     <string name="login_password_length_error">请输入6~20位的密码</string>
-    <string name="register_loading">提交中...</string>
+    <string name="register_loading">提交中&#8230;</string>
     <string name="register_app">注册账号</string>
     <string name="register_success">注册成功</string>
     <!--登录,注册异常-->

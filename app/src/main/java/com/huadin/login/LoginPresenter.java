@@ -18,13 +18,13 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * 登录
  */
 
-public class LoginPresenter implements LoginContract.Presenter
+class LoginPresenter implements LoginContract.Presenter
 {
 
   private static final String TAG = "LoginPresenter";
   private LoginContract.View mLoginView;
 
-  public LoginPresenter(LoginContract.View loginView)
+  LoginPresenter(LoginContract.View loginView)
   {
     this.mLoginView = loginView;
     mLoginView = checkNotNull(loginView, "loginView cannot be null");
@@ -40,7 +40,7 @@ public class LoginPresenter implements LoginContract.Presenter
     if (AMUtils.isEmpty(loginName))
     {
       errorResId = R.string.login_name_not_null;
-    }else if (!AMUtils.isMobile(loginName) && !AMUtils.isUserName(loginName))
+    } else if (!AMUtils.isMobile(loginName) && !AMUtils.isUserName(loginName))
     {
       errorResId = R.string.login_name_error;
     }
@@ -61,7 +61,6 @@ public class LoginPresenter implements LoginContract.Presenter
     String loginPassword = mLoginView.getLoginPassword();
     boolean isNetwork = mLoginView.networkIsAvailable();
 
-    // TODO: 2017/1/2 未区分用户名和手机号,暂时未手机号
 
     if (AMUtils.isEmpty(loginPassword))
     {

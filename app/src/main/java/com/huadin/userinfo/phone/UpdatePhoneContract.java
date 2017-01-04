@@ -7,7 +7,7 @@ import com.huadin.userinfo.UpdateContract;
  * 更换手机号 控制器
  */
 
-public interface UpdatePhoneContract
+interface UpdatePhoneContract
 {
   interface Presenter extends UpdateContract.Presenter
   {

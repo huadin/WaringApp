@@ -4,7 +4,7 @@ package com.huadin.login;
 import com.huadin.base.BasePresenter;
 import com.huadin.base.BaseView;
 
-public interface LoginContract
+interface LoginContract
 {
   interface Presenter extends BasePresenter
   {

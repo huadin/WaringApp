@@ -18,6 +18,7 @@
             style="@style/setting_linear_layout_text_view_style"
             android:drawableLeft="@drawable/icon_address_72px"
             android:drawablePadding="@dimen/setting_margin_left_16dp"
+            android:drawableStart="@drawable/icon_address_72px"
             android:text="@string/warning_address"/>
 
     </LinearLayout>
@@ -32,6 +33,7 @@
             style="@style/setting_linear_layout_text_view_style"
             android:drawableLeft="@drawable/icon_msg_72px"
             android:drawablePadding="@dimen/setting_margin_left_16dp"
+            android:drawableStart="@drawable/icon_msg_72px"
             android:text="@string/msg_setting"/>
     </LinearLayout>
 
@@ -46,6 +48,7 @@
             style="@style/setting_linear_layout_text_view_style"
             android:drawableLeft="@drawable/icon_contacts_72px"
             android:drawablePadding="@dimen/setting_margin_left_16dp"
+            android:drawableStart="@drawable/icon_contacts_72px"
             android:text="@string/contact_us"/>
     </LinearLayout>
 
@@ -59,6 +62,7 @@
             style="@style/setting_linear_layout_text_view_style"
             android:drawableLeft="@drawable/icon_feedback_72px"
             android:drawablePadding="@dimen/setting_margin_left_16dp"
+            android:drawableStart="@drawable/icon_feedback_72px"
             android:text="@string/feedback"/>
     </LinearLayout>
 
@@ -72,13 +76,9 @@
             style="@style/setting_linear_layout_text_view_style"
             android:drawableLeft="@drawable/icon_password_72px"
             android:drawablePadding="@dimen/setting_margin_left_16dp"
+            android:drawableStart="@drawable/icon_password_72px"
             android:text="@string/app_update"/>
     </LinearLayout>
 
-    <!--退出-->
-    <!--<Button-->
-        <!--android:id="@+id/app_out"-->
-        <!--style="@style/app_out_button_style"-->
-        <!--android:text="@string/app_out_text"/>-->
 
 </LinearLayout>

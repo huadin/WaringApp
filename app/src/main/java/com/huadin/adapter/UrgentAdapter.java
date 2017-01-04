@@ -51,7 +51,7 @@ public class UrgentAdapter extends RecyclerView.Adapter<UrgentAdapter.UrgentView
   {
     TextView tv;
 
-    public UrgentViewHolder(View itemView)
+    UrgentViewHolder(View itemView)
     {
       super(itemView);
       tv = (TextView) itemView.findViewById(R.id.urgent_text_view);

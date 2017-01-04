@@ -13,7 +13,10 @@ public class AMUtils
   private static final String MOBILE_PHONE_PATTERN = "^((13[0-9])|(15[0-9])|(18[0-9])|(14[7])|(17[0|6|7|8]))\\d{8}$";
 
   /*字母加数字*/
-  private static final String USER_NAME = "[A-Za-z0-9_\\-\\u4e00-\\u9fa5]{6,20}";
+//  private static final String USER_NAME = "[A-Za-z0-9_\\-\\u4e00-\\u9fa5]{6,20}";包含汉字
+  private static final String USER_NAME = "[A-Za-z0-9_\\-]{6,20}";
+
+  private static final String STRING_FILTER = "[^A-Za-z0-9_\\-]";
 
   /**
    * 检测手机号码是否符合格式
@@ -77,6 +80,18 @@ public class AMUtils
     Pattern patter = Pattern.compile(USER_NAME);
     Matcher m = patter.matcher(loginName);
     return m.matches();
+  }
+
+  /**
+   * 过滤汉字
+   * @param s 输入的字符
+   * @return "" 输入的汉字过滤为 ""
+   */
+  public static String stringFilter (String s)
+  {
+    Pattern pattern = Pattern.compile(STRING_FILTER);
+    Matcher m = pattern.matcher(s);
+    return m.replaceAll("").trim();
   }
 
 }

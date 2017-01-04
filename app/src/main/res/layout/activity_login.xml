@@ -4,7 +4,7 @@
               android:layout_height="match_parent"
               android:gravity="center_horizontal"
               android:orientation="vertical"
-              tools:context="com.huadin.login.LoginActivity">
+              tools:context="com.huadin.login.MainActivity">
 
     <FrameLayout
         android:id="@+id/fragment_ground"

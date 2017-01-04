@@ -25,13 +25,11 @@ public class MD5util
 
   private static String getMd5date(byte[] bytes)
   {
-    int len = bytes.length;
-    StringBuffer result = new StringBuffer();
-    for (int i = 0; i < len; i++)
+    StringBuilder result = new StringBuilder();
+    for (byte aByte : bytes)
     {
-      byte byte0 = bytes[i];
-      result.append(HD[byte0 >>> 4 & 0xf]);
-      result.append(HD[byte0 & 0xf]);
+      result.append(HD[aByte >>> 4 & 0xf]);
+      result.append(HD[aByte & 0xf]);
     }
     return result.toString();
   }

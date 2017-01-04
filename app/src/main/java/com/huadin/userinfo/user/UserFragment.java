@@ -95,7 +95,7 @@ public class UserFragment extends BaseFragment
     switch (view.getId())
     {
       case R.id.user_login_account:
-        //弹出对话框
+        //设置用户名
         UpdateUserNameFragment fragment = UpdateUserNameFragment.newInstance();
         new UpdateUserNamePresenter(fragment);
         start(fragment);

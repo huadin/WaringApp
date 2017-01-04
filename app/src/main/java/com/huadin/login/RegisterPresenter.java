@@ -14,7 +14,7 @@ import cn.bmob.v3.listener.SaveListener;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class RegisterPresenter implements RegisterContract.Presenter
+class RegisterPresenter implements RegisterContract.Presenter
 {
 
   private RegisterContract.View mRegisterView;
@@ -24,7 +24,7 @@ public class RegisterPresenter implements RegisterContract.Presenter
     @Override
     protected void onTick(long millisUntilFinished)
     {
-      mRegisterView.codeOnTick(millisUntilFinished/1000);
+      mRegisterView.codeOnTick(millisUntilFinished / 1000);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class RegisterPresenter implements RegisterContract.Presenter
   };
 
 
-  public RegisterPresenter(RegisterContract.View registerView)
+  RegisterPresenter(RegisterContract.View registerView)
   {
     this.mRegisterView = registerView;
     mRegisterView = checkNotNull(registerView, "registerView cannot be null");
@@ -92,7 +92,7 @@ public class RegisterPresenter implements RegisterContract.Presenter
     person.setUsername(registerPhone);
     person.setMobilePhoneNumber(registerPhone);
     person.setPassword(MD5util.getMD5(registerPassword));//密码加密
-    person.setUserPermission(false);
+    person.setUserPermission(true);
     mRegisterView.showLoading();
 
     person.signOrLogin(registerCode, new SaveListener<Person>()
@@ -127,11 +127,10 @@ public class RegisterPresenter implements RegisterContract.Presenter
     if (AMUtils.isEmpty(registerPhone))
     {
       errorRes = R.string.login_name_not_null;
-    }else if (!AMUtils.isMobile(registerPhone))
+    } else if (!AMUtils.isMobile(registerPhone))
     {
       errorRes = R.string.login_name_error;
-    }
-    else if (!isNetwork)
+    } else if (!isNetwork)
     {
       errorRes = R.string.no_network;
     }

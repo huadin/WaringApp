@@ -7,7 +7,7 @@ import com.huadin.userinfo.UpdateContract;
  * 更新用户信息
  */
 
-public interface UserContract
+interface UserContract
 {
   interface Presenter extends UpdateContract.Presenter
   {

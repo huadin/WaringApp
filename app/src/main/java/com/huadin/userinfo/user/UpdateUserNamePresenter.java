@@ -8,16 +8,16 @@ import cn.bmob.v3.listener.UpdateListener;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class UpdateUserNamePresenter implements UserContract.Presenter
+class UpdateUserNamePresenter implements UserContract.Presenter
 {
 
   private static final String TAG = "UpdateUserNamePresenter";
   private UserContract.View mUserView;
 
-  public UpdateUserNamePresenter(UserContract.View userView)
+  UpdateUserNamePresenter(UserContract.View userView)
   {
     mUserView = userView;
-    mUserView = checkNotNull(userView,"userView cannot be null");
+    mUserView = checkNotNull(userView, "userView cannot be null");
     mUserView.setPresenter(this);
   }
 
@@ -42,10 +42,10 @@ public class UpdateUserNamePresenter implements UserContract.Presenter
         if (e == null)
         {
           mUserView.updateSuccess();
-        }else
+        } else
         {
           int code = e.getErrorCode();
-          LogUtil.i(TAG,"code = " + code + " / message = " + e.getMessage());
+          LogUtil.i(TAG, "code = " + code + " / message = " + e.getMessage());
         }
       }
     });

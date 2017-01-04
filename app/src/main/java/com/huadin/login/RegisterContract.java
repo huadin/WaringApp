@@ -4,7 +4,7 @@ package com.huadin.login;
 import com.huadin.base.BasePresenter;
 import com.huadin.base.BaseView;
 
-public interface RegisterContract
+interface RegisterContract
 {
   interface View extends BaseView<Presenter>
   {
@@ -33,6 +33,7 @@ public interface RegisterContract
 
     /**
      * 显示验证码剩余时间
+     *
      * @param m 6000
      */
     void codeOnTick(long m);
