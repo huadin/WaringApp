@@ -58,6 +58,7 @@ public abstract class BaseFragment extends SupportFragment
     checkNotNull(toolbar, "toolbar cannot null");
     toolbar.setTitle(toolbarTitleResId);
     toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
+//    toolbar.setNavigationIcon(android.R.drawable.ic_menu_report_image);
     toolbar.setNavigationOnClickListener(new View.OnClickListener()
     {
       @Override

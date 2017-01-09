@@ -49,6 +49,7 @@
     <string name="error_code_101">用户名或密码不正确</string>
     <string name="error_code_202">用户名已存在</string>
     <string name="error_code_205">用户名不存在</string>
+    <string name="error_code_206">用户未登录</string>
     <string name="error_code_207">验证码错误</string>
     <string name="error_code_209">该手机号码 已存在</string>
     <string name="error_code_210">原密码不正确</string>

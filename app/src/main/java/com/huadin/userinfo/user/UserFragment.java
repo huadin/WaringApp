@@ -81,11 +81,11 @@ public class UserFragment extends BaseFragment
     mLoginAccount.setText(mPerson.getUsername());
     mUserPhone.setText(mPerson.getMobilePhoneNumber());
 
-    if (mPerson.isUserNameChange())
-    {
-      // 不可点击
-      mUserNameLayout.setClickable(false);
-    }
+//    if (mPerson.isUserNameChange())
+//    {
+//      // 不可点击
+//      mUserNameLayout.setClickable(false);
+//    }
   }
 
 
@@ -97,7 +97,7 @@ public class UserFragment extends BaseFragment
       case R.id.user_login_account:
         //设置用户名
         UpdateUserNameFragment fragment = UpdateUserNameFragment.newInstance();
-        new UpdateUserNamePresenter(fragment);
+        new UpdateUserNamePresenter(fragment,mContext);
         start(fragment);
         break;
     }
