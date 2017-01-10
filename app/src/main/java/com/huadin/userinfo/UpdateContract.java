@@ -15,7 +15,7 @@ public interface UpdateContract
 
   }
 
-  interface View extends BaseView<Presenter>
+  interface View<T> extends BaseView<T>
   {
 
     void showLoading();

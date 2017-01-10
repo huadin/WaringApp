@@ -14,7 +14,7 @@ interface UserContract
 
   }
 
-  interface View extends UpdateContract.View
+  interface View extends UpdateContract.View<Presenter>
   {
     /**
      * 更新用户名

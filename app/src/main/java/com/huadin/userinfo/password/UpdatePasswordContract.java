@@ -14,7 +14,7 @@ interface UpdatePasswordContract
 
   }
 
-  interface View extends UpdateContract.View
+  interface View extends UpdateContract.View<Presenter>
   {
     /**
      * 获取旧密码

@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.huadin.base.BaseFragment;
-import com.huadin.userinfo.UpdateContract;
 import com.huadin.util.AMUtils;
 import com.huadin.waringapp.R;
 
@@ -83,10 +82,10 @@ public class UpdateUserNameFragment extends BaseFragment implements UserContract
   }
 
   @Override
-  public void setPresenter(UpdateContract.Presenter presenter)
+  public void setPresenter(UserContract.Presenter presenter)
   {
-    this.mPresenter = (UserContract.Presenter) presenter;
-    mPresenter = (UserContract.Presenter) checkNotNull(presenter, "presenter cannot be null");
+    this.mPresenter = presenter;
+    mPresenter = checkNotNull(presenter, "presenter cannot be null");
   }
 
   @OnClick(R.id.submit_user_name)

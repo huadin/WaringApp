@@ -39,7 +39,7 @@ public class UpdatePhoneFragment extends BaseFragment implements UpdatePhoneCont
   @BindView(R.id.user_phone)
   TextView mUserPhone;
 
-  private UpdatePhonePresenter mPresenter;
+  private UpdatePhoneContract.Presenter mPresenter;
   private String mPhone;
   private StringBuilder mSB;
   private String _code;//重发
@@ -144,10 +144,10 @@ public class UpdatePhoneFragment extends BaseFragment implements UpdatePhoneCont
   }
 
   @Override
-  public void setPresenter(UpdateContract.Presenter presenter)
+  public void setPresenter(UpdatePhoneContract.Presenter presenter)
   {
-    this.mPresenter = (UpdatePhonePresenter) presenter;
-    mPresenter = (UpdatePhonePresenter) checkNotNull(presenter, "presenter cannot be null");
+    this.mPresenter = presenter;
+    mPresenter = checkNotNull(presenter, "presenter cannot be null");
   }
 
   @OnClick({R.id.user_info_code_text, R.id.next_step})

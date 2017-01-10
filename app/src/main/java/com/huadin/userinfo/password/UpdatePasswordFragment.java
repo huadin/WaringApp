@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.huadin.base.BaseFragment;
-import com.huadin.userinfo.UpdateContract;
 import com.huadin.waringapp.R;
 
 import butterknife.BindView;
@@ -92,10 +91,10 @@ public class UpdatePasswordFragment extends BaseFragment implements UpdatePasswo
 
 
   @Override
-  public void setPresenter(UpdateContract.Presenter presenter)
+  public void setPresenter(UpdatePasswordContract.Presenter presenter)
   {
-    this.mPresenter = (UpdatePasswordContract.Presenter) presenter;
-    mPresenter = (UpdatePasswordContract.Presenter) checkNotNull(presenter, "UpdatePasswordContract.Presenter cannot be null");
+    this.mPresenter = presenter;
+    mPresenter = checkNotNull(presenter, "UpdatePasswordContract.Presenter cannot be null");
   }
 
   @OnClick(R.id.password_submit)

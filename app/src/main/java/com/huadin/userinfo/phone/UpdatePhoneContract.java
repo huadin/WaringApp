@@ -17,7 +17,7 @@ interface UpdatePhoneContract
     void getCode();
   }
 
-  interface View extends UpdateContract.View
+  interface View extends UpdateContract.View<Presenter>
   {
     /**
      * 获取验证码
