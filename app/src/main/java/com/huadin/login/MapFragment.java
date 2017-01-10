@@ -47,10 +47,10 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   Toolbar mToolbar;
   @BindView(map)
   MapView mMapView;
-  private final int permissionCode = 0x11;
-  private AMap aMap;
+  private final int mPermissionCode = 0x11;
+  private AMap mMap;
   private MapContract.MapListener mPresenter;
-  private PermissionManager permissionManager;
+  private PermissionManager mPermissionManager;
 
   public static MapFragment newInstance()
   {
@@ -91,8 +91,8 @@ public class MapFragment extends BaseFragment implements PermissionListener,
 
   private void checkPermission()
   {
-    permissionManager = PermissionManager.with(this)
-            .addRequestCode(permissionCode)
+    mPermissionManager = PermissionManager.with(this)
+            .addRequestCode(mPermissionCode)
             .permissions(Manifest.permission.ACCESS_FINE_LOCATION)
             .setPermissionListener(this)
             .request();
@@ -104,8 +104,8 @@ public class MapFragment extends BaseFragment implements PermissionListener,
     super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     switch (requestCode)
     {
-      case permissionCode:
-        permissionManager.onPermissionResult(permissions, grantResults);
+      case mPermissionCode:
+        mPermissionManager.onPermissionResult(permissions, grantResults);
         break;
     }
   }
@@ -154,9 +154,9 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   {
     initToolbarHome(mToolbar, R.string.map_location, getActivity());
 
-    if (aMap == null)
+    if (mMap == null)
     {
-      aMap = mMapView.getMap();
+      mMap = mMapView.getMap();
     }
     setUpMap();
   }
@@ -166,9 +166,9 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   {
     //设置放大级别
     CameraUpdate update = CameraUpdateFactory.zoomTo(16);
-    aMap.moveCamera(update);
+    mMap.moveCamera(update);
     //设置交互控件
-    UiSettings mSetting = aMap.getUiSettings();
+    UiSettings mSetting = mMap.getUiSettings();
     //缩放按钮位置
     mSetting.setZoomPosition(AMapOptions.ZOOM_POSITION_RIGHT_CENTER);
     //指南针
@@ -178,9 +178,9 @@ public class MapFragment extends BaseFragment implements PermissionListener,
     //显示默认的定位按钮
     mSetting.setMyLocationButtonEnabled(true);
     //设置定位源
-    aMap.setLocationSource(this);
+    mMap.setLocationSource(this);
     // 可触发定位并显示定位层
-    aMap.setMyLocationEnabled(true);
+    mMap.setMyLocationEnabled(true);
   }
 
 

@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.huadin.base.InstallationListener;
 import com.huadin.bean.Person;
+import com.huadin.util.AMUtils;
 import com.huadin.util.InstallationUtil;
 import com.huadin.util.LogUtil;
 import com.huadin.waringapp.R;
@@ -34,7 +35,12 @@ class UpdateUserNamePresenter implements UserContract.Presenter, InstallationLis
   public void start()
   {
     final String userName = mUserView.updateUserName();
-    // TODO: 2017/1/2 没有进行正则
+
+    if (!AMUtils.isUserName(userName))
+    {
+      mUserView.updateError(R.string.update_user_name_error);
+      return;
+    }
 
     Person person = new Person();
     person.setUsername(userName);

@@ -129,7 +129,8 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, T
     {
       //登录
       case R.id.login_app:
-//        checkPermission();
+        //检查权限
+        checkPermission();
         break;
       //注册
       case R.id.to_register:

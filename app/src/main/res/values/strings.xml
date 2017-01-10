@@ -141,6 +141,7 @@
     <string name="user_login_account">登录号</string>
     <string name="user_binding_phone">手机号</string>
     <string name="user_name_change_prompt">登录名由字母和数字组成,并且只能该改一次</string>
+    <string name="update_user_name_error">用户名不合法</string>
 
 
 </resources>
