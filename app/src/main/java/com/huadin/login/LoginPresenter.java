@@ -73,10 +73,12 @@ class LoginPresenter implements LoginContract.Presenter, InstallationListener
     if (AMUtils.isEmpty(loginPassword))
     {
       errorRes = R.string.login_password_not_null;
-    } else if (AMUtils.validatePassword(loginPassword))
-    {
-      errorRes = R.string.login_password_length_error;
-    } else if (!isNetwork)
+    }
+//    else if (AMUtils.validatePassword(loginPassword))
+//    {
+//      errorRes = R.string.login_password_length_error;
+//    }
+    else if (!isNetwork)
     {
       errorRes = R.string.no_network;
     }
@@ -123,10 +125,15 @@ class LoginPresenter implements LoginContract.Presenter, InstallationListener
   /* 获取错误码 */
   private void errorCode(BmobException e)
   {
+    String errorMsg = e.getMessage();
     LogUtil.e(TAG, "onError: errorMsg = " + e.getMessage());
-    // TODO: 2017/1/10 code码需要提取
-    int code = e.getErrorCode();
-    showCode(code);
+    if (e.getErrorCode() == 9015)
+    {
+      int start = errorMsg.indexOf(":") + 1;
+      int end = errorMsg.indexOf(",");
+      String errorCode = errorMsg.substring(start, end);
+      showCode(Integer.valueOf(errorCode));
+    }
   }
 
   /* 根据错误码显示异常信息 */

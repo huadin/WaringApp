@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import com.huadin.base.BaseActivity;
+import com.huadin.userinfo.address.AddressFragment;
+import com.huadin.userinfo.address.AddressPresenter;
 import com.huadin.userinfo.password.UpdatePasswordFragment;
 import com.huadin.userinfo.password.UpdatePasswordPresenter;
 import com.huadin.userinfo.phone.UpdatePhoneFragment;
@@ -18,9 +20,6 @@ import butterknife.ButterKnife;
 
 public class UpdateUserInfoActivity extends BaseActivity
 {
-
-  private int mTitleResId;
-
   @BindView(R.id.top_toolbar)
   Toolbar mToolbar;
 
@@ -34,7 +33,7 @@ public class UpdateUserInfoActivity extends BaseActivity
 
   private void initFragment()
   {
-    mTitleResId = getIntent().getIntExtra(TITLE_KEY, 0);
+    int mTitleResId = getIntent().getIntExtra(TITLE_KEY, 0);
     switch (mTitleResId)
     {
       case R.string.password_modify:
@@ -62,6 +61,12 @@ public class UpdateUserInfoActivity extends BaseActivity
         ReleaseFragment releaseFragment = ReleaseFragment.newInstance();
         loadRootFragment(R.id.update_user_info_fragment_ground,releaseFragment);
         new ReleasePresenter(releaseFragment);
+        break;
+      case R.string.user_info_waring_address:
+        //预警地址
+        AddressFragment addressFragment = AddressFragment.newInstance();
+        loadRootFragment(R.id.update_user_info_fragment_ground,addressFragment);
+        new AddressPresenter(addressFragment);
         break;
 
     }

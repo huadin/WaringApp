@@ -80,4 +80,6 @@
     <dimen name="release_fragment_margin_top">16dp</dimen>
     <dimen name="release_fragment_content_min_height">80dp</dimen>
 
+    <dimen name="address_area_margin">16dp</dimen>
+
 </resources>

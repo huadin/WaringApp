@@ -6,6 +6,8 @@ public class Person extends BmobUser
 {
   private boolean userPermission;
   private boolean isUserNameChange;
+  private String areaId;
+  private String address;
 
   public boolean isUserNameChange()
   {
@@ -27,4 +29,23 @@ public class Person extends BmobUser
     this.userPermission = userPermission;
   }
 
+  public String getAreaId()
+  {
+    return areaId;
+  }
+
+  public void setAreaId(String areaId)
+  {
+    this.areaId = areaId;
+  }
+
+  public String getAddress()
+  {
+    return address;
+  }
+
+  public void setAddress(String address)
+  {
+    this.address = address;
+  }
 }
