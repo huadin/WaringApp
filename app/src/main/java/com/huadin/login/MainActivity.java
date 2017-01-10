@@ -18,6 +18,7 @@ import com.huadin.eventbus.EventCenter;
 import com.huadin.fault.ReportFragment;
 import com.huadin.fault.ReportPresenter;
 import com.huadin.interf.OnFragmentOpenDrawerListener;
+import com.huadin.permission.PermissionManager;
 import com.huadin.setting.SettingFragment;
 import com.huadin.urgent.UrgentFragment;
 import com.huadin.urgent.UrgentPresenter;
@@ -180,7 +181,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     if (loginFragment == null)
     {
       loginFragment = LoginFragment.newInstance();
-      new LoginPresenter(loginFragment);
+      new LoginPresenter(mContext, loginFragment);
       popTo(loginFragment);
     } else
     {

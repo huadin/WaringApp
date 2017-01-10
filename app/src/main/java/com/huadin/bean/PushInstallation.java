@@ -12,6 +12,8 @@ public class PushInstallation extends BmobInstallation
   private String pushUserName;
   //推送条件,地区Id
   private String areaId;
+  //设备识别码，预留
+  private String pushDevicesId;
 
 
   public String getPushUserName()
@@ -32,5 +34,15 @@ public class PushInstallation extends BmobInstallation
   public void setAreaId(String areaId)
   {
     this.areaId = areaId;
+  }
+
+  public String getPushDevicesId()
+  {
+    return pushDevicesId;
+  }
+
+  public void setPushDevicesId(String pushDevicesId)
+  {
+    this.pushDevicesId = pushDevicesId;
   }
 }

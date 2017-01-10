@@ -80,7 +80,7 @@ public class UserFragment extends BaseFragment
     if (mPerson == null) return;
     mLoginAccount.setText(mPerson.getUsername());
     mUserPhone.setText(mPerson.getMobilePhoneNumber());
-
+    // TODO: 2017/1/10 展示关闭更改用户名次数限制
 //    if (mPerson.isUserNameChange())
 //    {
 //      // 不可点击
@@ -97,7 +97,7 @@ public class UserFragment extends BaseFragment
       case R.id.user_login_account:
         //设置用户名
         UpdateUserNameFragment fragment = UpdateUserNameFragment.newInstance();
-        new UpdateUserNamePresenter(fragment,mContext);
+        new UpdateUserNamePresenter(fragment, mContext);
         start(fragment);
         break;
     }

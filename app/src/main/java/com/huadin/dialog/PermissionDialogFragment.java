@@ -17,10 +17,15 @@ public class PermissionDialogFragment extends DialogFragment
 {
 
   private OnPermissionListener listener;
+  private static final String PERMISSION_DIALOG_KEY = "PERMISSION_DIALOG_KEY";
 
-  public static PermissionDialogFragment newInstance()
+  public static PermissionDialogFragment newInstance(String title)
   {
-    return new PermissionDialogFragment();
+    Bundle args = new Bundle();
+    args.putString(PERMISSION_DIALOG_KEY, title);
+    PermissionDialogFragment dialogFragment = new PermissionDialogFragment();
+    dialogFragment.setArguments(args);
+    return dialogFragment;
   }
 
   @NonNull
@@ -52,10 +57,7 @@ public class PermissionDialogFragment extends DialogFragment
               @Override
               public void onClick(DialogInterface dialogInterface, int which)
               {
-                if (listener != null)
-                {
-                  listener.dialogNegative();
-                }
+                dialog.cancel();
               }
             });
 
@@ -67,8 +69,6 @@ public class PermissionDialogFragment extends DialogFragment
   public interface OnPermissionListener
   {
     void dialogPositive();
-
-    void dialogNegative();
   }
 
   public void setOnPermissionListener(OnPermissionListener listener)

@@ -1,8 +1,12 @@
 package com.huadin.login;
 
 
+import android.content.Context;
+
+import com.huadin.base.InstallationListener;
 import com.huadin.bean.Person;
 import com.huadin.util.AMUtils;
+import com.huadin.util.InstallationUtil;
 import com.huadin.util.LogUtil;
 import com.huadin.util.MD5util;
 import com.huadin.waringapp.R;
@@ -18,15 +22,18 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * 登录
  */
 
-class LoginPresenter implements LoginContract.Presenter
+class LoginPresenter implements LoginContract.Presenter, InstallationListener
 {
 
   private static final String TAG = "LoginPresenter";
   private LoginContract.View mLoginView;
+  private Context mContext;
 
-  LoginPresenter(LoginContract.View loginView)
+  LoginPresenter(Context context, LoginContract.View loginView)
   {
     this.mLoginView = loginView;
+    this.mContext = context;
+    mContext = checkNotNull(context, "context cannot be null");
     mLoginView = checkNotNull(loginView, "loginView cannot be null");
     mLoginView.setPresenter(this);
   }
@@ -54,7 +61,8 @@ class LoginPresenter implements LoginContract.Presenter
     login(loginName);
   }
 
-  private void login(String loginName)
+  /* 执行登录 */
+  private void login(final String loginName)
   {
     int errorRes = 0;
 
@@ -95,33 +103,54 @@ class LoginPresenter implements LoginContract.Presenter
       @Override
       public void onError(Throwable throwable)
       {
-
+        //登录异常
         BmobException e = new BmobException(throwable);
-        String errorMsg = e.getMessage();
-        if (e.getErrorCode() == 9015)
-        {
-          int start = errorMsg.indexOf(":") + 1;
-          int end = errorMsg.indexOf(",");
-          String errorCode = errorMsg.substring(start, end);
-
-          switch (Integer.valueOf(errorCode))
-          {
-            case 101:
-              mLoginView.hindLoading();
-              mLoginView.loginError(R.string.error_code_101);
-              break;
-          }
-        }
-        LogUtil.e(TAG, "onError: errorMsg = " + errorMsg);
+        errorCode(e);
       }
 
       @Override
       public void onNext(Person person)
       {
-        mLoginView.hindLoading();
-        mLoginView.loginSuccess();
+        //登录成功，绑定推送
+        InstallationUtil.newInstance()
+                .with(mContext)
+                .addInstallationListener(LoginPresenter.this)
+                .bindingPush(loginName);
       }
     });
   }
 
+  /* 获取错误码 */
+  private void errorCode(BmobException e)
+  {
+    LogUtil.e(TAG, "onError: errorMsg = " + e.getMessage());
+    int code = e.getErrorCode();
+    showCode(code);
+  }
+
+  /* 根据错误码显示异常信息 */
+  private void showCode(int code)
+  {
+    mLoginView.hindLoading();
+    switch (code)
+    {
+      case 101:
+        mLoginView.hindLoading();
+        mLoginView.loginError(R.string.error_code_101);
+        break;
+    }
+  }
+
+  @Override
+  public void installationSuccess()
+  {
+    mLoginView.hindLoading();
+    mLoginView.loginSuccess();
+  }
+
+  @Override
+  public void installationError(int code)
+  {
+    showCode(code);
+  }
 }

@@ -1,5 +1,9 @@
 package com.huadin.login;
 
+import android.Manifest;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,7 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.huadin.base.BaseFragment;
+import com.huadin.dialog.PermissionDialogFragment;
 import com.huadin.eventbus.EventCenter;
+import com.huadin.permission.PermissionListener;
+import com.huadin.permission.PermissionManager;
 import com.huadin.util.AMUtils;
 import com.huadin.waringapp.R;
 import com.huadin.widget.ClearEditText;
@@ -25,7 +32,7 @@ import butterknife.OnClick;
 import static cn.bmob.v3.Bmob.getApplicationContext;
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class LoginFragment extends BaseFragment implements LoginContract.View, TextWatcher
+public class LoginFragment extends BaseFragment implements LoginContract.View, TextWatcher, PermissionListener, PermissionDialogFragment.OnPermissionListener
 {
 
   @BindView(R.id.login_name)
@@ -34,9 +41,10 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, T
   ClearEditText mPasswordET;
   @BindView(R.id.top_toolbar)
   Toolbar mToolbar;
-
+  private final int mPermissionCode = 0x21;
 
   private LoginContract.Presenter mPresenter;
+  private PermissionManager mManager;
 
   public static LoginFragment newInstance()
   {
@@ -121,7 +129,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, T
     {
       //登录
       case R.id.login_app:
-        mPresenter.start();
+//        checkPermission();
         break;
       //注册
       case R.id.to_register:
@@ -157,5 +165,62 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, T
   public void afterTextChanged(Editable s)
   {
 
+  }
+
+  /* 检查权限 */
+  private void checkPermission()
+  {
+    mManager = PermissionManager.with(this)
+            .addRequestCode(mPermissionCode)
+            .permissions(Manifest.permission.READ_PHONE_STATE)
+            .setPermissionListener(this)
+            .request();
+  }
+
+  @Override
+  public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+  {
+    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    switch (requestCode)
+    {
+      case mPermissionCode:
+        mManager.onPermissionResult(permissions, grantResults);
+        break;
+    }
+  }
+
+  //授权后回调
+  @Override
+  public void onGranted()
+  {
+    //登录
+    mPresenter.start();
+  }
+
+  /**
+   * 显示去设置权限的 dialog
+   *
+   * @param permissions 返回需要显示说明的权限数组
+   */
+  @Override
+  public void onShowRationale(String permissions)
+  {
+    PermissionDialogFragment dialogFragment = PermissionDialogFragment.newInstance(getString(R.string.read_phone_state));
+    dialogFragment.setOnPermissionListener(this);
+    dialogFragment.show(getFragmentManager(),getClass().getSimpleName());
+  }
+
+  @Override
+  public void dialogPositive()
+  {
+    //进入设置
+    Intent localIntent = new Intent();
+    localIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    if (Build.VERSION.SDK_INT > 9)
+    {
+      localIntent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
+      localIntent.setData(Uri.fromParts("package", mContext.getPackageName(), null));
+    }
+    startActivity(localIntent);
   }
 }

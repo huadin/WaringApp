@@ -28,7 +28,7 @@ public class WelcomeActivity extends BaseActivity implements PermissionListener,
 
   private static final String TAG = "WelcomeActivity";
 
-  private String[] needPermissions = {
+  private String[] mNeedPermission = {
           Manifest.permission.ACCESS_COARSE_LOCATION,
           Manifest.permission.ACCESS_FINE_LOCATION,
           Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -63,7 +63,7 @@ public class WelcomeActivity extends BaseActivity implements PermissionListener,
   {
     manager = PermissionManager.with(this)
             .addRequestCode(permissionCode)
-            .permissions(needPermissions)
+            .permissions(mNeedPermission)
             .setPermissionListener(this)
             .request();
   }
