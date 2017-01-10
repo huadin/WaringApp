@@ -124,6 +124,7 @@ class LoginPresenter implements LoginContract.Presenter, InstallationListener
   private void errorCode(BmobException e)
   {
     LogUtil.e(TAG, "onError: errorMsg = " + e.getMessage());
+    // TODO: 2017/1/10 code码需要提取
     int code = e.getErrorCode();
     showCode(code);
   }

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/release_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/release_fragment_margin_top"
+        android:hint="@string/release_fragment_msg_title"/>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/release_fragment_margin_top"
+        android:layout_marginLeft="@dimen/release_fragment_margin_top"
+        android:layout_marginRight="@dimen/release_fragment_margin_top"
+        android:layout_marginStart="@dimen/release_fragment_margin_top"
+        app:counterEnabled="true"
+        app:counterMaxLength="200"
+        app:hintEnabled="false">
+
+        <EditText
+            android:id="@+id/release_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:hint="@string/release_fragment_msg_content"
+            android:maxLength="200"
+            android:minHeight="@dimen/release_fragment_content_min_height"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/release_msg_submit"
+        style="@style/login_register_submit_button"
+        android:layout_margin="@dimen/release_fragment_margin_top"
+        android:text="@string/report_submit"/>
+
+
+</LinearLayout>

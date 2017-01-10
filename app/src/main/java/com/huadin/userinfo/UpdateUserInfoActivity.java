@@ -8,6 +8,8 @@ import com.huadin.userinfo.password.UpdatePasswordFragment;
 import com.huadin.userinfo.password.UpdatePasswordPresenter;
 import com.huadin.userinfo.phone.UpdatePhoneFragment;
 import com.huadin.userinfo.phone.UpdatePhonePresenter;
+import com.huadin.userinfo.release.ReleaseFragment;
+import com.huadin.userinfo.release.ReleasePresenter;
 import com.huadin.userinfo.user.UserFragment;
 import com.huadin.waringapp.R;
 
@@ -43,14 +45,23 @@ public class UpdateUserInfoActivity extends BaseActivity
         break;
 
       case R.string.user_info_phone:
+        //更换手机号码
         UpdatePhoneFragment phoneFragment = UpdatePhoneFragment.newInstance();
         loadRootFragment(R.id.update_user_info_fragment_ground,phoneFragment);
         new UpdatePhonePresenter(phoneFragment);
         break;
 
       case R.string.user_info_user:
+        //设置用户名
         UserFragment userFragment = UserFragment.newInstance();
         loadRootFragment(R.id.update_user_info_fragment_ground,userFragment);
+        break;
+
+      case R.string.release_info:
+        //信息发布
+        ReleaseFragment releaseFragment = ReleaseFragment.newInstance();
+        loadRootFragment(R.id.update_user_info_fragment_ground,releaseFragment);
+        new ReleasePresenter(releaseFragment);
         break;
 
     }

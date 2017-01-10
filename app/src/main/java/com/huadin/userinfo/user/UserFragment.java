@@ -81,11 +81,11 @@ public class UserFragment extends BaseFragment
     mLoginAccount.setText(mPerson.getUsername());
     mUserPhone.setText(mPerson.getMobilePhoneNumber());
     // TODO: 2017/1/10 展示关闭更改用户名次数限制
-//    if (mPerson.isUserNameChange())
-//    {
-//      // 不可点击
-//      mUserNameLayout.setClickable(false);
-//    }
+    if (mPerson.isUserNameChange())
+    {
+      // 不可点击
+      mUserNameLayout.setClickable(false);
+    }
   }
 
 

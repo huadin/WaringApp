@@ -132,16 +132,21 @@
     <string name="report_info">停电报修</string>
     <string name="release_info">信息发布</string>
     <string name="is_out_current_user">是否退出当前账号?</string>
+
     <string name="user_info_old_password">请输入原密码</string>
     <string name="user_info_new_password">请输入新密码</string>
     <string name="update_password_submit">提交</string>
     <string name="update_password_success">修改成功</string>
+
     <string name="hint_new_phone">新手机号</string>
     <string name="user_info_code">验证码</string>
     <string name="user_login_account">登录号</string>
     <string name="user_binding_phone">手机号</string>
     <string name="user_name_change_prompt">登录名由字母和数字组成,并且只能该改一次</string>
     <string name="update_user_name_error">用户名不合法</string>
-
+    <!--发布信息-->
+    <string name="release_fragment_msg_title">标题</string>
+    <string name="release_fragment_msg_content">请输入内容</string>
+    <string name="release_msg_title_empty">请输入标题</string>
 
 </resources>
