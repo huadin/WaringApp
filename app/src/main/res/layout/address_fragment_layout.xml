@@ -3,19 +3,68 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:orientation="vertical">
 
-    <Spinner
-        android:id="@+id/address_area_id"
+    <!--地区-->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/address_area_margin"/>
+        android:layout_height="@dimen/address_area_layout_height"
+        android:layout_margin="@dimen/address_area_margin"
+        android:background="@drawable/area_background_shape"
+        android:orientation="horizontal">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/address_area_spinner_margin"
+            android:contentDescription="@null"
+            android:src="@drawable/icon_address_spinner_72px"/>
+
+        <Spinner
+            android:id="@+id/address_area_id"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/address_area_spinner_margin"
+            android:layout_weight="1"
+            android:prompt="@string/address_area_prompt"/>
+
+    </LinearLayout>
+
+    <!--详细地址-->
     <EditText
         android:id="@+id/address_msg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/address_area_margin"
+        android:layout_marginLeft="@dimen/address_area_margin"
+        android:layout_marginRight="@dimen/address_area_margin"
+        android:layout_marginStart="@dimen/address_area_margin"
+        android:background="@drawable/area_background_shape"
+        android:gravity="center_vertical"
         android:hint="@string/detailed_address"
-        android:layout_margin="@dimen/address_area_margin"/>
+        android:minHeight="@dimen/address_area_layout_height"
+        android:padding="@dimen/address_area_edit_padding"
+        android:paddingStart="@dimen/address_area_spinner_margin"/>
+
+    <!--提示-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/address_area_margin"
+        android:layout_marginStart="@dimen/address_area_margin"
+        android:layout_marginTop="@dimen/address_area_edit_padding"
+        android:text="@string/system_address_prompt"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_12"/>
+
+    <!--提交-->
+    <Button
+        android:id="@+id/address_submit"
+        style="@style/login_register_submit_button"
+        android:layout_margin="@dimen/address_area_margin"
+        android:text="@string/address_submit"/>
 
 </LinearLayout>

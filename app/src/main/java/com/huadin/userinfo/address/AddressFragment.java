@@ -3,21 +3,31 @@ package com.huadin.userinfo.address;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.huadin.adapter.AreaAdapter;
 import com.huadin.base.BaseFragment;
+import com.huadin.bean.Person;
+import com.huadin.database.City;
+import com.huadin.util.LogUtil;
 import com.huadin.util.PullUtil;
 import com.huadin.waringapp.R;
 
+import org.litepal.crud.DataSupport;
+
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import cn.bmob.v3.BmobUser;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -29,10 +39,13 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class AddressFragment extends BaseFragment implements AddressContract.View
 {
   @BindView(R.id.address_area_id)
-  Spinner mAddressAreaId;
+  Spinner mAddressSpinner;
   @BindView(R.id.address_msg)
   EditText mAddressDetailed;
+
+  private static final String TAG = "AddressFragment";
   private AddressContract.Presenter mPresenter;
+  private List<City> mCityList;
 
   public static AddressFragment newInstance()
   {
@@ -48,14 +61,20 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
   public void onAttach(Context context)
   {
     super.onAttach(context);
-    try
+
+    mCityList = DataSupport.findAll(City.class);
+    if (mCityList == null || mCityList.size() == 0)
     {
-      InputStream inputStream = mContext.getAssets().open(getString(R.string.pull_xml));
-      PullUtil.pullParser(inputStream);
-      // TODO: 2017/1/11 没有关闭
-    } catch (IOException e)
-    {
-      e.printStackTrace();
+      try (
+              //自动关闭
+              InputStream inputStream = mContext.getAssets().open(getString(R.string.pull_xml))
+      )
+      {
+        mCityList = PullUtil.pullParser(inputStream);
+      } catch (IOException e)
+      {
+        e.printStackTrace();
+      }
     }
   }
 
@@ -71,14 +90,38 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
   {
     View view = getViewResId(inflater, container, R.layout.address_fragment_layout);
     ButterKnife.bind(this, view);
+    LogUtil.i(TAG, "mCityList = " + mCityList);
+    initAdapter();
     return view;
   }
 
-  @Override
-  public String getAreaId()
+  private void initAdapter()
   {
+    AreaAdapter areaAdapter = new AreaAdapter(mContext, mCityList);
+    mAddressSpinner.setAdapter(areaAdapter);
 
-    return null;
+    //显示服务器上的数据
+    Person person = BmobUser.getCurrentUser(Person.class);
+    String areaName = person.getAreaName();
+    String address = person.getAddress();
+    if (!TextUtils.isEmpty(areaName))
+    {
+      for (int i = 0; i < mCityList.size(); i++)
+      {
+        if (areaName.equals(mCityList.get(i).getAreaName()))
+        {
+          mAddressSpinner.setSelection(i);
+        }
+      }
+      mAddressDetailed.setText(address);
+    }
+  }
+
+  @Override
+  public City getCity()
+  {
+    int position = mAddressSpinner.getSelectedItemPosition();
+    return mCityList.get(position);
   }
 
   @Override
@@ -102,7 +145,9 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
   @Override
   public void updateSuccess()
   {
+    // TODO: 2017/1/11 成功后启动预警服务,覆盖掉设置中的预警地址
     //保存成功
+    showMessage(R.string.address_submit_success);
     mContext.finish();
   }
 
@@ -110,7 +155,13 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
   public void updateError(int errorId)
   {
     //保存异常
-    showLoading(errorId);
+    showMessage(errorId);
+  }
+
+  @Override
+  public boolean networkState()
+  {
+    return isNetwork();
   }
 
   @Override
@@ -118,5 +169,11 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
   {
     mPresenter = presenter;
     mPresenter = checkNotNull(presenter, "presenter cannot be null");
+  }
+
+  @OnClick(R.id.address_submit)
+  public void onClick()
+  {
+    mPresenter.start();
   }
 }

@@ -89,6 +89,12 @@ public class UpdatePasswordFragment extends BaseFragment implements UpdatePasswo
     showMessage(errorId);
   }
 
+  @Override
+  public boolean networkState()
+  {
+    return isNetwork();
+  }
+
 
   @Override
   public void setPresenter(UpdatePasswordContract.Presenter presenter)

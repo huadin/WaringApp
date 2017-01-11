@@ -36,7 +36,7 @@ public class ReleasePresenter implements ReleaseContract.Presenter
   {
     String title = mReleaseView.releaseTitle();
     final String content = mReleaseView.releaseContent();
-
+    boolean isNetwork = mReleaseView.networkState();
     int errorId = 0;
     if (AMUtils.isEmpty(title))
     {
@@ -44,6 +44,9 @@ public class ReleasePresenter implements ReleaseContract.Presenter
     } else if (AMUtils.isEmpty(content))
     {
       errorId = R.string.release_fragment_msg_content;
+    }else if (!isNetwork)
+    {
+      errorId = R.string.no_network;
     }
 
     if (errorId != 0)

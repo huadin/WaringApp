@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <litepal>
-    <dbname value="application.db" ></dbname>
+    <dbname value="application.db"/>
 
-    <version value="1" ></version>
+    <version value="2" />
 
     <list>
-        <mapping class="com.huadin.database.User"></mapping>
+        <mapping class="com.huadin.database.City"/>
     </list>
 
 </litepal>

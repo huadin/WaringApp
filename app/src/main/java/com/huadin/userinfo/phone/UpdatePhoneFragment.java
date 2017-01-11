@@ -112,12 +112,6 @@ public class UpdatePhoneFragment extends BaseFragment implements UpdatePhoneCont
   }
 
   @Override
-  public boolean networkIsAvailable()
-  {
-    return isNetwork();
-  }
-
-  @Override
   public void showLoading()
   {
     showLoading(R.string.register_loading);
@@ -141,6 +135,12 @@ public class UpdatePhoneFragment extends BaseFragment implements UpdatePhoneCont
   public void updateError(int errorId)
   {
     showMessage(errorId);
+  }
+
+  @Override
+  public boolean networkState()
+  {
+    return isNetwork();
   }
 
   @Override

@@ -36,7 +36,7 @@ public class UpdatePasswordPresenter implements UpdatePasswordContract.Presenter
 
     String oldPassword = mPasswordView.oldPassword();
     String newPassword = mPasswordView.newPassword();
-
+    boolean isNetwork = mPasswordView.networkState();
     if (AMUtils.isEmpty(oldPassword))
     {
       errorId = R.string.user_info_old_password;
@@ -46,6 +46,9 @@ public class UpdatePasswordPresenter implements UpdatePasswordContract.Presenter
     } else if (AMUtils.validatePassword(newPassword))
     {
       errorId = R.string.login_password_length_error;
+    }else if (!isNetwork)
+    {
+      errorId = R.string.no_network;
     }
 
     if (errorId != 0)

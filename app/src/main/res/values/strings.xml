@@ -152,5 +152,10 @@
     <string name="detailed_address">请输入详细地址</string>
     <string name="select_area_id">请选择地区</string>
     <string name="pull_xml">company_xml.xml</string>
+    <string name="release_msg_success">发布成功</string>
+    <string name="address_submit_success">提交成功</string>
+    <string name="address_submit">提交</string>
+    <string name="address_area_prompt">请选择区域</string>
+    <string name="system_address_prompt">设置此地址后,会覆盖设置中预警地址!!!</string>
 
 </resources>

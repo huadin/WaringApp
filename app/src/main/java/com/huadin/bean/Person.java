@@ -6,6 +6,7 @@ public class Person extends BmobUser
 {
   private boolean userPermission;
   private boolean isUserNameChange;
+  private String areaName;
   private String areaId;
   private String address;
 
@@ -47,5 +48,15 @@ public class Person extends BmobUser
   public void setAddress(String address)
   {
     this.address = address;
+  }
+
+  public String getAreaName()
+  {
+    return areaName;
+  }
+
+  public void setAreaName(String areaName)
+  {
+    this.areaName = areaName;
   }
 }

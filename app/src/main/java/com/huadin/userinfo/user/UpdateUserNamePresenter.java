@@ -35,10 +35,19 @@ class UpdateUserNamePresenter implements UserContract.Presenter, InstallationLis
   public void start()
   {
     final String userName = mUserView.updateUserName();
-
+    boolean isNetwork = mUserView.networkState();
+    int errorId = 0;
     if (!AMUtils.isUserName(userName))
     {
-      mUserView.updateError(R.string.update_user_name_error);
+      errorId = R.string.update_user_name_error;
+    }else if (!isNetwork)
+    {
+      errorId = R.string.no_network;
+    }
+
+    if (errorId != 0)
+    {
+      mUserView.updateError(errorId);
       return;
     }
 

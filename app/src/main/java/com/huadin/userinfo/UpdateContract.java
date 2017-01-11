@@ -31,5 +31,12 @@ public interface UpdateContract
      * 修改失败
      */
     void updateError(int errorId);
+
+    /**
+     * 网络连接状态
+     *
+     * @return
+     */
+    boolean networkState();
   }
 }

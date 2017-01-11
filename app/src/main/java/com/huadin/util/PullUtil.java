@@ -2,6 +2,9 @@ package com.huadin.util;
 
 import android.util.Xml;
 
+import com.huadin.database.City;
+
+import org.litepal.crud.DataSupport;
 import org.xmlpull.v1.XmlPullParser;
 
 import java.io.InputStream;
@@ -17,40 +20,59 @@ public class PullUtil
 {
   private static final String TAG = "PullUtil";
 
-  public static void pullParser(InputStream inputStream)
+  /**
+   * 解析xml文件
+   *
+   * @param inputStream InputStream
+   */
+  public static List<City> pullParser(InputStream inputStream)
   {
     XmlPullParser parser = Xml.newPullParser();
+    DataSupport.deleteAll(City.class);
+    List<City> cityList = new ArrayList<>();
     try
     {
       parser.setInput(inputStream, "UTF-8");
-      int type = parser.getEventType();
-      List<String> sList = null;
-      while (type != XmlPullParser.END_DOCUMENT)
+      int eventType = parser.getEventType();
+      String areaId = "";
+      String areaName = "";
+      while (eventType != XmlPullParser.END_DOCUMENT)
       {
-        switch (type)
+        String nodeName = parser.getName();
+        switch (eventType)
         {
           case XmlPullParser.START_DOCUMENT:
-            sList = new ArrayList<>();
+
             break;
           case XmlPullParser.START_TAG:
-            if (parser.getName().equals("id"))
+            if ("name".equals(nodeName))
             {
-              type = parser.next();
-              sList.add(parser.getText());
+              areaName = parser.nextText();
+            } else if ("id".equals(nodeName))
+            {
+              areaId = parser.nextText();
             }
             break;
 
           case XmlPullParser.END_TAG:
-
+            if ("area".equals(nodeName))
+            {
+              City city = new City();
+              city.setAreaName(areaName);
+              city.setAreaId(areaId);
+              cityList.add(city);
+              DataSupport.saveAll(cityList);
+            }
             break;
         }
-        type = parser.next();
+        eventType = parser.next();
       }
-      if (sList != null) LogUtil.i(TAG, "sList = " + sList.toString());
+
+      return cityList;
     } catch (Exception e)
     {
       e.printStackTrace();
     }
-
+    return null;
   }
 }

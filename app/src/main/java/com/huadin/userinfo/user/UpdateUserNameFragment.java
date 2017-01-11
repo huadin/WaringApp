@@ -82,6 +82,12 @@ public class UpdateUserNameFragment extends BaseFragment implements UserContract
   }
 
   @Override
+  public boolean networkState()
+  {
+    return isNetwork();
+  }
+
+  @Override
   public void setPresenter(UserContract.Presenter presenter)
   {
     this.mPresenter = presenter;

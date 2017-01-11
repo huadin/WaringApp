@@ -1,5 +1,6 @@
 package com.huadin.userinfo.address;
 
+import com.huadin.database.City;
 import com.huadin.userinfo.UpdateContract;
 
 /**
@@ -21,7 +22,7 @@ public interface AddressContract
      *
      * @return String
      */
-    String getAreaId();
+    City getCity();
 
     /**
      * 详细地址

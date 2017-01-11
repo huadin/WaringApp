@@ -10,6 +10,7 @@
     <dimen name="toast_relative_layout_margin">10dp</dimen>
     <dimen name="toast_view_height">1px</dimen>
     <dimen name="toast_text_view_text_size">14sp</dimen>
+    <dimen name="text_size_12">12sp</dimen>
     <dimen name="text_size_14">14sp</dimen>
     <dimen name="text_size_18">18sp</dimen>
     <dimen name="text_size_22">22sp</dimen>
@@ -80,6 +81,10 @@
     <dimen name="release_fragment_margin_top">16dp</dimen>
     <dimen name="release_fragment_content_min_height">80dp</dimen>
 
+    <!--预警地址-->
     <dimen name="address_area_margin">16dp</dimen>
+    <dimen name="address_area_layout_height">48dp</dimen>
+    <dimen name="address_area_spinner_margin">10dp</dimen>
+    <dimen name="address_area_edit_padding">5dp</dimen>
 
 </resources>

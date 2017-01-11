@@ -52,13 +52,6 @@ interface UpdatePhoneContract
      */
     void codeOnTick(long m);
 
-    /**
-     * 网络连接
-     *
-     * @return boolean
-     */
-    boolean networkIsAvailable();
-
   }
 
 }

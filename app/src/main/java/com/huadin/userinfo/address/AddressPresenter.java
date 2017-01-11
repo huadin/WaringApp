@@ -1,6 +1,7 @@
 package com.huadin.userinfo.address;
 
 import com.huadin.bean.Person;
+import com.huadin.database.City;
 import com.huadin.util.AMUtils;
 import com.huadin.waringapp.R;
 
@@ -29,8 +30,10 @@ public class AddressPresenter implements AddressContract.Presenter
   public void start()
   {
     String detailedAddress = mAddressView.getDetailedAddress();
-    String areaId = mAddressView.getAreaId();
-
+    City city = mAddressView.getCity();
+    String areaName = city.getAreaName();
+    String areaId = city.getAreaId();
+    boolean isNetwork = mAddressView.networkState();
     int errorId = 0;
 
     if (AMUtils.isEmpty(areaId))
@@ -39,6 +42,9 @@ public class AddressPresenter implements AddressContract.Presenter
     } else if (AMUtils.isEmpty(detailedAddress))
     {
       errorId = R.string.detailed_address;
+    } else if (!isNetwork)
+    {
+      errorId = R.string.no_network;
     }
 
     if (errorId != 0)
@@ -48,6 +54,7 @@ public class AddressPresenter implements AddressContract.Presenter
     }
 
     Person person = new Person();
+    person.setAreaName(areaName);
     person.setAreaId(areaId);
     person.setAddress(detailedAddress);
 

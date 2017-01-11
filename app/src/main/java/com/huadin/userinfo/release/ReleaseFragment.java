@@ -89,6 +89,7 @@ public class ReleaseFragment extends BaseFragment implements ReleaseContract.Vie
   public void updateSuccess()
   {
     //发布成功
+    showMessage(R.string.release_msg_success);
     mContext.finish();
   }
 
@@ -96,6 +97,12 @@ public class ReleaseFragment extends BaseFragment implements ReleaseContract.Vie
   public void updateError(int errorId)
   {
     showMessage(errorId);
+  }
+
+  @Override
+  public boolean networkState()
+  {
+    return isNetwork();
   }
 
   @Override

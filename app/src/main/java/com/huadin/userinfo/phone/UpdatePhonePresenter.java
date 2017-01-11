@@ -51,7 +51,7 @@ public class UpdatePhonePresenter implements UpdatePhoneContract.Presenter
   public void getCode()
   {
     String phone = mPhoneView.getOldPhone();
-    boolean isNetwork = mPhoneView.networkIsAvailable();
+    boolean isNetwork = mPhoneView.networkState();
 
     if (!isNetwork)
     {
@@ -88,7 +88,7 @@ public class UpdatePhonePresenter implements UpdatePhoneContract.Presenter
     String oldPhone = mPhoneView.getOldPhone();
     newPhone = mPhoneView.getNewPhone();
 
-    boolean isNetwork = mPhoneView.networkIsAvailable();
+    boolean isNetwork = mPhoneView.networkState();
     int errorId = 0;
 
     if (!isNetwork)
