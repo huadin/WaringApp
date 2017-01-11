@@ -8,11 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.huadin.base.BaseFragment;
+import com.huadin.userinfo.address.AddressFragment;
 import com.huadin.waringapp.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import me.yokeyword.fragmentation.SupportFragment;
 
 /**
  * 设置
@@ -40,7 +42,7 @@ public class SettingFragment extends BaseFragment
   {
     View view = getViewResId(inflater, container, R.layout.setting_fragment_layout);
     ButterKnife.bind(this, view);
-    initToolbarHome(mToolbar, R.string.setting, getActivity());
+    initToolbarHome(mToolbar, R.string.setting, mContext);
     return view;
   }
 
@@ -52,6 +54,7 @@ public class SettingFragment extends BaseFragment
     switch (view.getId())
     {
       case R.id.address_linear_layout:
+        startAddressFragment();//预警
         break;
       case R.id.msg_linear_layout:
         break;
@@ -60,6 +63,19 @@ public class SettingFragment extends BaseFragment
       case R.id.feedback_linear_layout:
         break;
 
+    }
+  }
+
+  /**
+   * 启动预警地址
+   */
+  private void startAddressFragment()
+  {
+    AddressFragment addressFragment = findFragment(AddressFragment.class);
+    if (addressFragment == null)
+    {
+      addressFragment = AddressFragment.newInstance(getString(R.string.setting_info_flag_key));
+      start(addressFragment, SupportFragment.SINGLETASK);
     }
   }
 }

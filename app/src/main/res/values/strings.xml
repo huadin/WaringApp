@@ -157,5 +157,7 @@
     <string name="address_submit">提交</string>
     <string name="address_area_prompt">请选择区域</string>
     <string name="system_address_prompt">设置此地址后,会覆盖设置中预警地址!!!</string>
+    <string name="user_info_flag_key">USER_FLAG_KEY</string><!--预警中 flag 的 key-->
+    <string name="setting_info_flag_key">SETTING_FLAG_KEY</string><!--预警中 flag 的 key-->
 
 </resources>

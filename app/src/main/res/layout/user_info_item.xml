@@ -9,7 +9,7 @@
     <!--账户信息-->
     <LinearLayout
         style="@style/user_info_item_layout_parent"
-        android:elevation="@dimen/user_info_item_margin_2dp">
+        android:elevation="@dimen/elevation_height">
         <!--title-->
         <TextView
             style="@style/user_info_item_title_style"
@@ -45,9 +45,9 @@
             android:background="@drawable/layout_bottom_ripple_selector">
 
             <TextView
+                android:id="@+id/textView"
                 style="@style/user_info_item_style"
-                android:text="@string/user_info_waring_address"
-                android:id="@+id/textView"/>
+                android:text="@string/user_info_waring_address"/>
         </com.zhy.autolayout.AutoLinearLayout>
 
     </LinearLayout>
@@ -56,7 +56,7 @@
     <LinearLayout
         android:id="@+id/user_admin_info"
         style="@style/user_info_item_layout_parent"
-        android:elevation="@dimen/user_info_item_margin_2dp">
+        android:elevation="@dimen/elevation_height">
         <!--title-->
         <TextView
             style="@style/user_info_item_title_style"
@@ -104,7 +104,7 @@
     <!--安全信息-->
     <LinearLayout
         style="@style/user_info_item_layout_parent"
-        android:elevation="@dimen/user_info_item_margin_2dp">
+        android:elevation="@dimen/elevation_height">
         <!--title-->
         <TextView
             style="@style/user_info_item_title_style"
@@ -141,7 +141,7 @@
     <!--其他信息-->
     <LinearLayout
         style="@style/user_info_item_layout_parent"
-        android:elevation="@dimen/user_info_item_margin_2dp">
+        android:elevation="@dimen/elevation_height">
         <!--title-->
         <TextView
             style="@style/user_info_item_title_style"

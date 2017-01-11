@@ -12,7 +12,10 @@ public interface AddressContract
 {
   interface Presenter extends UpdateContract.Presenter
   {
-
+    /**
+     * 本地保存预警地址
+     */
+    void saveLocalAddress();
   }
 
   interface View extends UpdateContract.View<Presenter>

@@ -2,8 +2,11 @@ package com.huadin.userinfo.address;
 
 import com.huadin.bean.Person;
 import com.huadin.database.City;
+import com.huadin.database.WaringAddress;
 import com.huadin.util.AMUtils;
 import com.huadin.waringapp.R;
+
+import org.litepal.crud.DataSupport;
 
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.UpdateListener;
@@ -18,6 +21,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class AddressPresenter implements AddressContract.Presenter
 {
   private AddressContract.View mAddressView;
+  private String mAddressDetailed;
+  private String mAreaName;
+  private String mAreaId;
 
   public AddressPresenter(AddressContract.View addressView)
   {
@@ -26,37 +32,16 @@ public class AddressPresenter implements AddressContract.Presenter
     mAddressView.setPresenter(this);
   }
 
+  //网络保存个人信息中预警地址
   @Override
   public void start()
   {
-    String detailedAddress = mAddressView.getDetailedAddress();
-    City city = mAddressView.getCity();
-    String areaName = city.getAreaName();
-    String areaId = city.getAreaId();
-    boolean isNetwork = mAddressView.networkState();
-    int errorId = 0;
-
-    if (AMUtils.isEmpty(areaId))
-    {
-      errorId = R.string.select_area_id;
-    } else if (AMUtils.isEmpty(detailedAddress))
-    {
-      errorId = R.string.detailed_address;
-    } else if (!isNetwork)
-    {
-      errorId = R.string.no_network;
-    }
-
-    if (errorId != 0)
-    {
-      mAddressView.updateError(errorId);
-      return;
-    }
+    if (getCityInfo()) return;
 
     Person person = new Person();
-    person.setAreaName(areaName);
-    person.setAreaId(areaId);
-    person.setAddress(detailedAddress);
+    person.setAreaName(mAreaName);
+    person.setAreaId(mAreaId);
+    person.setAddress(mAddressDetailed);
 
     Person currentPerson = Person.getCurrentUser(Person.class);
     mAddressView.showLoading();
@@ -68,6 +53,9 @@ public class AddressPresenter implements AddressContract.Presenter
         mAddressView.hindLoading();
         if (e == null)
         {
+          //保存本地
+          saveAddress();
+
           mAddressView.updateSuccess();
         } else
         {
@@ -76,6 +64,53 @@ public class AddressPresenter implements AddressContract.Presenter
         }
       }
     });
+  }
+
+  //设置中预警地址,保存在本地
+  @Override
+  public void saveLocalAddress()
+  {
+    if (getCityInfo()) return;
+
+    saveAddress();
+
+  }
+
+  private boolean getCityInfo()
+  {
+    mAddressDetailed = mAddressView.getDetailedAddress();
+    City city = mAddressView.getCity();
+    mAreaName = city.getAreaName();
+    mAreaId = city.getAreaId();
+    boolean isNetwork = mAddressView.networkState();
+    int errorId = 0;
+
+    if (AMUtils.isEmpty(mAreaId))
+    {
+      errorId = R.string.select_area_id;
+    } else if (AMUtils.isEmpty(mAddressDetailed))
+    {
+      errorId = R.string.detailed_address;
+    } else if (!isNetwork)
+    {
+      errorId = R.string.no_network;
+    }
+
+    if (errorId != 0)
+    {
+      mAddressView.updateError(errorId);
+      return true;
+    }
+    return false;
+  }
+
+  //保存
+  private void saveAddress()
+  {
+    WaringAddress address = DataSupport.findFirst(WaringAddress.class);
+    address.setWaringArea(mAreaName);
+    address.setWaringAddress(mAddressDetailed);
+    address.save();
   }
 
   private void showCode(int code)
@@ -87,4 +122,6 @@ public class AddressPresenter implements AddressContract.Presenter
         break;
     }
   }
+
+
 }

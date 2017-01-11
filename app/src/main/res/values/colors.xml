@@ -24,11 +24,12 @@
     <!--线view颜色-->
     <color name="linear_view_color">#3C3F41</color>
     <!--ripple-->
-    <color name="ripple_bg_color">#3038B44A</color>
+    <color name="ripple_bg_color">#6038B44A</color>
     <!--设置中item layout 颜色-->
     <color name="linea_item_color">#FFFFFFFF</color>
     <!--layout bg-->
-    <color name="layout_bg">#15323232</color>
+    <color name="layout_bg">#F0F0F0</color>
+    <!--<color name="layout_bg">#15323232</color>-->
     <color name="layout_item_selector_check_true">#CBCBCB</color>
     <!--紧急信息-->
 

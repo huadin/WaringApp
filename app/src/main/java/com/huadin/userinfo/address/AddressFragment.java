@@ -3,6 +3,7 @@ package com.huadin.userinfo.address;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,6 @@ import com.huadin.adapter.AreaAdapter;
 import com.huadin.base.BaseFragment;
 import com.huadin.bean.Person;
 import com.huadin.database.City;
-import com.huadin.util.LogUtil;
 import com.huadin.util.PullUtil;
 import com.huadin.waringapp.R;
 
@@ -42,16 +42,19 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
   Spinner mAddressSpinner;
   @BindView(R.id.address_msg)
   EditText mAddressDetailed;
+  @BindView(R.id.top_toolbar)
+  Toolbar mToolbar;
 
   private static final String TAG = "AddressFragment";
+  private static final String FLAG_KEY = "FLAG_KEY";
   private AddressContract.Presenter mPresenter;
   private List<City> mCityList;
+  private String mFlag;
 
-  public static AddressFragment newInstance()
+  public static AddressFragment newInstance(String flag)
   {
-
     Bundle args = new Bundle();
-
+    args.putString(FLAG_KEY, flag);
     AddressFragment fragment = new AddressFragment();
     fragment.setArguments(args);
     return fragment;
@@ -90,7 +93,16 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
   {
     View view = getViewResId(inflater, container, R.layout.address_fragment_layout);
     ButterKnife.bind(this, view);
-    LogUtil.i(TAG, "mCityList = " + mCityList);
+    mFlag = getArguments().getString(FLAG_KEY);
+    if (mFlag.equals(getString(R.string.user_info_flag_key)))
+    {
+      //个人信息中隐藏toolBar
+      mToolbar.setVisibility(View.GONE);
+    } else
+    {
+      //设置中初始化toolBar
+      initToolbar(mToolbar, R.string.user_info_waring_address);
+    }
     initAdapter();
     return view;
   }
@@ -174,6 +186,14 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
   @OnClick(R.id.address_submit)
   public void onClick()
   {
-    mPresenter.start();
+    // TODO: 2017/1/11 改变button上文字及隐藏提示 
+    if (mFlag.equals(getString(R.string.user_info_flag_key)))
+    {
+      mPresenter.start();
+    } else
+    {
+      //本地
+      mPresenter.saveLocalAddress();
+    }
   }
 }

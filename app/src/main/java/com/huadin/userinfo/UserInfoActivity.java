@@ -53,7 +53,7 @@ public class UserInfoActivity extends BaseActivity implements PromptFragment.Pro
       //没有管理员权限
       if (!isPermission)
       {
-        mAdminLayout.setVisibility(View.VISIBLE);
+        mAdminLayout.setVisibility(View.GONE);
       }
     }
 

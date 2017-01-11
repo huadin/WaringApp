@@ -18,7 +18,6 @@ import com.huadin.eventbus.EventCenter;
 import com.huadin.fault.ReportFragment;
 import com.huadin.fault.ReportPresenter;
 import com.huadin.interf.OnFragmentOpenDrawerListener;
-import com.huadin.permission.PermissionManager;
 import com.huadin.setting.SettingFragment;
 import com.huadin.urgent.UrgentFragment;
 import com.huadin.urgent.UrgentPresenter;
@@ -152,17 +151,17 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         switch (item.getItemId())
         {
           case R.id.blackout_repair:
-            startReportFragment();
+            startReportFragment();//停电报修
             break;
-          case R.id.map_home:
+          case R.id.map_home://地图
             MapFragment mapFragment = findFragment(MapFragment.class);
             start(mapFragment, SupportFragment.SINGLETASK);
             break;
-          case R.id.setting:
+          case R.id.setting://设置
             startSettingFragment();
             break;
 
-          case R.id.urgent_info:
+          case R.id.urgent_info://个人信息
             startUrgentFragment();
             break;
         }
@@ -265,6 +264,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     closeDrawer();
   }
 
+  /**
+   * 登录或退出回调事件
+   *
+   * @param eventCenter EventCenter
+   */
   @Override
   protected void onEventComming(EventCenter eventCenter)
   {
@@ -272,10 +276,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     mUser = BmobUser.getCurrentUser(Person.class);
     switch (code)
     {
+      //登录成功
       case EventCenter.EVENT_CODE_LOGIN_SUCCESS:
         setUserName();
         break;
 
+      //退出成功
       case EventCenter.EVENT_CODE_OUT_SUCCESS:
         clearUserName();
         break;
