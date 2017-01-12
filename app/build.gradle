@@ -56,9 +56,9 @@ android {
         compile 'com.jakewharton:butterknife:8.4.0'
         apt 'com.jakewharton:butterknife-compiler:8.4.0'
         /* gson */
-        //    compile 'com.google.code.gson:gson:2.7'
+//        compile 'com.google.code.gson:gson:2.7'
         /*okHttpUtil*/
-        //    compile 'com.zhy:okhttputils:2.6.2'
+//        compile 'com.zhy:okhttputils:2.6.2'
         /*本地数据库*/
         compile 'org.litepal.android:core:1.4.0'
         /*eventBus*/
@@ -70,14 +70,14 @@ android {
         compile 'cn.bmob.android:bmob-sdk:3.5.3'
         /*bmob 兼容6.0必须*/
         compile 'cn.bmob.android:http-legacy:1.0'
-        //bmob-push：Bmob的推送包
+        /*bmob-push：Bmob的推送包*/
 //        compile 'cn.bmob.android:bmob-push:0.8'
-        //bmob-sms ：Bmob单独为短信服务提供的包
+        /*bmob-sms ：Bmob单独为短信服务提供的包*/
         compile 'cn.bmob.android:bmob-sms:1.0.1'
-        //fragment
+        /*fragment*/
         compile 'me.yokeyword:fragmentation:0.9.3'
-        // 如果想使用SwipeBack 滑动边缘退出Fragment/Activity功能，请再添加下面的库
-        // compile 'me.yokeyword:fragmentation-swipeback:0.7.9'
+        /*如果想使用SwipeBack 滑动边缘退出Fragment/Activity功能，请再添加下面的库*/
+//        compile 'me.yokeyword:fragmentation-swipeback:0.7.9'
         compile 'com.google.guava:guava:18.0'
         testCompile 'junit:junit:4.12'
     }

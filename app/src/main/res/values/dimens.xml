@@ -15,6 +15,10 @@
     <dimen name="text_size_14">14sp</dimen>
     <dimen name="text_size_18">18sp</dimen>
     <dimen name="text_size_22">22sp</dimen>
+    <dimen name="text_size_28px">28px</dimen>
+    <dimen name="text_size_30px">30px</dimen>
+    <dimen name="text_size_36px">36px</dimen>
+
 
     <!--LoadDialog-->
     <dimen name="load_dialog_width">40dp</dimen>
@@ -63,7 +67,7 @@
     <!--个人信息-->
     <dimen name="user_info_app_bar_layout_height">250dp</dimen>
     <dimen name="text_margin">16dp</dimen>
-    <dimen name="user_info_item_height">48dp</dimen>
+    <dimen name="user_info_item_height">96px</dimen>
     <dimen name="user_info_item_margin">16dp</dimen>
     <dimen name="app_bar_height">180dp</dimen>
     <dimen name="user_info_item_margin_top_10dp">10dp</dimen>

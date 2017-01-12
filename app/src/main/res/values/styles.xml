@@ -123,7 +123,7 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_marginLeft">@dimen/setting_margin_left_16dp</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:textSize">@dimen/text_size_18</item>
+        <item name="android:textSize">@dimen/text_size_36px</item>
         <item name="android:drawablePadding">@dimen/setting_margin_left_16dp</item>
     </style>
 
@@ -145,7 +145,7 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">@color/user_info_item_text_color</item>
-        <item name="android:textSize">@dimen/report_text_size_18sp</item>
+        <item name="android:textSize">@dimen/text_size_36px</item>
         <item name="android:layout_marginLeft">@dimen/user_info_item_margin</item>
     </style>
     <!--个人信息 layout-->
@@ -176,7 +176,7 @@
         <item name="android:layout_marginLeft">@dimen/user_info_item_margin</item>
         <item name="android:layout_marginTop">@dimen/user_info_item_margin_top_10dp</item>
         <item name="android:layout_marginBottom">@dimen/user_info_item_margin_top_5dp</item>
-        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="android:textSize">@dimen/text_size_28px</item>
         <item name="android:textColor">@color/user_info_item_text_color_9</item>
     </style>
 
@@ -214,6 +214,12 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/user_fragment_layout_height</item>
         <item name="android:orientation">horizontal</item>
+    </style>
+
+    <!--NavigationView 中 menu 字体大小-->
+    <style name="test_style">
+        <item name="android:textSize">18sp</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
 
 
