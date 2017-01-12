@@ -1,0 +1,3 @@
+<resources>
+    <dimen name="user_info_app_bar_layout_height">200dp</dimen>
+</resources>

@@ -59,7 +59,7 @@
         <!-- AutoLayout -->
         <meta-data
             android:name="design_width"
-            android:value="768">
+            android:value="720">
         </meta-data>
         <meta-data
             android:name="design_height"
