@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.huadin.base.BaseFragment;
 import com.huadin.userinfo.address.AddressFragment;
+import com.huadin.userinfo.address.AddressPresenter;
 import com.huadin.waringapp.R;
 
 import butterknife.BindView;
@@ -77,5 +78,6 @@ public class SettingFragment extends BaseFragment
       addressFragment = AddressFragment.newInstance(getString(R.string.setting_info_flag_key));
       start(addressFragment, SupportFragment.SINGLETASK);
     }
+    new AddressPresenter(addressFragment);
   }
 }

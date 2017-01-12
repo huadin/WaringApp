@@ -9,8 +9,9 @@ import org.litepal.crud.DataSupport;
 
 public class WaringAddress extends DataSupport
 {
-  private String waringArea;
-  private String waringAddress;
+  private String waringArea;//部门
+  private String waringAddress;//详细地址
+  private String isLocal;
 
   public String getWaringArea()
   {
@@ -30,5 +31,15 @@ public class WaringAddress extends DataSupport
   public void setWaringAddress(String waringAddress)
   {
     this.waringAddress = waringAddress;
+  }
+
+  public String getIsLocal()
+  {
+    return isLocal;
+  }
+
+  public void setIsLocal(String isLocal)
+  {
+    this.isLocal = isLocal;
   }
 }

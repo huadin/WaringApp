@@ -8,13 +8,16 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.huadin.adapter.AreaAdapter;
 import com.huadin.base.BaseFragment;
 import com.huadin.bean.Person;
 import com.huadin.database.City;
+import com.huadin.database.WaringAddress;
 import com.huadin.util.PullUtil;
 import com.huadin.waringapp.R;
 
@@ -44,6 +47,10 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
   EditText mAddressDetailed;
   @BindView(R.id.top_toolbar)
   Toolbar mToolbar;
+  @BindView(R.id.address_submit)
+  Button mAddressButton;
+  @BindView(R.id.address_prompt)
+  TextView mPromtpTextView;
 
   private static final String TAG = "AddressFragment";
   private static final String FLAG_KEY = "FLAG_KEY";
@@ -94,6 +101,13 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
     View view = getViewResId(inflater, container, R.layout.address_fragment_layout);
     ButterKnife.bind(this, view);
     mFlag = getArguments().getString(FLAG_KEY);
+    initViews();
+    initAdapter();
+    return view;
+  }
+
+  private void initViews()
+  {
     if (mFlag.equals(getString(R.string.user_info_flag_key)))
     {
       //个人信息中隐藏toolBar
@@ -102,9 +116,9 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
     {
       //设置中初始化toolBar
       initToolbar(mToolbar, R.string.user_info_waring_address);
+      mPromtpTextView.setVisibility(View.GONE);
+      mAddressButton.setText(R.string.address_save);
     }
-    initAdapter();
-    return view;
   }
 
   private void initAdapter()
@@ -112,10 +126,25 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
     AreaAdapter areaAdapter = new AreaAdapter(mContext, mCityList);
     mAddressSpinner.setAdapter(areaAdapter);
 
+    String areaName = "";
+    String address = "";
     //显示服务器上的数据
-    Person person = BmobUser.getCurrentUser(Person.class);
-    String areaName = person.getAreaName();
-    String address = person.getAddress();
+    if (mFlag.equals(getString(R.string.setting_info_flag_key)))
+    {
+      WaringAddress waringAddress = DataSupport.where("isLocal = ?", String.valueOf(1))
+              .findFirst(WaringAddress.class);
+      if (waringAddress != null)
+      {
+        areaName = waringAddress.getWaringArea();
+        address = waringAddress.getWaringAddress();
+      }
+    } else
+    {
+      Person person = BmobUser.getCurrentUser(Person.class);
+      areaName = person.getAreaName();
+      address = person.getAddress();
+    }
+
     if (!TextUtils.isEmpty(areaName))
     {
       for (int i = 0; i < mCityList.size(); i++)
@@ -127,6 +156,7 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
       }
       mAddressDetailed.setText(address);
     }
+
   }
 
   @Override
@@ -160,7 +190,13 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
     // TODO: 2017/1/11 成功后启动预警服务,覆盖掉设置中的预警地址
     //保存成功
     showMessage(R.string.address_submit_success);
-    mContext.finish();
+    if (mFlag.equals(getString(R.string.setting_info_flag_key)))
+    {
+      pop();
+    } else
+    {
+      mContext.finish();
+    }
   }
 
   @Override
