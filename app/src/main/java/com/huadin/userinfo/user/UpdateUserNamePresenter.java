@@ -93,7 +93,7 @@ class UpdateUserNamePresenter implements UserContract.Presenter, InstallationLis
 
 
   @Override
-  public void installationSuccess()
+  public void installationSuccess(String userName)
   {
     mUserView.hindLoading();
     mUserView.updateSuccess();

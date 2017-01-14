@@ -30,7 +30,7 @@ public class PromptFragment extends DialogFragment
   {
 
     Bundle args = new Bundle();
-    args.putString(MESSAGE_KEY,message);
+    args.putString(MESSAGE_KEY, message);
     PromptFragment fragment = new PromptFragment();
     fragment.setArguments(args);
     return fragment;
@@ -57,14 +57,21 @@ public class PromptFragment extends DialogFragment
       }
     });
 
-    dialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.string_cancel), new DialogInterface.OnClickListener()
+    //其他设备登录时,弹出的 dialog 只有确定
+    if (!getString(R.string.push_login_content).equals(message))
     {
-      @Override
-      public void onClick(DialogInterface dialog, int which)
+      dialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.string_cancel), new DialogInterface.OnClickListener()
       {
-        dialog.cancel();
-      }
-    });
+        @Override
+        public void onClick(DialogInterface dialog, int which)
+        {
+          dialog.cancel();
+        }
+      });
+    } else
+    {
+      dialog.setCanceledOnTouchOutside(false);//点击屏幕不消失
+    }
 
     dialog.show();
     return dialog;

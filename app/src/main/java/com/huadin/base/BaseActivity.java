@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.huadin.eventbus.EventCenter;
+import com.huadin.util.ActivityCollector;
 import com.huadin.util.NetworkUtil;
 import com.huadin.util.ToastUtil;
 import com.huadin.waringapp.R;
@@ -30,6 +31,7 @@ public abstract class BaseActivity extends SupportActivity
   protected void onCreate(Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
+    ActivityCollector.addActivity(this);
     mContext = getApplicationContext();
     LOG_TAG = this.getClass().getSimpleName();
     mToast = new ToastUtil(mContext);
@@ -43,6 +45,8 @@ public abstract class BaseActivity extends SupportActivity
       throw new IllegalArgumentException(
               "You must return a right contentView layout resource Id");
     }
+
+
   }
 
   /**
@@ -70,6 +74,7 @@ public abstract class BaseActivity extends SupportActivity
   protected void onDestroy()
   {
     super.onDestroy();
+    ActivityCollector.removeActivity(this);
     EventBus.getDefault().unregister(this);
   }
 

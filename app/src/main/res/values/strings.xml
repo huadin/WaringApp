@@ -161,4 +161,15 @@
     <string name="setting_info_flag_key">SETTING_FLAG_KEY</string><!--预警中 flag 的 key-->
     <string name="address_save">保存</string>
 
+    <!-- 推送 -->
+    <string name="push_result">result</string>
+    <string name="push_type">type</string>
+    <string name="push_title">title</string>
+    <string name="push_content">content</string>
+
+    <string name="push_type_login">1</string><!--登录-->
+    <string name="push_result_key">OK</string><!-- result key-->
+    <string name="push_login_key">登录</string>
+    <string name="push_login_content">该账号已在其他设备登录,如非本人登录,密码可能泄露,请更改密码!</string>
+
 </resources>

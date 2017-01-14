@@ -1,6 +1,8 @@
 package com.huadin.util;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.telephony.TelephonyManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
@@ -37,7 +39,7 @@ public class AMUtils
    * @param context context
    * @param e       editText
    */
-  public static void onInactive(Context context, EditText e)
+  public static void onInactive(@NonNull Context context, EditText e)
   {
     if (e == null) return;
 
@@ -51,7 +53,7 @@ public class AMUtils
    * @param context context
    * @param et      editText
    */
-  public static void onActive(Context context, EditText et)
+  public static void onActive(@NonNull Context context, EditText et)
   {
     if (et == null) return;
 
@@ -84,14 +86,27 @@ public class AMUtils
 
   /**
    * 过滤汉字
+   *
    * @param s 输入的字符
    * @return "" 输入的汉字过滤为 ""
    */
-  public static String stringFilter (String s)
+  public static String stringFilter(String s)
   {
     Pattern pattern = Pattern.compile(STRING_FILTER);
     Matcher m = pattern.matcher(s);
     return m.replaceAll("").trim();
+  }
+
+  /**
+   * 获取设备 deviceId
+   *
+   * @param context Context
+   * @return String
+   */
+  public static String getDeviceId(@NonNull Context context)
+  {
+    TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+    return tm.getDeviceId();
   }
 
 }

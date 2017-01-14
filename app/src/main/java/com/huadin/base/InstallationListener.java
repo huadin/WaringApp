@@ -10,7 +10,7 @@ public interface InstallationListener
   /**
    * 绑定成功
    */
-  void installationSuccess();
+  void installationSuccess(String userName);
 
   /**
    * 绑定异常

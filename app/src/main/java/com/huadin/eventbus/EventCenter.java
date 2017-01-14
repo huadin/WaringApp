@@ -24,6 +24,8 @@ public class EventCenter<T>
   public static final int EVENT_CODE_LOAD_REGISTER = 104;
   //有网络
   public static final int EVENT_CODE_NETWORK = 105;
+  //其他设备登录
+  public static final int OTHER_DEVICE_LOGIN = 107;
 
   /**
    * reserved data

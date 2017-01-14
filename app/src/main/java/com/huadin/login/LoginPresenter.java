@@ -5,14 +5,21 @@ import android.content.Context;
 
 import com.huadin.base.InstallationListener;
 import com.huadin.bean.Person;
+import com.huadin.bean.PushInstallation;
 import com.huadin.util.AMUtils;
 import com.huadin.util.InstallationUtil;
 import com.huadin.util.LogUtil;
 import com.huadin.util.MD5util;
 import com.huadin.waringapp.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import cn.bmob.v3.BmobPushManager;
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.PushListener;
 import rx.Subscriber;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -73,12 +80,7 @@ class LoginPresenter implements LoginContract.Presenter, InstallationListener
     if (AMUtils.isEmpty(loginPassword))
     {
       errorRes = R.string.login_password_not_null;
-    }
-//    else if (AMUtils.validatePassword(loginPassword))
-//    {
-//      errorRes = R.string.login_password_length_error;
-//    }
-    else if (!isNetwork)
+    } else if (!isNetwork)
     {
       errorRes = R.string.no_network;
     }
@@ -150,8 +152,38 @@ class LoginPresenter implements LoginContract.Presenter, InstallationListener
   }
 
   @Override
-  public void installationSuccess()
+  public void installationSuccess(String userName)
   {
+    BmobPushManager<PushInstallation> pushManager = new BmobPushManager<>();
+    BmobQuery<PushInstallation> query = PushInstallation.getQuery();
+    query.addWhereEqualTo("pushUserName", userName);
+    pushManager.setQuery(query);
+
+    JSONObject jsonObject = new JSONObject();
+    try
+    {
+      jsonObject.put(mContext.getString(R.string.push_result), AMUtils.getDeviceId(mContext))// DeviceId
+              .put(mContext.getString(R.string.push_type), mContext.getString(R.string.push_type_login))//推送类型
+              .put(mContext.getString(R.string.push_title), mContext.getString(R.string.push_login_key))//标题
+              .put(mContext.getString(R.string.push_content), mContext.getString(R.string.push_login_content));//内容
+
+    } catch (JSONException e)
+    {
+      e.printStackTrace();
+    }
+
+    pushManager.pushMessage(jsonObject, new PushListener()
+    {
+      @Override
+      public void done(BmobException e)
+      {
+        if (e != null)
+        {
+          LogUtil.i(TAG, "登录推送 code = " + e.getErrorCode() + " / message = " + e.getMessage());
+        }
+      }
+    });
+
     mLoginView.hindLoading();
     mLoginView.loginSuccess();
   }

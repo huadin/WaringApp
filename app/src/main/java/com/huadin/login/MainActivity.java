@@ -1,5 +1,6 @@
 package com.huadin.login;
 
+import android.app.Activity;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import com.huadin.base.BaseActivity;
 import com.huadin.base.BaseFragment;
 import com.huadin.bean.Person;
+import com.huadin.dialog.PromptFragment;
 import com.huadin.eventbus.EventCenter;
 import com.huadin.fault.ReportFragment;
 import com.huadin.fault.ReportPresenter;
@@ -22,6 +24,8 @@ import com.huadin.setting.SettingFragment;
 import com.huadin.urgent.UrgentFragment;
 import com.huadin.urgent.UrgentPresenter;
 import com.huadin.userinfo.UserInfoActivity;
+import com.huadin.util.ActivityCollector;
+import com.huadin.util.LogUtil;
 import com.huadin.waringapp.R;
 
 import butterknife.BindView;
@@ -30,7 +34,7 @@ import cn.bmob.v3.BmobUser;
 import me.yokeyword.fragmentation.SupportFragment;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener,
-        OnFragmentOpenDrawerListener
+        OnFragmentOpenDrawerListener, PromptFragment.PromptListener
 
 {
 
@@ -285,6 +289,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
       case EventCenter.EVENT_CODE_OUT_SUCCESS:
         clearUserName();
         break;
+
+      //强制退出
+      case EventCenter.OTHER_DEVICE_LOGIN:
+        PromptFragment fragment = PromptFragment.newInstance(getString(R.string.push_login_content));
+        fragment.setOnPromptListener(this);
+        fragment.show(getSupportFragmentManager(), getClass().getSimpleName());
+        break;
     }
   }
 
@@ -356,6 +367,27 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
           TOUCH_TIME = System.currentTimeMillis();
           showMessage(R.string.press_again_exit);
         }
+      }
+    }
+  }
+
+  //弹出强制下线的 dialog 确认回调
+  @Override
+  public void promptOk()
+  {
+
+    Person.logOut();
+    mUser = null;
+    clearUserName();
+    for (Activity activity : ActivityCollector.sActivities)
+    {
+      if (activity instanceof MainActivity)
+      {
+        LogUtil.i(LOG_TAG, "弹出登录界面");
+        startLoginFragment();
+      } else
+      {
+        activity.finish();
       }
     }
   }

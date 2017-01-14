@@ -34,6 +34,7 @@ public class InstallationUtil
 
   /**
    * 添加接口
+   *
    * @param listener InstallationListener
    * @return InstallationUtil
    */
@@ -46,6 +47,7 @@ public class InstallationUtil
 
   /**
    * 添加 context
+   *
    * @param context Context
    * @return InstallationUtil
    */
@@ -83,7 +85,7 @@ public class InstallationUtil
               {
                 if (e == null)
                 {
-                  mListener.installationSuccess();
+                  mListener.installationSuccess(userName);
                 } else
                 {
                   errorCode(e);
