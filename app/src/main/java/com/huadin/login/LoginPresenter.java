@@ -69,7 +69,7 @@ class LoginPresenter implements LoginContract.Presenter, InstallationListener
   }
 
   /* 执行登录 */
-  private void login(final String loginName)
+  private void login(String loginName)
   {
     int errorRes = 0;
 
@@ -115,11 +115,13 @@ class LoginPresenter implements LoginContract.Presenter, InstallationListener
       @Override
       public void onNext(Person person)
       {
+        String pushUserName = person.getMobilePhoneNumber();
+
         //登录成功，绑定推送
         InstallationUtil.newInstance()
                 .with(mContext)
                 .addInstallationListener(LoginPresenter.this)
-                .bindingPush(loginName);
+                .bindingPush(pushUserName);
       }
     });
   }
@@ -156,6 +158,15 @@ class LoginPresenter implements LoginContract.Presenter, InstallationListener
   {
     BmobPushManager<PushInstallation> pushManager = new BmobPushManager<>();
     BmobQuery<PushInstallation> query = PushInstallation.getQuery();
+//    //判断登录的用户是否为电话号
+//    if (!AMUtils.isMobile(userName))
+//    {
+//      Person person = Person.getCurrentUser(Person.class);
+//      if (person != null)
+//      {
+//        userName = person.getMobilePhoneNumber();
+//      }
+//    }
     query.addWhereEqualTo("pushUserName", userName);
     pushManager.setQuery(query);
 

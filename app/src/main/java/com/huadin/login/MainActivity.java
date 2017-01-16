@@ -371,6 +371,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
   }
 
+  /*强制下线并关闭其他Activity*/
   private void showOutLoginDialog()
   {
     for (Activity activity : ActivityCollector.sActivities)
@@ -380,6 +381,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         activity.finish();
       } else
       {
+        //清除用户数据
         Person.logOut();
         mUser = null;
         //抽屉可能打开,关闭
@@ -388,6 +390,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
       }
     }
 
+    //弹出警告框
     AlertDialog dialog = new AlertDialog.Builder(this).create();
     dialog.setTitle(R.string.permission_dialog_title);
     dialog.setMessage(getString(R.string.push_login_content));
@@ -405,7 +408,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
   }
 
 
-  //弹出强制下线的 dialog 确认回调
+  /*dialog 确定进入 loginFragment*/
   public void loginOut()
   {
     LogUtil.i(LOG_TAG, "弹出登录界面");
