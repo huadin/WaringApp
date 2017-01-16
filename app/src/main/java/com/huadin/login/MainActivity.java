@@ -238,7 +238,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     if (reportFragment == null)
     {
       reportFragment = ReportFragment.newInstance();
-      new ReportPresenter(reportFragment);
+      new ReportPresenter(mContext,reportFragment);
       popTo(reportFragment);
     } else
     {

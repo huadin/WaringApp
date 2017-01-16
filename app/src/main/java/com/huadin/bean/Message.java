@@ -12,6 +12,7 @@ public class Message
   private String type;
   private String title;
   private String content;
+  private String area;
 
 
   public String getResult()
@@ -52,5 +53,15 @@ public class Message
   public void setContent(String content)
   {
     this.content = content;
+  }
+
+  public String getArea()
+  {
+    return area;
+  }
+
+  public void setArea(String area)
+  {
+    this.area = area;
   }
 }

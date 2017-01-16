@@ -63,14 +63,15 @@ public class ReportFragment extends BaseFragment implements ReportContract.View
   @Override
   public void submitSuccess()
   {
-    // TODO: 2016/12/13 成功后操作
-
+    // 提交成功
+    showMessage(R.string.address_submit_success);
+    pop();
   }
 
   @Override
   public void submitError(int errorId)
   {
-    mToast.showMessage(errorId, 1000);
+    mToast.showMessage(errorId, 500);
   }
 
   @Override

@@ -97,7 +97,7 @@
     <string name="report_user">请输入联系人姓名</string>
     <string name="report_phone">请输入联系电话</string>
     <string name="report_address">请输入详细地址</string>
-    <string name="report_submit_loading">提交中#8230</string>
+    <string name="report_submit_loading">提交中&#8230;</string>
     <string name="report_title_cannot_be_null">请输入标题</string>
     <string name="report_content_cannot_be_null">请输入内容</string>
     <string name="report_user_cannot_be_null">请输入联系人</string>
@@ -166,10 +166,15 @@
     <string name="push_type">type</string>
     <string name="push_title">title</string>
     <string name="push_content">content</string>
+    <string name="push_area_id">area</string>
 
     <string name="push_type_login">1</string><!--登录-->
     <string name="push_result_key">OK</string><!-- result key-->
     <string name="push_login_key">登录</string>
     <string name="push_login_content">该账号已在其他设备登录,如非本人登录,密码可能泄露,请更改密码!</string>
+    <string name="push_report_type">2</string><!--停电报修-->
+    <string name="push_report_title">报修</string>
+    <string name="push_report_content">收到新停电报修信息,请查看!</string>
+    <string name="warning_address_not_null">请设置预警位置,否则无法提交!</string>
 
 </resources>
