@@ -67,10 +67,10 @@
         </meta-data>
         <!-- 开发者申请的key高德 start -->
         <!-- 笔记本 -->
-         <!--<meta-data-->
-         <!--android:name="com.amap.api.v2.apikey"-->
-         <!--android:value="@string/map_key_home">-->
-         <!--</meta-data>-->
+        <!--<meta-data-->
+        <!--android:name="com.amap.api.v2.apikey"-->
+        <!--android:value="@string/map_key_home">-->
+        <!--</meta-data>-->
         <!-- 台式 -->
         <meta-data
             android:name="com.amap.api.v2.apikey"

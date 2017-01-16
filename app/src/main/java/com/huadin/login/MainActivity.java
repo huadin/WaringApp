@@ -1,6 +1,8 @@
 package com.huadin.login;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,7 +17,6 @@ import android.widget.TextView;
 import com.huadin.base.BaseActivity;
 import com.huadin.base.BaseFragment;
 import com.huadin.bean.Person;
-import com.huadin.dialog.PromptFragment;
 import com.huadin.eventbus.EventCenter;
 import com.huadin.fault.ReportFragment;
 import com.huadin.fault.ReportPresenter;
@@ -34,7 +35,7 @@ import cn.bmob.v3.BmobUser;
 import me.yokeyword.fragmentation.SupportFragment;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener,
-        OnFragmentOpenDrawerListener, PromptFragment.PromptListener
+        OnFragmentOpenDrawerListener
 
 {
 
@@ -292,9 +293,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
       //强制退出
       case EventCenter.OTHER_DEVICE_LOGIN:
-        PromptFragment fragment = PromptFragment.newInstance(getString(R.string.push_login_content));
-        fragment.setOnPromptListener(this);
-        fragment.show(getSupportFragmentManager(), getClass().getSimpleName());
+        LogUtil.i("退出", "弹出 dialog");
+        showOutLoginDialog();
         break;
     }
   }
@@ -371,24 +371,44 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
   }
 
-  //弹出强制下线的 dialog 确认回调
-  @Override
-  public void promptOk()
+  private void showOutLoginDialog()
   {
-
-    Person.logOut();
-    mUser = null;
-    clearUserName();
     for (Activity activity : ActivityCollector.sActivities)
     {
-      if (activity instanceof MainActivity)
-      {
-        LogUtil.i(LOG_TAG, "弹出登录界面");
-        startLoginFragment();
-      } else
+      if (!(activity instanceof MainActivity))
       {
         activity.finish();
+      } else
+      {
+        Person.logOut();
+        mUser = null;
+        //抽屉可能打开,关闭
+        closeDrawer();
+        clearUserName();
       }
     }
+
+    AlertDialog dialog = new AlertDialog.Builder(this).create();
+    dialog.setTitle(R.string.permission_dialog_title);
+    dialog.setMessage(getString(R.string.push_login_content));
+    dialog.setIcon(R.drawable.icon_dialog_prompt);
+    dialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.string_ok), new DialogInterface.OnClickListener()
+    {
+      @Override
+      public void onClick(DialogInterface dialog, int which)
+      {
+        loginOut();
+      }
+    });
+    dialog.setCanceledOnTouchOutside(false);
+    dialog.show();
+  }
+
+
+  //弹出强制下线的 dialog 确认回调
+  public void loginOut()
+  {
+    LogUtil.i(LOG_TAG, "弹出登录界面");
+    startLoginFragment();
   }
 }
