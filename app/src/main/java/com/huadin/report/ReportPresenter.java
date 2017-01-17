@@ -1,4 +1,4 @@
-package com.huadin.fault;
+package com.huadin.report;
 
 
 import android.content.Context;
@@ -20,6 +20,7 @@ import cn.bmob.v3.listener.PushListener;
 import cn.bmob.v3.listener.SaveListener;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static org.litepal.crud.DataSupport.findFirst;
 
 public class ReportPresenter implements ReportContract.Presenter
 {
@@ -46,7 +47,8 @@ public class ReportPresenter implements ReportContract.Presenter
     String reportUser = mReportView.getReportUser();
     String reportPhone = mReportView.getReportPhone();
     String reportAddress = mReportView.getReportAddress();
-    final WaringAddress address = DataSupport.findFirst(WaringAddress.class);
+//    final WaringAddress address_1 = DataSupport.where("isLocal = ?",String.valueOf(1)).findFirst(WaringAddress.class);//本地
+    final WaringAddress address_1 = DataSupport.findFirst(WaringAddress.class);//本地
     int errorId = 0;
 
     if (!isNetwork)
@@ -67,7 +69,7 @@ public class ReportPresenter implements ReportContract.Presenter
     } else if (AMUtils.isEmpty(reportAddress))
     {
       errorId = R.string.report_address_cannot_be_null;
-    }else if (address == null)
+    } else if (address_1 == null)
     {
       errorId = R.string.warning_address_not_null;
     }
@@ -85,6 +87,7 @@ public class ReportPresenter implements ReportContract.Presenter
     bean.setReportUser(reportUser);
     bean.setReportPhone(reportPhone);
     bean.setReportAddress(reportAddress);
+    bean.setAreaId(address_1.getWaringAreaId());
 
     mReportView.showLoading();
     bean.save(new SaveListener<String>()
@@ -94,7 +97,7 @@ public class ReportPresenter implements ReportContract.Presenter
       {
         if (e == null)
         {
-          pushMessage(address);
+          pushMessage(address_1);
         } else
         {
           mReportView.hindLoading();
@@ -119,7 +122,7 @@ public class ReportPresenter implements ReportContract.Presenter
               .put(mContext.getString(R.string.push_type), mContext.getString(R.string.push_report_type))
               .put(mContext.getString(R.string.push_title), mContext.getString(R.string.push_report_title))
               .put(mContext.getString(R.string.push_content), mContext.getString(R.string.push_report_content))
-              .put(mContext.getString(R.string.push_area_id),address.getWaringArea());
+              .put(mContext.getString(R.string.push_area_id), address.getWaringArea());
 
     } catch (JSONException e)
     {
@@ -132,9 +135,15 @@ public class ReportPresenter implements ReportContract.Presenter
       public void done(BmobException e)
       {
         mReportView.hindLoading();
-        mReportView.submitSuccess();
         if (e != null)
-          LogUtil.i(TAG, "code = " + e.getErrorCode() + " / message = " + e.getMessage());
+        {
+          int code = e.getErrorCode();
+          LogUtil.i(TAG, "code = " + code + " / message = " + e.getMessage());
+          showCode(code);
+        } else
+        {
+          mReportView.submitSuccess();
+        }
       }
     });
   }
@@ -145,6 +154,9 @@ public class ReportPresenter implements ReportContract.Presenter
     {
       case 9010:
         mReportView.submitError(R.string.error_code_9010);
+        break;
+      case 100:
+        mReportView.submitError(R.string.error_code_100);
         break;
     }
   }

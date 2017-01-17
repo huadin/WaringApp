@@ -25,7 +25,7 @@ public class AddressPresenter implements AddressContract.Presenter
   private String mAreaName;
   private String mAreaId;
   /* 如果为本地保存预警地址，isLocal = 1 */
-  private String isLocal;
+//  private String isLocal;
 
   public AddressPresenter(AddressContract.View addressView)
   {
@@ -40,7 +40,7 @@ public class AddressPresenter implements AddressContract.Presenter
   {
     if (getCityInfo()) return;
 
-    isLocal = "0";
+//    isLocal = "0";
     Person person = new Person();
     person.setAreaName(mAreaName);
     person.setAreaId(mAreaId);
@@ -74,7 +74,8 @@ public class AddressPresenter implements AddressContract.Presenter
   public void saveLocalAddress()
   {
     if (getCityInfo()) return;
-    isLocal = "1";
+
+//    isLocal = "1";
     saveAddress();
     mAddressView.updateSuccess();
   }
@@ -86,6 +87,7 @@ public class AddressPresenter implements AddressContract.Presenter
     mAreaName = city.getAreaName();
     mAreaId = city.getAreaId();
     boolean isNetwork = mAddressView.networkState();
+    Person currentPerson = Person.getCurrentUser(Person.class);
     int errorId = 0;
 
     if (AMUtils.isEmpty(mAreaId))
@@ -97,6 +99,9 @@ public class AddressPresenter implements AddressContract.Presenter
     } else if (!isNetwork)
     {
       errorId = R.string.no_network;
+    }else if (currentPerson != null)
+    {
+      errorId = R.string.not_edit_waring_address;
     }
 
     if (errorId != 0)
@@ -110,14 +115,16 @@ public class AddressPresenter implements AddressContract.Presenter
   //保存
   private void saveAddress()
   {
-    WaringAddress address = DataSupport.where("isLocal = ?", String.valueOf(isLocal)).findFirst(WaringAddress.class);
+//    WaringAddress address = DataSupport.where("isLocal = ?", String.valueOf(isLocal)).findFirst(WaringAddress.class);
+    WaringAddress address = DataSupport.findFirst(WaringAddress.class);
     if (address == null)
     {
       address = new WaringAddress();
     }
     address.setWaringArea(mAreaName);
     address.setWaringAddress(mAddressDetailed);
-    address.setIsLocal(isLocal);
+    address.setWaringAreaId(mAreaId);
+//    address.setIsLocal(isLocal);
     address.save();
   }
 

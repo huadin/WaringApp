@@ -47,6 +47,7 @@
     <string name="register_app">注册账号</string>
     <string name="register_success">注册成功</string>
     <!--登录,注册异常-->
+    <string name="error_code_100">服务器异常,请稍后再试</string>
     <string name="error_code_101">用户名或密码不正确</string>
     <string name="error_code_202">用户名已存在</string>
     <string name="error_code_205">用户名不存在</string>
@@ -176,5 +177,7 @@
     <string name="push_report_title">报修</string>
     <string name="push_report_content">收到新停电报修信息,请查看!</string>
     <string name="warning_address_not_null">请设置预警位置,否则无法提交!</string>
+    <string name="fault_date_get_in">请稍后&#8230;</string>
+    <string name="not_edit_waring_address">用户已登录,请到个人信息中进行设置</string>
 
 </resources>

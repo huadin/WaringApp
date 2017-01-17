@@ -23,12 +23,12 @@ public interface UpdateContract
     void hindLoading();
 
     /**
-     * 修改成功
+     * 成功
      */
     void updateSuccess();
 
     /**
-     * 修改失败
+     * 失败
      */
     void updateError(int errorId);
 

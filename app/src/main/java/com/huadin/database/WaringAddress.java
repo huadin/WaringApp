@@ -11,7 +11,8 @@ public class WaringAddress extends DataSupport
 {
   private String waringArea;//部门
   private String waringAddress;//详细地址
-  private String isLocal;
+  private String isLocal;//1-本地，0-网络
+  private String waringAreaId;
 
   public String getWaringArea()
   {
@@ -41,5 +42,15 @@ public class WaringAddress extends DataSupport
   public void setIsLocal(String isLocal)
   {
     this.isLocal = isLocal;
+  }
+
+  public String getWaringAreaId()
+  {
+    return waringAreaId;
+  }
+
+  public void setWaringAreaId(String waringAreaId)
+  {
+    this.waringAreaId = waringAreaId;
   }
 }

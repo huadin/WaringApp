@@ -36,6 +36,17 @@ public class ReportBean extends BmobObject
    */
   private String reportCreateTime;
 
+  /**
+   * 所在地区编码
+   */
+  private String areaId;
+
+  /**
+   * 是否已处理
+   */
+  private boolean isHandle;
+
+
   public String getReportCreateTime()
   {
     return reportCreateTime;
@@ -94,5 +105,25 @@ public class ReportBean extends BmobObject
   public void setReportAddress(String reportAddress)
   {
     this.reportAddress = reportAddress;
+  }
+
+  public String getAreaId()
+  {
+    return areaId;
+  }
+
+  public void setAreaId(String areaId)
+  {
+    this.areaId = areaId;
+  }
+
+  public boolean isHandle()
+  {
+    return isHandle;
+  }
+
+  public void setHandle(boolean handle)
+  {
+    isHandle = handle;
   }
 }

@@ -1,4 +1,4 @@
-package com.huadin.fault;
+package com.huadin.report;
 
 import com.huadin.base.BasePresenter;
 import com.huadin.base.BaseView;

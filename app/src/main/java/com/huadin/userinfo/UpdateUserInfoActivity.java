@@ -6,6 +6,8 @@ import android.support.v7.widget.Toolbar;
 import com.huadin.base.BaseActivity;
 import com.huadin.userinfo.address.AddressFragment;
 import com.huadin.userinfo.address.AddressPresenter;
+import com.huadin.userinfo.fault.FaultFragment;
+import com.huadin.userinfo.fault.FaultPresenter;
 import com.huadin.userinfo.password.UpdatePasswordFragment;
 import com.huadin.userinfo.password.UpdatePasswordPresenter;
 import com.huadin.userinfo.phone.UpdatePhoneFragment;
@@ -17,6 +19,10 @@ import com.huadin.waringapp.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+/**
+ * 用户信息详细设置界面
+ */
 
 public class UpdateUserInfoActivity extends BaseActivity
 {
@@ -67,6 +73,12 @@ public class UpdateUserInfoActivity extends BaseActivity
         AddressFragment addressFragment = AddressFragment.newInstance(getString(R.string.user_info_flag_key));
         loadRootFragment(R.id.update_user_info_fragment_ground, addressFragment);
         new AddressPresenter(addressFragment);
+        break;
+      case R.string.fault_info:
+        //停电报修
+        FaultFragment faultFragment = FaultFragment.newInstance();
+        loadRootFragment(R.id.update_user_info_fragment_ground,faultFragment);
+        new FaultPresenter(faultFragment);
         break;
 
     }

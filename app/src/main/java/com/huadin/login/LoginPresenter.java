@@ -2,10 +2,12 @@ package com.huadin.login;
 
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.huadin.base.InstallationListener;
 import com.huadin.bean.Person;
 import com.huadin.bean.PushInstallation;
+import com.huadin.database.WaringAddress;
 import com.huadin.util.AMUtils;
 import com.huadin.util.InstallationUtil;
 import com.huadin.util.LogUtil;
@@ -14,6 +16,7 @@ import com.huadin.waringapp.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.litepal.crud.DataSupport;
 
 import cn.bmob.v3.BmobPushManager;
 import cn.bmob.v3.BmobQuery;
@@ -116,6 +119,24 @@ class LoginPresenter implements LoginContract.Presenter, InstallationListener
       public void onNext(Person person)
       {
         String pushUserName = person.getMobilePhoneNumber();
+
+        //登录成功后,保存预警地址
+        String areaName = person.getAreaName();
+        if (!TextUtils.isEmpty(areaName))
+        {
+//          WaringAddress address = DataSupport.where("isLocal = ?", String.valueOf(1)).findFirst(WaringAddress.class);
+          WaringAddress address = DataSupport.findFirst(WaringAddress.class);
+          if (address == null)
+          {
+            address = new WaringAddress();
+          }
+
+          address.setWaringArea(person.getAreaName());
+          address.setWaringAddress(person.getAddress());
+          address.setWaringAreaId(person.getAreaId());
+          address.setIsLocal(String.valueOf(1));
+          address.save();
+        }
 
         //登录成功，绑定推送
         InstallationUtil.newInstance()

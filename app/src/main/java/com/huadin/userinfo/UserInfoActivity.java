@@ -22,8 +22,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.bmob.v3.BmobUser;
 
-import static com.huadin.waringapp.R.string.password_modify;
-
+/**
+ * 用户信息 item 界面
+ */
 public class UserInfoActivity extends BaseActivity implements PromptFragment.PromptListener
 {
 
@@ -53,7 +54,7 @@ public class UserInfoActivity extends BaseActivity implements PromptFragment.Pro
       //没有管理员权限
       if (!isPermission)
       {
-        mAdminLayout.setVisibility(View.GONE);
+        mAdminLayout.setVisibility(View.VISIBLE);
       }
     }
 
@@ -97,23 +98,23 @@ public class UserInfoActivity extends BaseActivity implements PromptFragment.Pro
     {
       case R.id.user_info_item_user:
         //用户信息
-        startActivity(UpdateUserInfoActivity.class,R.string.user_info_user);
+        startActivity(UpdateUserInfoActivity.class, R.string.user_info_user);
         break;
       case R.id.user_info_item_waring_address:
-        startActivity(UpdateUserInfoActivity.class,R.string.user_info_waring_address);
+        startActivity(UpdateUserInfoActivity.class, R.string.user_info_waring_address);
         break;
       case R.id.person_info_message:
-        startActivity(UpdateUserInfoActivity.class,R.string.person_info);
+        startActivity(UpdateUserInfoActivity.class, R.string.person_info);
         break;
       case R.id.fault_info_message:
-        startActivity(UpdateUserInfoActivity.class,R.string.fault_info);
+        startActivity(UpdateUserInfoActivity.class, R.string.fault_info);
         break;
       case R.id.release_info_message:
-        startActivity(UpdateUserInfoActivity.class,R.string.release_info);
+        startActivity(UpdateUserInfoActivity.class, R.string.release_info);
         break;
       case R.id.user_info_item_phone:
         //更换手机号
-        startActivity(UpdateUserInfoActivity.class,R.string.user_info_phone);
+        startActivity(UpdateUserInfoActivity.class, R.string.user_info_phone);
         break;
       case R.id.user_info_item_password:
         //更改密码

@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.app.NotificationCompat;
 
@@ -21,6 +22,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.litepal.crud.DataSupport;
 
 import cn.bmob.push.PushConstants;
+
+import static org.litepal.crud.DataSupport.findFirst;
 
 public class MessageReceiver extends BroadcastReceiver
 {
@@ -60,6 +63,7 @@ public class MessageReceiver extends BroadcastReceiver
         //停电报修
         if (person == null) return;
 
+//        WaringAddress address = DataSupport.where("isLocal = ?", "0").findFirst(WaringAddress.class);
         WaringAddress address = DataSupport.findFirst(WaringAddress.class);
         //找到相同地区
         if (address != null && address.getWaringArea().equals(message.getArea()))
@@ -71,10 +75,12 @@ public class MessageReceiver extends BroadcastReceiver
             Notification notification = new NotificationCompat.Builder(context)
                     .setContentTitle(context.getString(R.string.push_report_title))
                     .setContentText(context.getString(R.string.push_report_content))
+                    .setSmallIcon(R.drawable.icon_logo_small)
+                    .setLargeIcon(BitmapFactory.decodeResource(context.getResources(),R.drawable.icon_logo_large))
                     .setDefaults(NotificationCompat.DEFAULT_ALL)//设置震动等,默认
                     .build();
 
-            manager.notify(Integer.valueOf(pushType), notification);
+            manager.notify(1, notification);
           }
         }
 

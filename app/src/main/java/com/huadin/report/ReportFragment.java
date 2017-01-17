@@ -1,4 +1,4 @@
-package com.huadin.fault;
+package com.huadin.report;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -65,7 +65,12 @@ public class ReportFragment extends BaseFragment implements ReportContract.View
   {
     // 提交成功
     showMessage(R.string.address_submit_success);
-    pop();
+//    pop();
+    mReportTitle.setText("");
+    mReportContent.setText("");
+    mReportUser.setText("");
+    mReportPhone.setText("");
+    mReportAddress.setText("");
   }
 
   @Override

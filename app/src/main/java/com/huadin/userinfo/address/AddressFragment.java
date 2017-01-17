@@ -50,9 +50,8 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
   @BindView(R.id.address_submit)
   Button mAddressButton;
   @BindView(R.id.address_prompt)
-  TextView mPromtpTextView;
+  TextView mPromptTextView;
 
-  private static final String TAG = "AddressFragment";
   private static final String FLAG_KEY = "FLAG_KEY";
   private AddressContract.Presenter mPresenter;
   private List<City> mCityList;
@@ -73,6 +72,7 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
     super.onAttach(context);
 
     mCityList = DataSupport.findAll(City.class);
+    //// TODO: 2017/1/17 在这解析会出现卡顿现象
     if (mCityList == null || mCityList.size() == 0)
     {
       try (
@@ -116,7 +116,7 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
     {
       //设置中初始化toolBar
       initToolbar(mToolbar, R.string.user_info_waring_address);
-      mPromtpTextView.setVisibility(View.GONE);
+      mPromptTextView.setVisibility(View.GONE);
       mAddressButton.setText(R.string.address_save);
     }
   }
@@ -131,8 +131,8 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
     //显示服务器上的数据
     if (mFlag.equals(getString(R.string.setting_info_flag_key)))
     {
-      WaringAddress waringAddress = DataSupport.where("isLocal = ?", String.valueOf(1))
-              .findFirst(WaringAddress.class);
+//      WaringAddress waringAddress = DataSupport.where("isLocal = ?", String.valueOf(1)).findFirst(WaringAddress.class);
+      WaringAddress waringAddress = DataSupport.findFirst(WaringAddress.class);
       if (waringAddress != null)
       {
         areaName = waringAddress.getWaringArea();
