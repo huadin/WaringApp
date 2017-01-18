@@ -52,6 +52,8 @@ public class FaultPresenter implements FaultContract.Presenter
   @Override
   public void start()
   {
+    //如在这检查网络,如果没有网络,会应生命周期没有执行到 onResume,无法 toast
+//    if (getNetworkStatue()) return;
 
     BmobQuery<ReportBean> query = getQuery();
     mFaultView.showLoading();
@@ -89,12 +91,14 @@ public class FaultPresenter implements FaultContract.Presenter
   @Override
   public void refresh()
   {
+    if (getNetworkStatue()) return;
     queryData(0, STATE_REFRESH);
   }
 
   @Override
   public void loadMore()
   {
+    if (getNetworkStatue()) return;
     queryData(mCurrentPage, STATE_MORE);
   }
 
@@ -220,12 +224,30 @@ public class FaultPresenter implements FaultContract.Presenter
     });
   }
 
+  /**
+   * 检查网络状态
+   *
+   * @return 有网络 - false;
+   */
+  private boolean getNetworkStatue()
+  {
+    if (!mFaultView.networkState())
+    {
+      mFaultView.updateError(R.string.no_network);
+      return true;
+    }
+    return false;
+  }
+
   private void showCode(int code)
   {
     switch (code)
     {
       case 9010:
         mFaultView.updateError(R.string.error_code_9010);
+        break;
+      case 9016:
+        mFaultView.updateError(R.string.error_code_9016);
         break;
     }
   }

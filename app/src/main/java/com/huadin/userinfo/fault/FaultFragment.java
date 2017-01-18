@@ -66,7 +66,10 @@ public class FaultFragment extends BaseFragment implements FaultContract.View, S
 
   private void initAdapter()
   {
-    mRefreshLayout.setColorSchemeColors(Color.BLUE, Color.BLUE, Color.BLACK, Color.YELLOW);
+    mRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.refresh_1),
+            getResources().getColor(R.color.refresh_2),
+            getResources().getColor(R.color.refresh_3),
+            getResources().getColor(R.color.refresh_4));
     mRefreshLayout.setOnRefreshListener(this);
     mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
     mRecyclerView.addItemDecoration(new LinearDecoration(mContext, LinearDecoration.VERTICAL_LIST));
@@ -100,6 +103,10 @@ public class FaultFragment extends BaseFragment implements FaultContract.View, S
   @Override
   public void updateError(int errorId)
   {
+    //无网络时执行
+    mRefreshLayout.setRefreshing(false);
+    // TODO: 2017/1/18 加载更多时,无网络时关闭加载更多的View
+
     //获取失败
     showMessage(errorId);
   }

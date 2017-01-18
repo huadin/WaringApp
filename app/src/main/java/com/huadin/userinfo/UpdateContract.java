@@ -35,7 +35,7 @@ public interface UpdateContract
     /**
      * 网络连接状态
      *
-     * @return
+     * @return 有网络 - true;
      */
     boolean networkState();
   }
