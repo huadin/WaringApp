@@ -46,6 +46,11 @@ public class ReportBean extends BmobObject
    */
   private boolean isHandle;
 
+  /**
+   * 是否已读
+   */
+  private boolean isRead;
+
 
   public String getReportCreateTime()
   {
@@ -125,5 +130,15 @@ public class ReportBean extends BmobObject
   public void setHandle(boolean handle)
   {
     isHandle = handle;
+  }
+
+  public boolean isRead()
+  {
+    return isRead;
+  }
+
+  public void setRead(boolean read)
+  {
+    isRead = read;
   }
 }

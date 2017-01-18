@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/fault_adapter_item_padding_top"
+    android:paddingEnd="@dimen/fault_adapter_item_padding"
+    android:paddingStart="@dimen/fault_adapter_item_padding"
+    android:paddingTop="@dimen/fault_adapter_item_padding_top">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/fault_adapter_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/app_name"
+            android:textColor="@color/user_info_item_text_color"
+            android:textSize="@dimen/text_size_16"/>
+
+        <TextView
+            android:id="@+id/fault_adapter_item_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_sign_in_short"
+            android:textSize="@dimen/text_size_12"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/fault_adapter_item_read"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/fault_adapter_item_image_margin"
+        android:contentDescription="@null"
+        android:src="@drawable/icon_read"/>
+
+</LinearLayout>
+
+

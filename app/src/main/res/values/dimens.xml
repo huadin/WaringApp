@@ -13,6 +13,7 @@
     <dimen name="toast_text_view_text_size">14sp</dimen>
     <dimen name="text_size_12">12sp</dimen>
     <dimen name="text_size_14">14sp</dimen>
+    <dimen name="text_size_16">16sp</dimen>
     <dimen name="text_size_18">18sp</dimen>
     <dimen name="text_size_22">22sp</dimen>
     <dimen name="text_size_28px">28px</dimen>
@@ -90,6 +91,11 @@
     <dimen name="address_area_layout_height">48dp</dimen>
     <dimen name="address_area_spinner_margin">10dp</dimen>
     <dimen name="address_area_edit_padding">5dp</dimen>
+
+    <!--停电报修-->
+    <dimen name="fault_adapter_item_padding">16dp</dimen>
+    <dimen name="fault_adapter_item_image_margin">10dp</dimen>
+    <dimen name="fault_adapter_item_padding_top">5dp</dimen>
 
 
 </resources>

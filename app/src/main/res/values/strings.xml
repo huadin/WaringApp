@@ -162,6 +162,8 @@
     <string name="setting_info_flag_key">SETTING_FLAG_KEY</string><!--预警中 flag 的 key-->
     <string name="address_save">保存</string>
 
+    <string name="text_view_empty">无数据</string>
+
     <!-- 推送 -->
     <string name="push_result">result</string>
     <string name="push_type">type</string>
@@ -177,7 +179,9 @@
     <string name="push_report_title">报修</string>
     <string name="push_report_content">收到新停电报修信息,请查看!</string>
     <string name="warning_address_not_null">请设置预警位置,否则无法提交!</string>
+
     <string name="fault_date_get_in">请稍后&#8230;</string>
     <string name="not_edit_waring_address">用户已登录,请到个人信息中进行设置</string>
+    <string name="fault_load_more_null">无更多数据</string>
 
 </resources>
