@@ -28,11 +28,4 @@
         android:textSize="@dimen/text_size_18"
         android:visibility="gone"/>
 
-    <Button
-        android:id="@+id/fault_adapter_temp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:text="加载"/>
-
 </FrameLayout>
