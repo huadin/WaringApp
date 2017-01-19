@@ -1,11 +1,11 @@
 package com.huadin.userinfo.fault;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +22,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -37,6 +36,8 @@ public class FaultFragment extends BaseFragment implements FaultContract.View, S
   SwipeRefreshLayout mRefreshLayout;
   @BindView(R.id.fault_fragment_recycler_view)
   RecyclerView mRecyclerView;
+  @BindView(R.id.top_toolbar)
+  Toolbar mToolbar;
   @BindView(R.id.fault_fragment_empty)
   TextView mEmpty;
 
@@ -60,6 +61,7 @@ public class FaultFragment extends BaseFragment implements FaultContract.View, S
   {
     View view = getViewResId(inflater, container, R.layout.fault_fragment_layout);
     ButterKnife.bind(this, view);
+    initToolbar(mToolbar,R.string.fault_info,true);
     initAdapter();
     return view;
   }
@@ -146,9 +148,4 @@ public class FaultFragment extends BaseFragment implements FaultContract.View, S
     mPresenter.refresh();
   }
 
-  @OnClick(R.id.fault_adapter_temp)
-  public void onClick()
-  {
-    mPresenter.loadMore();
-  }
 }

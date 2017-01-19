@@ -115,7 +115,7 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
     } else
     {
       //设置中初始化toolBar
-      initToolbar(mToolbar, R.string.user_info_waring_address);
+      initToolbar(mToolbar, R.string.user_info_waring_address,false);
       mPromptTextView.setVisibility(View.GONE);
       mAddressButton.setText(R.string.address_save);
     }

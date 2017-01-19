@@ -69,7 +69,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, T
   {
     View view = getViewResId(inflater, container, R.layout.login_fragment_layout);
     ButterKnife.bind(this, view);
-    initToolbar(mToolbar, R.string.action_sign_in);
+    initToolbar(mToolbar, R.string.action_sign_in,false);
     mNameET.addTextChangedListener(this);
     return view;
   }

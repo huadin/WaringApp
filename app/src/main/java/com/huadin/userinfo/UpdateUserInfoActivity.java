@@ -2,6 +2,7 @@ package com.huadin.userinfo;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.huadin.base.BaseActivity;
 import com.huadin.userinfo.address.AddressFragment;
@@ -76,13 +77,15 @@ public class UpdateUserInfoActivity extends BaseActivity
         break;
       case R.string.fault_info:
         //停电报修
+        //隐藏Activity中的toolbar
+        mToolbar.setVisibility(View.GONE);
         FaultFragment faultFragment = FaultFragment.newInstance();
         loadRootFragment(R.id.update_user_info_fragment_ground,faultFragment);
         new FaultPresenter(faultFragment);
         break;
 
     }
-    initToolbar(mToolbar, mTitleResId);
+    initToolbar(mToolbar, mTitleResId,true);
   }
 
   @Override

@@ -32,7 +32,7 @@ public class UrgentFragment extends BaseFragment implements UrgentContract.View
 
   @BindView(R.id.urgent_recycler)
   RecyclerView mRecyclerView;
-  @BindView(R.id.urgent_toolbar)
+  @BindView(R.id.top_toolbar)
   Toolbar mToolbar;
 
   public static UrgentFragment newInstance()

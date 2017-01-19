@@ -52,21 +52,11 @@ public abstract class BaseFragment extends SupportFragment
    *
    * @param toolbar           Toolbar
    * @param toolbarTitleResId 标题
+   * @param isCloseActivity   是否关闭当前Activity
    */
-  protected void initToolbar(@NonNull Toolbar toolbar, int toolbarTitleResId)
+  protected void initToolbar(@NonNull Toolbar toolbar, int toolbarTitleResId, final boolean isCloseActivity)
   {
-    checkNotNull(toolbar, "toolbar cannot null");
-    toolbar.setTitle(toolbarTitleResId);
-    toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
-//    toolbar.setNavigationIcon(android.R.drawable.ic_menu_report_image);
-    toolbar.setNavigationOnClickListener(new View.OnClickListener()
-    {
-      @Override
-      public void onClick(View view)
-      {
-        pop();
-      }
-    });
+    mContext.initToolbar(toolbar, toolbarTitleResId, isCloseActivity);
   }
 
   /**

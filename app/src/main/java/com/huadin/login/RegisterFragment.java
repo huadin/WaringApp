@@ -71,7 +71,7 @@ public class RegisterFragment extends BaseFragment implements RegisterContract.V
   {
     View view = getViewResId(inflater, container, R.layout.register_fragmnet_layout);
     ButterKnife.bind(this, view);
-    initToolbar(mToolbar, getTitleResId());
+    initToolbar(mToolbar, getTitleResId(),false);
     mRegisterName.addTextChangedListener(this);
     return view;
   }

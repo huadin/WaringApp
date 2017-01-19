@@ -116,17 +116,33 @@ public abstract class BaseActivity extends SupportActivity
     return NetworkUtil.getNetworkState(mContext);
   }
 
-  protected void initToolbar(Toolbar toolbar, int titleResId)
+
+  /**
+   * 初始化toolbar
+   *
+   * @param toolbar         Toolbar
+   * @param titleResId      标题
+   * @param isCloseActivity 是否关闭当前Activity
+   */
+  protected void initToolbar(Toolbar toolbar, int titleResId, final boolean isCloseActivity)
   {
     checkNotNull(toolbar, "toolbar cannot be null");
     toolbar.setTitle(titleResId);
-    toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
+    toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
     toolbar.setNavigationOnClickListener(new View.OnClickListener()
     {
       @Override
       public void onClick(View v)
       {
-        finish();
+        if (isCloseActivity)
+        {
+          //关闭Activity
+          finish();
+        } else
+        {
+          //弹出Fragment
+          pop();
+        }
       }
     });
 
