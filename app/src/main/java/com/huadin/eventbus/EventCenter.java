@@ -15,8 +15,8 @@ public class EventCenter<T>
   public static final int EVENT_CODE_OUT_SUCCESS = 106;
   // 注册成功
   public static final int EVENT_CODE_REGISTER_SUCCESS = 101;
-  // 修改密码成功
-  public static final int EVENT_CODE_USER_INFO_UPDATE = 102;
+  // 修改成功
+  public static final int EVENT_CODE_UPDATE_SUCCESS = 102;
 //  //	修改个人信息成功
 //  public static final int EVENT_CODE_Userinfo_INFO_UPDATE = 103;
 

@@ -171,7 +171,7 @@ public abstract class BaseFragment extends SupportFragment
    *
    * @param eventCenter EventCenter
    */
-  private void fragmentOnEvent(EventCenter eventCenter)
+  protected void fragmentOnEvent(EventCenter eventCenter)
   {
 
   }

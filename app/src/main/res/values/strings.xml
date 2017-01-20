@@ -30,6 +30,7 @@
     <string name="user_name">AS</string>
     <string name="user_name_1">Android Studio</string>
     <string name="read_phone_state">需要获取手机状态信息,是否去设置?</string>
+    <string name="submit_success">提交成功</string>
     <!--登录  注册-->
     <string name="register_name_exist">用户名已被注册</string>
     <string name="loading_login">登录中&#8230;</string>
@@ -184,5 +185,7 @@
     <string name="not_edit_waring_address">用户已登录,请到个人信息中进行设置</string>
     <string name="fault_load_more_null">无更多数据</string>
     <string name="fault_data_loading">加载中&#8230;</string>
+    <string name="fault_data_error">数据异常</string>
+
 
 </resources>

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.huadin.adapter.FaultAdapter;
 import com.huadin.base.BaseFragment;
 import com.huadin.bean.ReportBean;
+import com.huadin.eventbus.EventCenter;
 import com.huadin.userinfo.LoadMoreOnScrollListener;
 import com.huadin.util.LinearDecoration;
 import com.huadin.util.LogUtil;
@@ -46,6 +47,7 @@ public class FaultFragment extends BaseFragment implements FaultContract.View,
 
   private FaultContract.Presenter mPresenter;
   private FaultAdapter mFaultAdapter;
+  private List<ReportBean> mBeanList;
 
   public static FaultFragment newInstance()
   {
@@ -86,9 +88,10 @@ public class FaultFragment extends BaseFragment implements FaultContract.View,
     listener.setOnLoadMore(this);
 
     mRecyclerView.addOnScrollListener(listener);
-    mFaultAdapter = new FaultAdapter(new ArrayList<ReportBean>());
+    mBeanList = new ArrayList<>();
+    mFaultAdapter = new FaultAdapter(mBeanList);
 
-    View footerView = LayoutInflater.from(mContext).inflate(R.layout.recycler_view_footer,mRecyclerView,false);
+    View footerView = LayoutInflater.from(mContext).inflate(R.layout.recycler_view_footer, mRecyclerView, false);
     mFaultAdapter.setFooterView(footerView);
     mFaultAdapter.setOnItemClickListener(this);
     mRecyclerView.setAdapter(mFaultAdapter);
@@ -144,7 +147,7 @@ public class FaultFragment extends BaseFragment implements FaultContract.View,
   public void querySuccess(List<ReportBean> beanList)
   {
     mRefreshLayout.setRefreshing(false);
-
+    mBeanList = beanList;
     //获取数据成功,关联到 Adapter
     if (beanList.size() == 0)
     {
@@ -168,6 +171,24 @@ public class FaultFragment extends BaseFragment implements FaultContract.View,
   public void onItemClick(int position)
   {
     LogUtil.i(LOG_TAG, "position = " + position);
+    ReportBean bean = mBeanList.get(position);
+
+    DetailedFaultFragment fragment = DetailedFaultFragment.newInstance(bean,position);
+    start(fragment, SINGLETASK);
+    new DetailedFaultPresenter(fragment);
+
+  }
+
+  @Override
+  protected void fragmentOnEvent(EventCenter eventCenter)
+  {
+    switch (eventCenter.getEventCode())
+    {
+      case EventCenter.EVENT_CODE_UPDATE_SUCCESS:
+        int position = (int) eventCenter.getData();
+        mFaultAdapter.notifyItemRemoved(position);
+        break;
+    }
   }
 
   @Override
