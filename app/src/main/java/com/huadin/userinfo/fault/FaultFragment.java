@@ -14,7 +14,9 @@ import android.widget.TextView;
 import com.huadin.adapter.FaultAdapter;
 import com.huadin.base.BaseFragment;
 import com.huadin.bean.ReportBean;
+import com.huadin.userinfo.LoadMoreOnScrollListener;
 import com.huadin.util.LinearDecoration;
+import com.huadin.util.LogUtil;
 import com.huadin.waringapp.R;
 
 import java.util.ArrayList;
@@ -30,7 +32,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * 查看用户提交的报修信息
  */
 
-public class FaultFragment extends BaseFragment implements FaultContract.View, SwipeRefreshLayout.OnRefreshListener
+public class FaultFragment extends BaseFragment implements FaultContract.View,
+        SwipeRefreshLayout.OnRefreshListener, FaultAdapter.OnItemClickListener, LoadMoreOnScrollListener.onLoadMore
 {
   @BindView(R.id.fault_fragment_refresh)
   SwipeRefreshLayout mRefreshLayout;
@@ -61,22 +64,33 @@ public class FaultFragment extends BaseFragment implements FaultContract.View, S
   {
     View view = getViewResId(inflater, container, R.layout.fault_fragment_layout);
     ButterKnife.bind(this, view);
-    initToolbar(mToolbar,R.string.fault_info,true);
+    initToolbar(mToolbar, R.string.fault_info, true);
     initAdapter();
     return view;
   }
 
   private void initAdapter()
   {
+
     mRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.refresh_1),
             getResources().getColor(R.color.refresh_2),
             getResources().getColor(R.color.refresh_3),
             getResources().getColor(R.color.refresh_4));
     mRefreshLayout.setOnRefreshListener(this);
-    mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+
+    LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
+    mRecyclerView.setLayoutManager(layoutManager);
     mRecyclerView.addItemDecoration(new LinearDecoration(mContext, LinearDecoration.VERTICAL_LIST));
 
+    LoadMoreOnScrollListener listener = new LoadMoreOnScrollListener(layoutManager);
+    listener.setOnLoadMore(this);
+
+    mRecyclerView.addOnScrollListener(listener);
     mFaultAdapter = new FaultAdapter(new ArrayList<ReportBean>());
+
+    View footerView = LayoutInflater.from(mContext).inflate(R.layout.recycler_view_footer,mRecyclerView,false);
+    mFaultAdapter.setFooterView(footerView);
+    mFaultAdapter.setOnItemClickListener(this);
     mRecyclerView.setAdapter(mFaultAdapter);
     mPresenter.start();//开始获取数据
   }
@@ -135,6 +149,7 @@ public class FaultFragment extends BaseFragment implements FaultContract.View, S
     if (beanList.size() == 0)
     {
       //下拉加载没有数据
+      mFaultAdapter.setLoadMoreStatus(FaultAdapter.STATUS_READY);
       showMessage(R.string.fault_load_more_null);
       return;
     }
@@ -148,4 +163,16 @@ public class FaultFragment extends BaseFragment implements FaultContract.View, S
     mPresenter.refresh();
   }
 
+  /*点击事件*/
+  @Override
+  public void onItemClick(int position)
+  {
+    LogUtil.i(LOG_TAG, "position = " + position);
+  }
+
+  @Override
+  public void loadMore()
+  {
+    mPresenter.loadMore();
+  }
 }

@@ -34,7 +34,7 @@ public class FaultPresenter implements FaultContract.Presenter
   private static final int STATE_REFRESH = 0;// 下拉刷新
   private static final int STATE_MORE = 1;// 加载更多
   private int mCurrentPage = 0;//当前页编号
-  private int mLimit = 3;//每页的数据
+  private int mLimit = 15;//每页的数据
   private String lastTime = "";
   private List<ReportBean> mBeanList;
 
@@ -190,7 +190,7 @@ public class FaultPresenter implements FaultContract.Presenter
             if (type == STATE_REFRESH)
             {
               //下拉刷新
-              mCurrentPage = 0;
+              mCurrentPage = -1;
               lastTime = list.get(list.size() - 1).getCreatedAt();
               mBeanList.clear();
             }
@@ -198,7 +198,7 @@ public class FaultPresenter implements FaultContract.Presenter
             mBeanList.addAll(list);
 
             // 这里在每次加载完数据后，将当前页码+1,
-            // 这样在上拉刷新的onPullUpToRefresh方法中就不需要操作curPage了
+            // 这样在上拉刷新的方法中就不需要操作curPage了
             mCurrentPage++;
 
             //数据回调

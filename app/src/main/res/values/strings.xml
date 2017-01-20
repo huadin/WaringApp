@@ -183,5 +183,6 @@
     <string name="fault_date_get_in">请稍后&#8230;</string>
     <string name="not_edit_waring_address">用户已登录,请到个人信息中进行设置</string>
     <string name="fault_load_more_null">无更多数据</string>
+    <string name="fault_data_loading">加载中&#8230;</string>
 
 </resources>
