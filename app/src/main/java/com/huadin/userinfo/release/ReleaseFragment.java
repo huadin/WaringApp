@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.huadin.base.BaseFragment;
+import com.huadin.bean.Person;
 import com.huadin.waringapp.R;
 
 import butterknife.BindView;
@@ -18,7 +19,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Created by 潇湘 on 2017/1/10.
- * 发布信息
+ * 管理人员发布信息
  */
 
 public class ReleaseFragment extends BaseFragment implements ReleaseContract.View
@@ -70,7 +71,8 @@ public class ReleaseFragment extends BaseFragment implements ReleaseContract.Vie
   @Override
   public String areaId()
   {
-    return null;
+    Person person = Person.getCurrentUser(Person.class);
+    return person != null ? person.getAreaId() : "0";
   }
 
   @Override

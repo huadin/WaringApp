@@ -67,7 +67,7 @@ public class UpdateUserInfoActivity extends BaseActivity
         //信息发布
         ReleaseFragment releaseFragment = ReleaseFragment.newInstance();
         loadRootFragment(R.id.update_user_info_fragment_ground, releaseFragment);
-        new ReleasePresenter(releaseFragment);
+        new ReleasePresenter(mContext,releaseFragment);
         break;
       case R.string.user_info_waring_address:
         //预警地址

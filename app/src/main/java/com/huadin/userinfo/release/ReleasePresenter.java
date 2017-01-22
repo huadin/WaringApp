@@ -1,12 +1,19 @@
 package com.huadin.userinfo.release;
 
 
+import android.content.Context;
+
+import com.huadin.bean.Person;
 import com.huadin.bean.PushInstallation;
 import com.huadin.util.AMUtils;
 import com.huadin.util.LogUtil;
 import com.huadin.waringapp.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import cn.bmob.v3.BmobPushManager;
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.PushListener;
 
@@ -22,9 +29,12 @@ public class ReleasePresenter implements ReleaseContract.Presenter
   private static final String TAG = "ReleasePresenter";
   private ReleaseContract.View mReleaseView;
   private BmobPushManager<PushInstallation> mPushManager;
+  private Context mContext;
 
-  public ReleasePresenter(ReleaseContract.View releaseView)
+  public ReleasePresenter(Context context, ReleaseContract.View releaseView)
   {
+    mContext = context;
+    mContext = checkNotNull(context, "context cannot be null");
     mReleaseView = releaseView;
     mReleaseView = checkNotNull(releaseView, "releaseView cannot be null");
     mReleaseView.setPresenter(this);
@@ -34,6 +44,7 @@ public class ReleasePresenter implements ReleaseContract.Presenter
   @Override
   public void start()
   {
+    String areaId = mReleaseView.areaId();
     String title = mReleaseView.releaseTitle();
     final String content = mReleaseView.releaseContent();
     boolean isNetwork = mReleaseView.networkState();
@@ -44,7 +55,7 @@ public class ReleasePresenter implements ReleaseContract.Presenter
     } else if (AMUtils.isEmpty(content))
     {
       errorId = R.string.release_fragment_msg_content;
-    }else if (!isNetwork)
+    } else if (!isNetwork)
     {
       errorId = R.string.no_network;
     }
@@ -57,7 +68,29 @@ public class ReleasePresenter implements ReleaseContract.Presenter
 
     mReleaseView.showLoading();
 
-    mPushManager.pushMessage(title + content, new PushListener()
+    JSONObject jsonObject = new JSONObject();
+    try
+    {
+      if (areaId.equals("0"))
+      {
+        Person person = Person.getCurrentUser(Person.class);
+        areaId = person.getAreaId();
+      }
+      jsonObject.put(mContext.getString(R.string.push_type),mContext.getString(R.string.push_release_type))
+              .put(mContext.getString(R.string.push_result),mContext.getString(R.string.push_result_key))
+              .put(mContext.getString(R.string.push_title),mContext.getString(R.string.push_release_title))
+              .put(mContext.getString(R.string.push_content),mContext.getString(R.string.push_release_content))
+              .put(mContext.getString(R.string.push_area_id),areaId);
+    } catch (JSONException e)
+    {
+      e.printStackTrace();
+    }
+
+    BmobQuery<PushInstallation> query = PushInstallation.getQuery();
+    query.addWhereEqualTo(mContext.getString(R.string.area_id),areaId);
+    mPushManager.setQuery(query);
+
+    mPushManager.pushMessage(jsonObject, new PushListener()
     {
       @Override
       public void done(BmobException e)

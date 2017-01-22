@@ -19,6 +19,7 @@
     <string name="action_sign_in">登录</string>
     <string name="action_sign_up">注册</string>
     <string name="action_sign_in_short">Sign in</string>
+    <string name="area_id">areaId</string>
     <string name="hint_system_phone">18899998888</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
@@ -171,14 +172,20 @@
     <string name="push_content">content</string>
     <string name="push_area_id">area</string>
 
+
     <string name="push_type_login">1</string><!--登录-->
     <string name="push_result_key">OK</string><!-- result key-->
     <string name="push_login_key">登录</string>
     <string name="push_login_content">该账号已在其他设备登录,如非本人登录,密码可能泄露,请更改密码!</string>
+
     <string name="push_report_type">2</string><!--停电报修-->
     <string name="push_report_title">报修</string>
     <string name="push_report_content">收到新停电报修信息,请查看!</string>
     <string name="warning_address_not_null">请设置预警位置,否则无法提交!</string>
+
+    <string name="push_release_type">3</string><!--发布紧急信息-->
+    <string name="push_release_title">发布</string>
+    <string name="push_release_content">收到新发布的故障信息,请查看</string>
 
     <string name="fault_date_get_in">请稍后&#8230;</string>
     <string name="not_edit_waring_address">用户已登录,请到个人信息中进行设置</string>
