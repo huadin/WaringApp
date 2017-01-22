@@ -24,8 +24,7 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
+    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."
     </string>
     <string name="user_name">AS</string>
     <string name="user_name_1">Android Studio</string>
@@ -79,7 +78,7 @@
     <string name="permission_dialog_title">提示</string>
     <string name="permission_dialog_positive">去设置</string>
     <string name="permission_dialog_negative">取消</string>
-    <string name="permission_storage_message">本软件需要数据存储、定位、电话权限,是否去设置</string>
+    <string name="permission_storage_message">本软件需要相关权限才可正常使用,是否去设置</string>
 
     <!--item 菜单-->
     <string name="blackout_repair">停电报修</string>
@@ -186,6 +185,11 @@
     <string name="fault_load_more_null">无更多数据</string>
     <string name="fault_data_loading">加载中&#8230;</string>
     <string name="fault_data_error">数据异常</string>
+    <string name="detailed_read">已处理</string>
+    <string name="detailed_fault_title">详细信息</string>
+    <string name="detailed_fault_sign_read">是否将该条信息标记为已处理,并更改其状态?</string>
+    <string name="call_phone">拨打电话</string>
+    <string name="call_phone_rationale">请授予拨打电话权限,否则无法拨打电话,是否去设置?</string>
 
 
 </resources>

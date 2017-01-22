@@ -215,13 +215,6 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, T
   public void dialogPositive()
   {
     //进入设置
-    Intent localIntent = new Intent();
-    localIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-    if (Build.VERSION.SDK_INT > 9)
-    {
-      localIntent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
-      localIntent.setData(Uri.fromParts("package", mContext.getPackageName(), null));
-    }
-    startActivity(localIntent);
+    settingPermission();
   }
 }

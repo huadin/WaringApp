@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/detailed_fault_read"
+        android:title="@string/detailed_read"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/call_phone"
+        android:title="@string/call_phone"
+        app:showAsAction="never"/>
+
+</menu>

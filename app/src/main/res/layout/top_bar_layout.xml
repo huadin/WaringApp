@@ -12,6 +12,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
         app:layout_scrollFlags="scroll|enterAlways|snap"
-        app:titleTextColor="@color/app_text_color"/>
+        app:titleTextColor="@color/app_text_color"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
 </android.support.design.widget.AppBarLayout>

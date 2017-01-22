@@ -1,6 +1,9 @@
 package com.huadin.base;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -184,6 +187,21 @@ public abstract class BaseFragment extends SupportFragment
   protected boolean isNetwork()
   {
     return NetworkUtil.getNetworkState(mContext);
+  }
+
+  /**
+   * 设置权限界面
+   */
+  protected void settingPermission()
+  {
+    Intent localIntent = new Intent();
+    localIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    if (Build.VERSION.SDK_INT > 9)
+    {
+      localIntent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
+      localIntent.setData(Uri.fromParts("package", mContext.getPackageName(), null));
+    }
+    startActivity(localIntent);
   }
 
 }

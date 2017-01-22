@@ -16,12 +16,12 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * 详细停电报修信息
  */
 
-public class DetailedFaultPresenter implements DetailedFaultContract.Presenter
+class DetailedFaultPresenter implements DetailedFaultContract.Presenter
 {
   private static final String TAG = "DetailedFaultPresenter";
   private DetailedFaultContract.View mDetailedView;
 
-  public DetailedFaultPresenter(DetailedFaultContract.View detailedView)
+  DetailedFaultPresenter(DetailedFaultContract.View detailedView)
   {
     mDetailedView = detailedView;
     mDetailedView = checkNotNull(detailedView, "detailedView cannot be null");

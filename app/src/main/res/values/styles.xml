@@ -222,5 +222,14 @@
         <item name="android:gravity">center_vertical</item>
     </style>
 
+    <style name="detailed_text_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_18</item>
+        <item name="android:textColor">@color/user_info_item_text_color</item>
+        <item name="android:layout_marginStart">@dimen/detailed_fault_margin_16</item>
+        <item name="android:layout_marginTop">@dimen/detailed_fault_margin_5</item>
+    </style>
+
 
 </resources>

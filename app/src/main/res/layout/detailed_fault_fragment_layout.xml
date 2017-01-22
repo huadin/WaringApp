@@ -5,10 +5,32 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/submit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <include layout="@layout/top_bar_layout"/>
+
+    <TextView
+        android:id="@+id/detailed_fault_user"
+        style="@style/detailed_text_style"
         android:text="@string/action_sign_in_short"/>
+
+    <TextView
+        android:id="@+id/detailed_fault_address"
+        style="@style/detailed_text_style"
+        android:layout_marginEnd="@dimen/detailed_fault_margin_16"
+        android:text="@string/permission_rationale"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/detailed_fault_margin_16">
+
+        <TextView
+            android:id="@+id/detailed_fault_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/user_info_item_text_color"
+            android:textSize="@dimen/text_size_16"/>
+
+    </ScrollView>
+
 
 </LinearLayout>

@@ -63,7 +63,7 @@ public class ReportPresenter implements ReportContract.Presenter
     } else if (reportUser.isEmpty())
     {
       errorId = R.string.report_user_cannot_be_null;
-    } else if (AMUtils.isEmpty(reportPhone))
+    } else if (!AMUtils.isTelephone(reportPhone) && !AMUtils.isMobile(reportPhone))
     {
       errorId = R.string.report_format_error;
     } else if (AMUtils.isEmpty(reportAddress))

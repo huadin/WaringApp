@@ -13,7 +13,7 @@ public class AMUtils
 {
   /*手机号码正则表达式*/
   private static final String MOBILE_PHONE_PATTERN = "^((13[0-9])|(15[0-9])|(18[0-9])|(14[7])|(17[0678]))\\d{8}$";
-
+  private static final String FIXED_TELEPHONE = "[0-9]{7,12}";
   /*字母加数字*/
 //  private static final String USER_NAME = "[A-Za-z0-9_\\-\\u4e00-\\u9fa5]{6,20}";包含汉字
   private static final String USER_NAME = "[A-Za-z0-9_\\-]{6,20}";
@@ -24,12 +24,25 @@ public class AMUtils
    * 检测手机号码是否符合格式
    *
    * @param phone 电话号
-   * @return true
+   * @return 是 - true
    */
   public static boolean isMobile(String phone)
   {
     Pattern patter = Pattern.compile(MOBILE_PHONE_PATTERN);
     Matcher m = patter.matcher(phone);
+    return m.matches();
+  }
+
+  /**
+   * 检测是否为座机号
+   *
+   * @param telephone 座机号
+   * @return 是座机- true
+   */
+  public static boolean isTelephone(String telephone)
+  {
+    Pattern p = Pattern.compile(FIXED_TELEPHONE);
+    Matcher m = p.matcher(telephone);
     return m.matches();
   }
 
