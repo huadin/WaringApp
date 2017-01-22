@@ -78,6 +78,6 @@ public class SettingFragment extends BaseFragment
       addressFragment = AddressFragment.newInstance(getString(R.string.setting_info_flag_key));
       start(addressFragment, SupportFragment.SINGLETASK);
     }
-    new AddressPresenter(addressFragment);
+    new AddressPresenter(mContext,addressFragment);
   }
 }

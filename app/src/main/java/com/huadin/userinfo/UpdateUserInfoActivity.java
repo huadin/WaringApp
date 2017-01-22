@@ -73,7 +73,7 @@ public class UpdateUserInfoActivity extends BaseActivity
         //预警地址
         AddressFragment addressFragment = AddressFragment.newInstance(getString(R.string.user_info_flag_key));
         loadRootFragment(R.id.update_user_info_fragment_ground, addressFragment);
-        new AddressPresenter(addressFragment);
+        new AddressPresenter(mContext,addressFragment);
         break;
       case R.string.fault_info:
         //停电报修

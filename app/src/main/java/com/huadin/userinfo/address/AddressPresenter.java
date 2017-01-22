@@ -1,9 +1,12 @@
 package com.huadin.userinfo.address;
 
+import android.content.Context;
+
 import com.huadin.bean.Person;
 import com.huadin.database.City;
 import com.huadin.database.WaringAddress;
 import com.huadin.util.AMUtils;
+import com.huadin.util.InstallationUtil;
 import com.huadin.waringapp.R;
 
 import org.litepal.crud.DataSupport;
@@ -24,11 +27,14 @@ public class AddressPresenter implements AddressContract.Presenter
   private String mAddressDetailed;
   private String mAreaName;
   private String mAreaId;
+  private Context mContext;
   /* 如果为本地保存预警地址，isLocal = 1 */
-//  private String isLocal;
+  private int isLocal;
 
-  public AddressPresenter(AddressContract.View addressView)
+  public AddressPresenter(Context context, AddressContract.View addressView)
   {
+    mContext = context;
+    mContext = checkNotNull(context, "context cannot be null");
     mAddressView = addressView;
     mAddressView = checkNotNull(addressView, "addressView cannot be null");
     mAddressView.setPresenter(this);
@@ -38,9 +44,9 @@ public class AddressPresenter implements AddressContract.Presenter
   @Override
   public void start()
   {
+    isLocal = 0;
     if (getCityInfo()) return;
 
-//    isLocal = "0";
     Person person = new Person();
     person.setAreaName(mAreaName);
     person.setAreaId(mAreaId);
@@ -73,9 +79,9 @@ public class AddressPresenter implements AddressContract.Presenter
   @Override
   public void saveLocalAddress()
   {
+    isLocal = 1;
     if (getCityInfo()) return;
 
-//    isLocal = "1";
     saveAddress();
     mAddressView.updateSuccess();
   }
@@ -99,8 +105,9 @@ public class AddressPresenter implements AddressContract.Presenter
     } else if (!isNetwork)
     {
       errorId = R.string.no_network;
-    }else if (currentPerson != null)
+    } else if (currentPerson != null)
     {
+      if (isLocal == 1)
       errorId = R.string.not_edit_waring_address;
     }
 
@@ -126,6 +133,8 @@ public class AddressPresenter implements AddressContract.Presenter
     address.setWaringAreaId(mAreaId);
 //    address.setIsLocal(isLocal);
     address.save();
+
+    InstallationUtil.newInstance().with(mContext).bindingAreaIdPush(mAreaId);
   }
 
   private void showCode(int code)

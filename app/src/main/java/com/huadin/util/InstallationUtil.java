@@ -102,6 +102,43 @@ public class InstallationUtil
   }
 
   /**
+   * 绑定地区Id,推送使用
+   *
+   * @param areaId 地区Id
+   */
+  public void bindingAreaIdPush(final String areaId)
+  {
+    BmobQuery<PushInstallation> query = new BmobQuery<>();
+    query.addWhereEqualTo("installationId", BmobInstallation.getInstallationId(mContext));
+    query.findObjects(new FindListener<PushInstallation>()
+    {
+      @Override
+      public void done(List<PushInstallation> list, BmobException e)
+      {
+        if (e == null)
+        {
+          if (list.size() > 0)
+          {
+            PushInstallation p = list.get(0);
+            p.setAreaId(areaId);
+            p.update(new UpdateListener()
+            {
+              @Override
+              public void done(BmobException e)
+              {
+                if (e != null)
+                {
+                 LogUtil.i("绑定地区Id异常","code = " + e.getErrorCode() + " / message = " + e.getMessage());
+                }
+              }
+            });
+          }
+        }
+      }
+    });
+  }
+
+  /**
    * 异常
    *
    * @param e BmobException
