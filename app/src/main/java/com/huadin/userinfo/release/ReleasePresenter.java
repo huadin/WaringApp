@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.huadin.bean.Person;
 import com.huadin.bean.PushInstallation;
+import com.huadin.bean.ReleaseBean;
 import com.huadin.util.AMUtils;
 import com.huadin.util.LogUtil;
 import com.huadin.waringapp.R;
@@ -16,6 +17,7 @@ import cn.bmob.v3.BmobPushManager;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.PushListener;
+import cn.bmob.v3.listener.SaveListener;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -44,7 +46,6 @@ public class ReleasePresenter implements ReleaseContract.Presenter
   @Override
   public void start()
   {
-    String areaId = mReleaseView.areaId();
     String title = mReleaseView.releaseTitle();
     final String content = mReleaseView.releaseContent();
     boolean isNetwork = mReleaseView.networkState();
@@ -68,6 +69,37 @@ public class ReleasePresenter implements ReleaseContract.Presenter
 
     mReleaseView.showLoading();
 
+    ReleaseBean bean = new ReleaseBean();
+    bean.setReleaseTitle(title);
+    bean.setReleaseContent(content);
+    bean.save(new SaveListener<String>()
+    {
+      @Override
+      public void done(String objectId, BmobException e)
+      {
+        if (e == null)
+        {
+          startPushMessage();
+        } else
+        {
+          mReleaseView.hindLoading();
+          int code = e.getErrorCode();
+          LogUtil.i(TAG, "code = " + code + " / message = " + e.getMessage());
+          showCode(code);
+        }
+      }
+    });
+
+  }
+
+  /**
+   * 开始推送:
+   * <p>接收到消息后根据areaId区分地区<p/>
+   */
+  private void startPushMessage()
+  {
+    String areaId = mReleaseView.areaId();
+
     JSONObject jsonObject = new JSONObject();
     try
     {
@@ -76,19 +108,16 @@ public class ReleasePresenter implements ReleaseContract.Presenter
         Person person = Person.getCurrentUser(Person.class);
         areaId = person.getAreaId();
       }
-      jsonObject.put(mContext.getString(R.string.push_type),mContext.getString(R.string.push_release_type))
-              .put(mContext.getString(R.string.push_result),mContext.getString(R.string.push_result_key))
-              .put(mContext.getString(R.string.push_title),mContext.getString(R.string.push_release_title))
-              .put(mContext.getString(R.string.push_content),mContext.getString(R.string.push_release_content))
-              .put(mContext.getString(R.string.push_area_id),areaId);
+      jsonObject.put(mContext.getString(R.string.push_type), mContext.getString(R.string.push_release_type))
+              .put(mContext.getString(R.string.push_result), mContext.getString(R.string.push_result_key))
+              .put(mContext.getString(R.string.push_title), mContext.getString(R.string.push_release_title))
+              .put(mContext.getString(R.string.push_content), mContext.getString(R.string.push_release_content))
+              .put(mContext.getString(R.string.push_area_id), areaId);
     } catch (JSONException e)
     {
       e.printStackTrace();
     }
 
-    BmobQuery<PushInstallation> query = PushInstallation.getQuery();
-    query.addWhereEqualTo(mContext.getString(R.string.area_id),areaId);
-    mPushManager.setQuery(query);
 
     mPushManager.pushMessage(jsonObject, new PushListener()
     {

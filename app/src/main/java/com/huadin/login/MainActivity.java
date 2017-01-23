@@ -3,6 +3,7 @@ package com.huadin.login;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -164,7 +165,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             startSettingFragment();
             break;
 
-          case R.id.urgent_info://个人信息
+          case R.id.urgent_info://紧急信息
             startUrgentFragment();
             break;
         }
@@ -414,5 +415,19 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
   {
     LogUtil.i(LOG_TAG, "弹出登录界面");
     startLoginFragment();
+  }
+
+  /*接收管理员发送的紧急信息调用的方法*/
+  @Override
+  protected void onNewIntent(Intent intent)
+  {
+    super.onNewIntent(intent);
+    int titleResId = intent.getIntExtra(TITLE_KEY, 0);
+    switch (titleResId)
+    {
+      case R.string.fault_info:
+        startUrgentFragment();
+        break;
+    }
   }
 }

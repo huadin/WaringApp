@@ -1,5 +1,6 @@
 package com.huadin.receiver;
 
+
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -11,10 +12,12 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.NotificationCompat;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.huadin.bean.Message;
 import com.huadin.bean.Person;
 import com.huadin.database.WaringAddress;
 import com.huadin.eventbus.EventCenter;
+import com.huadin.login.MainActivity;
 import com.huadin.userinfo.UpdateUserInfoActivity;
 import com.huadin.util.AMUtils;
 import com.huadin.util.LogUtil;
@@ -37,12 +40,18 @@ public class MessageReceiver extends BroadcastReceiver
   @Override
   public void onReceive(Context context, Intent intent)
   {
-    if (intent.getAction().equals(PushConstants.ACTION_MESSAGE))
+    try
     {
-      String msg = intent.getStringExtra("msg");
-      LogUtil.i(TAG, "msg = " + msg);
-      Message message = new Gson().fromJson(msg, Message.class);
-      paresMessage(context, message);
+      if (intent.getAction().equals(PushConstants.ACTION_MESSAGE))
+      {
+        String msg = intent.getStringExtra("msg");
+        LogUtil.i(TAG, "msg = " + msg);
+        Message message = new Gson().fromJson(msg, Message.class);
+        paresMessage(context, message);
+      }
+    } catch (JsonSyntaxException e)
+    {
+      e.printStackTrace();
     }
   }
 
@@ -68,6 +77,11 @@ public class MessageReceiver extends BroadcastReceiver
 
       case 3:
         //接收管理员发布的信息
+        if (message.getArea().equals(person.getAreaId()))
+        {
+          sendNotification(context, MainActivity.class, new int[]{Intent.FLAG_ACTIVITY_SINGLE_TOP},
+                  R.string.fault_info, R.string.push_release_title, R.string.push_release_content);
+        }
 
         break;
     }
@@ -92,27 +106,49 @@ public class MessageReceiver extends BroadcastReceiver
       //找到管理员
       if (person.isUserPermission())
       {
-
-        Intent intent = new Intent(context, UpdateUserInfoActivity.class);
-        intent.putExtra(TITLE_KEY, R.string.fault_info);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        PendingIntent pIntent = PendingIntent.getActivity(context, 0, intent, 0);
-
-        NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        Notification notification = new NotificationCompat.Builder(context)
-                .setContentTitle(context.getString(R.string.push_report_title))
-                .setContentText(context.getString(R.string.push_report_content))
-                .setSmallIcon(R.drawable.icon_logo_small)
-                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_logo_large))
-                .setDefaults(NotificationCompat.DEFAULT_ALL)//设置震动等,默认
-                .setContentIntent(pIntent)
-                .setAutoCancel(true)//点击后消失
-                .build();
-
-        manager.notify(1, notification);
+        sendNotification(context, UpdateUserInfoActivity.class,
+                new int[]{Intent.FLAG_ACTIVITY_SINGLE_TOP, Intent.FLAG_ACTIVITY_NEW_TASK},
+                R.string.fault_info, R.string.push_report_title, R.string.push_report_content);
       }
     }
   }
+
+  /**
+   * 发送通知，并可点击
+   *
+   * @param context            Context
+   * @param cls                点击后跳转的 Activity
+   * @param flags              Activity启动模式
+   * @param toolbarTitleResId  toolbar 标题资源Id
+   * @param notifyTitleResId   通知标题的id
+   * @param notifyContentResId 通知内容的id
+   */
+  private void sendNotification(Context context, Class<?> cls, int[] flags, int toolbarTitleResId,
+                                int notifyTitleResId, int notifyContentResId)
+  {
+    Intent intent = new Intent(context, cls);
+    intent.putExtra(TITLE_KEY, toolbarTitleResId);
+    for (int flag : flags)
+    {
+      intent.addFlags(flag);
+    }
+    PendingIntent pi = PendingIntent.getActivity(context, 0, intent, 0);
+
+    NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+    Notification notification = new NotificationCompat.Builder(context)
+            .setContentTitle(context.getString(notifyTitleResId))
+            .setContentText(context.getString(notifyContentResId))
+            .setSmallIcon(R.drawable.icon_logo_small)
+            .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_logo_large))
+            .setDefaults(NotificationCompat.DEFAULT_ALL)//响铃及震动等
+            .setAutoCancel(true)//点击消失
+            .setContentIntent(pi)
+            .build();
+
+    manager.notify(0, notification);
+
+  }
+
 
 }
 
