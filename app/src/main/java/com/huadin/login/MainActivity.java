@@ -7,7 +7,6 @@ import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
@@ -15,12 +14,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.huadin.base.BaseActivity;
-import com.huadin.base.BaseFragment;
 import com.huadin.bean.Person;
 import com.huadin.eventbus.EventCenter;
+import com.huadin.interf.OnFragmentOpenDrawerListener;
 import com.huadin.report.ReportFragment;
 import com.huadin.report.ReportPresenter;
-import com.huadin.interf.OnFragmentOpenDrawerListener;
 import com.huadin.setting.SettingFragment;
 import com.huadin.urgent.UrgentFragment;
 import com.huadin.urgent.UrgentPresenter;
@@ -220,8 +218,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     if (settingFragment == null)
     {
       settingFragment = SettingFragment.newInstance();
-      // TODO: 2016/12/15 没有添加 Presenter
-
       popTo(settingFragment);
     } else
     {
@@ -238,7 +234,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     if (reportFragment == null)
     {
       reportFragment = ReportFragment.newInstance();
-      new ReportPresenter(mContext,reportFragment);
+      new ReportPresenter(mContext, reportFragment);
       popTo(reportFragment);
     } else
     {
@@ -349,14 +345,19 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
       mDrawer.closeDrawer(GravityCompat.START);
     } else
     {
-      Fragment topFragment = getTopFragment();
-      if (topFragment instanceof BaseFragment)
-      {
-        mNavigationView.setCheckedItem(R.id.map_home);
-      }
+//      Fragment topFragment = getTopFragment();
+//      if (topFragment instanceof BaseFragment)
+//      {
+//        mNavigationView.setCheckedItem(R.id.map_home);
+//      }
       if (getSupportFragmentManager().getBackStackEntryCount() > 1)
       {
         pop();
+        //显示地图时,设置 menu item 为地图
+        if (getSupportFragmentManager().getBackStackEntryCount() == 1)
+        {
+          mNavigationView.setCheckedItem(R.id.map_home);
+        }
       } else
       {
         if (System.currentTimeMillis() - TOUCH_TIME < WAIT_TIME)

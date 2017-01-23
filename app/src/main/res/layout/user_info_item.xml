@@ -119,9 +119,9 @@
             style="@style/user_info_item_layout_style">
 
             <TextView
+                android:id="@+id/textView2"
                 style="@style/user_info_item_style"
-                android:text="@string/user_info_phone"
-                android:id="@+id/textView2"/>
+                android:text="@string/user_info_phone"/>
         </com.zhy.autolayout.AutoLinearLayout>
 
         <!--密码更改-->
