@@ -69,9 +69,16 @@ public class ReleasePresenter implements ReleaseContract.Presenter
 
     mReleaseView.showLoading();
 
+    Person person = Person.getCurrentUser(Person.class);
+
     ReleaseBean bean = new ReleaseBean();
     bean.setReleaseTitle(title);
     bean.setReleaseContent(content);
+    if (person != null)
+    {
+      bean.setReleaseAreaId(person.getAreaId());
+    }
+
     bean.save(new SaveListener<String>()
     {
       @Override

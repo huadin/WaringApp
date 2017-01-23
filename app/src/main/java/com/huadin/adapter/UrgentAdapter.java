@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.huadin.bean.ReleaseBean;
 import com.huadin.waringapp.R;
 
 import java.util.List;
@@ -17,9 +18,9 @@ import java.util.List;
 public class UrgentAdapter extends RecyclerView.Adapter<UrgentAdapter.UrgentViewHolder>
 {
 
-  private List<String> mList;
+  private List<ReleaseBean> mList;
 
-  public UrgentAdapter(List<String> mList)
+  public UrgentAdapter(List<ReleaseBean> mList)
   {
     this.mList = mList;
   }
@@ -37,7 +38,7 @@ public class UrgentAdapter extends RecyclerView.Adapter<UrgentAdapter.UrgentView
   @Override
   public void onBindViewHolder(UrgentViewHolder holder, int position)
   {
-    holder.tv.setText(mList.get(position));
+    holder.tv.setText(mList.get(position).getReleaseTitle());
   }
 
 
@@ -45,6 +46,16 @@ public class UrgentAdapter extends RecyclerView.Adapter<UrgentAdapter.UrgentView
   public int getItemCount()
   {
     return mList.size();
+  }
+
+  /**
+   * 更新
+   * @param beanList List<ReleaseBean>
+   */
+  public void updateAdapter(List<ReleaseBean> beanList)
+  {
+    mList = beanList;
+    notifyDataSetChanged();
   }
 
   static class UrgentViewHolder extends RecyclerView.ViewHolder

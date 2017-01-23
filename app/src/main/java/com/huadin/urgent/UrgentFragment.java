@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.huadin.adapter.UrgentAdapter;
 import com.huadin.base.BaseFragment;
+import com.huadin.bean.ReleaseBean;
 import com.huadin.waringapp.R;
 
 import java.util.ArrayList;
@@ -27,8 +28,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class UrgentFragment extends BaseFragment implements UrgentContract.View
 {
 
+  private UrgentAdapter mAdapter;
+  private List<ReleaseBean> mBeanList;
   private UrgentContract.Presenter mPresenter;
-  private List<String> mList;
 
   @BindView(R.id.urgent_recycler)
   RecyclerView mRecyclerView;
@@ -44,18 +46,9 @@ public class UrgentFragment extends BaseFragment implements UrgentContract.View
   public void onCreate(@Nullable Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
-    initData();
+    mBeanList = new ArrayList<>();
   }
 
-  private void initData()
-  {
-    mList = new ArrayList<>();
-
-    for (int i = 0; i < 100; i++)
-    {
-      mList.add(String.valueOf(i + 1));
-    }
-  }
 
   @Nullable
   @Override
@@ -63,36 +56,44 @@ public class UrgentFragment extends BaseFragment implements UrgentContract.View
   {
     View view = getViewResId(inflater, container, R.layout.urgemt_fragment_layout);
     ButterKnife.bind(this, view);
-    initToolbarHome(mToolbar,R.string.fault_info,getActivity());
+    initToolbarHome(mToolbar, R.string.fault_info, getActivity());
 
-    UrgentAdapter adapter = new UrgentAdapter(mList);
+    mAdapter = new UrgentAdapter(mBeanList);
     mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-    mRecyclerView.setAdapter(adapter);
+    mRecyclerView.setAdapter(mAdapter);
+    mPresenter.start();
+
     return view;
   }
 
   @Override
   public void showLoading()
   {
-
+    showLoading(R.string.fault_date_get_in);
   }
 
   @Override
   public void hindLoading()
   {
-
+    dismissLoading();
   }
 
   @Override
-  public void success()
+  public void success(List<ReleaseBean> beanList)
   {
-
+    mAdapter.updateAdapter(beanList);
   }
 
   @Override
   public void error(int errorId)
   {
+    showMessage(errorId);
+  }
 
+  @Override
+  public boolean networkStatus()
+  {
+    return isNetwork();
   }
 
   @Override

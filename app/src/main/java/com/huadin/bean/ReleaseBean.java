@@ -14,6 +14,17 @@ public class ReleaseBean extends BmobObject implements Parcelable
 {
   private String releaseTitle;
   private String releaseContent;
+  private String releaseAreaId;
+
+  public String getReleaseAreaId()
+  {
+    return releaseAreaId;
+  }
+
+  public void setReleaseAreaId(String releaseAreaId)
+  {
+    this.releaseAreaId = releaseAreaId;
+  }
 
   public String getReleaseTitle()
   {
@@ -35,6 +46,10 @@ public class ReleaseBean extends BmobObject implements Parcelable
     this.releaseContent = releaseContent;
   }
 
+  public ReleaseBean()
+  {
+  }
+
   @Override
   public int describeContents()
   {
@@ -46,19 +61,17 @@ public class ReleaseBean extends BmobObject implements Parcelable
   {
     dest.writeString(this.releaseTitle);
     dest.writeString(this.releaseContent);
-  }
-
-  public ReleaseBean()
-  {
+    dest.writeString(this.releaseAreaId);
   }
 
   protected ReleaseBean(Parcel in)
   {
     this.releaseTitle = in.readString();
     this.releaseContent = in.readString();
+    this.releaseAreaId = in.readString();
   }
 
-  public static final Parcelable.Creator<ReleaseBean> CREATOR = new Parcelable.Creator<ReleaseBean>()
+  public static final Creator<ReleaseBean> CREATOR = new Creator<ReleaseBean>()
   {
     @Override
     public ReleaseBean createFromParcel(Parcel source)
