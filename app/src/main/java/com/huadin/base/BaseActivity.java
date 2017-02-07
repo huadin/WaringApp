@@ -3,10 +3,13 @@ package com.huadin.base;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.huadin.eventbus.EventCenter;
+import com.huadin.login.LoginFragment;
 import com.huadin.util.ActivityCollector;
 import com.huadin.util.NetworkUtil;
 import com.huadin.util.ToastUtil;
@@ -23,6 +26,8 @@ public abstract class BaseActivity extends SupportActivity
 {
 
   protected static final String TITLE_KEY = "TITLE_KEY";
+  //解锁抽屉模式时使用
+  protected DrawerLayout mBaseDrawerLayout;
   protected static String LOG_TAG = null;
   protected Context mContext;
   protected ToastUtil mToast;
@@ -140,12 +145,29 @@ public abstract class BaseActivity extends SupportActivity
           finish();
         } else
         {
-          //弹出Fragment
-          pop();
+          popTopFragment();
         }
       }
     });
 
+  }
+
+  /**
+   * 弹出顶部 fragment
+   */
+  protected void popTopFragment()
+  {
+    //解除抽屉锁定
+    Fragment topFragment = getTopFragment();
+    if (topFragment instanceof LoginFragment)
+    {
+      if (mBaseDrawerLayout != null)
+      {
+        mBaseDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+      }
+    }
+    //弹出Fragment
+    pop();
   }
 
   /**

@@ -92,6 +92,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
   private void initView()
   {
+    mBaseDrawerLayout = mDrawer;
+
     mNavigationView.setNavigationItemSelectedListener(this);
     mNavigationView.setCheckedItem(R.id.map_home);
     mNavigationView.setItemTextColor(cls);
@@ -190,6 +192,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     {
       start(loginFragment, SupportFragment.SINGLETASK);
     }
+    //锁定抽屉
+    mDrawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
   }
 
   /**
@@ -346,14 +350,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
       mDrawer.closeDrawer(GravityCompat.START);
     } else
     {
-//      Fragment topFragment = getTopFragment();
-//      if (topFragment instanceof BaseFragment)
-//      {
-//        mNavigationView.setCheckedItem(R.id.map_home);
-//      }
       if (getSupportFragmentManager().getBackStackEntryCount() > 1)
       {
-        pop();
+        popTopFragment();
+
         //显示地图时,设置 menu item 为地图
         if (getSupportFragmentManager().getBackStackEntryCount() == 1)
         {
