@@ -71,7 +71,7 @@ public class DetailedFaultFragment extends BaseFragment implements DetailedFault
   public void onCreate(@Nullable Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
-    _mActivity.setFragmentAnimator(new DefaultHorizontalAnimator());
+//    _mActivity.setFragmentAnimator(new DefaultHorizontalAnimator());
   }
 
   @Nullable

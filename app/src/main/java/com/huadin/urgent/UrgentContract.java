@@ -18,7 +18,7 @@ interface UrgentContract
 
     void hindLoading();
 
-    void success(List<ReleaseBean> beanList);
+    void querySuccess(List<ReleaseBean> beanList);
 
     /**
      * 请求数据失败
@@ -28,6 +28,8 @@ interface UrgentContract
     void error(int errorId);
 
     boolean networkStatus();
+
+    void updateSuccess();
   }
 
   interface Presenter extends BasePresenter

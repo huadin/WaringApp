@@ -11,7 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.huadin.adapter.BaseAdapter;
 import com.huadin.adapter.FaultAdapter;
+import com.huadin.adapter.FaultAdapter_1;
 import com.huadin.base.BaseFragment;
 import com.huadin.bean.ReportBean;
 import com.huadin.eventbus.EventCenter;
@@ -25,6 +27,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -34,19 +37,20 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 
 public class FaultFragment extends BaseFragment implements FaultContract.View,
-        SwipeRefreshLayout.OnRefreshListener, FaultAdapter.OnItemClickListener, LoadMoreOnScrollListener.onLoadMore
+        SwipeRefreshLayout.OnRefreshListener, LoadMoreOnScrollListener.onLoadMore, BaseAdapter.onItemClickListener
 {
-  @BindView(R.id.fault_fragment_refresh)
+  @BindView(R.id.fragment_refresh)
   SwipeRefreshLayout mRefreshLayout;
-  @BindView(R.id.fault_fragment_recycler_view)
+  @BindView(R.id.fragment_recycler_view)
   RecyclerView mRecyclerView;
   @BindView(R.id.top_toolbar)
   Toolbar mToolbar;
-  @BindView(R.id.fault_fragment_empty)
+  @BindView(R.id.fragment_empty)
   TextView mEmpty;
 
   private FaultContract.Presenter mPresenter;
-  private FaultAdapter mFaultAdapter;
+  //  private FaultAdapter mFaultAdapter;
+  private FaultAdapter_1 mFaultAdapter;
   private List<ReportBean> mBeanList;
 
   public static FaultFragment newInstance()
@@ -58,6 +62,7 @@ public class FaultFragment extends BaseFragment implements FaultContract.View,
   public void onCreate(@Nullable Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
+    _mActivity.setFragmentAnimator(new DefaultHorizontalAnimator());
   }
 
   @Nullable
@@ -89,10 +94,12 @@ public class FaultFragment extends BaseFragment implements FaultContract.View,
 
     mRecyclerView.addOnScrollListener(listener);
     mBeanList = new ArrayList<>();
-    mFaultAdapter = new FaultAdapter(mBeanList);
+//    mFaultAdapter = new FaultAdapter(mBeanList);
+    mFaultAdapter = new FaultAdapter_1(mContext, mBeanList, R.layout.fault_adapter_item);
 
-    View footerView = LayoutInflater.from(mContext).inflate(R.layout.recycler_view_footer, mRecyclerView, false);
-    mFaultAdapter.setFooterView(footerView);
+//    View footerView = LayoutInflater.from(mContext).inflate(R.layout.recycler_view_footer, mRecyclerView, false);
+//    mFaultAdapter.setFooterView(footerView);
+
     mFaultAdapter.setOnItemClickListener(this);
     mRecyclerView.setAdapter(mFaultAdapter);
     mPresenter.start();//开始获取数据
@@ -147,7 +154,7 @@ public class FaultFragment extends BaseFragment implements FaultContract.View,
   public void querySuccess(List<ReportBean> beanList)
   {
     mRefreshLayout.setRefreshing(false);
-    mBeanList = beanList;
+//    mBeanList = beanList;
     //获取数据成功,关联到 Adapter
     if (beanList.size() == 0)
     {
@@ -156,6 +163,8 @@ public class FaultFragment extends BaseFragment implements FaultContract.View,
       showMessage(R.string.fault_load_more_null);
       return;
     }
+    mBeanList.clear();
+    mBeanList.addAll(beanList);
     mFaultAdapter.updateAdapter(beanList);
   }
 
@@ -173,7 +182,7 @@ public class FaultFragment extends BaseFragment implements FaultContract.View,
     LogUtil.i(LOG_TAG, "position = " + position);
     ReportBean bean = mBeanList.get(position);
 
-    DetailedFaultFragment fragment = DetailedFaultFragment.newInstance(bean,position);
+    DetailedFaultFragment fragment = DetailedFaultFragment.newInstance(bean, position);
     start(fragment, SINGLETASK);
     new DetailedFaultPresenter(fragment);
 

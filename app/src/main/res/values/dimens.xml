@@ -63,6 +63,7 @@
     <dimen name="urgent_card_view_radius">10dp</dimen>
     <dimen name="urgent_card_view_elevation">5dp</dimen>
     <dimen name="urgent_card_view_margin_left">16dp</dimen>
+    <dimen name="urgent_item_text_margin_16">16dp</dimen>
     <dimen name="urgent_card_view_margin_top">5dp</dimen>
 
     <!--个人信息-->

@@ -12,11 +12,26 @@
     app:cardCornerRadius="@dimen/urgent_card_view_radius"
     app:cardElevation="@dimen/urgent_card_view_elevation">
 
-    <TextView
-        android:id="@+id/urgent_text_view"
+    <LinearLayout
+        android:id="@+id/urgent_layout"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:gravity="center"
-        android:textSize="18sp"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/urgent_text_title"
+            style="@style/urgent_item_text_style"
+            android:layout_marginTop="5dp"
+            android:text="@string/app_name"
+            android:textSize="@dimen/text_size_18"/>
+
+        <TextView
+            android:id="@+id/urgent_text_time"
+            style="@style/urgent_item_text_style"
+            android:layout_marginBottom="5dp"
+            android:text="@string/temp_time"
+            android:textSize="@dimen/text_size_16"/>
+
+    </LinearLayout>
 
 </android.support.v7.widget.CardView>

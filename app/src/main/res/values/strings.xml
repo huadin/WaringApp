@@ -11,6 +11,7 @@
     <string name="title">Title</string>
     <string name="bmob_app_key">eb6dd8eeb3a61db8b74c269113587850</string>
     <string name="title_activity_login">Sign in</string>
+    <string name="temp_time">2016&#8211;01&#8211;02</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">手机号码</string>

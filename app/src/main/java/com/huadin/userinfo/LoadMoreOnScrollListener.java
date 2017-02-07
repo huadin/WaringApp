@@ -4,6 +4,7 @@ package com.huadin.userinfo;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.huadin.adapter.BaseAdapter;
 import com.huadin.adapter.FaultAdapter;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -36,7 +37,7 @@ public class LoadMoreOnScrollListener extends RecyclerView.OnScrollListener
   {
     super.onScrollStateChanged(recyclerView, newState);
     int mLastVisibleItem;
-    FaultAdapter adapter = (FaultAdapter) recyclerView.getAdapter();
+    BaseAdapter adapter = (BaseAdapter) recyclerView.getAdapter();
     if (newState == RecyclerView.SCROLL_STATE_IDLE)//滑动停止
     {
       mLayoutManager = recyclerView.getLayoutManager();

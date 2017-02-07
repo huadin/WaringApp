@@ -106,7 +106,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
       @Override
       public void onClick(View view)
       {
-        // TODO: 2016/12/3 判断是否已经登录,mUser != null
+
         closeDrawer();
         mDrawer.postDelayed(new Runnable()
         {
@@ -148,7 +148,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
   public boolean onNavigationItemSelected(@NonNull final MenuItem item)
   {
     mDrawer.closeDrawer(GravityCompat.START);
-    // TODO: 2016/12/15 停电报修和设置进出栈有bug,会先进栈后出栈，有动画残留
+
     mDrawer.postDelayed(new Runnable()
     {
       @Override
