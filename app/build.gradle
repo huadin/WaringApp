@@ -13,10 +13,20 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        signingConfigs {
+            config {
+                storeFile file(KEY_PATH)
+                storePassword KEY_PAS
+                keyAlias ALIAS_NAME
+                keyPassword ALIAS_PAS
+            }
+        }
+
         buildTypes {
             release {
-                minifyEnabled false
+                minifyEnabled true
                 proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+                signingConfig signingConfigs.config
             }
         }
 
@@ -47,7 +57,7 @@ android {
         compile 'com.android.support:recyclerview-v7:25.1.0'
         /* 百分比布局 */
 //        compile 'com.android.support:percent:25.1.0'
-        compile 'com.zhy:percent-support-extends:1.1.1'
+//        compile 'com.zhy:percent-support-extends:1.1.1'
         /* autoLayout布局 */
         compile 'com.zhy:autolayout:1.4.5'
         /* butterKnife */

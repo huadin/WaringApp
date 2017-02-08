@@ -204,4 +204,12 @@ public abstract class BaseFragment extends SupportFragment
     startActivity(localIntent);
   }
 
+  /**
+   * 弹出顶部 fragment
+   */
+  protected void popTopFragment()
+  {
+    mContext.popTopFragment();
+  }
+
 }

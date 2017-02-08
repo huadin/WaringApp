@@ -77,6 +77,7 @@ public class MessageReceiver extends BroadcastReceiver
 
       case 3:
         //接收管理员发布的信息
+        // TODO: 2017/2/8 管理员自己也可以收到消息
         if (message.getArea().equals(person.getAreaId()))
         {
           sendNotification(context, MainActivity.class, new int[]{Intent.FLAG_ACTIVITY_SINGLE_TOP},

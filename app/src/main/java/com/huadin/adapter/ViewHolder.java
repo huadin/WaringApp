@@ -7,12 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class ViewHolder extends RecyclerView.ViewHolder
+class ViewHolder extends RecyclerView.ViewHolder
 {
   private SparseArray<View> mViews;
   private View mCovertView;
 
-  public ViewHolder(View itemView)
+  ViewHolder(View itemView)
   {
     super(itemView);
     mCovertView = itemView;
@@ -25,7 +25,7 @@ public class ViewHolder extends RecyclerView.ViewHolder
     return new ViewHolder(view);
   }
 
-  public <T extends View> T getView(int viewId)
+  <T extends View> T getView(int viewId)
   {
     View view = mViews.get(viewId);
     if (view == null)
