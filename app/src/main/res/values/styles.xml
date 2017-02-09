@@ -35,6 +35,10 @@
         <item name="android:background">@color/colorPrimary</item>
     </style>
 
+    <!--toolbar menu 弹出位置-->
+    <style name="toolbar_menu_pop_style" parent="ThemeOverlay.AppCompat.Light">
+
+    </style>
 
     <!--注册输入框-->
     <style name="register_edit_text_layout">

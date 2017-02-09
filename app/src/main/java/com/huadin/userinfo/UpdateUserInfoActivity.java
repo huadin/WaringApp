@@ -11,6 +11,8 @@ import com.huadin.userinfo.fault.FaultFragment;
 import com.huadin.userinfo.fault.FaultPresenter;
 import com.huadin.userinfo.password.UpdatePasswordFragment;
 import com.huadin.userinfo.password.UpdatePasswordPresenter;
+import com.huadin.userinfo.person.PersonFragment;
+import com.huadin.userinfo.person.PersonPresenter;
 import com.huadin.userinfo.phone.UpdatePhoneFragment;
 import com.huadin.userinfo.phone.UpdatePhonePresenter;
 import com.huadin.userinfo.release.ReleaseFragment;
@@ -82,6 +84,12 @@ public class UpdateUserInfoActivity extends BaseActivity
         FaultFragment faultFragment = FaultFragment.newInstance();
         loadRootFragment(R.id.update_user_info_fragment_ground,faultFragment);
         new FaultPresenter(faultFragment);
+        break;
+      case R.string.person_info:
+        mToolbar.setVisibility(View.GONE);
+        PersonFragment personFragment = PersonFragment.newInstance();
+        loadRootFragment(R.id.update_user_info_fragment_ground,personFragment);
+        new PersonPresenter(personFragment);
         break;
 
     }

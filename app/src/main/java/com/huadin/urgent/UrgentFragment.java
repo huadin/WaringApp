@@ -106,7 +106,7 @@ public class UrgentFragment extends BaseFragment implements UrgentContract.View,
   public void querySuccess(List<ReleaseBean> beanList)
   {
     mRefreshLayout.setRefreshing(false);
-
+    mEmpty.setVisibility(View.GONE);
     if (beanList.size() == 0)
     {
       //下拉加载没有数据

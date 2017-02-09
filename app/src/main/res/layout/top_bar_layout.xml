@@ -13,6 +13,6 @@
         android:background="@color/colorPrimary"
         app:layout_scrollFlags="scroll|enterAlways|snap"
         app:titleTextColor="@color/app_text_color"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        app:popupTheme="@style/toolbar_menu_pop_style"/>
 
 </android.support.design.widget.AppBarLayout>

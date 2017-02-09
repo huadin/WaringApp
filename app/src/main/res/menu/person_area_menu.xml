@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/area_11401"
+        android:title="@string/area_11401"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/area_11402"
+        android:title="@string/area_11402"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/area_11403"
+        android:title="@string/area_11403"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/area_11404"
+        android:title="@string/area_11404"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/area_11405"
+        android:title="@string/area_11405"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/area_11406"
+        android:title="@string/area_11406"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/area_11407"
+        android:title="@string/area_11407"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/area_11408"
+        android:title="@string/area_11408"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/area_11409"
+        android:title="@string/area_11409"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/area_11410"
+        android:title="@string/area_11410"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/area_11411"
+        android:title="@string/area_11411"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/area_11412"
+        android:title="@string/area_11412"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/area_11414"
+        android:title="@string/area_11414"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/area_11415"
+        android:title="@string/area_11415"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/area_11416"
+        android:title="@string/area_11416"
+        app:showAsAction="never"/>
+
+
+</menu>

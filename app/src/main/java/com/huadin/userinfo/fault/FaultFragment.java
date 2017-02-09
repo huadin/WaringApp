@@ -154,6 +154,7 @@ public class FaultFragment extends BaseFragment implements FaultContract.View,
   public void querySuccess(List<ReportBean> beanList)
   {
     mRefreshLayout.setRefreshing(false);
+    mEmpty.setVisibility(View.GONE);
 //    mBeanList = beanList;
     //获取数据成功,关联到 Adapter
     if (beanList.size() == 0)

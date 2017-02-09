@@ -30,6 +30,23 @@
     </string>
     <string name="user_name">AS</string>
     <string name="user_name_1">Android Studio</string>
+
+    <string name="area_11401">城区</string>
+    <string name="area_11402">朝阳</string>
+    <string name="area_11403">海淀</string>
+    <string name="area_11404">丰台</string>
+    <string name="area_11405">石景山</string>
+    <string name="area_11406">通州</string>
+    <string name="area_11407">昌平</string>
+    <string name="area_11408">门头沟</string>
+    <string name="area_11409">房山</string>
+    <string name="area_11410">大兴</string>
+    <string name="area_11411">平谷</string>
+    <string name="area_11412">怀柔</string>
+    <string name="area_11414">顺义</string>
+    <string name="area_11415">延庆</string>
+    <string name="area_11416">亦庄</string>
+
     <string name="read_phone_state">需要获取手机状态信息,是否去设置?</string>
     <string name="submit_success">提交成功</string>
     <!--登录  注册-->
