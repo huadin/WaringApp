@@ -16,6 +16,7 @@
     <!--toolbar menu 弹出位置-->
     <style name="toolbar_menu_pop_style" parent="ThemeOverlay.AppCompat.Light">
         <item name="overlapAnchor">false</item>
+        <item name="android:listPreferredItemHeightSmall">40dp</item><!--menu item 的高度-->
     </style>
 
 </resources>
