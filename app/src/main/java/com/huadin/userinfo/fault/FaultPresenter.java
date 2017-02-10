@@ -4,18 +4,16 @@ import android.support.annotation.NonNull;
 
 import com.huadin.bean.ReportBean;
 import com.huadin.database.WaringAddress;
-import com.huadin.util.LogUtil;
+import com.huadin.interf.OnQueryDataListener;
+import com.huadin.util.QueryDataUtil;
 import com.huadin.waringapp.R;
 
 import org.litepal.crud.DataSupport;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 
@@ -26,24 +24,18 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * 获取用户提交的报修信息
  */
 
-public class FaultPresenter implements FaultContract.Presenter
+public class FaultPresenter implements FaultContract.Presenter, OnQueryDataListener<ReportBean>
 {
-
-  private static final String TAG = "FaultPresenter";
   private FaultContract.View mFaultView;
-  private static final int STATE_REFRESH = 0;// 下拉刷新
-  private static final int STATE_MORE = 1;// 加载更多
-  private int mCurrentPage = 0;//当前页编号
-  private int mLimit = 15;//每页的数据
-  private String lastTime = "";
-  private List<ReportBean> mBeanList;
+  private QueryDataUtil<ReportBean> mQueryDataUtil;
 
   public FaultPresenter(FaultContract.View faultView)
   {
     mFaultView = faultView;
     mFaultView = checkNotNull(faultView, "faultView cannot be null");
     mFaultView.setPresenter(this);
-    mBeanList = new ArrayList<>();
+    OnQueryDataListener<ReportBean> mListener = this;
+    mQueryDataUtil = new QueryDataUtil<>(mListener);
   }
 
   /**
@@ -52,7 +44,7 @@ public class FaultPresenter implements FaultContract.Presenter
   @Override
   public void start()
   {
-    //如在这检查网络,如果没有网络,会应生命周期没有执行到 onResume,无法 toast
+    //如在这检查网络,如果没有网络,生命周期没有执行到 onResume,无法 toast
 //    if (getNetworkStatue()) return;
 
     BmobQuery<ReportBean> query = getQuery();
@@ -63,26 +55,7 @@ public class FaultPresenter implements FaultContract.Presenter
       public void done(List<ReportBean> list, BmobException e)
       {
         mFaultView.hindLoading();
-        if (e == null)
-        {
-          LogUtil.i(TAG, "list size = " + list.size());
-
-          if (list.size() > 0)
-          {
-            lastTime = list.get(list.size() - 1).getCreatedAt();
-            //防止在加载更多时,adapter中 list 集合丢失第一页数据
-            mBeanList.addAll(list);
-            mFaultView.querySuccess(list);
-          } else
-          {
-            mFaultView.updateSuccess();
-          }
-        } else
-        {
-          int code = e.getErrorCode();
-          LogUtil.i(TAG, "code = " + code + " / message = " + e.getMessage());
-          showCode(code);
-        }
+        mQueryDataUtil.firstQuery(list, e);
       }
     });
 
@@ -92,14 +65,16 @@ public class FaultPresenter implements FaultContract.Presenter
   public void refresh()
   {
     if (getNetworkStatue()) return;
-    queryData(0, STATE_REFRESH);
+    mQueryDataUtil.refreshData();
+    queryData();
   }
 
   @Override
   public void loadMore()
   {
     if (getNetworkStatue()) return;
-    queryData(mCurrentPage, STATE_MORE);
+    mQueryDataUtil.loadMoreData();
+    queryData();
   }
 
   /**
@@ -132,94 +107,30 @@ public class FaultPresenter implements FaultContract.Presenter
    */
   private BmobQuery<ReportBean> getQuery()
   {
+    int limit = 15;//每页查询数据的个数
     List<BmobQuery<ReportBean>> listBQ = setQueryCondition();
 
     BmobQuery<ReportBean> query = new BmobQuery<>();
     query.and(listBQ);
     query.order("-createdAt");
-    query.setLimit(mLimit);
+    query.setLimit(limit);
     return query;
   }
 
 
   /**
    * 查询数据
-   *
-   * @param page 页数
-   * @param type recyclerView 操作类型
    */
-  private void queryData(int page, final int type)
+  private void queryData()
   {
-    LogUtil.i(TAG, "page = " + page + " / type = " + type);
     BmobQuery<ReportBean> query = getQuery();
-    switch (type)
-    {
-      case STATE_REFRESH:
-        page = 0;
-        query.setSkip(page);
-        break;
-      case STATE_MORE:
-        Date date;
-        try
-        {
-          SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-          date = sdf.parse(lastTime);
-
-          // 只查询小于等于最后一个item发表时间的数据
-          query.addWhereLessThanOrEqualTo("createdAt", new BmobDate(date));
-          // 跳过之前页数并去掉重复数据
-          query.setSkip(page * mLimit);
-        } catch (Exception e)
-        {
-          e.printStackTrace();
-        }
-        break;
-    }
-
-    query.findObjects(new FindListener<ReportBean>()
+    BmobQuery<ReportBean> queryDate = mQueryDataUtil.getBmobQuery(query);
+    queryDate.findObjects(new FindListener<ReportBean>()
     {
       @Override
       public void done(List<ReportBean> list, BmobException e)
       {
-        if (e == null)
-        {
-          LogUtil.i(TAG, "list size = " + list.size());
-
-          if (list.size() > 0)
-          {
-            if (type == STATE_REFRESH)
-            {
-              //下拉刷新
-              mCurrentPage = -1;
-              lastTime = list.get(list.size() - 1).getCreatedAt();
-              mBeanList.clear();
-            }
-
-            mBeanList.addAll(list);
-
-            // 这里在每次加载完数据后，将当前页码+1,
-            // 这样在上拉刷新的方法中就不需要操作curPage了
-            mCurrentPage++;
-
-            //数据回调
-            mFaultView.querySuccess(mBeanList);
-
-          } else if (type == STATE_REFRESH)
-          {
-            //刷新没有数据,即服务器无数据
-            mFaultView.updateSuccess();//暂时这么写
-          } else if (type == STATE_MORE)
-          {
-            //加载更多没有数据
-            mFaultView.querySuccess(list);
-          }
-
-        } else
-        {
-          int code = e.getErrorCode();
-          LogUtil.i(TAG, "code = " + code + " / message = " + e.getMessage());
-          showCode(code);
-        }
+        mQueryDataUtil.findPageData(list, e);
       }
     });
   }
@@ -239,16 +150,22 @@ public class FaultPresenter implements FaultContract.Presenter
     return false;
   }
 
-  private void showCode(int code)
+
+  @Override
+  public void queryDataSuccess(List<ReportBean> list)
   {
-    switch (code)
-    {
-      case 9010:
-        mFaultView.updateError(R.string.error_code_9010);
-        break;
-      case 9016:
-        mFaultView.updateError(R.string.error_code_9016);
-        break;
-    }
+    mFaultView.querySuccess(list);
+  }
+
+  @Override
+  public void queryDataSuccessNotData()
+  {
+    mFaultView.updateSuccess();
+  }
+
+  @Override
+  public void queryDataError(int errorResId)
+  {
+    mFaultView.updateError(errorResId);
   }
 }

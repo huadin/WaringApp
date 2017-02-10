@@ -136,6 +136,7 @@ public class PersonFragment extends BaseFragment implements PersonContract.View,
   public void querySuccess(List<Person> personList)
   {
     //查询成功回调
+    mRefresh.setRefreshing(false);
     mEmpty.setVisibility(View.GONE);
     mPersonAdapter.updateAdapter(personList);
   }

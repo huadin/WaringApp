@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.huadin.base.BaseFragment;
+import com.huadin.setting.contact.ContactFragment;
 import com.huadin.userinfo.address.AddressFragment;
 import com.huadin.userinfo.address.AddressPresenter;
 import com.huadin.waringapp.R;
@@ -57,11 +58,13 @@ public class SettingFragment extends BaseFragment
       case R.id.address_linear_layout:
         startAddressFragment();//预警
         break;
-      case R.id.msg_linear_layout:
+      case R.id.msg_linear_layout://消息设置
+
         break;
-      case R.id.contact_us_linear_layout:
+      case R.id.contact_us_linear_layout://联系我们
+        startContactFragment();
         break;
-      case R.id.feedback_linear_layout:
+      case R.id.feedback_linear_layout://意见反馈
         break;
 
     }
@@ -78,6 +81,21 @@ public class SettingFragment extends BaseFragment
       addressFragment = AddressFragment.newInstance(getString(R.string.setting_info_flag_key));
       start(addressFragment, SupportFragment.SINGLETASK);
     }
-    new AddressPresenter(mContext,addressFragment);
+    new AddressPresenter(mContext, addressFragment);
   }
+
+  /**
+   * 联系我们
+   */
+  private void startContactFragment()
+  {
+    ContactFragment contactFragment = findFragment(ContactFragment.class);
+    if (contactFragment == null)
+    {
+      contactFragment = ContactFragment.newInstance();
+      start(contactFragment, SupportFragment.SINGLETASK);
+    }
+  }
+
+
 }

@@ -29,6 +29,8 @@ public class UserFragment extends BaseFragment
   TextView mLoginAccount;
   @BindView(R.id.user_binding_phone_content)
   TextView mUserPhone;
+  @BindView(R.id.user_binding_address_name)
+  TextView mUserAddress;
   @BindView(R.id.user_login_account)
   LinearLayout mUserNameLayout;
 
@@ -80,6 +82,7 @@ public class UserFragment extends BaseFragment
     if (mPerson == null) return;
     mLoginAccount.setText(mPerson.getUsername());
     mUserPhone.setText(mPerson.getMobilePhoneNumber());
+    mUserAddress.setText(mPerson.getAreaName());
     // TODO: 2017/1/10 展示关闭更改用户名次数限制
     if (mPerson.isUserNameChange())
     {
