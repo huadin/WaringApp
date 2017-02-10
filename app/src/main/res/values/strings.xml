@@ -162,6 +162,7 @@
     <string name="user_info_code">验证码</string>
     <string name="user_login_account">登录号</string>
     <string name="user_binding_phone">手机号</string>
+    <string name="user_binding_address">区域名</string>
     <string name="user_name_change_prompt">登录名由字母和数字组成,并且只能该改一次</string>
     <string name="update_user_name_error">用户名不合法</string>
     <!--发布信息-->
@@ -215,6 +216,14 @@
     <string name="detailed_fault_sign_read">是否将该条信息标记为已处理,并更改其状态?</string>
     <string name="call_phone">拨打电话</string>
     <string name="call_phone_rationale">请授予拨打电话权限,否则无法拨打电话,是否去设置?</string>
+
+    <!--联系我们-->
+    <string name="contact_http_title">官网</string>
+    <string name="contact_http">www.bj.sgcc.com.cn</string>
+    <string name="contact_phone_title">电话</string>
+    <string name="contact_phone">95598</string>
+    <string name="contact_weiBo">微博</string>
+    <string name="contact_weiXin">微信</string>
 
 
 </resources>

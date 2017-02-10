@@ -44,6 +44,24 @@
     </com.zhy.autolayout.AutoLinearLayout>
 
     <!--地址信息-->
+    <View
+        style="@style/user_info_item_view"
+        android:layout_marginBottom="@dimen/user_fragment_view_margin"
+        android:layout_marginTop="@dimen/user_fragment_view_margin"/>
 
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/user_binding_address"
+        style="@style/user_fragment_item_layout_style">
+
+        <TextView
+            style="@style/user_fragment_text_title_style"
+            android:text="@string/user_binding_address"/>
+
+        <TextView
+            android:id="@+id/user_binding_address_name"
+            style="@style/user_fragment_text_content_style"
+            android:text="@string/app_name"/>
+
+    </com.zhy.autolayout.AutoLinearLayout>
 
 </LinearLayout>

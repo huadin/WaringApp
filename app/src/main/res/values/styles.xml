@@ -245,5 +245,66 @@
         <item name="android:textColor">@color/app_text_color</item>
     </style>
 
+    <!--联系我们 start -->
+    <style name="contact_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/contact_fragment_linear_layout_height</item>
+        <item name="android:layout_marginTop">@dimen/contact_fragment_linear_layout_margin_top
+        </item>
+        <!--<item name="android:background">@drawable/layout_ripple_selector</item>-->
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="contact_title">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/contact_fragment_linear_layout_padding_left</item>
+        <item name="android:textSize">@dimen/text_size_18</item>
+    </style>
+
+    <style name="contact_content">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">3</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">@dimen/text_size_18</item>
+    </style>
+
+    <style name="contact_image">
+        <item name="android:layout_height">@dimen/contact_fragment_image_w_h</item>
+        <item name="android:layout_width">@dimen/contact_fragment_image_w_h</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:background">@drawable/ic_chevron_right_black_24dp</item>
+        <item name="android:layout_marginEnd">@dimen/contact_fragment_linear_layout_margin_end
+        </item>
+    </style>
+
+    <style name="contact_wei_layout">
+        <item name="android:layout_width">match_parent</item>
+        <!--<item name="android:background">@drawable/layout_ripple_selector</item>-->
+        <item name="android:layout_height">@dimen/contact_fragment_linear_layout_height</item>
+        <item name="android:layout_marginTop">@dimen/contact_fragment_linear_layout_margin_top
+        </item>
+    </style>
+
+    <style name="contact_wei_content">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/contact_fragment_linear_layout_margin_end</item>
+        <item name="android:textSize">@dimen/text_size_18</item>
+    </style>
+
+    <style name="contact_wei_icon">
+        <item name="android:layout_width">@dimen/contact_fragment_image_w_h</item>
+        <item name="android:layout_height">@dimen/contact_fragment_image_w_h</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginRight">@dimen/contact_fragment_linear_layout_margin_end
+        </item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
 
 </resources>
