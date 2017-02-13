@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/top_bar_layout"/>
+    <!--感谢-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/feedback_fragment_thank_margin_top"
+        android:gravity="center"
+        android:text="@string/feedback_thank"
+        android:textColor="@color/user_info_item_text_color"/>
+    <!--建议-->
+    <EditText
+        android:id="@+id/feedback_fragment_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/feedback_fragment_edit_margin"
+        android:background="@drawable/setting_layout_item_selector"
+        android:elevation="@dimen/feedback_fragment_elevation"
+        android:gravity="start"
+        android:hint="@string/feedback_fragment_input_feedback"
+        android:maxHeight="@dimen/feedback_fragment_edit_max_height"
+        android:minHeight="@dimen/feedback_fragment_edit_min_height"
+        android:padding="@dimen/feedback_fragment_edit_padding"
+        android:textSize="@dimen/text_size_14"/>
+    <!--官网-->
+    <TextView
+        style="@style/feedback_other_text_style"
+        android:text="@string/website_http_1"/>
+    <!--微博-->
+    <TextView
+        style="@style/feedback_other_text_style"
+        android:layout_marginTop="@dimen/feedback_fragment_edit_margin"
+        android:text="@string/sina_http_1"/>
+
+
+</LinearLayout>

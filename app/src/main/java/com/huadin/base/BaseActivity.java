@@ -10,6 +10,9 @@ import android.view.View;
 
 import com.huadin.eventbus.EventCenter;
 import com.huadin.login.LoginFragment;
+import com.huadin.setting.contact.ContactFragment;
+import com.huadin.setting.feedback.FeedbackFragment;
+import com.huadin.userinfo.address.AddressFragment;
 import com.huadin.util.ActivityCollector;
 import com.huadin.util.NetworkUtil;
 import com.huadin.util.ToastUtil;
@@ -153,13 +156,22 @@ public abstract class BaseActivity extends SupportActivity
   }
 
   /**
+   * 锁定抽屉
+   */
+  protected void lockDrawer()
+  {
+    mBaseDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+  }
+
+  /**
    * 弹出顶部 fragment
    */
   protected void popTopFragment()
   {
     //解除抽屉锁定
     Fragment topFragment = getTopFragment();
-    if (topFragment instanceof LoginFragment)
+    if (topFragment instanceof LoginFragment || topFragment instanceof AddressFragment ||
+            topFragment instanceof ContactFragment || topFragment instanceof FeedbackFragment)
     {
       if (mBaseDrawerLayout != null)
       {

@@ -225,9 +225,16 @@
     <string name="contact_weiBo">微博</string>
     <string name="contact_weiXin">微信</string>
     <string name="website_http">http://www.95598.cn/person/index.shtml</string>
+    <string name="website_http_1">官网：www.bj.sgcc.com.cn</string>
     <string name="sina_http">http://weibo.com/sgcc</string>
+    <string name="sina_http_1">微博：weibo.com/sgcc</string>
     <string name="action_view">android.intent.action.VIEW</string>
     <string name="call_phone_number">tel:95598</string>
+
+    <!--意见反馈-->
+    <string name="feedback_thank">感谢使用本客户端</string>
+    <string name="feedback_fragment_input_feedback">请输入您的建议</string>
+    <string name="input_cannot_be_null">请输入建议内容!</string>
 
 
 </resources>

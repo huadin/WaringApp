@@ -7,7 +7,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.view.ViewGroup;
 
 import com.huadin.eventbus.EventCenter;
 import com.huadin.interf.OnFragmentOpenDrawerListener;
+import com.huadin.util.LogUtil;
 import com.huadin.util.NetworkUtil;
 import com.huadin.util.ToastUtil;
 import com.huadin.waringapp.R;
@@ -210,6 +213,14 @@ public abstract class BaseFragment extends SupportFragment
   protected void popTopFragment()
   {
     mContext.popTopFragment();
+  }
+
+  /**
+   * 锁定抽屉
+   */
+  protected void  lockDrawer()
+  {
+    mContext.lockDrawer();
   }
 
 }

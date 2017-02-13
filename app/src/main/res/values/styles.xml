@@ -302,6 +302,14 @@
         <item name="android:layout_marginRight">@dimen/contact_fragment_linear_layout_margin_end
         </item>
     </style>
+
+    <style name="feedback_other_text_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingStart">@dimen/contact_fragment_linear_layout_margin_end</item>
+        <item name="android:textColor">@color/user_info_item_text_color</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
     <!--联系我们 end -->
 
 </resources>

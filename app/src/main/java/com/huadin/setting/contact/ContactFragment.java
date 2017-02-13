@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.huadin.permission.PermissionListener;
 import com.huadin.permission.PermissionManager;
 import com.huadin.waringapp.R;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -27,6 +29,9 @@ import butterknife.OnClick;
 
 public class ContactFragment extends BaseFragment implements PermissionListener
 {
+
+  @BindView(R.id.top_toolbar)
+  Toolbar mToolbar;
 
   private PermissionManager mPermissionManager;
   private int PERMISSION_CODE = 0x72;
@@ -45,9 +50,9 @@ public class ContactFragment extends BaseFragment implements PermissionListener
   @Override
   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
   {
-
     View view = getViewResId(inflater, container, R.layout.contact_fragment);
     ButterKnife.bind(this, view);
+    initToolbar(mToolbar,R.string.contact_us,false);
     return view;
   }
 
