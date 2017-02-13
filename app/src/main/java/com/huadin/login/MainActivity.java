@@ -252,14 +252,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
    */
   private void popTo(final SupportFragment fragment)
   {
-    popTo(MapFragment.class, false, new Runnable()
-    {
-      @Override
-      public void run()
-      {
-        start(fragment);
-      }
-    });
+//    popTo(MapFragment.class, false, new Runnable()
+//    {
+//      @Override
+//      public void run()
+//      {
+//        start(fragment);
+//      }
+//    });
+    start(fragment);
   }
 
 
