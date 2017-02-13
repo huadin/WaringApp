@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/contact_fragment_linear_layout_margin"
+    android:background="@drawable/setting_layout_item_selector"
+    android:orientation="vertical">
+    <!--官网-->
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/contact_layout_http"
+        style="@style/contact_layout"
+        android:layout_marginTop="@dimen/contact_fragment_linear_layout_margin_top">
+
+        <TextView
+            style="@style/contact_title"
+            android:text="@string/contact_http_title"/>
+
+        <TextView
+            android:id="@+id/contact_http"
+            style="@style/contact_content"
+            android:text="@string/contact_http"/>
+
+        <ImageView
+            style="@style/contact_image"
+            android:contentDescription="@null"/>
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <!--电话-->
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/contact_layout_phone"
+        style="@style/contact_layout">
+
+        <TextView
+            style="@style/contact_title"
+            android:text="@string/contact_phone_title"/>
+
+        <TextView
+            android:id="@+id/contact_phone"
+            style="@style/contact_content"
+            android:text="@string/contact_phone"/>
+
+        <ImageView
+            style="@style/contact_image"
+            android:contentDescription="@null"/>
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <!--微博-->
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/contact_weiBo_layout"
+        style="@style/contact_wei_layout">
+
+        <TextView
+            style="@style/contact_wei_content"
+            android:text="@string/contact_weiBo"
+            />
+
+        <ImageView
+            style="@style/contact_wei_icon"
+            android:contentDescription="@null"
+            android:src="@drawable/icon_sina"/>
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <!--微信-->
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/contact_weiXi_layout"
+        style="@style/contact_wei_layout">
+
+        <TextView
+            style="@style/contact_wei_content"
+            android:text="@string/contact_weiXin"/>
+
+        <ImageView
+            style="@style/contact_wei_icon"
+            android:contentDescription="@null"
+            android:src="@drawable/icon_weixin"/>
+    </com.zhy.autolayout.AutoLinearLayout>
+
+</com.zhy.autolayout.AutoLinearLayout>

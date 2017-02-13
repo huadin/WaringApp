@@ -102,12 +102,20 @@
     <dimen name="detailed_fault_margin_5">5dp</dimen>
 
     <!--联系我们-->
-    <dimen name="contact_fragment_linear_layout_height">40dp</dimen>
+    <dimen name="contact_fragment_linear_layout_height">96px</dimen>
     <dimen name="contact_fragment_linear_layout_margin_top">32px</dimen>
     <dimen name="contact_fragment_linear_layout_margin_end">16dp</dimen>
     <dimen name="contact_fragment_linear_layout_padding_left">35px</dimen>
     <dimen name="contact_fragment_image_w_h">30dp</dimen><!--image 的宽高-->
     <dimen name="contact_fragment_linear_layout_margin">16dp</dimen>
+
+    <!--意见反馈-->
+    <dimen name="feedback_fragment_thank_margin_top">20dp</dimen>
+    <dimen name="feedback_fragment_edit_min_height">150dp</dimen>
+    <dimen name="feedback_fragment_edit_margin">16dp</dimen>
+    <dimen name="feedback_fragment_elevation">2dp</dimen>
+    <dimen name="feedback_fragment_edit_padding">5dp</dimen>
+    <dimen name="feedback_fragment_edit_max_height">250dp</dimen>
 
 
 </resources>

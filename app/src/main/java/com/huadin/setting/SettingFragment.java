@@ -9,8 +9,11 @@ import android.view.ViewGroup;
 
 import com.huadin.base.BaseFragment;
 import com.huadin.setting.contact.ContactFragment;
+import com.huadin.setting.feedback.FeedbackFragment;
+import com.huadin.setting.feedback.FeedbackPresenter;
 import com.huadin.userinfo.address.AddressFragment;
 import com.huadin.userinfo.address.AddressPresenter;
+import com.huadin.util.LogUtil;
 import com.huadin.waringapp.R;
 
 import butterknife.BindView;
@@ -50,7 +53,7 @@ public class SettingFragment extends BaseFragment
 
 
   @OnClick({R.id.address_linear_layout, R.id.msg_linear_layout,
-          R.id.contact_us_linear_layout, R.id.feedback_linear_layout})
+          R.id.contact_us_linear_layout, R.id.feedback_linear_layout, R.id.app_update})
   public void onClick(View view)
   {
     switch (view.getId())
@@ -65,9 +68,15 @@ public class SettingFragment extends BaseFragment
         startContactFragment();
         break;
       case R.id.feedback_linear_layout://意见反馈
+        startFeedbackFragment();
         break;
 
+      case R.id.app_update:
+        LogUtil.i(LOG_TAG, "******************");
+        break;
     }
+    //锁定抽屉
+    lockDrawer();
   }
 
   /**
@@ -95,6 +104,20 @@ public class SettingFragment extends BaseFragment
       contactFragment = ContactFragment.newInstance();
       start(contactFragment, SupportFragment.SINGLETASK);
     }
+  }
+
+  /**
+   * 意见反馈
+   */
+  private void startFeedbackFragment()
+  {
+    FeedbackFragment feedbackFragment = findFragment(FeedbackFragment.class);
+    if (feedbackFragment == null)
+    {
+      feedbackFragment = FeedbackFragment.newInstance();
+      start(feedbackFragment, SupportFragment.SINGLETASK);
+    }
+    new FeedbackPresenter(feedbackFragment);
   }
 
 
