@@ -68,10 +68,10 @@
         </meta-data>
         <!-- 开发者申请的key高德 start -->
         <!-- 笔记本 -->
-        <!--<meta-data-->
-        <!--android:name="com.amap.api.v2.apikey"-->
-        <!--android:value="@string/map_key_home">-->
-        <!--</meta-data>-->
+        <!-- <meta-data -->
+        <!-- android:name="com.amap.api.v2.apikey" -->
+        <!-- android:value="@string/map_key_home"> -->
+        <!-- </meta-data> -->
         <!-- 台式 -->
         <meta-data
             android:name="com.amap.api.v2.apikey"
@@ -79,7 +79,8 @@
         </meta-data>
         <!-- 开发者申请的key高德 end -->
 
-        <!--推送开始-->
+
+        <!-- 推送开始 -->
 
         <service
             android:name="cn.bmob.push.lib.service.PushService"
@@ -99,6 +100,7 @@
 
         <receiver android:name="cn.bmob.push.PushReceiver">
             <intent-filter>
+
                 <!-- 系统启动完成后会调用 -->
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
                 <!-- 解锁完成后会调用 -->
@@ -107,7 +109,6 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
             </intent-filter>
         </receiver>
-
         <receiver
             android:name="com.huadin.receiver.MessageReceiver"
             android:enabled="true"
@@ -122,6 +123,7 @@
             android:name="cn.bmob.push.PushNotifyReceiver"
             android:process=":bmobpush">
             <intent-filter>
+
                 <!-- 接收心跳广播的action -->
                 <action android:name="cn.bmob.push.action.HEARTBEAT"/>
                 <!-- 接收唤醒广播的action -->
@@ -129,15 +131,16 @@
             </intent-filter>
         </receiver>
 
-        <!--推送结束-->
+        <!-- 推送结束 -->
+
 
         <!-- 主界面 -->
         <activity
             android:name="com.huadin.login.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:launchMode="singleTask">
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <!-- 高德 -->
         <service android:name="com.amap.api.location.APSService"/>
@@ -150,12 +153,16 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-
         <activity
             android:name="com.huadin.userinfo.UpdateUserInfoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait">
         </activity>
+
+        <service android:name="com.huadin.service.HttpIntentService"
+            android:enabled="true">
+
+        </service>
 
     </application>
 

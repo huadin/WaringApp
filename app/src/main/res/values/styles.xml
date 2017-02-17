@@ -233,6 +233,7 @@
         <item name="android:textColor">@color/user_info_item_text_color</item>
         <item name="android:layout_marginStart">@dimen/detailed_fault_margin_16</item>
         <item name="android:layout_marginTop">@dimen/detailed_fault_margin_5</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
 
     <style name="urgent_item_text_style">
@@ -311,5 +312,6 @@
         <item name="android:textSize">@dimen/text_size_14</item>
     </style>
     <!--联系我们 end -->
+
 
 </resources>
