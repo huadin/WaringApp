@@ -16,6 +16,7 @@ import com.huadin.adapter.BaseAdapter;
 import com.huadin.adapter.PersonAdapter;
 import com.huadin.base.BaseFragment;
 import com.huadin.bean.Person;
+import com.huadin.dialog.WaringDialogFragment;
 import com.huadin.userinfo.LoadMoreOnScrollListener;
 import com.huadin.waringapp.R;
 
@@ -33,7 +34,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 
 public class PersonFragment extends BaseFragment implements PersonContract.View, SwipeRefreshLayout.OnRefreshListener,
-        LoadMoreOnScrollListener.onLoadMore, Toolbar.OnMenuItemClickListener, BaseAdapter.onItemClickListener
+        LoadMoreOnScrollListener.onLoadMore, Toolbar.OnMenuItemClickListener, BaseAdapter.onItemClickListener,
+        BaseAdapter.onItemLongClickListener, WaringDialogFragment.onWaringDialogListener
 {
 
   @BindView(R.id.top_toolbar)
@@ -48,6 +50,7 @@ public class PersonFragment extends BaseFragment implements PersonContract.View,
   private PersonContract.Presenter mPresenter;
   private PersonAdapter mPersonAdapter;
   private List<Person> mPersonList;
+  private int mPermissionChangesIndex;
   private String mPersonArea;//管理人员所在的区,默认为城区
 
   public static PersonFragment newInstance()
@@ -92,6 +95,7 @@ public class PersonFragment extends BaseFragment implements PersonContract.View,
 
     mPersonAdapter = new PersonAdapter(mContext, mPersonList, R.layout.person_adapter_item);
     mPersonAdapter.setOnItemClickListener(this);
+    mPersonAdapter.setOnItemLongClickListener(this);
     LinearLayoutManager manager = new LinearLayoutManager(mContext);
     mRecyclerView.setLayoutManager(manager);
     mRecyclerView.setAdapter(mPersonAdapter);
@@ -145,6 +149,16 @@ public class PersonFragment extends BaseFragment implements PersonContract.View,
   public void updateError(int errorId)
   {
     //异常时回调
+    showMessage(errorId);
+  }
+
+
+  @Override
+  public void updatePermissionSuccess()
+  {
+    mPersonAdapter.notifyItemRemoved(mPermissionChangesIndex);
+    mPersonList.remove(mPermissionChangesIndex);
+    if (mPersonList.size() == 0) mEmpty.setVisibility(View.VISIBLE);
   }
 
   @Override
@@ -231,6 +245,31 @@ public class PersonFragment extends BaseFragment implements PersonContract.View,
   @Override
   public void onItemClick(int pos)
   {
-    showMessage(String.valueOf(pos));
+    showMessage(R.string.long_click_change_permission);
+  }
+
+  @Override
+  public void onItemLongClick(int position)
+  {
+
+    mPermissionChangesIndex = position;
+
+    //修改权限
+    WaringDialogFragment dialogFragment = WaringDialogFragment.newInstance(
+            R.string.person_permission_changes, R.string.person_permission_message);
+    dialogFragment.setOnWaringDialogListener(this);
+    dialogFragment.show(getFragmentManager(), getClass().getSimpleName());
+
+  }
+
+  @Override
+  public void onWaringDialog()
+  {
+    //确认回调
+    if (mPersonList != null && mPersonList.size() > 0)
+    {
+      Person person = mPersonList.get(mPermissionChangesIndex);
+      mPresenter.permissionChanges(person);
+    }
   }
 }

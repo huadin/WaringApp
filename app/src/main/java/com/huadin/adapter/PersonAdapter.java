@@ -37,5 +37,17 @@ public class PersonAdapter extends BaseAdapter<Person>
         }
       }
     });
+
+    personTV.setOnLongClickListener(new View.OnLongClickListener() {
+      @Override
+      public boolean onLongClick(View v)
+      {
+        if (mLongClickListener != null)
+        {
+          mLongClickListener.onItemLongClick(position);
+        }
+        return false;
+      }
+    });
   }
 }

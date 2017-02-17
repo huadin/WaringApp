@@ -2,6 +2,7 @@ package com.huadin.userinfo.person;
 
 import com.huadin.bean.Person;
 import com.huadin.interf.OnQueryDataListener;
+import com.huadin.util.LogUtil;
 import com.huadin.util.QueryDataUtil;
 import com.huadin.waringapp.R;
 
@@ -10,6 +11,7 @@ import java.util.List;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -20,6 +22,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public class PersonPresenter implements PersonContract.Presenter, OnQueryDataListener<Person>
 {
+  private static final String TAG = "PersonPresenter";
+
   private QueryDataUtil<Person> mQueryDataUtil;
   private PersonContract.View mPersonView;
 
@@ -62,6 +66,29 @@ public class PersonPresenter implements PersonContract.Presenter, OnQueryDataLis
     if (getNetworkStatue()) return;
     mQueryDataUtil.loadMoreData();
     queryData();
+  }
+
+  @Override
+  public void permissionChanges(Person person)
+  {
+    mPersonView.showLoading();
+    person.setUserPermission(false);
+    person.update(person.getObjectId(),new UpdateListener()
+    {
+      @Override
+      public void done(BmobException e)
+      {
+        mPersonView.hindLoading();
+        if (e == null)
+        {
+          mPersonView.updatePermissionSuccess();
+        } else
+        {
+          int code = e.getErrorCode();
+          LogUtil.i(TAG, "message = " + e.getMessage() + "/ code = " + code);
+        }
+      }
+    });
   }
 
   /**
