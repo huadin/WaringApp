@@ -25,6 +25,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<ViewHolder>
   private int mStatus = -3;
   private int mLayoutId;
   onItemClickListener mListener;
+  onItemLongClickListener mLongClickListener;
 
   BaseAdapter(Context context, List<T> datas, int layoutId)
   {
@@ -128,10 +129,21 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<ViewHolder>
     void onItemClick(int pos);
   }
 
+  public interface onItemLongClickListener
+  {
+    void onItemLongClick(int position);
+  }
+
   public void setOnItemClickListener(onItemClickListener listener)
   {
     mListener = listener;
     mListener = checkNotNull(listener, "listener cannot be null");
+  }
+
+  public void setOnItemLongClickListener(onItemLongClickListener longClickListener)
+  {
+    mLongClickListener = longClickListener;
+    mLongClickListener = checkNotNull(longClickListener, "onItemLongClickListener cannot be null");
   }
 
   public void clearAdapterList()

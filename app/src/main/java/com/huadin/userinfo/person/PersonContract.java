@@ -27,6 +27,11 @@ public interface PersonContract
      * @return 区名
      */
     String getArea();
+
+    /**
+     * 更新权限成功
+     */
+    void updatePermissionSuccess();
   }
 
   interface Presenter extends UpdateContract.Presenter
@@ -40,6 +45,12 @@ public interface PersonContract
      * 加载更多
      */
     void loadMore();
+
+    /**
+     * 权限变更
+     */
+
+    void permissionChanges(Person person);
   }
 
 }

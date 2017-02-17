@@ -236,5 +236,12 @@
     <string name="feedback_fragment_input_feedback">请输入您的建议</string>
     <string name="input_cannot_be_null">请输入建议内容!</string>
 
+    <!--人员管理-->
+    <string name="long_click_change_permission">长按更改其权限</string>
+    <string name="person_permission_changes">权限变更</string>
+    <string name="person_permission_message">权限变更后无法恢复,请谨慎操作</string>
+    <string name="ok">确定</string>
+    <string name="cancle">取消</string>
+
 
 </resources>

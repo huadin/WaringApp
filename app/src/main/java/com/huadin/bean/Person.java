@@ -1,8 +1,11 @@
 package com.huadin.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import cn.bmob.v3.BmobUser;
 
-public class Person extends BmobUser
+public class Person extends BmobUser implements Parcelable
 {
   private boolean userPermission;
   private boolean isUserNameChange;
@@ -59,4 +62,48 @@ public class Person extends BmobUser
   {
     this.areaName = areaName;
   }
+
+  @Override
+  public int describeContents()
+  {
+    return 0;
+  }
+
+  @Override
+  public void writeToParcel(Parcel dest, int flags)
+  {
+    dest.writeByte(this.userPermission ? (byte) 1 : (byte) 0);
+    dest.writeByte(this.isUserNameChange ? (byte) 1 : (byte) 0);
+    dest.writeString(this.areaName);
+    dest.writeString(this.areaId);
+    dest.writeString(this.address);
+  }
+
+  public Person()
+  {
+  }
+
+  protected Person(Parcel in)
+  {
+    this.userPermission = in.readByte() != 0;
+    this.isUserNameChange = in.readByte() != 0;
+    this.areaName = in.readString();
+    this.areaId = in.readString();
+    this.address = in.readString();
+  }
+
+  public static final Parcelable.Creator<Person> CREATOR = new Parcelable.Creator<Person>()
+  {
+    @Override
+    public Person createFromParcel(Parcel source)
+    {
+      return new Person(source);
+    }
+
+    @Override
+    public Person[] newArray(int size)
+    {
+      return new Person[size];
+    }
+  };
 }
