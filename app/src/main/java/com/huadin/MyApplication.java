@@ -1,6 +1,7 @@
 package com.huadin;
 
 import com.huadin.waringapp.R;
+import com.squareup.leakcanary.LeakCanary;
 
 import org.litepal.LitePal;
 import org.litepal.LitePalApplication;
@@ -18,6 +19,8 @@ public class MyApplication extends LitePalApplication
     super.onCreate();
 
     LitePal.initialize(this);
+
+    LeakCanary.install(this);
 
     configBmob();
   }

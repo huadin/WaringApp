@@ -16,6 +16,7 @@ import com.huadin.base.BaseActivity;
 import com.huadin.login.MainActivity;
 import com.huadin.permission.PermissionListener;
 import com.huadin.permission.PermissionManager;
+import com.huadin.service.HttpIntentService;
 import com.huadin.util.LogUtil;
 
 import butterknife.BindView;
@@ -172,7 +173,9 @@ public class WelcomeActivity extends BaseActivity implements PermissionListener,
   @Override
   public void onAnimationStart(Animation animation)
   {
-    // TODO: 2016/12/10 开启服务,加载网络数据
+    //开启服务,加载网络数据
+    Intent intent = new Intent(this, HttpIntentService.class);
+    startService(intent);
   }
 
   @Override

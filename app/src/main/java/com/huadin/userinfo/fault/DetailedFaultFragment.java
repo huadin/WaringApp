@@ -27,7 +27,6 @@ import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -99,9 +98,14 @@ public class DetailedFaultFragment extends BaseFragment implements DetailedFault
 
   private void initData()
   {
-    mUser.setText(mReportBean.getReportUser());
-    mAddress.setText(mReportBean.getReportAddress());
-    mContent.setText(mReportBean.getReportContent());
+
+    String userContent = getString(R.string.report_user_title) + mReportBean.getReportUser();
+    String addressContent = getString(R.string.report_user_address)+ mReportBean.getReportUser();
+    String content = getString(R.string.report_user_content) + mReportBean.getReportUser();
+
+    mUser.setText(userContent);
+    mAddress.setText(addressContent);
+    mContent.setText(content);
   }
 
   @Override

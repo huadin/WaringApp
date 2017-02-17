@@ -12,6 +12,7 @@
     <string name="bmob_app_key">eb6dd8eeb3a61db8b74c269113587850</string>
     <string name="title_activity_login">Sign in</string>
     <string name="temp_time">2016&#8211;01&#8211;02</string>
+    <string name="http_url">http://210.77.179.6/95598/outageNotice/queryOutageNoticeList</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">手机号码</string>
@@ -135,6 +136,9 @@
 
 
     <!--紧急信息-->
+    <string name="report_user_title">姓名"\n"</string>
+    <string name="report_user_address">地址"\n"</string>
+    <string name="report_user_content">内容"\n"</string>
 
     <!--个人信息-->
     <string name="user_info_title">个人信息</string>

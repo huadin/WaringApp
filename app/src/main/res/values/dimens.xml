@@ -99,7 +99,8 @@
     <dimen name="fault_adapter_item_padding_top">5dp</dimen>
     <dimen name="recycler_view_footer_padding">5dp</dimen>
     <dimen name="detailed_fault_margin_16">16dp</dimen>
-    <dimen name="detailed_fault_margin_5">5dp</dimen>
+    <dimen name="detailed_fault_margin_5">10dp</dimen>
+    <!--<dimen name="detailed_fault_height">72px</dimen>-->
 
     <!--联系我们-->
     <dimen name="contact_fragment_linear_layout_height">96px</dimen>
