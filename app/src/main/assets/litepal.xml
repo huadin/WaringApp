@@ -2,11 +2,12 @@
 <litepal>
     <dbname value="application.db"/>
 
-    <version value="4" />
+    <version value="5" />
 
     <list>
         <mapping class="com.huadin.database.City"/>
         <mapping class="com.huadin.database.WaringAddress"/>
+        <mapping class="com.huadin.database.StopPowerBean"/>
     </list>
 
 </litepal>

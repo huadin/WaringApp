@@ -248,4 +248,8 @@
     <string name="cancle">取消</string>
 
 
+    <!--获取数据-->
+    <string name="key_start_time">start_time</string>
+    <string name="key_end_time">end_time</string>
+    <string name="key_org_code">org_code</string>
 </resources>
