@@ -1,5 +1,6 @@
 package com.huadin.util;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
@@ -38,9 +39,16 @@ public enum HttpUtil
   private String mOrgCode;
   private String mEndTime;
   private String mStartTime;
+  private Context mContext;
   private static final long mEndLong = 7 * 24 * 60 * 60 * 1000;
   private static final String TAG = "HttpUtil";
   private List<JSONArray> mJSONArrays = new ArrayList<>();
+
+  public HttpUtil setContent(@NonNull Context content)
+  {
+    mContext = content;
+    return this;
+  }
 
   public HttpUtil addUrl(String url)
   {
@@ -57,15 +65,21 @@ public enum HttpUtil
    */
   public HttpUtil setStartTime(@NonNull String startTime, String endTime)
   {
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
 
-    this.mStartTime = startTime;
+    if (TextUtils.isEmpty(startTime))
+    {
+      mStartTime = sdf.format(new Date(System.currentTimeMillis()));
+    }else
+    {
+      this.mStartTime = startTime;
+    }
 
     if (TextUtils.isEmpty(endTime))
     {
       //开始时间延长7天
       try
       {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
         Date date = sdf.parse(mStartTime);
         long endLong = date.getTime() + mEndLong;
         mEndTime = sdf.format(new Date(endLong));
@@ -193,12 +207,16 @@ public enum HttpUtil
   private void parseToBean(List<JSONArray> jsonArrays)
   {
     List<StopPowerBean> beanList = ParseUtil.pareJson(jsonArrays);
-    LogUtil.i(TAG,"beanList = " + beanList.toString());
+    LogUtil.i(TAG, "beanList = " + beanList.toString());
 
     //删除旧数据
     DataSupport.deleteAll(StopPowerBean.class);
     //保存新数据
     DataSupport.saveAll(beanList);
+
+    //开始编码解析
+    AMapGeoCode geoCode = new AMapGeoCode(mContext);
+    geoCode.startGeoCode();
   }
 
 }
