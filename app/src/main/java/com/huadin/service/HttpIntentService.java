@@ -22,23 +22,28 @@ public class HttpIntentService extends IntentService
     super("");
   }
 
-  public HttpIntentService(String name)
-  {
-    super(name);
-  }
-
   //子线程中
   @Override
   protected void onHandleIntent(Intent intent)
   {
+
+    String startTime = intent.getStringExtra(getString(R.string.key_start_time));
+    String endTime = intent.getStringExtra(getString(R.string.key_end_time));
+    String orgCode = intent.getStringExtra(getString(R.string.key_org_code));
+
     //获取数据
-    HttpUtil.INSTANCE.addUrl(getString(R.string.http_url)).requestHttp("2017-2-17","2017-2-24");
+    HttpUtil.INSTANCE
+            .setContent(getApplicationContext())
+            .addUrl(getString(R.string.http_url))
+            .setStartTime(startTime, endTime)
+            .setOrgCode(orgCode)
+            .request();
   }
 
   @Override
   public void onDestroy()
   {
     super.onDestroy();
-    LogUtil.i(TAG, "--- onDestroy ---");
+    LogUtil.i(TAG, "--- Intent Service onDestroy ---");
   }
 }

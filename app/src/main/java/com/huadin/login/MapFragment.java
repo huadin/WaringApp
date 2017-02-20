@@ -4,9 +4,6 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -23,6 +20,7 @@ import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.UiSettings;
 import com.huadin.base.BaseFragment;
+import com.huadin.eventbus.EventCenter;
 import com.huadin.permission.PermissionListener;
 import com.huadin.permission.PermissionManager;
 import com.huadin.util.LogUtil;
@@ -197,7 +195,6 @@ public class MapFragment extends BaseFragment implements PermissionListener,
     {
       // TODO: 2016/12/10 检测GPS是否开启 ,未开启则提示用户
       //无网络
-      // TODO: 2016/12/29 有网络后,重新开启定位服务
       showMessage(R.string.error_code_9016);
     }
   }
@@ -308,4 +305,13 @@ public class MapFragment extends BaseFragment implements PermissionListener,
     }
   }
 
+  @Override
+  protected void fragmentOnEvent(EventCenter eventCenter)
+  {
+    super.fragmentOnEvent(eventCenter);
+    if (eventCenter.getEventCode() == EventCenter.GEO_CODE_COMPLETE)
+    {
+      LogUtil.i(LOG_TAG, "解析数据完成" + "long = " + System.currentTimeMillis());
+    }
+  }
 }

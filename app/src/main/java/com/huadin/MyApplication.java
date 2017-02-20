@@ -1,5 +1,8 @@
 package com.huadin;
 
+import android.content.Context;
+import android.support.multidex.MultiDex;
+
 import com.huadin.waringapp.R;
 import com.squareup.leakcanary.LeakCanary;
 
@@ -45,4 +48,10 @@ public class MyApplication extends LitePalApplication
     BmobPush.startWork(this);
   }
 
+  @Override
+  protected void attachBaseContext(Context base)
+  {
+    super.attachBaseContext(base);
+    MultiDex.install(this);
+  }
 }

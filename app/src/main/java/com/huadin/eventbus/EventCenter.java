@@ -26,6 +26,9 @@ public class EventCenter<T>
   public static final int EVENT_CODE_NETWORK = 105;
   //其他设备登录
   public static final int OTHER_DEVICE_LOGIN = 107;
+  //编码解析完成
+  public static final int GEO_CODE_COMPLETE = 108;
+
 
   /**
    * reserved data
