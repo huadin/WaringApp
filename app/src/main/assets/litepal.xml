@@ -2,13 +2,15 @@
 <litepal>
     <dbname value="application.db"/>
 
-    <version value="6" />
+    <version value="8" />
 
     <list>
         <mapping class="com.huadin.database.City"/>
         <mapping class="com.huadin.database.WaringAddress"/>
         <mapping class="com.huadin.database.StopPowerBean"/>
         <mapping class="com.huadin.database.ScopeLatLng"/>
+        <mapping class="com.huadin.database.Range"/>
+        <mapping class="com.huadin.database.LatLngPoint"/>
     </list>
 
 </litepal>

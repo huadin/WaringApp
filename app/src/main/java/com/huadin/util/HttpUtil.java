@@ -1,11 +1,12 @@
 package com.huadin.util;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.huadin.database.StopPowerBean;
+import com.huadin.eventbus.EventCenter;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,16 +40,9 @@ public enum HttpUtil
   private String mOrgCode;
   private String mEndTime;
   private String mStartTime;
-  private Context mContext;
   private static final long mEndLong = 7 * 24 * 60 * 60 * 1000;
   private static final String TAG = "HttpUtil";
   private List<JSONArray> mJSONArrays = new ArrayList<>();
-
-  public HttpUtil setContent(@NonNull Context content)
-  {
-    mContext = content;
-    return this;
-  }
 
   public HttpUtil addUrl(String url)
   {
@@ -70,7 +64,7 @@ public enum HttpUtil
     if (TextUtils.isEmpty(startTime))
     {
       mStartTime = sdf.format(new Date(System.currentTimeMillis()));
-    }else
+    } else
     {
       this.mStartTime = startTime;
     }
@@ -171,8 +165,8 @@ public enum HttpUtil
       int totalPage = pObj.getInt("totalPage");
       int totalCount = pObj.getInt("totalCount");
 
-      LogUtil.i(TAG, "totalPage" + totalPage);
-      LogUtil.i(TAG, "totalCount" + totalCount);
+      LogUtil.i(TAG, "totalPage = " + totalPage);
+      LogUtil.i(TAG, "totalCount = " + totalCount);
 
       //获取第一页的数据
       JSONArray firstPageJsonArray = obj.getJSONArray("seleList");//前十个数据
@@ -181,7 +175,9 @@ public enum HttpUtil
       //判断是否还有数据
       if (totalCount > 10)
       {
-        if (mJSONArrays.size() == totalPage)
+        LogUtil.i(TAG,"mJSONArrays size = " + mJSONArrays.size());
+
+        if (mJSONArrays.size() >= totalPage)
         {
           //全部请求完毕,解析JsonArray数据中数据
           parseToBean(mJSONArrays);
@@ -208,15 +204,14 @@ public enum HttpUtil
   {
     List<StopPowerBean> beanList = ParseUtil.pareJson(jsonArrays);
     LogUtil.i(TAG, "beanList = " + beanList.toString());
-
+    mJSONArrays.clear();
     //删除旧数据
     DataSupport.deleteAll(StopPowerBean.class);
     //保存新数据
     DataSupport.saveAll(beanList);
 
-    //开始编码解析
-    AMapGeoCode geoCode = new AMapGeoCode(mContext);
-    geoCode.startGeoCode();
+    // TODO: 2017/2/21  开始编码解析
+    EventBus.getDefault().post(new EventCenter(EventCenter.GEO_CODE_START));
   }
 
 }

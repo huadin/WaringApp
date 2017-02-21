@@ -42,4 +42,14 @@ public class ScopeLatLng extends DataSupport
   {
     this.longitude = longitude;
   }
+
+  @Override
+  public String toString()
+  {
+    return "ScopeLatLng{" +
+            "scope='" + scope + '\'' +
+            ", latitude=" + latitude +
+            ", longitude=" + longitude +
+            '}';
+  }
 }

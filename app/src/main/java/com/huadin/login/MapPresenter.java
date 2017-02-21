@@ -6,6 +6,22 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.maps.LocationSource;
+import com.amap.api.maps.model.BitmapDescriptor;
+import com.amap.api.maps.model.BitmapDescriptorFactory;
+import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.MarkerOptions;
+import com.huadin.database.ScopeLatLng;
+import com.huadin.database.StopPowerBean;
+import com.huadin.util.LogUtil;
+import com.huadin.util.RangeUtil;
+
+import org.litepal.crud.DataSupport;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -15,10 +31,18 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 class MapPresenter implements MapContract.MapListener
 {
+  private static final String TAG = "MapPresenter";
   private MapContract.View mView;
   private AMapLocationClient mClient;
   private Context mContext;
   private LocationSource.OnLocationChangedListener mListener;
+
+  private BitmapDescriptor JHMarker;//计划
+  private BitmapDescriptor TDMarker;//处于停电
+  private BitmapDescriptor GZMarker;//故障
+  private BitmapDescriptor LLMarker;//临时
+  private BitmapDescriptor mMarker;//添加到map上的marker
+  private BitmapDescriptor itemMarker;//前一个marker
 
   MapPresenter(MapContract.View view, Context context)
   {
@@ -27,6 +51,15 @@ class MapPresenter implements MapContract.MapListener
     mContext = checkNotNull(context, "context cannot null");
     mView = checkNotNull(view, "view cannot null");
     mView.setPresenter(this);
+    initMarker();
+  }
+
+  private void initMarker()
+  {
+    JHMarker = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW);
+    GZMarker = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN);
+    LLMarker = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE);
+    TDMarker = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED);
   }
 
   /**
@@ -41,11 +74,14 @@ class MapPresenter implements MapContract.MapListener
     {
       if (aMapLocation.getErrorCode() == 0)
       {
-        mView.latLng(aMapLocation.getLatitude(), aMapLocation.getLongitude());
+        LatLng latLng = new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude());
+
+        mView.latLng(latLng);
         //显示系统小蓝点
         mListener.onLocationChanged(aMapLocation);
       } else
       {
+        //异常
         mView.locationError(aMapLocation.getErrorCode(), aMapLocation.getErrorInfo());
       }
     }
@@ -114,6 +150,164 @@ class MapPresenter implements MapContract.MapListener
     mClient = checkNotNull(mClient, "AMapLocationClient null");
     mClient.onDestroy();
     mClient = null;
+  }
+
+  @Override
+  public void addMarkerToMap(List<ScopeLatLng> scopeLatLngList, LatLng latLng)
+  {
+    LogUtil.i(TAG, "解析数据完成" + "long = " + System.currentTimeMillis() + " / list = " + scopeLatLngList.toString());
+    if (scopeLatLngList.size() == 0) return;
+    List<String> scopeList = RangeUtil.scopeFromRange(scopeLatLngList, latLng);
+    if (scopeList.size() > 0)
+    {
+
+      ArrayList<MarkerOptions> optionsArrayList = new ArrayList<>();
+
+      for (int i = 0; i < scopeList.size(); i++)
+      {
+        String scope = scopeList.get(i);
+
+        //获取经纬度
+        LatLng ll = getLatLntFromScope(scope);
+
+        //根据 scope 模糊搜索 StopPowerBean
+        String content = getContentFormScope(scope);
+
+        MarkerOptions options = new MarkerOptions()
+                .title("停电信息")// title
+                .position(ll) // 定位点
+                .icon(mMarker) ;   // marker
+//                .snippet(content); //内容
+//                .draggable(true)//可拖拽
+//                  .perspective(true);//近大远小
+        optionsArrayList.add(options);
+      }
+      mView.addMarker(optionsArrayList);
+    }
+  }
+
+  private LatLng getLatLntFromScope(String scope)
+  {
+    ScopeLatLng scopeLatLng = DataSupport.where("scope like ?", scope).findFirst(ScopeLatLng.class);
+    return new LatLng(scopeLatLng.getLatitude(), scopeLatLng.getLongitude());
+  }
+
+
+  private String getContentFormScope(String scope)
+  {
+    StringBuilder sb = new StringBuilder("");
+    StringBuilder contentBuilder = new StringBuilder("");
+    String content = null;
+
+    //将 xxx村委会 替换成 xxx村
+    if (scope.endsWith("委会"))
+    {
+      scope = scope.replace("委会", "").trim();
+    }
+
+    //模糊查询所有符合条件的
+    List<StopPowerBean> tempNST = DataSupport.where("scope like ?", "%" + scope + "%").find(StopPowerBean.class);
+
+    if (tempNST != null && tempNST.size() > 0)
+    {
+      // 获取 typeCode , scope ,lineName
+      StopPowerBean firstNST = tempNST.get(0);
+      String newScope = firstNST.getScope();
+      String typeCode = firstNST.getTypeCode();
+      String lineName = firstNST.getLineName();
+
+      switch (typeCode)
+      {
+        case "计划停电":
+          mMarker = JHMarker;
+          break;
+        case "临时停电":
+          mMarker = LLMarker;
+          break;
+        case "故障停电":
+          mMarker = GZMarker;
+          break;
+      }
+
+
+      //追加 scope 的不同停电时间段
+      for (int i = 0; i < tempNST.size(); i++)
+      {
+        StopPowerBean nst = tempNST.get(i);
+        String date = nst.getDate();
+        String time = nst.getTime();
+
+        if (compareTime(date, time))
+        {
+          mMarker = TDMarker;//处于停电状态
+        }
+
+        if (i == tempNST.size() - 1)
+        {
+          sb.append(date);
+          sb.append(" ");
+          sb.append(time);
+          sb.append(".");
+        } else
+        {
+          sb.append(date);
+          sb.append(" ");
+          sb.append(time);
+          sb.append(",\n");
+          sb.append("");
+        }
+      }
+
+      //组合所有信息
+      contentBuilder.append("停电类型：");
+      contentBuilder.append(typeCode);
+      contentBuilder.append("\n");
+      contentBuilder.append("停电范围：");
+      contentBuilder.append(newScope);
+      contentBuilder.append("\n");
+      contentBuilder.append("停电线路：");
+      contentBuilder.append(lineName);
+      contentBuilder.append("\n");
+      contentBuilder.append("停电时间：");
+      contentBuilder.append(sb.toString());
+
+      content = contentBuilder.toString();
+
+      sb.delete(0, sb.length());
+      contentBuilder.delete(0, sb.length());
+    }
+    return content;
+  }
+
+  /**
+   * 检测当前时间是否处于停电期间
+   *
+   * @param date 日期
+   * @param time 时间
+   * @return true 表示处于停电时间内
+   */
+  private boolean compareTime(String date, String time)
+  {
+
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+
+
+    String systemTime = sdf.format(new Date(System.currentTimeMillis()));
+
+    String[] dateArr = systemTime.trim().split("-");//系统日期、时间
+
+    String tempDate = dateArr[0];
+    String tempTime = dateArr[1];
+
+    String[] timeArr = time.trim().split("-");//停电时间
+
+    String startTime = timeArr[0].trim();
+    String endTime = timeArr[1].trim();
+
+    int startIndex = startTime.compareTo(tempTime);//index < 0 ,startTime < newTime
+    int endIndex = endTime.compareTo(tempTime); // index > 0 , endTime > newTime
+
+    return tempDate.equals(date) && (startIndex < 0 && endIndex > 0);
   }
 
 

@@ -33,7 +33,6 @@ public class HttpIntentService extends IntentService
 
     //获取数据
     HttpUtil.INSTANCE
-            .setContent(getApplicationContext())
             .addUrl(getString(R.string.http_url))
             .setStartTime(startTime, endTime)
             .setOrgCode(orgCode)
