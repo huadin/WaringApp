@@ -13,11 +13,14 @@ import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 
 import com.huadin.base.BaseActivity;
+import com.huadin.database.Range;
 import com.huadin.login.MainActivity;
 import com.huadin.permission.PermissionListener;
 import com.huadin.permission.PermissionManager;
 import com.huadin.service.HttpIntentService;
 import com.huadin.util.LogUtil;
+
+import org.litepal.crud.DataSupport;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

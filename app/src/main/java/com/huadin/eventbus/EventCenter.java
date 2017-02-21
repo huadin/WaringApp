@@ -27,8 +27,9 @@ public class EventCenter<T>
   //其他设备登录
   public static final int OTHER_DEVICE_LOGIN = 107;
   //编码解析完成
-  public static final int GEO_CODE_COMPLETE = 108;
-
+  public static final int GEO_CODE_COMPLETE = 109;
+  //开始解析编码
+  public static final int GEO_CODE_START = 108;
 
   /**
    * reserved data

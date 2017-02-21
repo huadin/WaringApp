@@ -19,12 +19,19 @@ import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.UiSettings;
+import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.MarkerOptions;
 import com.huadin.base.BaseFragment;
+import com.huadin.database.ScopeLatLng;
 import com.huadin.eventbus.EventCenter;
 import com.huadin.permission.PermissionListener;
 import com.huadin.permission.PermissionManager;
+import com.huadin.util.AMapGeoCode;
 import com.huadin.util.LogUtil;
 import com.huadin.waringapp.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,6 +56,7 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   private AMap mMap;
   private MapContract.MapListener mPresenter;
   private PermissionManager mPermissionManager;
+  private LatLng mLatLng;
 
   public static MapFragment newInstance()
   {
@@ -208,15 +216,12 @@ public class MapFragment extends BaseFragment implements PermissionListener,
 
   /**
    * mapPresenter 回调
-   *
-   * @param latitude  维度
-   * @param longitude 经度
    */
   @Override
-  public void latLng(double latitude, double longitude)
+  public void latLng(LatLng latLng)
   {
-    LogUtil.i(LOG_TAG, "latitude = " + latitude);
-    LogUtil.i(LOG_TAG, "longitude = " + longitude);
+    mLatLng = latLng;
+    mLatLng = checkNotNull(latLng, "LatLng 没有数据");
   }
 
   /**
@@ -254,6 +259,12 @@ public class MapFragment extends BaseFragment implements PermissionListener,
     {
       mPresenter.stopLocation();
     }
+  }
+
+  @Override
+  public void addMarker(ArrayList<MarkerOptions> options)
+  {
+    mMap.addMarkers(options,true);
   }
 
   private void showDialogPermission()
@@ -309,9 +320,19 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   protected void fragmentOnEvent(EventCenter eventCenter)
   {
     super.fragmentOnEvent(eventCenter);
-    if (eventCenter.getEventCode() == EventCenter.GEO_CODE_COMPLETE)
+    switch (eventCenter.getEventCode())
     {
-      LogUtil.i(LOG_TAG, "解析数据完成" + "long = " + System.currentTimeMillis());
+      case EventCenter.GEO_CODE_COMPLETE:
+        List<ScopeLatLng> scopeLatLngs = (List<ScopeLatLng>) eventCenter.getData();
+        mPresenter.addMarkerToMap(scopeLatLngs, mLatLng);
+//        mMap.clear();
+        break;
+
+      case EventCenter.GEO_CODE_START://开始解析
+        AMapGeoCode geoCode = new AMapGeoCode(mContext);
+        geoCode.startGeoCode();
+        break;
     }
+
   }
 }

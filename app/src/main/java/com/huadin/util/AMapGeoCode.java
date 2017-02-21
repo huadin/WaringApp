@@ -90,7 +90,7 @@ public class AMapGeoCode implements GeocodeSearch.OnGeocodeSearchListener
           DataSupport.deleteAll(ScopeLatLng.class);
           DataSupport.saveAll(mLatLngs);
           //发送通知,显示标记物
-          EventBus.getDefault().post(new EventCenter(EventCenter.GEO_CODE_COMPLETE));
+          EventBus.getDefault().post(new EventCenter<>(EventCenter.GEO_CODE_COMPLETE,mLatLngs));
         }
       }
     }
@@ -124,9 +124,9 @@ public class AMapGeoCode implements GeocodeSearch.OnGeocodeSearchListener
       Set<String> setKey = map.keySet();
       for (String scope : setKey)
       {
-//        LogUtil.i(TAG,"scope = " + scope);
         GeocodeQuery query = new GeocodeQuery(scope, "北京");
         search.getFromLocationNameAsyn(query);
+        LogUtil.i(TAG,"scope = " + scope);
       }
     }
   }
