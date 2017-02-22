@@ -18,6 +18,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
+        <TextView
+            android:id="@+id/network_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:textSize="@dimen/text_size_16"
+            android:text="@string/no_network"
+            android:textColor="@color/app_text_color"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/map_text_margin_top_30"
+            android:paddingStart="@dimen/map_text_margin_start"
+            android:paddingEnd="@dimen/map_text_margin_start"
+            android:background="@drawable/bg_toast_custom"
+            android:visibility="gone"/>
+
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/map_range_edit"
             android:layout_width="wrap_content"

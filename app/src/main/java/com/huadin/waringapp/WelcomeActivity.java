@@ -177,8 +177,8 @@ public class WelcomeActivity extends BaseActivity implements PermissionListener,
   public void onAnimationStart(Animation animation)
   {
     //开启服务,加载网络数据
-    Intent intent = new Intent(this, HttpIntentService.class);
-    startService(intent);
+    if (!isNetwork()) return; //没有网络
+    startService();
   }
 
   @Override

@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.huadin.eventbus.EventCenter;
 import com.huadin.login.LoginFragment;
+import com.huadin.service.HttpIntentService;
 import com.huadin.setting.contact.ContactFragment;
 import com.huadin.setting.feedback.FeedbackFragment;
 import com.huadin.userinfo.address.AddressFragment;
@@ -122,6 +123,12 @@ public abstract class BaseActivity extends SupportActivity
   protected boolean isNetwork()
   {
     return NetworkUtil.getNetworkState(mContext);
+  }
+
+  protected void startService()
+  {
+    Intent intent = new Intent(this, HttpIntentService.class);
+    startService(intent);
   }
 
 

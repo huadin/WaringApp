@@ -28,19 +28,19 @@ public class NetworkReceiver extends BroadcastReceiver
               .getSystemService(Context.CONNECTIVITY_SERVICE);
 
       NetworkInfo info = manager.getActiveNetworkInfo();
-
+      EventCenter<Boolean> eventCenter;
       if (null != info && info.isConnected())
       {
         //有网络
-        EventBus.getDefault().post(new EventCenter<Boolean>(EventCenter.EVENT_CODE_NETWORK,true));
+        eventCenter = new EventCenter<>(EventCenter.EVENT_CODE_NETWORK, true);
       } else
       {
         //无网络
-        EventBus.getDefault().post(new EventCenter<Boolean>(EventCenter.EVENT_CODE_NETWORK,false));
+        eventCenter = new EventCenter<>(EventCenter.EVENT_CODE_NETWORK, false);
       }
+      EventBus.getDefault().post(eventCenter);
     }
   }
-
 
 
 }

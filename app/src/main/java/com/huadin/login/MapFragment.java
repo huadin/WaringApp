@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.AMapOptions;
@@ -53,6 +55,9 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   Toolbar mToolbar;
   @BindView(map)
   MapView mMapView;
+  @BindView(R.id.network_text_view)
+  TextView mNetworkTextView;
+
   private final int mPermissionCode = 0x11;
   private AMap mMap;
   private MapContract.MapListener mPresenter;
@@ -255,7 +260,12 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   @Override
   public void activate(OnLocationChangedListener onLocationChangedListener)
   {
-    LogUtil.i(LOG_TAG, "activate = " + System.currentTimeMillis());
+    //检测网络
+    if (!isNetwork())
+    {
+      //无网络提示
+      mNetworkTextView.setVisibility(View.VISIBLE);
+    }
     mPresenter.startLocation(onLocationChangedListener);
   }
 
@@ -339,6 +349,14 @@ public class MapFragment extends BaseFragment implements PermissionListener,
       case EventCenter.GEO_CODE_START://开始解析
         AMapGeoCode geoCode = new AMapGeoCode(mContext);
         geoCode.startGeoCode();
+        break;
+      case EventCenter.EVENT_CODE_NETWORK:
+        boolean network = (boolean) eventCenter.getData();
+        if (network)
+        {
+          mNetworkTextView.setVisibility(View.GONE);
+          startService();
+        }
         break;
     }
 

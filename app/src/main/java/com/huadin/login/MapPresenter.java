@@ -81,7 +81,6 @@ class MapPresenter implements MapContract.MapListener
       {
         double lag = aMapLocation.getLatitude();
         double lng = aMapLocation.getLongitude();
-        LogUtil.i(TAG, "lat = " + lag + " / lng = " + lng);
 
         LatLng latLng = new LatLng(lag, lng);
 
@@ -288,6 +287,8 @@ class MapPresenter implements MapContract.MapListener
       String newScope = powerBean.getScope();
       String typeCode = powerBean.getTypeCode();
 //      String lineName = powerBean.getLineName();
+
+      LogUtil.i(TAG,"type  = " + typeCode);
 
       switch (typeCode)
       {

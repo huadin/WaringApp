@@ -14,12 +14,12 @@ import java.util.List;
  * 解析
  */
 
-public class ParseUtil
+class ParseUtil
 {
 
   private static List<StopPowerBean> list = new ArrayList<>();
 
-  public static List<StopPowerBean> pareJson(List<JSONArray> jsonList)
+  static List<StopPowerBean> pareJson(List<JSONArray> jsonList)
   {
     try
     {

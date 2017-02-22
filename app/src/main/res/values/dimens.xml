@@ -40,8 +40,9 @@
     <dimen name="register_phone_code_width">180px</dimen>
     <dimen name="login_register_button_height_96px">96px</dimen>
 
-    <!--自定义范围-->
+    <!--MapFragment-->
     <dimen name="map_fab_margin_10dp">10dp</dimen>
+    <dimen name="map_text_margin_top_30">30dp</dimen>
 
     <!--故障提交-->
     <dimen name="report_title_margin_left_16dp">16dp</dimen>
@@ -117,6 +118,7 @@
     <dimen name="feedback_fragment_elevation">2dp</dimen>
     <dimen name="feedback_fragment_edit_padding">5dp</dimen>
     <dimen name="feedback_fragment_edit_max_height">250dp</dimen>
+    <dimen name="map_text_margin_start">10dp</dimen>
 
 
 </resources>
