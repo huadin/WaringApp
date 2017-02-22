@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,6 +23,7 @@ import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
+import com.huadin.MyApplication;
 import com.huadin.base.BaseFragment;
 import com.huadin.database.ScopeLatLng;
 import com.huadin.eventbus.EventCenter;
@@ -62,7 +62,8 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   private AMap mMap;
   private MapContract.MapListener mPresenter;
   private PermissionManager mPermissionManager;
-  private LatLng mLatLng;
+  private List<ScopeLatLng> scopeLatLngs = new ArrayList<>();
+  private boolean isCompleteLocation;
 
   public static MapFragment newInstance()
   {
@@ -86,6 +87,7 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   public void onCreate(@Nullable Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
+    MyApplication.mMapFragmentCreate = true;
     checkPermission();
   }
 
@@ -148,6 +150,7 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   public void onDestroy()
   {
     super.onDestroy();
+    MyApplication.mMapFragmentCreate = false;
     mMapView.onDestroy();
     if (mPresenter != null)
     {
@@ -233,8 +236,12 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   @Override
   public void latLng(LatLng latLng)
   {
-    mLatLng = latLng;
-    mLatLng = checkNotNull(latLng, "LatLng 没有数据");
+    checkNotNull(latLng, "LatLng 没有数据");
+    if (isCompleteLocation)
+    {
+      mPresenter.addMarkerToMap(scopeLatLngs, latLng);
+      isCompleteLocation = false;
+    }
   }
 
   /**
@@ -342,8 +349,13 @@ public class MapFragment extends BaseFragment implements PermissionListener,
     switch (eventCenter.getEventCode())
     {
       case EventCenter.GEO_CODE_COMPLETE:
-        List<ScopeLatLng> scopeLatLngs = (List<ScopeLatLng>) eventCenter.getData();
-        mPresenter.addMarkerToMap(scopeLatLngs, mLatLng);
+        List<ScopeLatLng> list = (List<ScopeLatLng>) eventCenter.getData();
+        /*
+        * 此位置调用  mPresenter.addMarkerToMap(scopeLatLngs, latLng) 时
+        * 可能出现定位结果未返回现象,既 latLnt = null;
+        */
+        scopeLatLngs.addAll(list);
+        isCompleteLocation = true;
         break;
 
       case EventCenter.GEO_CODE_START://开始解析

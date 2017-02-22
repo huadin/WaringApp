@@ -16,6 +16,8 @@ import cn.bmob.v3.BmobInstallation;
 
 public class MyApplication extends LitePalApplication
 {
+  public static boolean mMapFragmentCreate = false;
+
   @Override
   public void onCreate()
   {

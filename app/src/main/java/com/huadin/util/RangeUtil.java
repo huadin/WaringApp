@@ -30,8 +30,6 @@ public class RangeUtil
   public static List<String> scopeFromRange(List<ScopeLatLng> mList, LatLng p1)
   {
 
-    LogUtil.i(TAG,"p1 / lat = " + p1.latitude + " / lng = " + p1.longitude);
-
     List<String> scopeList = null;
     try
     {
@@ -54,7 +52,6 @@ public class RangeUtil
         double lat = mList.get(i).getLatitude();
         double lng = mList.get(i).getLongitude();
 
-        LogUtil.i(TAG,"p2 / lat = " + lat + " / lng = " + lng);
         LatLng p2 = new LatLng(lat, lng);
 
         //两点间距离
@@ -67,6 +64,7 @@ public class RangeUtil
         llpList.add(llp);
 
         //在范围内的 scope 保存到集合中
+        // TODO: 2017/2/22 关闭了范围
 //        if (range <= cr.getRange())
 //        {
         scopeList.add(mList.get(i).getScope());

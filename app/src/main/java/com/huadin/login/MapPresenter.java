@@ -1,6 +1,7 @@
 package com.huadin.login;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -167,7 +168,7 @@ class MapPresenter implements MapContract.MapListener
    * @param latLng          当前位置的经纬度
    */
   @Override
-  public void addMarkerToMap(List<ScopeLatLng> scopeLatLngList, LatLng latLng)
+  public void addMarkerToMap(List<ScopeLatLng> scopeLatLngList, @NonNull LatLng latLng)
   {
     LogUtil.i(TAG, "解析数据完成" + "long = " + System.currentTimeMillis() + " / list = " + scopeLatLngList.toString());
     if (scopeLatLngList.size() == 0) return;

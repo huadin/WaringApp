@@ -3,6 +3,7 @@ package com.huadin.util;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
+import com.huadin.MyApplication;
 import com.huadin.database.StopPowerBean;
 import com.huadin.eventbus.EventCenter;
 
@@ -175,7 +176,7 @@ public enum HttpUtil
       //判断是否还有数据
       if (totalCount > 10)
       {
-        LogUtil.i(TAG,"mJSONArrays size = " + mJSONArrays.size());
+        LogUtil.i(TAG, "mJSONArrays size = " + mJSONArrays.size());
 
         if (mJSONArrays.size() >= totalPage)
         {
@@ -211,6 +212,11 @@ public enum HttpUtil
     DataSupport.saveAll(beanList);
 
     //TODO 开始编码解析,MapFragment 还没有创建出来,无发接受到
+    while (!MyApplication.mMapFragmentCreate)
+    {
+//      LogUtil.i(TAG, "MapFragment not create");
+    }
+
     EventBus.getDefault().post(new EventCenter(EventCenter.GEO_CODE_START));
   }
 
