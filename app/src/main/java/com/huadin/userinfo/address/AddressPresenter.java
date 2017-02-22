@@ -144,6 +144,9 @@ public class AddressPresenter implements AddressContract.Presenter
       case 9010:
         mAddressView.updateError(R.string.error_code_9010);
         break;
+      case 9016:
+        mAddressView.updateError(R.string.error_code_9016);
+        break;
     }
   }
 

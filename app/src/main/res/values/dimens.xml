@@ -119,6 +119,8 @@
     <dimen name="feedback_fragment_edit_padding">5dp</dimen>
     <dimen name="feedback_fragment_edit_max_height">250dp</dimen>
     <dimen name="map_text_margin_start">10dp</dimen>
+    <dimen name="setting_area_height">48dp</dimen>
+    <dimen name="setting_area_margin">16dp</dimen>
 
 
 </resources>

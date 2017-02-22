@@ -98,7 +98,7 @@ public enum HttpUtil
   {
     if (TextUtils.isEmpty(orgCode))
     {
-      mOrgCode = "11402";
+      mOrgCode = "11401";
     } else
     {
       this.mOrgCode = orgCode;

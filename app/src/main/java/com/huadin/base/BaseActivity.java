@@ -8,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.huadin.database.WaringAddress;
 import com.huadin.eventbus.EventCenter;
 import com.huadin.login.LoginFragment;
 import com.huadin.service.HttpIntentService;
@@ -21,6 +22,7 @@ import com.huadin.waringapp.R;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.litepal.crud.DataSupport;
 
 import me.yokeyword.fragmentation.SupportActivity;
 
@@ -30,6 +32,8 @@ public abstract class BaseActivity extends SupportActivity
 {
 
   protected static final String TITLE_KEY = "TITLE_KEY";
+  protected static final String KEY_ADDRESS_AREA_SHARED = "Address_Shared";
+  protected static final String KEY_ADDRESS_AREA_KEY = "SHARED_KEY";
   //解锁抽屉模式时使用
   protected DrawerLayout mBaseDrawerLayout;
   protected static String LOG_TAG = null;
@@ -127,7 +131,9 @@ public abstract class BaseActivity extends SupportActivity
 
   protected void startService()
   {
+    WaringAddress waringAddress = DataSupport.findFirst(WaringAddress.class);
     Intent intent = new Intent(this, HttpIntentService.class);
+    intent.putExtra(getString(R.string.key_org_code),waringAddress.getWaringAreaId());
     startService(intent);
   }
 

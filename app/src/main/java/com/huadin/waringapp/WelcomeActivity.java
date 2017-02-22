@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,14 +14,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 
 import com.huadin.base.BaseActivity;
-import com.huadin.database.Range;
 import com.huadin.login.MainActivity;
 import com.huadin.permission.PermissionListener;
 import com.huadin.permission.PermissionManager;
-import com.huadin.service.HttpIntentService;
 import com.huadin.util.LogUtil;
-
-import org.litepal.crud.DataSupport;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,6 +42,7 @@ public class WelcomeActivity extends BaseActivity implements PermissionListener,
    */
   private boolean isNeedCheck = true;
   private PermissionManager manager;
+  private int keyCode = -1;
 
   @Override
   protected void onCreate(Bundle savedInstanceState)
@@ -176,15 +174,25 @@ public class WelcomeActivity extends BaseActivity implements PermissionListener,
   @Override
   public void onAnimationStart(Animation animation)
   {
-    //开启服务,加载网络数据
-    if (!isNetwork()) return; //没有网络
-    startService();
+    SharedPreferences sharedPreferences = getSharedPreferences(KEY_ADDRESS_AREA_SHARED, MODE_PRIVATE);
+    keyCode = sharedPreferences.getInt(KEY_ADDRESS_AREA_KEY, 0);
+    if (keyCode == 1 && isNetwork())
+    {
+      //开启服务,加载网络数据
+      startService();
+    }
   }
 
   @Override
   public void onAnimationEnd(Animation animation)
   {
-    startActivity(MainActivity.class);
+    if (keyCode > 0)
+    {
+      startActivity(MainActivity.class);
+    } else
+    {
+      startActivity(SettingAreaActivity.class);
+    }
     finish();
   }
 
