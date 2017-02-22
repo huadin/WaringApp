@@ -9,6 +9,7 @@ import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.model.BitmapDescriptor;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.huadin.database.ScopeLatLng;
 import com.huadin.database.StopPowerBean;
@@ -22,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
+import java.util.TreeMap;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -42,7 +45,9 @@ class MapPresenter implements MapContract.MapListener
   private BitmapDescriptor GZMarker;//故障
   private BitmapDescriptor LLMarker;//临时
   private BitmapDescriptor mMarker;//添加到map上的marker
-  private BitmapDescriptor itemMarker;//前一个marker
+  private BitmapDescriptor mBeforeMarker;//前一个marker
+  private Marker mHindMarker;//用于隐藏infoWindow窗口
+  private Marker mTempMarker;//用于改变点击的marker的颜色
 
   MapPresenter(MapContract.View view, Context context)
   {
@@ -74,7 +79,11 @@ class MapPresenter implements MapContract.MapListener
     {
       if (aMapLocation.getErrorCode() == 0)
       {
-        LatLng latLng = new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude());
+        double lag = aMapLocation.getLatitude();
+        double lng = aMapLocation.getLongitude();
+        LogUtil.i(TAG, "lat = " + lag + " / lng = " + lng);
+
+        LatLng latLng = new LatLng(lag, lng);
 
         mView.latLng(latLng);
         //显示系统小蓝点
@@ -152,6 +161,12 @@ class MapPresenter implements MapContract.MapListener
     mClient = null;
   }
 
+  /**
+   * 添加标记点
+   *
+   * @param scopeLatLngList 解析出来的经纬度的集合
+   * @param latLng          当前位置的经纬度
+   */
   @Override
   public void addMarkerToMap(List<ScopeLatLng> scopeLatLngList, LatLng latLng)
   {
@@ -174,11 +189,11 @@ class MapPresenter implements MapContract.MapListener
         String content = getContentFormScope(scope);
 
         MarkerOptions options = new MarkerOptions()
-                .title("停电信息")// title
-                .position(ll) // 定位点
-                .icon(mMarker) ;   // marker
-//                .snippet(content); //内容
-//                .draggable(true)//可拖拽
+                .title("停电信息")     // title
+                .position(ll)          // 定位点
+                .icon(mMarker)         // marker
+                .snippet(content);     //内容
+//                .draggable(true)     //可拖拽
 //                  .perspective(true);//近大远小
         optionsArrayList.add(options);
       }
@@ -186,6 +201,55 @@ class MapPresenter implements MapContract.MapListener
     }
   }
 
+  @Override
+  public void markerClick(Marker marker)
+  {
+    mHindMarker = marker;
+
+    //改变点击的marker的颜色
+    if (marker != mTempMarker)
+    {
+      if (mTempMarker != null)
+      {
+        //改变前一个marker的颜色
+        mTempMarker.setIcon(mBeforeMarker);
+      }
+      mTempMarker = marker;
+    }
+
+    ArrayList<BitmapDescriptor> iconList = marker.getIcons();
+    if (iconList != null && iconList.size() > 0)
+    {
+      mBeforeMarker = iconList.get(0);
+    }
+
+    marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+  }
+
+  @Override
+  public void mapClick()
+  {
+    if (mHindMarker != null)
+    {
+      mHindMarker.hideInfoWindow();
+      //改变颜色
+      mHindMarker.setIcon(mBeforeMarker);
+    }
+  }
+
+  @Override
+  public void windowClick(Marker marker)
+  {
+    mHindMarker.hideInfoWindow();
+    marker.setIcon(mBeforeMarker);
+  }
+
+  /**
+   * 获取经纬度信息
+   *
+   * @param scope 地点
+   * @return LatLng
+   */
   private LatLng getLatLntFromScope(String scope)
   {
     ScopeLatLng scopeLatLng = DataSupport.where("scope like ?", scope).findFirst(ScopeLatLng.class);
@@ -193,10 +257,19 @@ class MapPresenter implements MapContract.MapListener
   }
 
 
+  /**
+   * 获取停电详细信息
+   *
+   * @param scope 地点
+   * @return 停电详细信息
+   */
   private String getContentFormScope(String scope)
   {
-    StringBuilder sb = new StringBuilder("");
-    StringBuilder contentBuilder = new StringBuilder("");
+    //为了防止添加重复的时间段
+    TreeMap<String, String> treeMap = new TreeMap<>();
+
+    StringBuilder sb = new StringBuilder();
+    StringBuilder contentBuilder = new StringBuilder();
     String content = null;
 
     //将 xxx村委会 替换成 xxx村
@@ -206,15 +279,15 @@ class MapPresenter implements MapContract.MapListener
     }
 
     //模糊查询所有符合条件的
-    List<StopPowerBean> tempNST = DataSupport.where("scope like ?", "%" + scope + "%").find(StopPowerBean.class);
+    List<StopPowerBean> beanList = DataSupport.where("scope like ?", "%" + scope + "%").find(StopPowerBean.class);
 
-    if (tempNST != null && tempNST.size() > 0)
+    if (beanList != null && beanList.size() > 0)
     {
       // 获取 typeCode , scope ,lineName
-      StopPowerBean firstNST = tempNST.get(0);
-      String newScope = firstNST.getScope();
-      String typeCode = firstNST.getTypeCode();
-      String lineName = firstNST.getLineName();
+      StopPowerBean powerBean = beanList.get(0);
+      String newScope = powerBean.getScope();
+      String typeCode = powerBean.getTypeCode();
+//      String lineName = powerBean.getLineName();
 
       switch (typeCode)
       {
@@ -231,9 +304,9 @@ class MapPresenter implements MapContract.MapListener
 
 
       //追加 scope 的不同停电时间段
-      for (int i = 0; i < tempNST.size(); i++)
+      for (int i = 0; i < beanList.size(); i++)
       {
-        StopPowerBean nst = tempNST.get(i);
+        StopPowerBean nst = beanList.get(i);
         String date = nst.getDate();
         String time = nst.getTime();
 
@@ -242,20 +315,20 @@ class MapPresenter implements MapContract.MapListener
           mMarker = TDMarker;//处于停电状态
         }
 
-        if (i == tempNST.size() - 1)
-        {
-          sb.append(date);
-          sb.append(" ");
-          sb.append(time);
-          sb.append(".");
-        } else
-        {
-          sb.append(date);
-          sb.append(" ");
-          sb.append(time);
-          sb.append(",\n");
-          sb.append("");
-        }
+        sb.append(date);
+        sb.append(" ");
+        sb.append(time);
+
+        treeMap.put(sb.toString(), null);
+        sb.delete(0, sb.length());
+      }
+
+      Set<String> keySet = treeMap.keySet();
+      for (String s : keySet)
+      {
+        sb.append(s);
+        sb.append(";");
+        sb.append("\n");
       }
 
       //组合所有信息
@@ -265,9 +338,9 @@ class MapPresenter implements MapContract.MapListener
       contentBuilder.append("停电范围：");
       contentBuilder.append(newScope);
       contentBuilder.append("\n");
-      contentBuilder.append("停电线路：");
-      contentBuilder.append(lineName);
-      contentBuilder.append("\n");
+//      contentBuilder.append("停电线路：");
+//      contentBuilder.append("太多了");
+//      contentBuilder.append("\n");
       contentBuilder.append("停电时间：");
       contentBuilder.append(sb.toString());
 

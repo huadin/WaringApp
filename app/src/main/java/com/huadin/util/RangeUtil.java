@@ -29,6 +29,9 @@ public class RangeUtil
    */
   public static List<String> scopeFromRange(List<ScopeLatLng> mList, LatLng p1)
   {
+
+    LogUtil.i(TAG,"p1 / lat = " + p1.latitude + " / lng = " + p1.longitude);
+
     List<String> scopeList = null;
     try
     {
@@ -50,6 +53,8 @@ public class RangeUtil
       {
         double lat = mList.get(i).getLatitude();
         double lng = mList.get(i).getLongitude();
+
+        LogUtil.i(TAG,"p2 / lat = " + lat + " / lng = " + lng);
         LatLng p2 = new LatLng(lat, lng);
 
         //两点间距离
@@ -64,7 +69,7 @@ public class RangeUtil
         //在范围内的 scope 保存到集合中
 //        if (range <= cr.getRange())
 //        {
-          scopeList.add(mList.get(i).getScope());
+        scopeList.add(mList.get(i).getScope());
 //        }
       }
 
@@ -88,47 +93,42 @@ public class RangeUtil
    * @param mList ScopeLatLng 集合
    * @return 符合范围的 scope 集合
    */
-  public static List<String> resetRangeClick(List<ScopeLatLng> mList)
+  public static List<String> resetRange(List<ScopeLatLng> mList)
   {
     LogUtil.i(TAG, "mList.size() = " + mList.size());
     List<String> scopeList = null;
-    List<Integer> tempList = null; //存储符合条件的下标号
-    try
+    List<Integer> tempList; //存储符合条件的下标号
+
+    List<LatLngPoint> pList = DataSupport.findAll(LatLngPoint.class);
+    Range cr = DataSupport.findFirst(Range.class);
+    if (pList.size() > 0)
     {
-      List<LatLngPoint> pList = DataSupport.findAll(LatLngPoint.class);
-      Range cr = DataSupport.findFirst(Range.class);
-      if (pList.size() > 0)
+      tempList = new ArrayList<>();
+
+      for (int i = 0; i < pList.size(); i++)
       {
-        tempList = new ArrayList<>();
-
-        for (int i = 0; i < pList.size(); i++)
+        if (pList.get(i).getRange() <= cr.getRange())
         {
-          if (pList.get(i).getRange() <= cr.getRange())
-          {
-            tempList.add(pList.get(i).getNumber());
-          }
+          tempList.add(pList.get(i).getNumber());
         }
-        LogUtil.i(TAG, "LatLngPoint = " + tempList.toString());
-        //自定义距离时，判断集合中是否有数据
-        if (tempList.size() > 0)
-        {
-          LogUtil.i(TAG, "mList.size() = " + mList.size());
-          //显示数据
-          scopeList = new ArrayList<>();
-          for (int i = 0; i < tempList.size(); i++)
-          {
-            //根据下标号取出原集合中的scope
-            LogUtil.i(TAG, "number = " + tempList.get(i));
-
-            scopeList.add(mList.get(tempList.get(i)).getScope());
-          }
-        }
-        return scopeList;
       }
-    } catch (Exception e)
-    {
-      e.printStackTrace();
+      LogUtil.i(TAG, "LatLngPoint = " + tempList.toString());
+      //自定义距离时，判断集合中是否有数据
+      if (tempList.size() > 0)
+      {
+        LogUtil.i(TAG, "mList.size() = " + mList.size());
+        //显示数据
+        scopeList = new ArrayList<>();
+        for (int i = 0; i < tempList.size(); i++)
+        {
+          //根据下标号取出原集合中的scope
+          LogUtil.i(TAG, "number = " + tempList.get(i));
+
+          scopeList.add(mList.get(tempList.get(i)).getScope());
+        }
+      }
+      return scopeList;
     }
-    return scopeList;
+    return null;
   }
 }

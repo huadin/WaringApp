@@ -3,6 +3,7 @@ package com.huadin.login;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.huadin.base.BaseView;
 import com.huadin.database.ScopeLatLng;
@@ -35,6 +36,7 @@ interface MapContract
 
     /**
      * 准备添加覆盖物
+     *
      * @param options MarkerOptions
      */
     void addMarker(ArrayList<MarkerOptions> options);
@@ -64,6 +66,23 @@ interface MapContract
      * @param scopeLatLngList 解析出来的经纬度的集合
      */
     void addMarkerToMap(List<ScopeLatLng> scopeLatLngList, LatLng latLng);
+
+    /**
+     * marker 点击事件
+     *
+     * @param marker Marker
+     */
+    void markerClick(Marker marker);
+
+    /**
+     * 地图点击事件
+     */
+    void mapClick();
+
+    /**
+     * 窗口点击事件
+     */
+    void windowClick(Marker marker);
   }
 
 }

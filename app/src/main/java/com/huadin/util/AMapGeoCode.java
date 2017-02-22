@@ -85,12 +85,13 @@ public class AMapGeoCode implements GeocodeSearch.OnGeocodeSearchListener
 
         mLatLngs.add(latLng);
 
-        if (mLatLngs.size() == map.size())
+        if (mLatLngs.size() >= map.size())
         {
           DataSupport.deleteAll(ScopeLatLng.class);
           DataSupport.saveAll(mLatLngs);
           //发送通知,显示标记物
           EventBus.getDefault().post(new EventCenter<>(EventCenter.GEO_CODE_COMPLETE,mLatLngs));
+          mLatLngs.clear();
         }
       }
     }

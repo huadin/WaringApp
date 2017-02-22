@@ -210,7 +210,7 @@ public enum HttpUtil
     //保存新数据
     DataSupport.saveAll(beanList);
 
-    // TODO: 2017/2/21  开始编码解析
+    //TODO 开始编码解析,MapFragment 还没有创建出来,无发接受到
     EventBus.getDefault().post(new EventCenter(EventCenter.GEO_CODE_START));
   }
 

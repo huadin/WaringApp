@@ -20,6 +20,7 @@ import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.huadin.base.BaseFragment;
 import com.huadin.database.ScopeLatLng;
@@ -45,7 +46,7 @@ import static com.huadin.waringapp.R.id.map;
  */
 
 public class MapFragment extends BaseFragment implements PermissionListener,
-        MapContract.View, LocationSource
+        MapContract.View, LocationSource, AMap.OnMarkerClickListener, AMap.OnMapClickListener, AMap.OnInfoWindowClickListener
 {
 
   @BindView(R.id.top_toolbar)
@@ -164,6 +165,13 @@ public class MapFragment extends BaseFragment implements PermissionListener,
     {
       mMap = mMapView.getMap();
     }
+
+    //marker 点击事件
+    mMap.setOnMarkerClickListener(this);
+    //地图点击事件
+    mMap.setOnMapClickListener(this);
+    //infoWindow窗口点击事件
+    mMap.setOnInfoWindowClickListener(this);
     setUpMap();
   }
 
@@ -264,7 +272,8 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   @Override
   public void addMarker(ArrayList<MarkerOptions> options)
   {
-    mMap.addMarkers(options,true);
+    mMap.clear();
+    mMap.addMarkers(options, true);
   }
 
   private void showDialogPermission()
@@ -325,7 +334,6 @@ public class MapFragment extends BaseFragment implements PermissionListener,
       case EventCenter.GEO_CODE_COMPLETE:
         List<ScopeLatLng> scopeLatLngs = (List<ScopeLatLng>) eventCenter.getData();
         mPresenter.addMarkerToMap(scopeLatLngs, mLatLng);
-//        mMap.clear();
         break;
 
       case EventCenter.GEO_CODE_START://开始解析
@@ -334,5 +342,27 @@ public class MapFragment extends BaseFragment implements PermissionListener,
         break;
     }
 
+  }
+
+  //标记点击事件
+  @Override
+  public boolean onMarkerClick(Marker marker)
+  {
+    mPresenter.markerClick(marker);
+    return false;
+  }
+
+  //地图点击事件
+  @Override
+  public void onMapClick(LatLng latLng)
+  {
+    mPresenter.mapClick();
+  }
+
+  //窗口点击事件
+  @Override
+  public void onInfoWindowClick(Marker marker)
+  {
+    mPresenter.windowClick(marker);
   }
 }
