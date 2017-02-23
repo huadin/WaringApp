@@ -29,10 +29,9 @@ interface MapContract
     /**
      * 定位异常信息
      *
-     * @param errorCode 错误码
      * @param errorInfo 错误信息
      */
-    void locationError(int errorCode, String errorInfo);
+    void locationError(String errorInfo);
 
     /**
      * 准备添加覆盖物
@@ -48,6 +47,11 @@ interface MapContract
      * 开启定位
      */
     void startLocation(LocationSource.OnLocationChangedListener onLocationChangedListener);
+
+    /**
+     * 恢复定位
+     */
+    void resumeLocation();
 
     /**
      * 停止定位

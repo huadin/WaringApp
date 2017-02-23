@@ -239,21 +239,20 @@ public class MapFragment extends BaseFragment implements PermissionListener,
     checkNotNull(latLng, "LatLng 没有数据");
     if (isCompleteLocation)
     {
-      mPresenter.addMarkerToMap(scopeLatLngs, latLng);
       isCompleteLocation = false;
+      mPresenter.addMarkerToMap(scopeLatLngs, latLng);
     }
+    LogUtil.i(LOG_TAG, "isCompleteLocation = " + isCompleteLocation);
   }
 
   /**
    * mapPresenter 回调
    *
-   * @param errorCode 错误码
    * @param errorInfo 错误信息
    */
   @Override
-  public void locationError(int errorCode, String errorInfo)
+  public void locationError(String errorInfo)
   {
-    LogUtil.i(LOG_TAG, "errorCode = " + errorCode);
     LogUtil.i(LOG_TAG, "errorInfo = " + errorInfo);
   }
 
@@ -339,6 +338,9 @@ public class MapFragment extends BaseFragment implements PermissionListener,
     if (hidden)
     {
       mPresenter.stopLocation();
+    } else
+    {
+      mPresenter.resumeLocation();
     }
   }
 
@@ -354,6 +356,7 @@ public class MapFragment extends BaseFragment implements PermissionListener,
         * 此位置调用  mPresenter.addMarkerToMap(scopeLatLngs, latLng) 时
         * 可能出现定位结果未返回现象,既 latLnt = null;
         */
+        scopeLatLngs.clear();
         scopeLatLngs.addAll(list);
         isCompleteLocation = true;
         break;

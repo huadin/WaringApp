@@ -115,7 +115,7 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
     } else
     {
       //设置中初始化toolBar
-      initToolbar(mToolbar, R.string.user_info_waring_address,false);
+      initToolbar(mToolbar, R.string.user_info_waring_address, false);
       mPromptTextView.setVisibility(View.GONE);
       mAddressButton.setText(R.string.address_save);
     }
@@ -131,7 +131,6 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
     //显示服务器上的数据
     if (mFlag.equals(getString(R.string.setting_info_flag_key)))
     {
-//      WaringAddress waringAddress = DataSupport.where("isLocal = ?", String.valueOf(1)).findFirst(WaringAddress.class);
       WaringAddress waringAddress = DataSupport.findFirst(WaringAddress.class);
       if (waringAddress != null)
       {
@@ -190,6 +189,9 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
     // TODO: 2017/1/11 成功后启动预警服务,覆盖掉设置中的预警地址
     //保存成功
     showMessage(R.string.address_submit_success);
+
+    startService();
+
     if (mFlag.equals(getString(R.string.setting_info_flag_key)))
     {
       pop();

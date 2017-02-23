@@ -16,6 +16,7 @@ import com.huadin.database.ScopeLatLng;
 import com.huadin.database.StopPowerBean;
 import com.huadin.util.LogUtil;
 import com.huadin.util.RangeUtil;
+import com.huadin.waringapp.R;
 
 import org.litepal.crud.DataSupport;
 
@@ -91,7 +92,7 @@ class MapPresenter implements MapContract.MapListener
       } else
       {
         //异常
-        mView.locationError(aMapLocation.getErrorCode(), aMapLocation.getErrorInfo());
+        mView.locationError(aMapLocation.getErrorInfo());
       }
     }
   }
@@ -141,6 +142,16 @@ class MapPresenter implements MapContract.MapListener
   }
 
   /**
+   * 恢复定位
+   */
+  @Override
+  public void resumeLocation()
+  {
+    mClient.startLocation();
+  }
+
+
+  /**
    * 停止定位
    */
   @Override
@@ -171,7 +182,11 @@ class MapPresenter implements MapContract.MapListener
   public void addMarkerToMap(List<ScopeLatLng> scopeLatLngList, @NonNull LatLng latLng)
   {
     LogUtil.i(TAG, "解析数据完成" + "long = " + System.currentTimeMillis() + " / list = " + scopeLatLngList.toString());
-    if (scopeLatLngList.size() == 0) return;
+    if (scopeLatLngList.size() == 0)
+    {
+      mView.locationError(mContext.getString(R.string.http_not_data));
+      return;
+    }
     List<String> scopeList = RangeUtil.scopeFromRange(scopeLatLngList, latLng);
     if (scopeList.size() > 0)
     {
@@ -289,7 +304,7 @@ class MapPresenter implements MapContract.MapListener
       String typeCode = powerBean.getTypeCode();
 //      String lineName = powerBean.getLineName();
 
-      LogUtil.i(TAG,"type  = " + typeCode);
+      LogUtil.i(TAG, "type  = " + typeCode);
 
       switch (typeCode)
       {

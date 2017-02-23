@@ -96,6 +96,8 @@ public enum HttpUtil
    */
   public HttpUtil setOrgCode(String orgCode)
   {
+
+    LogUtil.i(TAG,"orgCode = " + orgCode);
     if (TextUtils.isEmpty(orgCode))
     {
       mOrgCode = "11401";

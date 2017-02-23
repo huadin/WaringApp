@@ -256,4 +256,5 @@
 
     <string name="setting_area_title">请选择地区,一遍获取该地区停电信息,\n如未设置则默认为"城区"。</string>
     <string name="setting_area_toolbar_title">区域设置</string>
+    <string name="http_not_data">该地区无停电信息</string>
 </resources>
