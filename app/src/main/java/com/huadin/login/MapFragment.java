@@ -242,7 +242,6 @@ public class MapFragment extends BaseFragment implements PermissionListener,
       isCompleteLocation = false;
       mPresenter.addMarkerToMap(scopeLatLngs, latLng);
     }
-    LogUtil.i(LOG_TAG, "isCompleteLocation = " + isCompleteLocation);
   }
 
   /**

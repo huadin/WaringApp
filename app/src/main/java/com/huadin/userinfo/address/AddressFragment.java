@@ -55,7 +55,7 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
   private static final String FLAG_KEY = "FLAG_KEY";
   private AddressContract.Presenter mPresenter;
   private List<City> mCityList;
-  private String mFlag;
+  private String mFlag;//用于区分是否为本地
 
   public static AddressFragment newInstance(String flag)
   {
@@ -186,7 +186,6 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
   @Override
   public void updateSuccess()
   {
-    // TODO: 2017/1/11 成功后启动预警服务,覆盖掉设置中的预警地址
     //保存成功
     showMessage(R.string.address_submit_success);
 
@@ -194,7 +193,8 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
 
     if (mFlag.equals(getString(R.string.setting_info_flag_key)))
     {
-      pop();
+//      pop();
+      popTopFragment();
     } else
     {
       mContext.finish();
@@ -224,7 +224,7 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
   @OnClick(R.id.address_submit)
   public void onClick()
   {
-    // TODO: 2017/1/11 改变button上文字及隐藏提示 
+
     if (mFlag.equals(getString(R.string.user_info_flag_key)))
     {
       mPresenter.start();

@@ -345,7 +345,7 @@ class MapPresenter implements MapContract.MapListener
       {
         sb.append(s);
         sb.append(";");
-        sb.append("\n");
+        if (keySet.size() > 1) sb.append("\n");
       }
 
       //组合所有信息

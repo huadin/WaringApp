@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 
+import com.huadin.bean.Person;
 import com.huadin.database.WaringAddress;
 import com.huadin.eventbus.EventCenter;
 import com.huadin.login.LoginFragment;
@@ -131,9 +133,20 @@ public abstract class BaseActivity extends SupportActivity
 
   protected void startService()
   {
-    WaringAddress waringAddress = DataSupport.findFirst(WaringAddress.class);
+    String areaId;
+    //登录点查询网络上地址,否则查询本地
+    Person person = Person.getCurrentUser(Person.class);
+    if (person != null && !TextUtils.isEmpty(person.getAreaId()))
+    {
+      areaId = person.getAreaId();
+    } else
+    {
+      WaringAddress waringAddress = DataSupport.findFirst(WaringAddress.class);
+      areaId = waringAddress.getWaringAreaId();
+    }
+
     Intent intent = new Intent(this, HttpIntentService.class);
-    intent.putExtra(getString(R.string.key_org_code),waringAddress.getWaringAreaId());
+    intent.putExtra(getString(R.string.key_org_code), areaId);
     startService(intent);
   }
 
