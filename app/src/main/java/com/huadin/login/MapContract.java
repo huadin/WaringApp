@@ -87,6 +87,12 @@ interface MapContract
      * 窗口点击事件
      */
     void windowClick(Marker marker);
+
+    /**
+     * 重置范围
+     * @param r 范围
+     */
+    void resetRange(double r);
   }
 
 }

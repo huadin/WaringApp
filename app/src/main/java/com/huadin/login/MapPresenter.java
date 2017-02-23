@@ -12,6 +12,7 @@ import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
+import com.huadin.database.Range;
 import com.huadin.database.ScopeLatLng;
 import com.huadin.database.StopPowerBean;
 import com.huadin.util.LogUtil;
@@ -188,33 +189,9 @@ class MapPresenter implements MapContract.MapListener
       return;
     }
     List<String> scopeList = RangeUtil.scopeFromRange(scopeLatLngList, latLng);
-    if (scopeList.size() > 0)
-    {
-
-      ArrayList<MarkerOptions> optionsArrayList = new ArrayList<>();
-
-      for (int i = 0; i < scopeList.size(); i++)
-      {
-        String scope = scopeList.get(i);
-
-        //获取经纬度
-        LatLng ll = getLatLntFromScope(scope);
-
-        //根据 scope 模糊搜索 StopPowerBean
-        String content = getContentFormScope(scope);
-
-        MarkerOptions options = new MarkerOptions()
-                .title("停电信息")     // title
-                .position(ll)          // 定位点
-                .icon(mMarker)         // marker
-                .snippet(content);     //内容
-//                .draggable(true)     //可拖拽
-//                  .perspective(true);//近大远小
-        optionsArrayList.add(options);
-      }
-      mView.addMarker(optionsArrayList);
-    }
+    setMarkerOptions(scopeList);
   }
+
 
   @Override
   public void markerClick(Marker marker)
@@ -258,6 +235,64 @@ class MapPresenter implements MapContract.MapListener
     mHindMarker.hideInfoWindow();
     marker.setIcon(mBeforeMarker);
   }
+
+  @Override
+  public void resetRange(double r)
+  {
+    List<ScopeLatLng> scopeLatLngs = DataSupport.findAll(ScopeLatLng.class);
+    Range range = DataSupport.findFirst(Range.class);
+    if (range == null)
+    {
+      range = new Range();
+    }
+    range.setRange(r);
+    range.save();
+
+    List<String> scopeList = RangeUtil.resetRange(scopeLatLngs);
+    if (scopeList == null || scopeList.size() == 0)
+    {
+      mView.locationError(mContext.getString(R.string.no_data_range));
+      return;
+    }
+
+    setMarkerOptions(scopeList);
+  }
+
+  /**
+   * 设置 MarkerOptions
+   *
+   * @param scopeList 停电地点集合
+   */
+  private void setMarkerOptions(List<String> scopeList)
+  {
+    if (scopeList.size() > 0)
+    {
+
+      ArrayList<MarkerOptions> optionsArrayList = new ArrayList<>();
+
+      for (int i = 0; i < scopeList.size(); i++)
+      {
+        String scope = scopeList.get(i);
+
+        //获取经纬度
+        LatLng ll = getLatLntFromScope(scope);
+
+        //根据 scope 模糊搜索 StopPowerBean
+        String content = getContentFormScope(scope);
+
+        MarkerOptions options = new MarkerOptions()
+                .title("停电信息")     // title
+                .position(ll)          // 定位点
+                .icon(mMarker)         // marker
+                .snippet(content);     //内容
+//                .draggable(true)     //可拖拽
+//                  .perspective(true);//近大远小
+        optionsArrayList.add(options);
+      }
+      mView.addMarker(optionsArrayList);
+    }
+  }
+
 
   /**
    * 获取经纬度信息

@@ -30,57 +30,37 @@ public class RangeUtil
   public static List<String> scopeFromRange(List<ScopeLatLng> mList, LatLng p1)
   {
 
-    List<String> scopeList = null;
-    try
+    List<LatLngPoint> llpList = new ArrayList<>();//将查询到的数据保存到数据库
+    List<String> scopeList = new ArrayList<>();//存储符合条件的 info
+
+    if (llpList.size() > 0) llpList.clear();
+    if (scopeList.size() > 0) scopeList.clear();
+
+    for (int i = 0; i < mList.size(); i++)
     {
-      Range cr = DataSupport.findFirst(Range.class);
-      if (cr == null)
-      {
-        cr = new Range();
-        cr.setRange(2000.0);
-        cr.save();
-      }
+      double lat = mList.get(i).getLatitude();
+      double lng = mList.get(i).getLongitude();
 
-      List<LatLngPoint> llpList = new ArrayList<>();//将查询到的数据保存到数据库
-      scopeList = new ArrayList<>();//存储符合条件的 info
+      LatLng p2 = new LatLng(lat, lng);
 
-      if (llpList.size() > 0) llpList.clear();
-      if (scopeList.size() > 0) scopeList.clear();
+      //两点间距离
+      double range = AMapUtils.calculateLineDistance(p1, p2);
+      LogUtil.i(TAG, "range = " + range);
+      //按照顺序保存距离
+      LatLngPoint llp = new LatLngPoint();
+      llp.setNumber(i);
+      llp.setRange(range);
+      llpList.add(llp);
 
-      for (int i = 0; i < mList.size(); i++)
-      {
-        double lat = mList.get(i).getLatitude();
-        double lng = mList.get(i).getLongitude();
-
-        LatLng p2 = new LatLng(lat, lng);
-
-        //两点间距离
-        double range = AMapUtils.calculateLineDistance(p1, p2);
-        LogUtil.i(TAG, "range = " + range);
-        //按照顺序保存距离
-        LatLngPoint llp = new LatLngPoint();
-        llp.setNumber(i);
-        llp.setRange(range);
-        llpList.add(llp);
-
-        //在范围内的 scope 保存到集合中
-        // TODO: 2017/2/22 关闭了范围
-//        if (range <= cr.getRange())
-//        {
-        scopeList.add(mList.get(i).getScope());
-//        }
-      }
-
-      //删除旧数据
-      DataSupport.deleteAll(LatLngPoint.class);
-      //保存到数据库
-      DataSupport.saveAll(llpList);
-      return scopeList;
-
-    } catch (Exception e)
-    {
-      e.printStackTrace();
+      //在范围内的 scope 保存到集合中
+      // TODO: 2017/2/22 默认显示全部
+      scopeList.add(mList.get(i).getScope());
     }
+
+    //删除旧数据
+    DataSupport.deleteAll(LatLngPoint.class);
+    //保存到数据库
+    DataSupport.saveAll(llpList);
     return scopeList;
   }
 
@@ -98,14 +78,14 @@ public class RangeUtil
     List<Integer> tempList; //存储符合条件的下标号
 
     List<LatLngPoint> pList = DataSupport.findAll(LatLngPoint.class);
-    Range cr = DataSupport.findFirst(Range.class);
+    Range range = DataSupport.findFirst(Range.class);
     if (pList.size() > 0)
     {
       tempList = new ArrayList<>();
 
       for (int i = 0; i < pList.size(); i++)
       {
-        if (pList.get(i).getRange() <= cr.getRange())
+        if (pList.get(i).getRange() <= range.getRange())
         {
           tempList.add(pList.get(i).getNumber());
         }

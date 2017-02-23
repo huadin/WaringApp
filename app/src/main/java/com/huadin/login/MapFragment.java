@@ -26,6 +26,7 @@ import com.amap.api.maps.model.MarkerOptions;
 import com.huadin.MyApplication;
 import com.huadin.base.BaseFragment;
 import com.huadin.database.ScopeLatLng;
+import com.huadin.dialog.RangeDialogFragment;
 import com.huadin.eventbus.EventCenter;
 import com.huadin.permission.PermissionListener;
 import com.huadin.permission.PermissionManager;
@@ -38,22 +39,23 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static com.huadin.waringapp.R.id.map;
 
 /**
  * 地图定位
  */
 
 public class MapFragment extends BaseFragment implements PermissionListener,
-        MapContract.View, LocationSource, AMap.OnMarkerClickListener, AMap.OnMapClickListener, AMap.OnInfoWindowClickListener
+        MapContract.View, LocationSource, AMap.OnMarkerClickListener,
+        AMap.OnMapClickListener, AMap.OnInfoWindowClickListener, RangeDialogFragment.OnRangeClickListener
 {
 
   @BindView(R.id.top_toolbar)
   Toolbar mToolbar;
-  @BindView(map)
+  @BindView(R.id.map)
   MapView mMapView;
   @BindView(R.id.network_text_view)
   TextView mNetworkTextView;
@@ -253,6 +255,7 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   public void locationError(String errorInfo)
   {
     LogUtil.i(LOG_TAG, "errorInfo = " + errorInfo);
+    showMessage(errorInfo);
   }
 
   @Override
@@ -396,5 +399,26 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   public void onInfoWindowClick(Marker marker)
   {
     mPresenter.windowClick(marker);
+  }
+
+  @OnClick(R.id.map_range_edit)
+  public void onClick()
+  {
+    RangeDialogFragment dialogFragment = RangeDialogFragment.newInstance();
+    dialogFragment.setOnRangeClickListener(this);
+    dialogFragment.show(getFragmentManager(), getClass().getSimpleName());
+  }
+
+
+  @Override
+  public void resetRange(double range)
+  {
+    mPresenter.resetRange(range);
+  }
+
+  @Override
+  public void rangeError()
+  {
+    showMessage(R.string.range_dialog_error_prompt);
   }
 }
