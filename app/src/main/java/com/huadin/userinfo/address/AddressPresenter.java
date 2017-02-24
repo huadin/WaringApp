@@ -81,8 +81,9 @@ public class AddressPresenter implements AddressContract.Presenter
   {
     isLocal = 1;
     if (getCityInfo()) return;
-
+    mAddressView.showLoading();
     saveAddress();
+    mAddressView.hindLoading();
     mAddressView.updateSuccess();
   }
 
@@ -108,7 +109,7 @@ public class AddressPresenter implements AddressContract.Presenter
     } else if (currentPerson != null)
     {
       if (isLocal == 1)
-      errorId = R.string.not_edit_waring_address;
+        errorId = R.string.not_edit_waring_address;
     }
 
     if (errorId != 0)

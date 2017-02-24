@@ -92,8 +92,8 @@ class MapPresenter implements MapContract.MapListener
         mListener.onLocationChanged(aMapLocation);
       } else
       {
-        //异常
-        mView.locationError(aMapLocation.getErrorInfo());
+        //异常 aMapLocation.getErrorInfo()
+        mView.locationError(mContext.getString(R.string.location_error));
       }
     }
   }
@@ -379,8 +379,11 @@ class MapPresenter implements MapContract.MapListener
       for (String s : keySet)
       {
         sb.append(s);
-        sb.append(";");
-        if (keySet.size() > 1) sb.append("\n");
+        if (keySet.size() > 1)
+        {
+          sb.append(";");
+          sb.append("\n");
+        }
       }
 
       //组合所有信息

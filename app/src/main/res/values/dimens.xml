@@ -124,7 +124,7 @@
 
     <!--重置范围-->
     <dimen name="range_dialog_edit_height">48dp</dimen>
-    <dimen name="range_dialog_edit_padding">30dp</dimen>
+    <dimen name="range_dialog_edit_padding">26dp</dimen>
     <dimen name="range_dialog_edit_margin_top">10dp</dimen>
 
 

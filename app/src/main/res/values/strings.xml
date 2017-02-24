@@ -260,4 +260,6 @@
     <string name="range_dialog_fragment_dialot_title">请输入范围(单位/KM)</string>
     <string name="range_dialog_error_prompt">请输入1KM以上范围</string>
     <string name="no_data_range">无符合范围的数据</string>
+    <string name="location_error">定位异常</string>
+    <string name="click_input_range">请点击此处</string>
 </resources>

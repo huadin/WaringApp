@@ -52,8 +52,7 @@ public class RangeUtil
       llp.setRange(range);
       llpList.add(llp);
 
-      //在范围内的 scope 保存到集合中
-      // TODO: 2017/2/22 默认显示全部
+      //在范围内的 scope 保存到集合中 ， 默认显示全部
       scopeList.add(mList.get(i).getScope());
     }
 
@@ -73,7 +72,7 @@ public class RangeUtil
    */
   public static List<String> resetRange(List<ScopeLatLng> mList)
   {
-    LogUtil.i(TAG, "mList.size() = " + mList.size());
+//    LogUtil.i(TAG, "mList.size() = " + mList.size());
     List<String> scopeList = null;
     List<Integer> tempList; //存储符合条件的下标号
 
@@ -90,17 +89,17 @@ public class RangeUtil
           tempList.add(pList.get(i).getNumber());
         }
       }
-      LogUtil.i(TAG, "LatLngPoint = " + tempList.toString());
+//      LogUtil.i(TAG, "LatLngPoint = " + tempList.toString());
       //自定义距离时，判断集合中是否有数据
       if (tempList.size() > 0)
       {
-        LogUtil.i(TAG, "mList.size() = " + mList.size());
+        LogUtil.i(TAG, "resetRange mList.size() = " + mList.size());
         //显示数据
         scopeList = new ArrayList<>();
         for (int i = 0; i < tempList.size(); i++)
         {
           //根据下标号取出原集合中的scope
-          LogUtil.i(TAG, "number = " + tempList.get(i));
+//          LogUtil.i(TAG, "number = " + tempList.get(i));
 
           scopeList.add(mList.get(tempList.get(i)).getScope());
         }
