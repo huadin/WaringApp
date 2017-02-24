@@ -205,7 +205,7 @@ public enum HttpUtil
   //解析为实体
   private void parseToBean(List<JSONArray> jsonArrays)
   {
-    List<StopPowerBean> beanList = ParseUtil.pareJson(jsonArrays);
+    List<StopPowerBean> beanList = ParseUtil.pareJson(jsonArrays,mOrgCode);
     LogUtil.i(TAG, "beanList = " + beanList.toString());
     mJSONArrays.clear();
     //删除旧数据

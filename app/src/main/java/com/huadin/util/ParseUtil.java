@@ -18,9 +18,17 @@ class ParseUtil
 {
 
   private static List<StopPowerBean> list = new ArrayList<>();
-
-  static List<StopPowerBean> pareJson(List<JSONArray> jsonList)
+  private static String mOrgCode;
+  /**
+   * 解析网络数据
+   *
+   * @param jsonList 数据集合
+   * @param orgCode  地区编码
+   * @return List<StopPowerBean>
+   */
+  static List<StopPowerBean> pareJson(List<JSONArray> jsonList, String orgCode)
   {
+    mOrgCode = orgCode;
     try
     {
       list.clear();
@@ -99,6 +107,7 @@ class ParseUtil
     st.setTime(time);
     st.setDate(date);
     st.setTypeCode(type);
+    st.setOrgCode(mOrgCode);
     list.add(st);
   }
 }

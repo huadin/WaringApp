@@ -18,6 +18,7 @@ public class StopPowerBean extends DataSupport implements Parcelable
    * time : 06:00:00 - 17:00:00
    * lineName : 范大路
    * typeCode : 计划停电(01)
+   * orgCode : 地区编码 11401
    */
 
   private String date;
@@ -25,6 +26,7 @@ public class StopPowerBean extends DataSupport implements Parcelable
   private String scope;
   private String lineName;
   private String typeCode;
+  private String orgCode;
 
   public String getDate()
   {
@@ -76,6 +78,38 @@ public class StopPowerBean extends DataSupport implements Parcelable
     this.typeCode = typeCode;
   }
 
+  public String getOrgCode()
+  {
+    return orgCode;
+  }
+
+  public void setOrgCode(String orgCode)
+  {
+    this.orgCode = orgCode;
+  }
+
+  public static Creator<StopPowerBean> getCREATOR()
+  {
+    return CREATOR;
+  }
+
+  public StopPowerBean()
+  {
+  }
+
+  @Override
+  public String toString()
+  {
+    return "StopPowerBean{" +
+            "date='" + date + '\'' +
+            ", time='" + time + '\'' +
+            ", scope='" + scope + '\'' +
+            ", lineName='" + lineName + '\'' +
+            ", typeCode='" + typeCode + '\'' +
+            ", orgCode='" + orgCode + '\'' +
+            '}';
+  }
+
   @Override
   public int describeContents()
   {
@@ -90,10 +124,7 @@ public class StopPowerBean extends DataSupport implements Parcelable
     dest.writeString(this.scope);
     dest.writeString(this.lineName);
     dest.writeString(this.typeCode);
-  }
-
-  public StopPowerBean()
-  {
+    dest.writeString(this.orgCode);
   }
 
   protected StopPowerBean(Parcel in)
@@ -103,9 +134,10 @@ public class StopPowerBean extends DataSupport implements Parcelable
     this.scope = in.readString();
     this.lineName = in.readString();
     this.typeCode = in.readString();
+    this.orgCode = in.readString();
   }
 
-  public static final Parcelable.Creator<StopPowerBean> CREATOR = new Parcelable.Creator<StopPowerBean>()
+  public static final Creator<StopPowerBean> CREATOR = new Creator<StopPowerBean>()
   {
     @Override
     public StopPowerBean createFromParcel(Parcel source)
@@ -119,16 +151,4 @@ public class StopPowerBean extends DataSupport implements Parcelable
       return new StopPowerBean[size];
     }
   };
-
-  @Override
-  public String toString()
-  {
-    return "StopPowerBean{" +
-            "date='" + date + '\'' +
-            ", time='" + time + '\'' +
-            ", scope='" + scope + '\'' +
-            ", lineName='" + lineName + '\'' +
-            ", typeCode='" + typeCode + '\'' +
-            '}';
-  }
 }

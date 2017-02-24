@@ -311,7 +311,31 @@
         <item name="android:textColor">@color/user_info_item_text_color</item>
         <item name="android:textSize">@dimen/text_size_14</item>
     </style>
+
     <!--联系我们 end -->
 
+    <!--search start-->
+    <style name="search_linear_layout_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/address_area_layout_height</item>
+        <item name="android:background">@drawable/area_background_shape</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="search_image_view_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_marginStart">@dimen/address_area_spinner_margin</item>
+    </style>
+
+    <style name="search_spinner_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginEnd">@dimen/address_area_spinner_margin</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <!--search end-->
 
 </resources>

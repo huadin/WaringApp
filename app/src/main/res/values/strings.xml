@@ -262,4 +262,14 @@
     <string name="no_data_range">无符合范围的数据</string>
     <string name="location_error">定位异常</string>
     <string name="click_input_range">请点击此处</string>
+
+    <!--搜索-->
+    <string name="search_loading">搜索中&#8230;</string>
+    <string name="search_start_date_hint">请选择指定日期</string>
+    <string name="search_select_type">请选择停电类型</string>
+    <string name="search_submit">搜索</string>
+    <string name="search_input_scope">请输入范围</string>
+    <string name="search_city_error">选择地区异常</string>
+    <string name="search_org_code_error">类型选择异常</string>
+    <string name="search_start_error">请选择开始日期</string>
 </resources>

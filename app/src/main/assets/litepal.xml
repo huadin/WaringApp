@@ -2,7 +2,7 @@
 <litepal>
     <dbname value="application.db"/>
 
-    <version value="8" />
+    <version value="9" />
 
     <list>
         <mapping class="com.huadin.database.City"/>

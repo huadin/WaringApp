@@ -127,5 +127,10 @@
     <dimen name="range_dialog_edit_padding">26dp</dimen>
     <dimen name="range_dialog_edit_margin_top">10dp</dimen>
 
+    <!--搜索-->
+    <dimen name="search_fragment_spinner_margin">16dp</dimen>
+    <dimen name="search_fragment_spinner_margin_10">10dp</dimen>
+    <dimen name="spinner_padding">8dp</dimen>
+
 
 </resources>

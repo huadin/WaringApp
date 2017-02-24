@@ -20,6 +20,8 @@ import com.huadin.eventbus.EventCenter;
 import com.huadin.interf.OnFragmentOpenDrawerListener;
 import com.huadin.report.ReportFragment;
 import com.huadin.report.ReportPresenter;
+import com.huadin.search.SearchFragment;
+import com.huadin.search.SearchPresenter;
 import com.huadin.setting.SettingFragment;
 import com.huadin.urgent.UrgentFragment;
 import com.huadin.urgent.UrgentPresenter;
@@ -170,6 +172,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
           case R.id.urgent_info://紧急信息
             startUrgentFragment();
             break;
+
+          case R.id.info_search:
+            startSearchFragment();//搜索
         }
       }
     }, 250);
@@ -244,6 +249,23 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     } else
     {
       start(reportFragment, SupportFragment.SINGLETASK);
+    }
+  }
+
+  /**
+   * 搜索
+   */
+  private void startSearchFragment()
+  {
+    SearchFragment searchFragment = findFragment(SearchFragment.class);
+    if (searchFragment == null)
+    {
+      searchFragment = SearchFragment.newInstance();
+      new SearchPresenter(searchFragment);
+      popTo(searchFragment);
+    } else
+    {
+      start(searchFragment, SupportFragment.SINGLETASK);
     }
   }
 

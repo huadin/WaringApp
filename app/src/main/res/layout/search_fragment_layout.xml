@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/top_bar_layout"/>
+
+    <!--地区-->
+    <LinearLayout
+        style="@style/search_linear_layout_style"
+        android:layout_margin="@dimen/search_fragment_spinner_margin">
+
+        <ImageView
+            style="@style/search_image_view_style"
+            android:contentDescription="@null"
+            android:src="@drawable/icon_address_spinner_72px"/>
+
+        <Spinner
+            android:id="@+id/search_spinner_area"
+            style="@style/search_spinner_style"
+            android:prompt="@string/address_area_prompt"/>
+
+    </LinearLayout>
+
+    <!--类型-->
+    <LinearLayout
+        style="@style/search_linear_layout_style"
+        android:layout_marginEnd="@dimen/search_fragment_spinner_margin"
+        android:layout_marginStart="@dimen/search_fragment_spinner_margin">
+
+        <ImageView
+            style="@style/search_image_view_style"
+            android:contentDescription="@null"
+            android:src="@drawable/icon_search_type_72px"/>
+
+        <Spinner
+            android:id="@+id/search_spinner_type"
+            style="@style/search_spinner_style"
+            android:prompt="@string/search_select_type"/>
+
+    </LinearLayout>
+
+    <!--时间-->
+    <LinearLayout
+        style="@style/search_linear_layout_style"
+        android:layout_margin="@dimen/search_fragment_spinner_margin">
+
+
+        <ImageView
+            style="@style/search_image_view_style"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_start_date_24dp"/>
+
+        <TextView
+            android:id="@+id/search_start_date"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/search_fragment_spinner_margin_10"
+            android:gravity="center_vertical"
+            android:hint="@string/search_start_date_hint"
+            android:textColor="@color/user_info_item_text_color"
+            android:textSize="@dimen/text_size_16"/>
+
+    </LinearLayout>
+
+    <!--范围-->
+    <LinearLayout
+        style="@style/search_linear_layout_style"
+        android:layout_marginEnd="@dimen/search_fragment_spinner_margin"
+        android:layout_marginStart="@dimen/search_fragment_spinner_margin"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <ImageView
+            style="@style/search_image_view_style"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_location_type_24dp"/>
+
+        <com.huadin.widget.ClearEditText
+            android:id="@+id/search_scope"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/search_fragment_spinner_margin_10"
+            android:layout_marginStart="@dimen/search_fragment_spinner_margin_10"
+            android:background="@null"
+            android:hint="@string/search_input_scope"
+            android:maxLines="1"
+            android:textSize="@dimen/text_size_16"/>
+
+    </LinearLayout>
+
+    <!--提交-->
+    <Button
+        android:id="@+id/search_submit"
+        style="@style/login_register_submit_button"
+        android:layout_margin="@dimen/search_fragment_spinner_margin"
+        android:text="@string/search_submit"/>
+
+
+</LinearLayout>
