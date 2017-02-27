@@ -131,6 +131,8 @@
     <dimen name="search_fragment_spinner_margin">16dp</dimen>
     <dimen name="search_fragment_spinner_margin_10">10dp</dimen>
     <dimen name="spinner_padding">8dp</dimen>
+    <dimen name="search_adapter_type_margit_start">16dp</dimen>
+    <dimen name="search_adapter_type_margin_top">5dp</dimen>
 
 
 </resources>

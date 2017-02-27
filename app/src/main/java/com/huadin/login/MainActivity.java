@@ -316,7 +316,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         break;
 
       //强制退出
-      case EventCenter.OTHER_DEVICE_LOGIN:
+      case EventCenter.EVENT_CODE_OTHER_DEVICE_LOGIN:
         LogUtil.i("退出", "弹出 dialog");
         showOutLoginDialog();
         break;

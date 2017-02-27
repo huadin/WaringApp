@@ -90,7 +90,7 @@ public class AMapGeoCode implements GeocodeSearch.OnGeocodeSearchListener
           DataSupport.deleteAll(ScopeLatLng.class);
           DataSupport.saveAll(mLatLngs);
           //发送通知,显示标记物
-          EventBus.getDefault().post(new EventCenter<>(EventCenter.GEO_CODE_COMPLETE,mLatLngs));
+          EventBus.getDefault().post(new EventCenter<>(EventCenter.EVENT_CODE_GEO_CODE_COMPLETE,mLatLngs));
           mLatLngs.clear();
           map.clear();
         }

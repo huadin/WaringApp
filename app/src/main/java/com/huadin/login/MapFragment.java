@@ -352,7 +352,7 @@ public class MapFragment extends BaseFragment implements PermissionListener,
     super.fragmentOnEvent(eventCenter);
     switch (eventCenter.getEventCode())
     {
-      case EventCenter.GEO_CODE_COMPLETE:
+      case EventCenter.EVENT_CODE_GEO_CODE_COMPLETE:
         List<ScopeLatLng> list = (List<ScopeLatLng>) eventCenter.getData();
         /*
         * 此位置调用  mPresenter.addMarkerToMap(scopeLatLngs, latLng) 时
@@ -363,7 +363,7 @@ public class MapFragment extends BaseFragment implements PermissionListener,
         isCompleteLocation = true;
         break;
 
-      case EventCenter.GEO_CODE_START://开始解析
+      case EventCenter.EVENT_CODE_GEO_CODE_START://开始解析
         AMapGeoCode geoCode = new AMapGeoCode(mContext);
         geoCode.startGeoCode();
         break;
@@ -372,7 +372,7 @@ public class MapFragment extends BaseFragment implements PermissionListener,
         if (network)
         {
           mNetworkTextView.setVisibility(View.GONE);
-          startService();
+          startService(null,null,null,null);
         }
         break;
     }

@@ -67,7 +67,7 @@ public class MessageReceiver extends BroadcastReceiver
 
         if (deviceId.equals(message.getResult()) || person == null) return;
         //退出当前账号
-        EventBus.getDefault().post(new EventCenter(EventCenter.OTHER_DEVICE_LOGIN));
+        EventBus.getDefault().post(new EventCenter(EventCenter.EVENT_CODE_OTHER_DEVICE_LOGIN));
         break;
 
       case 2:

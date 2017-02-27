@@ -182,9 +182,9 @@ public abstract class BaseFragment extends SupportFragment
   /**
    * 启动服务获取网络数据
    */
-  protected void startService()
+  protected void startService(String areaId, String type, String startTime, String scope)
   {
-    mContext.startService();
+    mContext.startService(areaId, type, startTime, scope);
   }
 
   /**

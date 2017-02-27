@@ -91,7 +91,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, T
     showMessage(R.string.login_success);
     //发送订阅事件,改变 DrawerLayout 上用户名
     EventBus.getDefault().post(new EventCenter(EventCenter.EVENT_CODE_LOGIN_SUCCESS));
-    startService();
+    startService(null,null,null,null);
     popTopFragment();
   }
 

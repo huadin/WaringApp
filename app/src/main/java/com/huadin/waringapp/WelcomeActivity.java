@@ -179,7 +179,7 @@ public class WelcomeActivity extends BaseActivity implements PermissionListener,
     if (keyCode == 1 && isNetwork())
     {
       //开启服务,加载网络数据
-      startService();
+      startService(null, null, null, null);
     }
   }
 

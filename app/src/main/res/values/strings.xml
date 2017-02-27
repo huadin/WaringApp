@@ -249,9 +249,11 @@
 
 
     <!--获取数据-->
-    <string name="key_start_time">start_time</string>
-    <string name="key_end_time">end_time</string>
-    <string name="key_org_code">org_code</string>
+    <string name="key_start_time">key_start_time</string>
+    <string name="key_end_time">key_end_time</string>
+    <string name="key_org_code">key_org_code</string>
+    <string name="key_type">key_type</string>
+    <string name="key_scope">key_scope</string>
 
 
     <string name="setting_area_title">请选择地区,一遍获取该地区停电信息,\n如未设置则默认为"城区"。</string>
@@ -272,4 +274,5 @@
     <string name="search_city_error">选择地区异常</string>
     <string name="search_org_code_error">类型选择异常</string>
     <string name="search_start_error">请选择开始日期</string>
+    <string name="search_date_result">搜索结果</string>
 </resources>

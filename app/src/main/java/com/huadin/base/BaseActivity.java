@@ -1,8 +1,10 @@
 package com.huadin.base;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
@@ -131,22 +133,35 @@ public abstract class BaseActivity extends SupportActivity
     return NetworkUtil.getNetworkState(mContext);
   }
 
-  protected void startService()
+  /**
+   * 启动服务
+   *
+   * @param areaId    地区
+   * @param type      类型
+   * @param startTime 时间
+   * @param scope     范围
+   */
+  protected void startService(@Nullable String areaId, @Nullable String type,
+                              @Nullable String startTime, @Nullable String scope)
   {
-    String areaId;
-    //登录点查询网络上地址,否则查询本地
-    Person person = Person.getCurrentUser(Person.class);
-    if (person != null && !TextUtils.isEmpty(person.getAreaId()))
+    if (TextUtils.isEmpty(areaId))
     {
-      areaId = person.getAreaId();
-    } else
-    {
-      WaringAddress waringAddress = DataSupport.findFirst(WaringAddress.class);
-      areaId = waringAddress.getWaringAreaId();
+      //登录点查询网络上地址,否则查询本地
+      Person person = Person.getCurrentUser(Person.class);
+      if (person != null && !TextUtils.isEmpty(person.getAreaId()))
+      {
+        areaId = person.getAreaId();
+      } else
+      {
+        WaringAddress waringAddress = DataSupport.findFirst(WaringAddress.class);
+        areaId = waringAddress.getWaringAreaId();
+      }
     }
-
     Intent intent = new Intent(this, HttpIntentService.class);
     intent.putExtra(getString(R.string.key_org_code), areaId);
+    intent.putExtra(getString(R.string.key_type), type);
+    intent.putExtra(getString(R.string.key_start_time), startTime);
+    intent.putExtra(getString(R.string.key_scope), scope);
     startService(intent);
   }
 

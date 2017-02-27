@@ -16,7 +16,7 @@ public interface SearchContract
 {
   interface Presenter extends BasePresenter
   {
-
+    void hindLoading();
   }
 
   interface View extends BaseView<Presenter>
@@ -30,7 +30,7 @@ public interface SearchContract
      *
      * @param powerBeanList 停电信息集合
      */
-    void searchSuccess(List<StopPowerBean> powerBeanList);
+//    void searchSuccess(List<StopPowerBean> powerBeanList);
 
     /**
      * 查询异常
@@ -68,6 +68,16 @@ public interface SearchContract
      * @return 停电类型
      */
     String getType();
+
+    /**
+     * 启动搜索服务
+     *
+     * @param areaId    地区
+     * @param type      类型
+     * @param startTime 开始时间
+     * @param scope     范围
+     */
+    void startSearchService(String areaId, String type, String startTime, String scope);
 
   }
 }

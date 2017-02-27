@@ -189,7 +189,7 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
     //保存成功
     showMessage(R.string.address_submit_success);
 
-    startService();
+    startService(null,null,null,null);
 
     if (mFlag.equals(getString(R.string.setting_info_flag_key)))
     {

@@ -21,15 +21,19 @@ public class EventCenter<T>
 //  public static final int EVENT_CODE_Userinfo_INFO_UPDATE = 103;
 
   //加载注册 Fragment
-  public static final int EVENT_CODE_LOAD_REGISTER = 104;
+//  public static final int EVENT_CODE_LOAD_REGISTER = 104;
   //有网络
   public static final int EVENT_CODE_NETWORK = 105;
   //其他设备登录
-  public static final int OTHER_DEVICE_LOGIN = 107;
+  public static final int EVENT_CODE_OTHER_DEVICE_LOGIN = 107;
   //编码解析完成
-  public static final int GEO_CODE_COMPLETE = 109;
+  public static final int EVENT_CODE_GEO_CODE_COMPLETE = 109;
   //开始解析编码
-  public static final int GEO_CODE_START = 108;
+  public static final int EVENT_CODE_GEO_CODE_START = 108;
+  //搜索获取网络数据
+  public static final int EVENT_CODE_SEARCH_HTTP_DATA = 109;
+  //时间回调
+  public static final int EVENT_CODE_START_DATE = 110;
 
   /**
    * reserved data

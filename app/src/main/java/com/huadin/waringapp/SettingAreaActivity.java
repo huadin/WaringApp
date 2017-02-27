@@ -115,13 +115,13 @@ public class SettingAreaActivity extends BaseActivity implements AddressContract
   @Override
   public void showLoading()
   {
-    LoadDialog.show(mContext, getString(R.string.register_loading));
+    LoadDialog.show(this, getString(R.string.register_loading));
   }
 
   @Override
   public void hindLoading()
   {
-    LoadDialog.dismiss(mContext);
+    LoadDialog.dismiss(this);
   }
 
   @Override
@@ -132,7 +132,7 @@ public class SettingAreaActivity extends BaseActivity implements AddressContract
     editor.putInt(KEY_ADDRESS_AREA_KEY, 1);
     editor.apply();
 
-    if (isNetwork()) startService();
+    if (isNetwork()) startService(null,null,null,null);
     startActivity(MainActivity.class);
     finish();
   }

@@ -30,12 +30,16 @@ public class HttpIntentService extends IntentService
     String startTime = intent.getStringExtra(getString(R.string.key_start_time));
     String endTime = intent.getStringExtra(getString(R.string.key_end_time));
     String orgCode = intent.getStringExtra(getString(R.string.key_org_code));
+    String type = intent.getStringExtra(getString(R.string.key_type));
+    String scope = intent.getStringExtra(getString(R.string.key_scope));
 
     //获取数据
     HttpUtil.INSTANCE
             .addUrl(getString(R.string.http_url))
             .setStartTime(startTime, endTime)
             .setOrgCode(orgCode)
+            .setType(type)
+            .setScope(scope)
             .request();
   }
 

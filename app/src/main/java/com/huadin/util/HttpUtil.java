@@ -41,6 +41,8 @@ public enum HttpUtil
   private String mOrgCode;
   private String mEndTime;
   private String mStartTime;
+  private String mScope;
+  private String mType;
   private static final long mEndLong = 7 * 24 * 60 * 60 * 1000;
   private static final String TAG = "HttpUtil";
   private List<JSONArray> mJSONArrays = new ArrayList<>();
@@ -97,7 +99,7 @@ public enum HttpUtil
   public HttpUtil setOrgCode(String orgCode)
   {
 
-    LogUtil.i(TAG,"orgCode = " + orgCode);
+    LogUtil.i(TAG, "orgCode = " + orgCode);
     if (TextUtils.isEmpty(orgCode))
     {
       mOrgCode = "11401";
@@ -109,6 +111,41 @@ public enum HttpUtil
     return this;
   }
 
+  /**
+   * 设置停电类型
+   *
+   * @param type 01 02 07
+   */
+  public HttpUtil setType(String type)
+  {
+    if (TextUtils.isEmpty(type))
+    {
+      mType = "";
+    } else
+    {
+      mType = type;
+    }
+    return this;
+  }
+
+  /**
+   * 设置停电范围
+   *
+   * @param scope 范围
+   */
+  public HttpUtil setScope(String scope)
+  {
+
+    if (TextUtils.isEmpty(scope))
+    {
+      mScope = "";
+    } else
+    {
+      mScope = scope;
+    }
+    return this;
+  }
+
 
   private FormBody getFormBody()
   {
@@ -116,10 +153,10 @@ public enum HttpUtil
             .add("orgNo", mOrgCode)
             .add("outageStartTime", mStartTime)   //开始日期
             .add("outageEndTime", mEndTime)       //结束日期
-            .add("scope", "")                     //范围
+            .add("scope", mScope)                     //范围
             .add("provinceNo", "11102")
-            .add("typeCode", "")                  //类型
-            .add("lineName", "")                  //线路
+            .add("typeCode", mType)                  //类型
+             .add("lineName", "")                  //线路
             .build();
   }
 
@@ -205,9 +242,44 @@ public enum HttpUtil
   //解析为实体
   private void parseToBean(List<JSONArray> jsonArrays)
   {
-    List<StopPowerBean> beanList = ParseUtil.pareJson(jsonArrays,mOrgCode);
+    List<StopPowerBean> beanList = ParseUtil.pareJson(jsonArrays, mOrgCode);
     LogUtil.i(TAG, "beanList = " + beanList.toString());
     mJSONArrays.clear();
+
+    /*
+    * 搜索时 TextUtils.isEmpty(mType) 为 false;
+    * 根据此可区分是否是搜索
+    * */
+
+    if (TextUtils.isEmpty(mType))
+    {
+      normalGetHttpData(beanList);
+    } else
+    {
+      searchGetHttpData(beanList);
+    }
+
+  }
+
+  /**
+   * 搜索获取网络数据
+   *
+   * @param beanList 数据集
+   */
+  private void searchGetHttpData(List<StopPowerBean> beanList)
+  {
+    EventCenter<List<StopPowerBean>> eventCenter = new EventCenter<>(
+            EventCenter.EVENT_CODE_SEARCH_HTTP_DATA, beanList);
+    EventBus.getDefault().post(eventCenter);
+  }
+
+  /**
+   * 正常获取网络数据
+   *
+   * @param beanList 数据集
+   */
+  private void normalGetHttpData(List<StopPowerBean> beanList)
+  {
     //删除旧数据
     DataSupport.deleteAll(StopPowerBean.class);
     //保存新数据
@@ -219,7 +291,7 @@ public enum HttpUtil
 //      LogUtil.i(TAG, "MapFragment not create");
     }
 
-    EventBus.getDefault().post(new EventCenter(EventCenter.GEO_CODE_START));
+    EventBus.getDefault().post(new EventCenter(EventCenter.EVENT_CODE_GEO_CODE_START));
   }
 
 }

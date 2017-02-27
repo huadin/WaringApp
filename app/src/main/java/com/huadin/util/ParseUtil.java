@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 /**
  * Created by Snow on 2017/2/20.
@@ -17,8 +18,10 @@ import java.util.List;
 class ParseUtil
 {
 
-  private static List<StopPowerBean> list = new ArrayList<>();
-  private static String mOrgCode;
+  private static List<StopPowerBean> sList = new ArrayList<>();
+  private static String sOrgCode;
+  private static TreeMap<String, String> sKeyMap = new TreeMap<>();
+
   /**
    * 解析网络数据
    *
@@ -28,10 +31,10 @@ class ParseUtil
    */
   static List<StopPowerBean> pareJson(List<JSONArray> jsonList, String orgCode)
   {
-    mOrgCode = orgCode;
+    sOrgCode = orgCode;
     try
     {
-      list.clear();
+      sList.clear();
       for (JSONArray array : jsonList)
       {
         for (int i = 0; i < array.length(); i++)
@@ -71,7 +74,8 @@ class ParseUtil
     {
       e.printStackTrace();
     }
-    return list;
+    sKeyMap.clear();
+    return sList;
   }
 
   /**
@@ -79,12 +83,22 @@ class ParseUtil
    */
   private static void splitScope(String[] scopeArr, String lineName, String time, String date, String typeCode)
   {
+    StringBuilder sb = new StringBuilder();
+    sb.append(date);
+    sb.append(" ");
+    sb.append(time);
+
     for (String scope : scopeArr)
     {
+      boolean isKeyContains = sKeyMap.containsKey(scope);
+      boolean isValueContains = sKeyMap.containsValue(sb.toString());
+      sKeyMap.put(scope, sb.toString());
+      //key 和 value 同时为 true，则说明 存在同一地点同一时间停电,既重复
+      if (isKeyContains && isValueContains) continue;
       setNewStopType(scope, lineName, time, date, typeCode);
     }
+    sb.delete(0, sb.length());
   }
-
 
   private static void setNewStopType(String scope, String lineName, String time, String date, String typeCode)
   {
@@ -107,7 +121,7 @@ class ParseUtil
     st.setTime(time);
     st.setDate(date);
     st.setTypeCode(type);
-    st.setOrgCode(mOrgCode);
-    list.add(st);
+    st.setOrgCode(sOrgCode);
+    sList.add(st);
   }
 }
