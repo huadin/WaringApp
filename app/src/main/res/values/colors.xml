@@ -47,6 +47,9 @@
     <color name="refresh_3">#FFBB33</color>
     <color name="refresh_4">#FF4444</color>
 
+    <!--SwitchCompat-->
+    <color name="switch_off_color">#aaaaaa</color>
+
     <color name="test_color">#1D96F4</color>
 
 </resources>

@@ -134,5 +134,11 @@
     <dimen name="search_adapter_type_margit_start">16dp</dimen>
     <dimen name="search_adapter_type_margin_top">5dp</dimen>
 
+    <!--SwitchCompat-->
+    <dimen name="switch_min_width">50dp</dimen>
+    <dimen name="msg_setting_fragment_margin">16dp</dimen>
+    <dimen name="msg_setting_fragment_margin_32">32dp</dimen>
+    <dimen name="msg_setting_fragment_margin_5">5dp</dimen>
+
 
 </resources>

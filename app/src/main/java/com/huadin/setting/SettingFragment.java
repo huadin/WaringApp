@@ -11,6 +11,7 @@ import com.huadin.base.BaseFragment;
 import com.huadin.setting.contact.ContactFragment;
 import com.huadin.setting.feedback.FeedbackFragment;
 import com.huadin.setting.feedback.FeedbackPresenter;
+import com.huadin.setting.msg.MsgSettingFragment;
 import com.huadin.userinfo.address.AddressFragment;
 import com.huadin.userinfo.address.AddressPresenter;
 import com.huadin.util.LogUtil;
@@ -62,7 +63,7 @@ public class SettingFragment extends BaseFragment
         startAddressFragment();//预警
         break;
       case R.id.msg_linear_layout://消息设置
-
+        startMsgFragment();
         break;
       case R.id.contact_us_linear_layout://联系我们
         startContactFragment();
@@ -88,8 +89,8 @@ public class SettingFragment extends BaseFragment
     if (addressFragment == null)
     {
       addressFragment = AddressFragment.newInstance(getString(R.string.setting_info_flag_key));
-      start(addressFragment, SupportFragment.SINGLETASK);
     }
+    start(addressFragment, SupportFragment.SINGLETASK);
     new AddressPresenter(mContext, addressFragment);
   }
 
@@ -102,8 +103,8 @@ public class SettingFragment extends BaseFragment
     if (contactFragment == null)
     {
       contactFragment = ContactFragment.newInstance();
-      start(contactFragment, SupportFragment.SINGLETASK);
     }
+    start(contactFragment, SupportFragment.SINGLETASK);
   }
 
   /**
@@ -115,9 +116,19 @@ public class SettingFragment extends BaseFragment
     if (feedbackFragment == null)
     {
       feedbackFragment = FeedbackFragment.newInstance();
-      start(feedbackFragment, SupportFragment.SINGLETASK);
     }
+    start(feedbackFragment, SupportFragment.SINGLETASK);
     new FeedbackPresenter(feedbackFragment);
+  }
+
+  private void startMsgFragment()
+  {
+    MsgSettingFragment msgSettingFragment = findFragment(MsgSettingFragment.class);
+    if (msgSettingFragment == null)
+    {
+      msgSettingFragment = MsgSettingFragment.newInstance();
+    }
+    start(msgSettingFragment,SupportFragment.SINGLETASK);
   }
 
 

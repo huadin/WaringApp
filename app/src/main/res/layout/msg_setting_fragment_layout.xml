@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/top_bar_layout"/>
+
+    <!--消息设置-->
+    <LinearLayout
+        style="@style/msg_setting_linear_style"
+        android:layout_marginTop="@dimen/msg_setting_fragment_margin_32">
+
+        <TextView
+            style="@style/msg_setting_text_style"
+            android:text="@string/push_msg_setting"/>
+
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/switch_all_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            app:switchMinWidth="@dimen/switch_min_width"
+            app:theme="@style/switch_compat_style"/>
+
+    </LinearLayout>
+
+    <!--推送时间设置-->
+    <LinearLayout
+        style="@style/msg_setting_linear_style"
+        android:layout_marginTop="@dimen/msg_setting_fragment_margin">
+
+        <TextView
+            style="@style/msg_setting_text_style"
+            android:text="@string/not_disturb_setting"/>
+
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/switch_part_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:switchMinWidth="@dimen/switch_min_width"
+            app:theme="@style/switch_compat_style"/>
+
+    </LinearLayout>
+
+    <!--注意-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/msg_setting_fragment_margin"
+        android:layout_marginStart="@dimen/msg_setting_fragment_margin"
+        android:layout_marginTop="@dimen/msg_setting_fragment_margin_5"
+        android:gravity="center_vertical"
+        android:text="@string/msg_setting_prompt"/>
+
+</LinearLayout>

@@ -19,4 +19,15 @@
         <item name="android:listPreferredItemHeightSmall">40dp</item><!--menu item 的高度-->
     </style>
 
+    <!--SwitchCompat  start-->
+    <style name="switch_compat_style">
+        <!--打开时按钮的颜色-->
+        <item name="colorControlActivated">@color/colorPrimaryDark</item>
+        <!--关闭时按钮的颜色-->
+        <item name="colorSwitchThumbNormal">@color/switch_off_color</item>
+        <!--关闭时轨迹的颜色-->
+        <item name="android:colorForeground">@color/switch_off_color</item>
+    </style>
+    <!--SwitchCompat  end-->
+
 </resources>

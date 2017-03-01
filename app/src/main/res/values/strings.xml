@@ -275,4 +275,7 @@
     <string name="search_org_code_error">类型选择异常</string>
     <string name="search_start_error">请选择开始日期</string>
     <string name="search_date_result">搜索结果</string>
+    <string name="push_msg_setting">推送消息设置</string>
+    <string name="not_disturb_setting">免打扰设置</string>
+    <string name="msg_setting_prompt">*注：开启后,自动屏蔽22:00 &#8211; 07:00间的任何消息</string>
 </resources>
