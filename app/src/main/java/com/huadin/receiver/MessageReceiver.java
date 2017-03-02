@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.app.NotificationCompat;
@@ -26,12 +27,22 @@ import com.huadin.waringapp.R;
 import org.greenrobot.eventbus.EventBus;
 import org.litepal.crud.DataSupport;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import cn.bmob.push.PushConstants;
+
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
 
 public class MessageReceiver extends BroadcastReceiver
 {
   private static final String TAG = "MessageReceiver";
   private static final String TITLE_KEY = "TITLE_KEY";
+  private static final String KEY_PART_ON = "PART_ON";
+  private static final String KEY_ALL_ON = "KEY_ALL_ON";
+  private static final String KEY_SWITCH_STATE = "SWITCH_STATE";
 
   public MessageReceiver()
   {
@@ -57,6 +68,11 @@ public class MessageReceiver extends BroadcastReceiver
 
   private void paresMessage(@NonNull Context context, Message message)
   {
+    SharedPreferences preferences = context.getSharedPreferences(KEY_SWITCH_STATE, Context.MODE_APPEND);
+
+    boolean isAllOn = preferences.getBoolean(KEY_ALL_ON,true);
+    boolean isPartOn = preferences.getBoolean(KEY_PART_ON,false);
+
     Person person = Person.getCurrentUser(Person.class);
     String pushType = message.getType();
     switch (Integer.valueOf(pushType))
@@ -72,6 +88,15 @@ public class MessageReceiver extends BroadcastReceiver
 
       case 2:
         //停电报修
+        if (!isAllOn) break;
+        if (isPartOn) //免打扰开启
+        {
+          //检测时间段是否为 22:00 - 07:00
+          DateFormat df = SimpleDateFormat.getTimeInstance(DateFormat.HOUR_OF_DAY0_FIELD);
+          String time = df.format(new Date(System.currentTimeMillis()));
+          LogUtil.i(TAG,"time = " + time);
+          break;
+        }
         repairNotify(context, message, person);
         break;
 

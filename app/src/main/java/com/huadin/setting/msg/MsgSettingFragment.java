@@ -33,8 +33,6 @@ public class MsgSettingFragment extends BaseFragment implements CompoundButton.O
   @BindView(R.id.switch_part_button)
   SwitchCompat mPartSwitch;
 
-  private boolean mAllOn;
-  private boolean mPartOn;
   private SharedPreferences mPreferences;
   private SharedPreferences.Editor mEditor;
   private static final String KEY_PART_ON = "PART_ON";

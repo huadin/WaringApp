@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:layout_margin="@dimen/contact_fragment_linear_layout_margin"
     android:background="@drawable/setting_layout_item_selector"
+    android:elevation="@dimen/elevation_height"
     android:orientation="vertical">
     <!--官网-->
     <com.zhy.autolayout.AutoLinearLayout
@@ -53,7 +54,7 @@
         <TextView
             style="@style/contact_wei_content"
             android:text="@string/contact_weiBo"
-            />
+            android:id="@+id/textView3"/>
 
         <ImageView
             style="@style/contact_wei_icon"

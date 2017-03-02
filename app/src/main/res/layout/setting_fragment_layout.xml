@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/layout_bg"
     android:orientation="vertical">
+    <!--    android:background="@color/layout_bg" -->
 
     <include layout="@layout/top_bar_layout"/>
 
@@ -18,64 +18,70 @@
         android:orientation="vertical">
 
         <!--预警地址-->
-        <com.zhy.autolayout.AutoLinearLayout
+        <!--<com.zhy.autolayout.AutoLinearLayout-->
+        <!--android:id="@+id/address_linear_layout"-->
+        <!--style="@style/setting_linear_layout_style">-->
+
+        <TextView
             android:id="@+id/address_linear_layout"
-            style="@style/setting_linear_layout_style">
+            style="@style/setting_linear_layout_text_view_style"
+            android:layout_marginTop="@dimen/setting_linear_margin_top"
+            android:drawableStart="@drawable/icon_address_72px"
+            android:text="@string/warning_address"/>
 
-            <TextView
-                style="@style/setting_linear_layout_text_view_style"
-                android:drawableStart="@drawable/icon_address_72px"
-                android:text="@string/warning_address"/>
-
-        </com.zhy.autolayout.AutoLinearLayout>
+        <!--</com.zhy.autolayout.AutoLinearLayout>-->
 
         <!--消息设置-->
-        <com.zhy.autolayout.AutoLinearLayout
-            android:id="@+id/msg_linear_layout"
-            style="@style/setting_linear_layout_style"
-            android:layout_marginTop="0dp">
+        <!--<com.zhy.autolayout.AutoLinearLayout-->
+        <!--android:id="@+id/msg_linear_layout"-->
+        <!--style="@style/setting_linear_layout_style"-->
+        <!--android:layout_marginTop="0dp">-->
 
-            <TextView
-                style="@style/setting_linear_layout_text_view_style"
-                android:drawableStart="@drawable/icon_msg_72px"
-                android:text="@string/msg_setting"/>
-        </com.zhy.autolayout.AutoLinearLayout>
+        <TextView
+            android:id="@+id/msg_linear_layout"
+            style="@style/setting_linear_layout_text_view_style"
+            android:drawableStart="@drawable/icon_msg_72px"
+            android:text="@string/msg_setting"/>
+        <!--</com.zhy.autolayout.AutoLinearLayout>-->
 
         <!--联系我们-->
-        <com.zhy.autolayout.AutoLinearLayout
-            android:id="@+id/contact_us_linear_layout"
-            style="@style/setting_linear_layout_style"
-            android:layout_marginTop="0dp">
+        <!--<com.zhy.autolayout.AutoLinearLayout-->
+        <!--android:id="@+id/contact_us_linear_layout"-->
+        <!--style="@style/setting_linear_layout_style"-->
+        <!--android:layout_marginTop="0dp">-->
 
-            <TextView
-                style="@style/setting_linear_layout_text_view_style"
-                android:drawableStart="@drawable/icon_contacts_72px"
-                android:text="@string/contact_us"/>
-        </com.zhy.autolayout.AutoLinearLayout>
+        <TextView
+            android:id="@+id/contact_us_linear_layout"
+            style="@style/setting_linear_layout_text_view_style"
+            android:drawableStart="@drawable/icon_contacts_72px"
+            android:text="@string/contact_us"/>
+        <!--</com.zhy.autolayout.AutoLinearLayout>-->
 
         <!--意见反馈-->
-        <com.zhy.autolayout.AutoLinearLayout
-            android:id="@+id/feedback_linear_layout"
-            style="@style/setting_linear_layout_style"
-            android:layout_marginTop="0dp">
+        <!--<com.zhy.autolayout.AutoLinearLayout-->
+        <!--android:id="@+id/feedback_linear_layout"-->
+        <!--style="@style/setting_linear_layout_style"-->
+        <!--android:layout_marginTop="0dp">-->
 
-            <TextView
-                style="@style/setting_linear_layout_text_view_style"
-                android:drawableStart="@drawable/icon_feedback_72px"
-                android:text="@string/feedback"/>
-        </com.zhy.autolayout.AutoLinearLayout>
+        <TextView
+            android:id="@+id/feedback_linear_layout"
+            style="@style/setting_linear_layout_text_view_style"
+            android:drawableStart="@drawable/icon_feedback_72px"
+            android:text="@string/feedback"/>
+        <!--</com.zhy.autolayout.AutoLinearLayout>-->
 
         <!--检查更新-->
-        <com.zhy.autolayout.AutoLinearLayout
-            android:id="@+id/app_update"
-            style="@style/setting_linear_layout_style"
-            android:layout_marginTop="0dp">
+        <!--<com.zhy.autolayout.AutoLinearLayout-->
+        <!--android:id="@+id/app_update"-->
+        <!--style="@style/setting_linear_layout_style"-->
+        <!--android:layout_marginTop="0dp">-->
 
-            <TextView
-                style="@style/setting_linear_layout_text_view_style"
-                android:drawableStart="@drawable/icon_password_72px"
-                android:text="@string/app_update"/>
-        </com.zhy.autolayout.AutoLinearLayout>
+        <TextView
+            android:id="@+id/app_update"
+            style="@style/setting_linear_layout_text_view_style"
+            android:drawableStart="@drawable/icon_password_72px"
+            android:text="@string/app_update"/>
+        <!--</com.zhy.autolayout.AutoLinearLayout>-->
 
     </com.zhy.autolayout.AutoLinearLayout>
 

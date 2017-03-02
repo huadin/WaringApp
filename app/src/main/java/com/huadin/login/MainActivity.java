@@ -63,6 +63,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
   {
     super.onCreate(savedInstanceState);
 //    setContentView(R.layout.activity_main);
+    getWindow().setBackgroundDrawable(null);
     ButterKnife.bind(this);
 
     mUser = BmobUser.getCurrentUser(Person.class);

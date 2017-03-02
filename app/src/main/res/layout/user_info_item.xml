@@ -19,14 +19,15 @@
             style="@style/user_info_item_view"/>
 
         <!--用户信息-->
-        <com.zhy.autolayout.AutoLinearLayout
-            android:id="@+id/user_info_item_user"
-            style="@style/user_info_item_layout_style">
+        <!--<com.zhy.autolayout.AutoLinearLayout-->
+        <!--android:id="@+id/user_info_item_user"-->
+        <!--style="@style/user_info_item_layout_style">-->
 
-            <TextView
-                style="@style/user_info_item_style"
-                android:text="@string/user_info_user"/>
-        </com.zhy.autolayout.AutoLinearLayout>
+        <TextView
+            android:id="@+id/user_info_item_user"
+            style="@style/user_info_item_style"
+            android:text="@string/user_info_user"/>
+        <!--</com.zhy.autolayout.AutoLinearLayout>-->
 
         <!--地址信息-->
         <!--<com.zhy.autolayout.AutoLinearLayout-->
@@ -39,16 +40,17 @@
         <!--</com.zhy.autolayout.AutoLinearLayout>-->
 
         <!--预警地址-->
-        <com.zhy.autolayout.AutoLinearLayout
+        <!--<com.zhy.autolayout.AutoLinearLayout
             android:id="@+id/user_info_item_waring_address"
             style="@style/user_info_item_layout_style"
-            android:background="@drawable/layout_bottom_ripple_selector">
+            android:background="@drawable/layout_bottom_ripple_selector">-->
 
-            <TextView
-                android:id="@+id/textView"
-                style="@style/user_info_item_style"
-                android:text="@string/user_info_waring_address"/>
-        </com.zhy.autolayout.AutoLinearLayout>
+        <TextView
+            android:id="@+id/user_info_item_waring_address"
+            style="@style/user_info_item_style"
+            android:background="@drawable/layout_bottom_ripple_selector"
+            android:text="@string/user_info_waring_address"/>
+        <!--</com.zhy.autolayout.AutoLinearLayout>-->
 
     </com.zhy.autolayout.AutoLinearLayout>
 
@@ -66,38 +68,42 @@
             style="@style/user_info_item_view"/>
 
         <!--人员-->
-        <com.zhy.autolayout.AutoLinearLayout
+        <!--<com.zhy.autolayout.AutoLinearLayout-->
+        <!--android:id="@+id/person_info_message"-->
+        <!--style="@style/user_info_item_layout_style">-->
+
+        <TextView
             android:id="@+id/person_info_message"
-            style="@style/user_info_item_layout_style">
+            style="@style/user_info_item_style"
+            android:text="@string/person_info"/>
 
-            <TextView
-                style="@style/user_info_item_style"
-                android:text="@string/person_info"/>
-
-        </com.zhy.autolayout.AutoLinearLayout>
+        <!--</com.zhy.autolayout.AutoLinearLayout>-->
 
         <!--故障信息,查看用户提交-->
-        <com.zhy.autolayout.AutoLinearLayout
+        <!--<com.zhy.autolayout.AutoLinearLayout-->
+        <!--android:id="@+id/fault_info_message"-->
+        <!--style="@style/user_info_item_layout_style">-->
+
+        <TextView
             android:id="@+id/fault_info_message"
-            style="@style/user_info_item_layout_style">
+            style="@style/user_info_item_style"
+            android:text="@string/fault_info"/>
 
-            <TextView
-                style="@style/user_info_item_style"
-                android:text="@string/fault_info"/>
-
-        </com.zhy.autolayout.AutoLinearLayout>
+        <!--</com.zhy.autolayout.AutoLinearLayout>-->
 
         <!--紧急信息发布-->
-        <com.zhy.autolayout.AutoLinearLayout
+        <!--<com.zhy.autolayout.AutoLinearLayout-->
+        <!--android:id="@+id/release_info_message"-->
+        <!--style="@style/user_info_item_layout_style"-->
+        <!--android:background="@drawable/layout_bottom_ripple_selector">-->
+
+        <TextView
             android:id="@+id/release_info_message"
-            style="@style/user_info_item_layout_style"
-            android:background="@drawable/layout_bottom_ripple_selector">
+            style="@style/user_info_item_style"
+            android:background="@drawable/layout_bottom_ripple_selector"
+            android:text="@string/release_info"/>
 
-            <TextView
-                style="@style/user_info_item_style"
-                android:text="@string/release_info"/>
-
-        </com.zhy.autolayout.AutoLinearLayout>
+        <!--</com.zhy.autolayout.AutoLinearLayout>-->
 
     </com.zhy.autolayout.AutoLinearLayout>
 
@@ -114,27 +120,29 @@
             style="@style/user_info_item_view"/>
 
         <!--用户信息-->
-        <com.zhy.autolayout.AutoLinearLayout
-            android:id="@+id/user_info_item_phone"
-            style="@style/user_info_item_layout_style">
+        <!--<com.zhy.autolayout.AutoLinearLayout-->
+        <!--android:id="@+id/user_info_item_phone"-->
+        <!--style="@style/user_info_item_layout_style">-->
 
-            <TextView
-                android:id="@+id/textView2"
-                style="@style/user_info_item_style"
-                android:text="@string/user_info_phone"/>
-        </com.zhy.autolayout.AutoLinearLayout>
+        <TextView
+            android:id="@+id/user_info_item_phone"
+            style="@style/user_info_item_style"
+            android:text="@string/user_info_phone"/>
+        <!--</com.zhy.autolayout.AutoLinearLayout>-->
 
         <!--密码更改-->
-        <com.zhy.autolayout.AutoLinearLayout
+        <!--<com.zhy.autolayout.AutoLinearLayout-->
+        <!--android:id="@+id/user_info_item_password"-->
+        <!--style="@style/user_info_item_layout_style"-->
+        <!--android:background="@drawable/layout_bottom_ripple_selector">-->
+
+        <TextView
             android:id="@+id/user_info_item_password"
-            style="@style/user_info_item_layout_style"
-            android:background="@drawable/layout_bottom_ripple_selector">
+            style="@style/user_info_item_style"
+            android:background="@drawable/layout_bottom_ripple_selector"
+            android:text="@string/password_modify"/>
 
-            <TextView
-                style="@style/user_info_item_style"
-                android:text="@string/password_modify"/>
-
-        </com.zhy.autolayout.AutoLinearLayout>
+        <!--</com.zhy.autolayout.AutoLinearLayout>-->
 
 
     </com.zhy.autolayout.AutoLinearLayout>
@@ -152,16 +160,18 @@
             style="@style/user_info_item_view"/>
 
         <!--退出-->
-        <com.zhy.autolayout.AutoLinearLayout
+        <!--<com.zhy.autolayout.AutoLinearLayout-->
+        <!--android:id="@+id/user_info_out"-->
+        <!--style="@style/user_info_item_layout_style"-->
+        <!--android:background="@drawable/layout_bottom_ripple_selector">-->
+
+        <TextView
             android:id="@+id/user_info_out"
-            style="@style/user_info_item_layout_style"
-            android:background="@drawable/layout_bottom_ripple_selector">
+            style="@style/user_info_item_style"
+            android:background="@drawable/layout_bottom_ripple_selector"
+            android:text="@string/user_info_out"/>
 
-            <TextView
-                style="@style/user_info_item_style"
-                android:text="@string/user_info_out"/>
-
-        </com.zhy.autolayout.AutoLinearLayout>
+        <!--</com.zhy.autolayout.AutoLinearLayout>-->
 
     </com.zhy.autolayout.AutoLinearLayout>
 

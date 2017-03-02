@@ -37,6 +37,7 @@ public class UpdateUserInfoActivity extends BaseActivity
   {
     super.onCreate(savedInstanceState);
     ButterKnife.bind(this);
+    getWindow().setBackgroundDrawable(null);
     initFragment();
   }
 

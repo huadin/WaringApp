@@ -123,11 +123,13 @@
 
     <!--设置张 textView 样式-->
     <style name="setting_linear_layout_text_view_style">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_marginLeft">@dimen/setting_margin_left_16dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/setting_linear_layout_height</item>
+        <item name="android:paddingStart">@dimen/setting_margin_left_16dp</item>
         <item name="android:gravity">center_vertical</item>
+        <!--<item name="android:layout_marginTop">@dimen/setting_linear_margin_top</item>-->
         <item name="android:textSize">@dimen/text_size_36px</item>
+        <item name="android:background">@drawable/layout_ripple_selector</item>
         <item name="android:drawablePadding">@dimen/setting_margin_left_16dp</item>
     </style>
 
@@ -146,11 +148,12 @@
     <!--个人信息 item-->
     <style name="user_info_item_style">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_height">@dimen/user_info_item_height</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">@color/user_info_item_text_color</item>
         <item name="android:textSize">@dimen/text_size_36px</item>
-        <item name="android:layout_marginLeft">@dimen/user_info_item_margin</item>
+        <item name="android:background">@drawable/layout_ripple_selector</item>
+        <item name="android:paddingStart">@dimen/user_info_item_margin</item>
     </style>
     <!--个人信息 layout-->
     <style name="user_info_item_layout_style">
@@ -292,7 +295,7 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:paddingLeft">@dimen/contact_fragment_linear_layout_margin_end</item>
+        <item name="android:paddingLeft">@dimen/contact_fragment_linear_layout_padding_left</item>
         <item name="android:textSize">@dimen/text_size_18</item>
         <item name="android:layout_weight">1</item>
     </style>

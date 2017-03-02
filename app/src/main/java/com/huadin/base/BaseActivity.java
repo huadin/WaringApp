@@ -18,6 +18,7 @@ import com.huadin.login.LoginFragment;
 import com.huadin.service.HttpIntentService;
 import com.huadin.setting.contact.ContactFragment;
 import com.huadin.setting.feedback.FeedbackFragment;
+import com.huadin.setting.msg.MsgSettingFragment;
 import com.huadin.userinfo.address.AddressFragment;
 import com.huadin.util.ActivityCollector;
 import com.huadin.util.NetworkUtil;
@@ -212,7 +213,8 @@ public abstract class BaseActivity extends SupportActivity
     //解除抽屉锁定
     Fragment topFragment = getTopFragment();
     if (topFragment instanceof LoginFragment || topFragment instanceof AddressFragment ||
-            topFragment instanceof ContactFragment || topFragment instanceof FeedbackFragment)
+            topFragment instanceof ContactFragment || topFragment instanceof FeedbackFragment ||
+            topFragment instanceof MsgSettingFragment  )
     {
       if (mBaseDrawerLayout != null)
       {
