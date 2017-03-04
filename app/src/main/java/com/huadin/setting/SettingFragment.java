@@ -12,9 +12,10 @@ import com.huadin.setting.contact.ContactFragment;
 import com.huadin.setting.feedback.FeedbackFragment;
 import com.huadin.setting.feedback.FeedbackPresenter;
 import com.huadin.setting.msg.MsgSettingFragment;
+import com.huadin.setting.msg.SettingPresenter;
+import com.huadin.userinfo.UpdateContract;
 import com.huadin.userinfo.address.AddressFragment;
 import com.huadin.userinfo.address.AddressPresenter;
-import com.huadin.util.LogUtil;
 import com.huadin.waringapp.R;
 
 import butterknife.BindView;
@@ -22,13 +23,15 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.yokeyword.fragmentation.SupportFragment;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * 设置
  */
 
-public class SettingFragment extends BaseFragment
+public class SettingFragment extends BaseFragment implements UpdateContract.View<SettingPresenter>
 {
-
+  private SettingPresenter mPresenter;
 
   @BindView(R.id.top_toolbar)
   Toolbar mToolbar;
@@ -72,8 +75,10 @@ public class SettingFragment extends BaseFragment
         startFeedbackFragment();
         break;
 
-      case R.id.app_update:
-        LogUtil.i(LOG_TAG, "******************");
+      case R.id.app_update://检查更新
+        new SettingPresenter(this);
+        mPresenter.start();
+
         break;
     }
     //锁定抽屉
@@ -128,8 +133,45 @@ public class SettingFragment extends BaseFragment
     {
       msgSettingFragment = MsgSettingFragment.newInstance();
     }
-    start(msgSettingFragment,SupportFragment.SINGLETASK);
+    start(msgSettingFragment, SupportFragment.SINGLETASK);
   }
 
+  @Override
+  public void showLoading()
+  {
+    showLoading(R.string.fault_date_get_in);
+  }
 
+  @Override
+  public void hindLoading()
+  {
+    dismissLoading();
+  }
+
+  @Override
+  public void updateSuccess()
+  {
+    unLockDrawer();
+    showMessage(R.string.not_update_app);
+  }
+
+  @Override
+  public void updateError(int errorId)
+  {
+    unLockDrawer();
+    showMessage(errorId);
+  }
+
+  @Override
+  public boolean networkState()
+  {
+    return isNetwork();
+  }
+
+  @Override
+  public void setPresenter(SettingPresenter presenter)
+  {
+    mPresenter = presenter;
+    mPresenter = checkNotNull(presenter, "SettingPresenter cannot be null");
+  }
 }

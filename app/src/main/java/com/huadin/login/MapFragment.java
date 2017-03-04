@@ -66,6 +66,7 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   private PermissionManager mPermissionManager;
   private List<ScopeLatLng> scopeLatLngs = new ArrayList<>();
   private boolean isCompleteLocation;
+  private boolean mIsLocationSuccess;
 
   public static MapFragment newInstance()
   {
@@ -238,7 +239,8 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   @Override
   public void latLng(LatLng latLng)
   {
-    checkNotNull(latLng, "LatLng 没有数据");
+    mIsLocationSuccess = true;
+
     if (isCompleteLocation)
     {
       isCompleteLocation = false;
@@ -255,7 +257,11 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   public void locationError(String errorInfo)
   {
     LogUtil.i(LOG_TAG, "errorInfo = " + errorInfo);
-    showMessage(errorInfo);
+    if (mIsLocationSuccess)
+    {
+      mIsLocationSuccess = false;
+      showMessage(errorInfo);
+    }
   }
 
   @Override
@@ -372,7 +378,7 @@ public class MapFragment extends BaseFragment implements PermissionListener,
         if (network)
         {
           mNetworkTextView.setVisibility(View.GONE);
-          startService(null,null,null,null);
+          startService(null, null, null, null);
         }
         break;
     }

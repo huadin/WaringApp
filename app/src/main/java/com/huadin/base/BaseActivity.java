@@ -1,6 +1,5 @@
 package com.huadin.base;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -214,15 +213,23 @@ public abstract class BaseActivity extends SupportActivity
     Fragment topFragment = getTopFragment();
     if (topFragment instanceof LoginFragment || topFragment instanceof AddressFragment ||
             topFragment instanceof ContactFragment || topFragment instanceof FeedbackFragment ||
-            topFragment instanceof MsgSettingFragment  )
+            topFragment instanceof MsgSettingFragment)
     {
-      if (mBaseDrawerLayout != null)
-      {
-        mBaseDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-      }
+      unLockDrawer();
     }
     //弹出Fragment
     pop();
+  }
+
+  /**
+   * 解除锁定
+   */
+  protected void unLockDrawer()
+  {
+    if (mBaseDrawerLayout != null)
+    {
+      mBaseDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+    }
   }
 
   /**

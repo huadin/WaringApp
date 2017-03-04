@@ -278,4 +278,5 @@
     <string name="push_msg_setting">推送消息设置</string>
     <string name="not_disturb_setting">免打扰设置</string>
     <string name="msg_setting_prompt">*注：开启后,自动屏蔽22:00 &#8211; 07:00间的任何消息</string>
+    <string name="not_update_app">当前已是最新版本</string>
 </resources>

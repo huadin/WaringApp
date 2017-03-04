@@ -25,8 +25,6 @@ import org.greenrobot.eventbus.Subscribe;
 
 import me.yokeyword.fragmentation.SupportFragment;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 
 public abstract class BaseFragment extends SupportFragment
 {
@@ -66,10 +64,8 @@ public abstract class BaseFragment extends SupportFragment
    * 打开抽屉
    */
   protected void initToolbarHome(@NonNull Toolbar toolbar, int toolbarTitleResId,
-                                 final FragmentActivity activity)
+                                 @NonNull final FragmentActivity activity)
   {
-    checkNotNull(toolbar, "toolbar cannot null");
-    checkNotNull(activity, "activity cannot null");
     toolbar.setTitle(toolbarTitleResId);
     toolbar.setTitleTextColor(getResources().getColor(R.color.app_text_color));
     toolbar.setNavigationIcon(R.drawable.icon_home_72px);
@@ -226,6 +222,11 @@ public abstract class BaseFragment extends SupportFragment
   protected void lockDrawer()
   {
     mContext.lockDrawer();
+  }
+
+  protected void unLockDrawer()
+  {
+    mContext.unLockDrawer();
   }
 
 }
