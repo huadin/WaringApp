@@ -43,6 +43,7 @@ public class FeedbackPresenter implements FeedbackContract.Presenter
     if (errorId != 0)
     {
       mFeedbackView.updateError(errorId);
+      return;
     }
 
     String feedbackUser = "未登录";
