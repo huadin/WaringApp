@@ -73,10 +73,10 @@
             android:value="@string/map_key_home">
         </meta-data>
         <!-- 台式 -->
-        <!--<meta-data-->
-        <!--android:name="com.amap.api.v2.apikey"-->
-        <!--android:value="@string/map_key_company">-->
-        <!--</meta-data>-->
+        <!-- <meta-data -->
+        <!-- android:name="com.amap.api.v2.apikey" -->
+        <!-- android:value="@string/map_key_company"> -->
+        <!-- </meta-data> -->
         <!-- 开发者申请的key高德 end -->
 
 
@@ -117,7 +117,6 @@
                 <action android:name="cn.bmob.push.action.MESSAGE"/>
             </intent-filter>
         </receiver>
-
         <receiver
             android:name="com.huadin.receiver.NetworkReceiver"
             android:enabled="true"
@@ -171,15 +170,20 @@
         <service
             android:name="com.huadin.service.HttpIntentService"
             android:enabled="true">
-
         </service>
 
-        <!--启动时设置预警地区-->
-        <activity android:name=".SettingAreaActivity"
+        <!-- 启动时设置预警地区 -->
+        <activity
+            android:name=".SettingAreaActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
 
+        <!--推送开启的服务-->
+        <service
+            android:name="com.huadin.service.PushIntentService"
+            android:enabled="true">
+        </service>
     </application>
 
 </manifest>

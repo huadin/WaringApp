@@ -77,7 +77,7 @@ android {
         compile 'me.yokeyword:fragmentation:0.9.3'
         /*如果想使用SwipeBack 滑动边缘退出Fragment/Activity功能，请再添加下面的库*/
 //        compile 'me.yokeyword:fragmentation-swipeback:0.7.9'
-        compile 'com.google.guava:guava:18.0'
+        compile 'com.google.guava:guava:20.0'
 //        /*下拉刷新控件*/
 //        compile 'com.mylhyl:commonrefreshlayout:2.0'
         testCompile 'junit:junit:4.12'
