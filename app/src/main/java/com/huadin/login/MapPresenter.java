@@ -93,6 +93,7 @@ class MapPresenter implements MapContract.MapListener
       } else
       {
         //异常 aMapLocation.getErrorInfo()
+        LogUtil.i(TAG,"定位异常信息 = " + aMapLocation.getErrorInfo());
         mView.locationError(mContext.getString(R.string.location_error));
       }
     }
@@ -265,8 +266,8 @@ class MapPresenter implements MapContract.MapListener
    */
   private void setMarkerOptions(List<String> scopeList)
   {
-    if (scopeList.size() > 0)
-    {
+//    if (scopeList.size() > 0)
+//    {
 
       ArrayList<MarkerOptions> optionsArrayList = new ArrayList<>();
 
@@ -290,7 +291,7 @@ class MapPresenter implements MapContract.MapListener
         optionsArrayList.add(options);
       }
       mView.addMarker(optionsArrayList);
-    }
+//    }
   }
 
 

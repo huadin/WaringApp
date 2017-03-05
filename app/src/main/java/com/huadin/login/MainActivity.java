@@ -5,11 +5,14 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -53,6 +56,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
   private TextView nameAfter;
   //用户名
   private TextView userName;
+  private TextView mUrgent;//用于显示计数
+  private TextView mMessage;  //用于显示计数
+
   private ColorStateList cls;
   // 再点一次退出程序时间设置
   private static final long WAIT_TIME = 2000L;
@@ -104,6 +110,19 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     nameAfter = (TextView) mNavigationView.getHeaderView(0).findViewById(R.id.user_name_after);
     userName = (TextView) mNavigationView.getHeaderView(0).findViewById(R.id.user_name);
+    mUrgent = (TextView) MenuItemCompat.getActionView(mNavigationView
+            .getMenu().findItem(R.id.urgent_info));
+    mMessage = (TextView) MenuItemCompat.getActionView(mNavigationView
+            .getMenu().findItem(R.id.message_notify));
+
+    mUrgent.setGravity(Gravity.CENTER_VERTICAL);
+    mUrgent.setTypeface(null, Typeface.BOLD);
+    mUrgent.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+
+    mMessage.setGravity(Gravity.CENTER_VERTICAL);
+    mMessage.setTypeface(null, Typeface.BOLD);
+    mMessage.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+
     nameAfter.setOnClickListener(new View.OnClickListener()
     {
       @Override

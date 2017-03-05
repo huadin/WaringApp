@@ -156,7 +156,7 @@ public enum HttpUtil
             .add("scope", mScope)                     //范围
             .add("provinceNo", "11102")
             .add("typeCode", mType)                  //类型
-             .add("lineName", "")                  //线路
+            .add("lineName", "")                  //线路
             .build();
   }
 
@@ -227,10 +227,14 @@ public enum HttpUtil
           mNewUrl = mUrl + "?pageNow=" + (mJSONArrays.size() + 1) + "&pageCount=" + totalCount;
           request();
         }
-      } else
+      } else if (totalCount > 0 && totalCount <= 10)
       {
         //只有一页数据
         parseToBean(mJSONArrays);
+      } else
+      {
+        //没有数据
+        EventBus.getDefault().post(new EventCenter(EventCenter.EVENT_CODE_NOT_HTTP_DATA));
       }
 
     } catch (JSONException e)

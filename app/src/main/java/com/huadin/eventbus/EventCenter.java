@@ -14,7 +14,7 @@ public class EventCenter<T>
   //退出成功
   public static final int EVENT_CODE_OUT_SUCCESS = 106;
   // 注册成功
-  public static final int EVENT_CODE_REGISTER_SUCCESS = 101;
+//  public static final int EVENT_CODE_REGISTER_SUCCESS = 101;
   // 修改成功
   public static final int EVENT_CODE_UPDATE_SUCCESS = 102;
 //  //	修改个人信息成功
@@ -34,6 +34,8 @@ public class EventCenter<T>
   public static final int EVENT_CODE_SEARCH_HTTP_DATA = 109;
   //时间回调
   public static final int EVENT_CODE_START_DATE = 110;
+  //没有停电信息
+  public static final int EVENT_CODE_NOT_HTTP_DATA = 111;
 
   /**
    * reserved data

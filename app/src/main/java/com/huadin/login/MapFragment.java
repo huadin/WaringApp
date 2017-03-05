@@ -34,6 +34,8 @@ import com.huadin.util.AMapGeoCode;
 import com.huadin.util.LogUtil;
 import com.huadin.waringapp.R;
 
+import org.litepal.crud.DataSupport;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,6 +69,7 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   private List<ScopeLatLng> scopeLatLngs = new ArrayList<>();
   private boolean isCompleteLocation;
   private boolean mIsLocationSuccess;
+  private boolean mHidden;
 
   public static MapFragment newInstance()
   {
@@ -132,6 +135,7 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   {
     super.onResume();
     mMapView.onResume();
+    mPresenter.resumeLocation();
   }
 
   @Override
@@ -139,6 +143,7 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   {
     super.onPause();
     mMapView.onPause();
+    mPresenter.stopLocation();
   }
 
   @Override
@@ -213,8 +218,6 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   @Override
   public void onGranted()
   {
-    LogUtil.i(LOG_TAG, "onGranted = " + System.currentTimeMillis());
-
     //初始化控制器,在权限检测之前?
     new MapPresenter(this, mContext);
 
@@ -239,6 +242,8 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   @Override
   public void latLng(LatLng latLng)
   {
+    LogUtil.i(LOG_TAG, "持续定位中... / isCompleteLocation = " + isCompleteLocation);
+
     mIsLocationSuccess = true;
 
     if (isCompleteLocation)
@@ -343,6 +348,7 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   {
     super.onHiddenChanged(hidden);
     //地图不再前台时，停止定位
+    mHidden = hidden;
     if (hidden)
     {
       mPresenter.stopLocation();
@@ -359,11 +365,12 @@ public class MapFragment extends BaseFragment implements PermissionListener,
     switch (eventCenter.getEventCode())
     {
       case EventCenter.EVENT_CODE_GEO_CODE_COMPLETE:
-        List<ScopeLatLng> list = (List<ScopeLatLng>) eventCenter.getData();
+//        List<ScopeLatLng> list = (List<ScopeLatLng>) eventCenter.getData();
         /*
         * 此位置调用  mPresenter.addMarkerToMap(scopeLatLngs, latLng) 时
         * 可能出现定位结果未返回现象,既 latLnt = null;
         */
+        List<ScopeLatLng> list = DataSupport.findAll(ScopeLatLng.class);
         scopeLatLngs.clear();
         scopeLatLngs.addAll(list);
         isCompleteLocation = true;
@@ -380,6 +387,11 @@ public class MapFragment extends BaseFragment implements PermissionListener,
           mNetworkTextView.setVisibility(View.GONE);
           startService(null, null, null, null);
         }
+        break;
+      case EventCenter.EVENT_CODE_NOT_HTTP_DATA:
+        mMap.clear();
+        //不在前台时，不 Toast 信息
+        if (!mHidden) showMessage(R.string.http_not_data);
         break;
     }
 
