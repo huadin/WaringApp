@@ -106,7 +106,7 @@ public class SearchFragment extends BaseFragment implements SearchContract.View
   private void searchSuccess(List<StopPowerBean> powerBeanList)
   {
     //  查询成功去另一页面展示
-    LogUtil.i(LOG_TAG,"powerBeanList Size = " + powerBeanList.size());
+    LogUtil.i(LOG_TAG, "powerBeanList Size = " + powerBeanList.size());
     mPresenter.hindLoading();
     SearchDateDetailedFragment fragment = SearchDateDetailedFragment.newInstance(powerBeanList);
     start(fragment, SupportFragment.SINGLETASK);
@@ -177,13 +177,18 @@ public class SearchFragment extends BaseFragment implements SearchContract.View
         searchSuccess(beanList);
         isClick = false;
         break;
-      case EventCenter.EVENT_CODE_START_DATE:
+      case EventCenter.EVENT_CODE_START_DATE://选择日期
         String date = (String) eventCenter.getData();
         if (!TextUtils.isEmpty(mStartDate.getText().toString()))
         {
           mStartDate.setText("");
         }
         mStartDate.setText(date);
+        break;
+      case EventCenter.EVENT_CODE_SEARCH_NOT_HTTP_DATA://搜索是没有数据
+        isClick = false;
+        dismissLoading();
+        showMessage(R.string.search_not_http_data);
         break;
     }
   }

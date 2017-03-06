@@ -39,6 +39,7 @@ public class PushIntentService extends IntentService
   private static final String KEY_PART_ON = "PART_ON";
   private static final String KEY_ALL_ON = "KEY_ALL_ON";
   private static final String KEY_SWITCH_STATE = "SWITCH_STATE";
+  protected static final String TITLE_KEY = "TITLE_KEY";
   private Context mContext;
 
   public PushIntentService()

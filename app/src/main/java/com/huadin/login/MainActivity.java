@@ -21,6 +21,7 @@ import com.huadin.base.BaseActivity;
 import com.huadin.bean.Person;
 import com.huadin.eventbus.EventCenter;
 import com.huadin.interf.OnFragmentOpenDrawerListener;
+import com.huadin.message.MessageFragment;
 import com.huadin.report.ReportFragment;
 import com.huadin.report.ReportPresenter;
 import com.huadin.search.SearchFragment;
@@ -67,7 +68,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
   protected void onCreate(Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
-//    setContentView(R.layout.activity_main);
     getWindow().setBackgroundDrawable(null);
     ButterKnife.bind(this);
 
@@ -115,7 +115,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     mMessage.setGravity(Gravity.CENTER_VERTICAL);
     mMessage.setTypeface(null, Typeface.BOLD);
     mMessage.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-    mMessage.setText(String.valueOf(1));
+
     nameAfter.setOnClickListener(new View.OnClickListener()
     {
       @Override
@@ -188,6 +188,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
           case R.id.info_search:
             startSearchFragment();//搜索
+            break;
+
+          case R.id.message_notify://消息通知
+            startMessageFragment();
+            break;
         }
       }
     }, 250);
@@ -283,6 +288,23 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
   }
 
   /**
+   * 启动消息通知
+   */
+  private void startMessageFragment()
+  {
+    MessageFragment messageFragment = findFragment(MessageFragment.class);
+    if (messageFragment == null)
+    {
+      messageFragment = MessageFragment.newInstance();
+      popTo(messageFragment);
+    } else
+    {
+      start(messageFragment, SupportFragment.SINGLETASK);
+    }
+    mMessage.setText("");
+  }
+
+  /**
    * 启动Fragment
    */
   private void popTo(final SupportFragment fragment)
@@ -333,8 +355,21 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         showOutLoginDialog();
         break;
       case EventCenter.EVENT_CODE_START_LONG_RUN_SERVICE:
-        int count = (int) eventCenter.getData();
-        mMessage.setText(String.valueOf(count));
+        final int count = (int) eventCenter.getData();
+        runOnUiThread(new Runnable()
+        {
+          @Override
+          public void run()
+          {
+            if (count > 0)
+            {
+              mMessage.setText(String.valueOf(count));
+            } else
+            {
+              mMessage.setText("");
+            }
+          }
+        });
         break;
     }
   }
@@ -466,6 +501,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     {
       case R.string.fault_info:
         startUrgentFragment();
+        break;
+      case R.string.message_notify:
+        startMessageFragment();
         break;
     }
   }

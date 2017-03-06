@@ -38,6 +38,8 @@ public class EventCenter<T>
   public static final int EVENT_CODE_NOT_HTTP_DATA = 111;
   //启动预警服务
   public static final int EVENT_CODE_START_LONG_RUN_SERVICE = 112;
+  //搜索是没有数据
+  public static final int EVENT_CODE_SEARCH_NOT_HTTP_DATA = 113;
 
   /**
    * reserved data

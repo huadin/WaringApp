@@ -233,8 +233,18 @@ public enum HttpUtil
         parseToBean(mJSONArrays);
       } else
       {
-        //没有数据
-        EventBus.getDefault().post(new EventCenter(EventCenter.EVENT_CODE_NOT_HTTP_DATA));
+        /* 没有数据包括 更换区域时 和 搜索数据时没有数据
+        *  1.更换区域时，没有数据会执行 Map.clear();清空地图
+        *  2.搜索时，MapFragment 没有被销毁,所以区分两者
+        * */
+
+        if (TextUtils.isEmpty(mType))
+        {
+          EventBus.getDefault().post(new EventCenter(EventCenter.EVENT_CODE_NOT_HTTP_DATA));
+        }else
+        {
+          EventBus.getDefault().post(new EventCenter(EventCenter.EVENT_CODE_SEARCH_NOT_HTTP_DATA));
+        }
       }
 
     } catch (JSONException e)
