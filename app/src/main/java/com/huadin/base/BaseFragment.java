@@ -1,10 +1,13 @@
 package com.huadin.base;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
@@ -15,6 +18,7 @@ import android.view.ViewGroup;
 
 import com.huadin.eventbus.EventCenter;
 import com.huadin.interf.OnFragmentOpenDrawerListener;
+import com.huadin.service.NotifyIntentService;
 import com.huadin.util.NetworkUtil;
 import com.huadin.util.ToastUtil;
 import com.huadin.waringapp.R;
@@ -227,6 +231,19 @@ public abstract class BaseFragment extends SupportFragment
   protected void unLockDrawer()
   {
     mContext.unLockDrawer();
+  }
+
+  /**
+   * 启动定时任务
+   */
+  protected void startAlarm()
+  {
+    AlarmManager manager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
+    long aLong = 60 * 1000;
+    long alarmLong = SystemClock.elapsedRealtime() + aLong;
+    Intent intent = new Intent(mContext, NotifyIntentService.class);
+    PendingIntent PI = PendingIntent.getService(mContext, 0, intent, 0);
+    manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, alarmLong, PI);
   }
 
 }

@@ -36,6 +36,8 @@ public class EventCenter<T>
   public static final int EVENT_CODE_START_DATE = 110;
   //没有停电信息
   public static final int EVENT_CODE_NOT_HTTP_DATA = 111;
+  //启动预警服务
+  public static final int EVENT_CODE_START_LONG_RUN_SERVICE = 112;
 
   /**
    * reserved data

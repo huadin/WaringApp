@@ -56,7 +56,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
   private TextView nameAfter;
   //用户名
   private TextView userName;
-  private TextView mUrgent;//用于显示计数
   private TextView mMessage;  //用于显示计数
 
   private ColorStateList cls;
@@ -110,19 +109,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     nameAfter = (TextView) mNavigationView.getHeaderView(0).findViewById(R.id.user_name_after);
     userName = (TextView) mNavigationView.getHeaderView(0).findViewById(R.id.user_name);
-    mUrgent = (TextView) MenuItemCompat.getActionView(mNavigationView
-            .getMenu().findItem(R.id.urgent_info));
+
     mMessage = (TextView) MenuItemCompat.getActionView(mNavigationView
             .getMenu().findItem(R.id.message_notify));
-
-    mUrgent.setGravity(Gravity.CENTER_VERTICAL);
-    mUrgent.setTypeface(null, Typeface.BOLD);
-    mUrgent.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-
     mMessage.setGravity(Gravity.CENTER_VERTICAL);
     mMessage.setTypeface(null, Typeface.BOLD);
     mMessage.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-
+    mMessage.setText(String.valueOf(1));
     nameAfter.setOnClickListener(new View.OnClickListener()
     {
       @Override
@@ -337,8 +330,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
       //强制退出
       case EventCenter.EVENT_CODE_OTHER_DEVICE_LOGIN:
-        LogUtil.i("退出", "弹出 dialog");
         showOutLoginDialog();
+        break;
+      case EventCenter.EVENT_CODE_START_LONG_RUN_SERVICE:
+        int count = (int) eventCenter.getData();
+        mMessage.setText(String.valueOf(count));
         break;
     }
   }

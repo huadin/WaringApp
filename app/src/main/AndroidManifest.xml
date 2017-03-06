@@ -179,9 +179,14 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
 
-        <!--推送开启的服务-->
+        <!-- 推送开启的服务 -->
         <service
             android:name="com.huadin.service.PushIntentService"
+            android:enabled="true">
+        </service>
+        <!--检测用户设置的停电位置-->
+        <service
+            android:name="com.huadin.service.NotifyIntentService"
             android:enabled="true">
         </service>
     </application>

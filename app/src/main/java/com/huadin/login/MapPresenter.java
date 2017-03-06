@@ -2,6 +2,7 @@ package com.huadin.login;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -280,6 +281,8 @@ class MapPresenter implements MapContract.MapListener
 
         //根据 scope 模糊搜索 StopPowerBean
         String content = getContentFormScope(scope);
+        //防止解析地址与实际地址对不上，会丢失数据
+        if (TextUtils.isEmpty(content)) continue;
 
         MarkerOptions options = new MarkerOptions()
                 .title("停电信息")     // title

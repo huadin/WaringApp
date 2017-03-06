@@ -242,7 +242,6 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   @Override
   public void latLng(LatLng latLng)
   {
-    LogUtil.i(LOG_TAG, "持续定位中... / isCompleteLocation = " + isCompleteLocation);
 
     mIsLocationSuccess = true;
 
@@ -374,6 +373,8 @@ public class MapFragment extends BaseFragment implements PermissionListener,
         scopeLatLngs.clear();
         scopeLatLngs.addAll(list);
         isCompleteLocation = true;
+        //启动预警服务
+        startAlarm();
         break;
 
       case EventCenter.EVENT_CODE_GEO_CODE_START://开始解析
