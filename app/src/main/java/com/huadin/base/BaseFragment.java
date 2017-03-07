@@ -228,10 +228,10 @@ public abstract class BaseFragment extends SupportFragment
     mContext.lockDrawer();
   }
 
-  protected void unLockDrawer()
-  {
-    mContext.unLockDrawer();
-  }
+//  protected void unLockDrawer()
+//  {
+//    mContext.unLockDrawer();
+//  }
 
   /**
    * 启动定时任务

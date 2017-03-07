@@ -94,7 +94,7 @@ class MapPresenter implements MapContract.MapListener
       } else
       {
         //异常 aMapLocation.getErrorInfo()
-        LogUtil.i(TAG,"定位异常信息 = " + aMapLocation.getErrorInfo());
+        LogUtil.i(TAG, "定位异常信息 = " + aMapLocation.getErrorInfo());
         mView.locationError(mContext.getString(R.string.location_error));
       }
     }
@@ -267,34 +267,31 @@ class MapPresenter implements MapContract.MapListener
    */
   private void setMarkerOptions(List<String> scopeList)
   {
-//    if (scopeList.size() > 0)
-//    {
 
-      ArrayList<MarkerOptions> optionsArrayList = new ArrayList<>();
+    ArrayList<MarkerOptions> optionsArrayList = new ArrayList<>();
 
-      for (int i = 0; i < scopeList.size(); i++)
-      {
-        String scope = scopeList.get(i);
+    for (int i = 0; i < scopeList.size(); i++)
+    {
+      String scope = scopeList.get(i);
 
-        //获取经纬度
-        LatLng ll = getLatLntFromScope(scope);
+      //获取经纬度
+      LatLng ll = getLatLntFromScope(scope);
 
-        //根据 scope 模糊搜索 StopPowerBean
-        String content = getContentFormScope(scope);
-        //防止解析地址与实际地址对不上，会丢失数据
-        if (TextUtils.isEmpty(content)) continue;
+      //根据 scope 模糊搜索 StopPowerBean
+      String content = getContentFormScope(scope);
+      //防止解析地址与实际地址对不上，会丢失数据
+      if (TextUtils.isEmpty(content)) continue;
 
-        MarkerOptions options = new MarkerOptions()
-                .title("停电信息")     // title
-                .position(ll)          // 定位点
-                .icon(mMarker)         // marker
-                .snippet(content);     //内容
+      MarkerOptions options = new MarkerOptions()
+              .title("停电信息")     // title
+              .position(ll)          // 定位点
+              .icon(mMarker)         // marker
+              .snippet(content);     //内容
 //                .draggable(true)     //可拖拽
 //                  .perspective(true);//近大远小
-        optionsArrayList.add(options);
-      }
-      mView.addMarker(optionsArrayList);
-//    }
+      optionsArrayList.add(options);
+    }
+    mView.addMarker(optionsArrayList);
   }
 
 
@@ -340,6 +337,16 @@ class MapPresenter implements MapContract.MapListener
       // 获取 typeCode , scope ,lineName
       StopPowerBean powerBean = beanList.get(0);
       String newScope = powerBean.getScope();
+
+      if (newScope.length() >= 20)
+      {
+        StringBuilder sbScope = new StringBuilder(newScope);
+        sbScope.insert(15, "\n");
+        newScope = sbScope.toString();
+        sbScope.delete(0, sbScope.length());
+      }
+
+
       String typeCode = powerBean.getTypeCode();
 //      String lineName = powerBean.getLineName();
 

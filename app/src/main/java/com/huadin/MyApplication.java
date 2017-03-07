@@ -13,6 +13,7 @@ import cn.bmob.push.BmobPush;
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobConfig;
 import cn.bmob.v3.BmobInstallation;
+import cn.sharesdk.framework.ShareSDK;
 
 public class MyApplication extends LitePalApplication
 {
@@ -28,6 +29,8 @@ public class MyApplication extends LitePalApplication
     LeakCanary.install(this);
 
     configBmob();
+
+    ShareSDK.initSDK(this);
   }
 
   private void configBmob()

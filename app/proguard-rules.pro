@@ -180,6 +180,17 @@
 -dontwarn sun.misc.Unsafe
 # guava  --- end ---
 
+# SharedSdk  --- start ---
+-keep class cn.sharesdk.**{*;}
+-keep class com.sina.**{*;}
+-keep class **.R$* {*;}
+-keep class **.R{*;}
+-keep class com.mob.**{*;}
+-dontwarn com.mob.**
+-dontwarn cn.sharesdk.**
+-dontwarn **.R$*
+# SharedSdk  --- end ---
+
 # 其他
 # Message 推送消息实体类, Message 是通过 Gson 映射解析生产,如不保留,无法解析出 Message 中字段
 -keep public class com.huadin.bean.Message { private *;}
