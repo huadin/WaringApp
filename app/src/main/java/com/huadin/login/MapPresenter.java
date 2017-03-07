@@ -324,11 +324,10 @@ class MapPresenter implements MapContract.MapListener
     String content = null;
 
     //将 xxx村委会 替换成 xxx村
-    if (scope.endsWith("委会"))
-    {
-      scope = scope.replace("委会", "").trim();
-    }
-
+//    if (scope.endsWith("委会"))
+//    {
+//      scope = scope.replace("委会", "").trim();
+//    }
     //模糊查询所有符合条件的
     List<StopPowerBean> beanList = DataSupport.where("scope like ?", "%" + scope + "%").find(StopPowerBean.class);
 

@@ -195,7 +195,7 @@ public enum HttpUtil
   //解析第一页请求的数据
   private void parseBody(String body)
   {
-    LogUtil.i(TAG, "body = " + body);
+
     try
     {
       JSONObject obj = new JSONObject(body);

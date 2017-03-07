@@ -10,6 +10,7 @@ import com.amap.api.services.geocoder.GeocodeSearch;
 import com.amap.api.services.geocoder.RegeocodeResult;
 import com.huadin.database.ScopeLatLng;
 import com.huadin.database.StopPowerBean;
+import com.huadin.database.WaringAddress;
 import com.huadin.eventbus.EventCenter;
 
 import org.greenrobot.eventbus.EventBus;
@@ -34,6 +35,7 @@ public class AMapGeoCode implements GeocodeSearch.OnGeocodeSearchListener
   private static final String TAG = "AMapGeoCode";
   private ExecutorService mPool;
   private Context mContext;
+  private int cityNameCount = 2;
   private List<ScopeLatLng> mLatLngs = new ArrayList<>();
   private TreeMap<String, String> map;
 
@@ -42,6 +44,8 @@ public class AMapGeoCode implements GeocodeSearch.OnGeocodeSearchListener
   {
     mContext = context;
     mContext = checkNotNull(context, "Content cannot be null");
+    WaringAddress address = DataSupport.findFirst(WaringAddress.class);
+    if (address != null) cityNameCount = address.getWaringArea().length();
   }
 
   public void startGeoCode()
@@ -73,7 +77,19 @@ public class AMapGeoCode implements GeocodeSearch.OnGeocodeSearchListener
               geocodeResult.getGeocodeAddressList().size() > 0)
       {
         GeocodeAddress geoCodeAddress = geocodeResult.getGeocodeAddressList().get(0);
-        String scope = geoCodeAddress.getFormatAddress().substring(6);
+        String scope;
+        /*
+        * 北京市石景山区xxx
+        * 北京市朝阳区xxx
+        * */
+        if (cityNameCount == 2)
+        {
+          scope = geoCodeAddress.getFormatAddress().substring(6);
+        } else
+        {
+          scope = geoCodeAddress.getFormatAddress().substring(7);
+        }
+
         double lat = geoCodeAddress.getLatLonPoint().getLatitude();//纬度
         double lng = geoCodeAddress.getLatLonPoint().getLongitude();//经度
         LogUtil.i(TAG, "地址：" + scope + " / " + "纬度：" + lat + " / 经度：" + lng);
@@ -129,7 +145,7 @@ public class AMapGeoCode implements GeocodeSearch.OnGeocodeSearchListener
       {
         GeocodeQuery query = new GeocodeQuery(scope, "北京");
         search.getFromLocationNameAsyn(query);
-        LogUtil.i(TAG,"scope = " + scope);
+        LogUtil.i(TAG, "scope = " + scope);
       }
     }
   }
