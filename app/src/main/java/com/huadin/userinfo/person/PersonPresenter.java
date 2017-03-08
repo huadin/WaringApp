@@ -72,7 +72,8 @@ public class PersonPresenter implements PersonContract.Presenter, OnQueryDataLis
   public void permissionChanges(Person person)
   {
     mPersonView.showLoading();
-    person.setUserPermission(false);
+    // TODO: 2017/3/8 用户权限设置
+//    person.setUserPermission(false);
     person.update(person.getObjectId(),new UpdateListener()
     {
       @Override

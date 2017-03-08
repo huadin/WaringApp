@@ -41,7 +41,7 @@ class MapPresenter implements MapContract.MapListener
   private static final String TAG = "MapPresenter";
   private MapContract.View mView;
   private AMapLocationClient mClient;
-  private Context mContext;
+  private Context mContext;// TODO: 2017/3/8 Context存在内存泄漏
   private LocationSource.OnLocationChangedListener mListener;
 
   private BitmapDescriptor JHMarker;//计划
@@ -87,7 +87,6 @@ class MapPresenter implements MapContract.MapListener
         double lng = aMapLocation.getLongitude();
 
         LatLng latLng = new LatLng(lag, lng);
-
         mView.latLng(latLng);
         //显示系统小蓝点
         mListener.onLocationChanged(aMapLocation);

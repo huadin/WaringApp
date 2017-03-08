@@ -53,6 +53,7 @@ public class AddressPresenter implements AddressContract.Presenter
     person.setAddress(mAddressDetailed);
 
     Person currentPerson = Person.getCurrentUser(Person.class);
+    person.setUserPermission(currentPerson.isUserPermission());
     mAddressView.showLoading();
     person.update(currentPerson.getObjectId(), new UpdateListener()
     {

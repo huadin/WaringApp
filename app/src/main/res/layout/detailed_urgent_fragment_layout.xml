@@ -10,6 +10,8 @@
     <TextView
         android:id="@+id/temp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:textSize="@dimen/text_size_18"
+        android:padding="@dimen/detailed_urgent_padding"/>
 
 </LinearLayout>

@@ -35,7 +35,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * 停电报修详细信息
  */
 
-public class DetailedFaultFragment extends BaseFragment implements DetailedFaultContract.View, Toolbar.OnMenuItemClickListener, PromptFragment.PromptListener, PermissionListener, PermissionDialogFragment.OnPermissionListener
+public class DetailedFaultFragment extends BaseFragment implements DetailedFaultContract.View,
+        Toolbar.OnMenuItemClickListener, PromptFragment.PromptListener, PermissionListener,
+        PermissionDialogFragment.OnPermissionListener
 {
 
   @BindView(R.id.top_toolbar)

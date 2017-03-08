@@ -49,7 +49,6 @@ public class FaultFragment extends BaseFragment implements FaultContract.View,
   TextView mEmpty;
 
   private FaultContract.Presenter mPresenter;
-  //  private FaultAdapter mFaultAdapter;
   private FaultAdapter_1 mFaultAdapter;
   private List<ReportBean> mBeanList;
 
@@ -94,11 +93,8 @@ public class FaultFragment extends BaseFragment implements FaultContract.View,
 
     mRecyclerView.addOnScrollListener(listener);
     mBeanList = new ArrayList<>();
-//    mFaultAdapter = new FaultAdapter(mBeanList);
-    mFaultAdapter = new FaultAdapter_1(mContext, mBeanList, R.layout.fault_adapter_item);
 
-//    View footerView = LayoutInflater.from(mContext).inflate(R.layout.recycler_view_footer, mRecyclerView, false);
-//    mFaultAdapter.setFooterView(footerView);
+    mFaultAdapter = new FaultAdapter_1(mContext, mBeanList, R.layout.fault_adapter_item);
 
     mFaultAdapter.setOnItemClickListener(this);
     mRecyclerView.setAdapter(mFaultAdapter);
@@ -155,7 +151,6 @@ public class FaultFragment extends BaseFragment implements FaultContract.View,
   {
     mRefreshLayout.setRefreshing(false);
     mEmpty.setVisibility(View.GONE);
-//    mBeanList = beanList;
     //获取数据成功,关联到 Adapter
     if (beanList.size() == 0)
     {

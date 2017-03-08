@@ -30,7 +30,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * 故障信息，查看管理人员发布的紧急信息
  */
-public class UrgentFragment extends BaseFragment implements UrgentContract.View, SwipeRefreshLayout.OnRefreshListener, LoadMoreOnScrollListener.onLoadMore, BaseAdapter.onItemClickListener
+public class UrgentFragment extends BaseFragment implements UrgentContract.View,
+        SwipeRefreshLayout.OnRefreshListener, LoadMoreOnScrollListener.onLoadMore,
+        BaseAdapter.onItemClickListener
 {
 
   private UrgentAdapter_1 mAdapter;
