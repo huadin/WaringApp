@@ -45,7 +45,7 @@
     <!-- 
     	Wechat微信和WechatMoments微信朋友圈的appid是一样的；
     
-                       注意：开发者不能用我们这两个平台的appid,否则分享不了
+         注意：开发者不能用我们这两个平台的appid,否则分享不了
     
        	  微信测试的时候，微信测试需要先签名打包出apk,
 		sample测试微信，要先签名打包，keystore在sample项目中，密码123456
@@ -55,27 +55,20 @@
 		默认值为false。此外，微信收藏不支持此字段。
 	-->
     <Wechat
-        AppId="wx4868b35061f87885"
-        AppSecret="64020361b8ec4c99936c0e3999a9f249"
+        AppId="wx0ed8ac1d8c1253b1"
+        AppSecret="374314f2ec603d09d5952f3a4d24dd3a"
         BypassApproval="false"
         Enable="true"
         Id="2"
         SortId="2"/>
 
     <WechatMoments
-        AppId="wx4868b35061f87885"
-        AppSecret="64020361b8ec4c99936c0e3999a9f249"
+        AppId="wx0ed8ac1d8c1253b1"
+        AppSecret="374314f2ec603d09d5952f3a4d24dd3a"
         BypassApproval="false"
         Enable="true"
         Id="3"
         SortId="3"/>
-
-    <WechatFavorite
-        AppId="wx4868b35061f87885"
-        AppSecret="64020361b8ec4c99936c0e3999a9f249"
-        Enable="true"
-        Id="4"
-        SortId="4"/>
 
     <!-- ShareByAppClient标识是否使用微博客户端分享，默认是false -->
 

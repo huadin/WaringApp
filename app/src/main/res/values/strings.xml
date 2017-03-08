@@ -13,6 +13,7 @@
     <string name="title_activity_login">Sign in</string>
     <string name="temp_time">2016&#8211;01&#8211;02</string>
     <string name="http_url">http://210.77.179.6/95598/outageNotice/queryOutageNoticeList</string>
+    <string name="shared_url">http://www.95598.cn/static//piture//20160616/140101.jpg</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">手机号码</string>
@@ -288,5 +289,7 @@
     <string name="message_notify_content">您的预警地址有新停电信息</string>
     <string name="start_app">点击进入</string>
     <string name="not_open_gps">GPS未开启,请开启GPS实现定位</string>
+    <string name="shared_text">随时随地查看停电信息</string>
+
 
 </resources>

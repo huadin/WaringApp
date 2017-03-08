@@ -147,7 +147,7 @@ public abstract class OnekeyShareThemeImpl implements PlatformActionListener, Ca
 		if (formateShareData(platform)) {
 			ShareParams sp = shareDataToShareParams(platform);
 			if (sp != null) {
-				toast("ssdk_oks_sharing");
+				toast("启动中...");
 				if (customizeCallback != null) {
 					customizeCallback.onShare(platform, sp);
 				}
@@ -408,7 +408,7 @@ public abstract class OnekeyShareThemeImpl implements PlatformActionListener, Ca
 			} break;
 			case 3: {
 				// 取消
-				toast("ssdk_oks_share_canceled");
+				toast("分享已取消");
 			} break;
 		}
 		return false;
