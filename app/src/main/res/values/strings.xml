@@ -286,5 +286,6 @@
     <!--消息通知-->
     <string name="message_notify_title">预警消息</string>
     <string name="message_notify_content">您的预警地址有新停电信息</string>
+    <string name="start_app">点击进入</string>
 
 </resources>

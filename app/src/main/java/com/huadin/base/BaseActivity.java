@@ -38,6 +38,7 @@ public abstract class BaseActivity extends SupportActivity
   protected static final String TITLE_KEY = "TITLE_KEY";
   protected static final String KEY_ADDRESS_AREA_SHARED = "Address_Shared";
   protected static final String KEY_ADDRESS_AREA_KEY = "SHARED_KEY";
+  protected static final String KEY_FIRST_KEY = "FIRST_KEY";
   //解锁抽屉模式时使用
   protected DrawerLayout mBaseDrawerLayout;
   protected static String LOG_TAG = null;

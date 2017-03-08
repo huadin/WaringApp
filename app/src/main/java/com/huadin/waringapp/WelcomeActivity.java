@@ -43,6 +43,7 @@ public class WelcomeActivity extends BaseActivity implements PermissionListener,
   private boolean isNeedCheck = true;
   private PermissionManager manager;
   private int keyCode = -1;
+  private boolean isFirst;
 
   @Override
   protected void onCreate(Bundle savedInstanceState)
@@ -176,6 +177,7 @@ public class WelcomeActivity extends BaseActivity implements PermissionListener,
   {
     SharedPreferences sharedPreferences = getSharedPreferences(KEY_ADDRESS_AREA_SHARED, MODE_PRIVATE);
     keyCode = sharedPreferences.getInt(KEY_ADDRESS_AREA_KEY, 0);
+    isFirst = sharedPreferences.getBoolean(KEY_FIRST_KEY, true);
     if (keyCode == 1 && isNetwork())
     {
       //开启服务,加载网络数据
@@ -186,12 +188,15 @@ public class WelcomeActivity extends BaseActivity implements PermissionListener,
   @Override
   public void onAnimationEnd(Animation animation)
   {
-    if (keyCode > 0)
+    if (isFirst)
     {
-      startActivity(MainActivity.class);
-    } else
+      startActivity(BootPageActivity.class);
+    } else if (keyCode == 0)
     {
       startActivity(SettingAreaActivity.class);
+    } else if (keyCode == 1)
+    {
+      startActivity(MainActivity.class);
     }
     finish();
   }

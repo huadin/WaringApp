@@ -140,5 +140,11 @@
     <dimen name="msg_setting_fragment_margin_32">32dp</dimen>
     <dimen name="msg_setting_fragment_margin_5">5dp</dimen>
 
+    <!--引导页-->
+    <dimen name="boot_page_margin_bottom">72dp</dimen>
+    <dimen name="boot_page_image_width">10dp</dimen>
+    <dimen name="boot_page_linear_layout_margin_bottom">16dp</dimen>
+    <dimen name="boot_page_image_margin_start">4dp</dimen>
+
 
 </resources>

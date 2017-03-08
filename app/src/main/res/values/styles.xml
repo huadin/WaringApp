@@ -386,7 +386,16 @@
         <item name="android:layout_marginEnd">@dimen/msg_setting_fragment_margin</item>
         <item name="android:orientation">horizontal</item>
     </style>
+
     <!--SwitchCompat  end-->
 
+    <!--引导页-->
+    <style name="boot_page_image_style">
+        <item name="android:layout_width">@dimen/boot_page_image_width</item>
+        <item name="android:layout_height">@dimen/boot_page_image_width</item>
+        <item name="android:layout_marginEnd">@dimen/boot_page_image_margin_start</item>
+        <item name="android:layout_marginStart">@dimen/boot_page_image_margin_start</item>
+        <item name="android:background">@drawable/boot_page_point_select</item>
+    </style>
 
 </resources>
