@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -244,6 +245,15 @@ public abstract class BaseFragment extends SupportFragment
     Intent intent = new Intent(mContext, NotifyIntentService.class);
     PendingIntent PI = PendingIntent.getService(mContext, 0, intent, 0);
     manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, alarmLong, PI);
+  }
+
+  /**
+   * 检测GPS是否开启
+   */
+  protected boolean isOpenGPS()
+  {
+    LocationManager manager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
+    return manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
   }
 
 }

@@ -94,7 +94,8 @@ class MapPresenter implements MapContract.MapListener
       } else
       {
         //异常 aMapLocation.getErrorInfo()
-        LogUtil.i(TAG, "定位异常信息 = " + aMapLocation.getErrorInfo());
+        LogUtil.i(TAG, "定位异常信息 = " + aMapLocation.getErrorInfo() +
+                "error code = " + aMapLocation.getErrorCode());
         mView.locationError(mContext.getString(R.string.location_error));
       }
     }

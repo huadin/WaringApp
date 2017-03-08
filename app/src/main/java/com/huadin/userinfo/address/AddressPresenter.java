@@ -81,9 +81,9 @@ public class AddressPresenter implements AddressContract.Presenter
   {
     isLocal = 1;
     if (getCityInfo()) return;
-    mAddressView.showLoading();
+//    mAddressView.showLoading();
     saveAddress();
-    mAddressView.hindLoading();
+//    mAddressView.hindLoading();
     mAddressView.updateSuccess();
   }
 
@@ -136,6 +136,7 @@ public class AddressPresenter implements AddressContract.Presenter
     address.save();
 
     InstallationUtil.newInstance().with(mContext).bindingAreaIdPush(mAreaId);
+
   }
 
   private void showCode(int code)

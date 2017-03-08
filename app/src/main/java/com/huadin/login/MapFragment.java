@@ -218,14 +218,17 @@ public class MapFragment extends BaseFragment implements PermissionListener,
   @Override
   public void onGranted()
   {
-    //初始化控制器,在权限检测之前?
     new MapPresenter(this, mContext);
 
     if (!isNetwork())
     {
-      // TODO: 2016/12/10 检测GPS是否开启 ,未开启则提示用户
       //无网络
       showMessage(R.string.error_code_9016);
+    }
+
+    if (!isOpenGPS())
+    {
+      showMessage(R.string.not_open_gps);
     }
   }
 

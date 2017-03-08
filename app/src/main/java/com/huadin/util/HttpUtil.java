@@ -178,7 +178,7 @@ public enum HttpUtil
       @Override
       public void onFailure(Call call, IOException e)
       {
-        LogUtil.i(TAG, "error message" + e.getMessage());
+        LogUtil.i(TAG, "error message = " + e.getMessage());
       }
 
       @Override
@@ -241,7 +241,7 @@ public enum HttpUtil
         if (TextUtils.isEmpty(mType))
         {
           EventBus.getDefault().post(new EventCenter(EventCenter.EVENT_CODE_NOT_HTTP_DATA));
-        }else
+        } else
         {
           EventBus.getDefault().post(new EventCenter(EventCenter.EVENT_CODE_SEARCH_NOT_HTTP_DATA));
         }
