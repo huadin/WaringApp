@@ -83,8 +83,8 @@
     	是需要将应用信息中的“ShareByAppClient”设置为true，此字段默认值为false。
     -->
     <Evernote
-        ConsumerKey="sharesdk-7807"
-        ConsumerSecret="d05bf86993836004"
+        ConsumerKey="wa"
+        ConsumerSecret="b5fb1c4af537a1cd"
         Enable="true"
         HostType="sandbox"
         Id="5"
