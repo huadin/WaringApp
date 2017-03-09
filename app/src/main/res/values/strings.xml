@@ -291,5 +291,9 @@
     <string name="not_open_gps">GPS未开启,请开启GPS实现定位</string>
     <string name="shared_text">随时随地查看停电信息</string>
 
+    <!--baseAdapter-->
+    <string name="loading_ready">准备加载</string>
+    <string name="loading_start">加载中&#8230;</string>
+    <string name="loading_end">我是有底线的</string>
 
 </resources>

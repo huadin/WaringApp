@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.huadin.waringapp.R;
 
@@ -17,10 +19,9 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<ViewHolder>
 {
   private static final int TYPE_LOAD_MORE = -1;//加载更多
   private static final int STATUS_END = -2;
-  protected static final int STATUS_READY = -3;
-  protected static final int STATUS_START = -4;
+  private static final int STATUS_READY = -3;
+  private static final int STATUS_START = -4;
   private Context mContext;
-  //  private View mFooterView;
   private List<T> mDatas;
   private int mStatus = -3;
   private int mLayoutId;
@@ -72,22 +73,35 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<ViewHolder>
 
   private void bindFooterView(ViewHolder holder)
   {
+    View view = holder.itemView.findViewById(R.id.footer_layout);
+    TextView tv = (TextView) holder.itemView.findViewById(R.id.footer_tv);
+    ProgressBar bar = (ProgressBar) holder.itemView.findViewById(R.id.footer_progress);
     switch (mStatus)
     {
       case STATUS_READY:
-        holder.itemView.findViewById(R.id.footer_layout).setVisibility(View.GONE);
-        holder.itemView.setVisibility(View.GONE);
+        if (mDatas.size() < 15)
+        {
+          holder.itemView.setVisibility(View.GONE);
+          view.setVisibility(View.GONE);
+        } else
+        {
+          view.setVisibility(View.VISIBLE);
+          bar.setVisibility(View.GONE);
+          tv.setText(mContext.getString(R.string.loading_ready));
+        }
+//        mStatus = STATUS_START;
         break;
-
       case STATUS_START:
-        holder.itemView.findViewById(R.id.footer_layout).setVisibility(View.VISIBLE);
-        holder.itemView.setVisibility(View.VISIBLE);
+        view.setVisibility(View.VISIBLE);
+        bar.setVisibility(View.VISIBLE);
+        tv.setText(mContext.getString(R.string.loading_start));
         mStatus = STATUS_END;
         break;
 
       case STATUS_END:
-        holder.itemView.findViewById(R.id.footer_layout).setVisibility(View.GONE);
-        holder.itemView.setVisibility(View.GONE);
+        view.setVisibility(View.VISIBLE);
+        bar.setVisibility(View.GONE);
+        tv.setText(mContext.getString(R.string.loading_end));
         mStatus = STATUS_READY;
         break;
     }
