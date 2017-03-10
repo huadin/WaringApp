@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 /*butterKnife*/
 apply plugin: 'com.neenbedankt.android-apt'
-
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -10,7 +9,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
-        versionName "1.0"
+        versionName "0.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         signingConfigs {
@@ -78,13 +77,11 @@ android {
         /*如果想使用SwipeBack 滑动边缘退出Fragment/Activity功能，请再添加下面的库*/
 //        compile 'me.yokeyword:fragmentation-swipeback:0.7.9'
         compile 'com.google.guava:guava:20.0'
-//        /*下拉刷新控件*/
-//        compile 'com.mylhyl:commonrefreshlayout:2.0'
         testCompile 'junit:junit:4.12'
 
         debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
-        releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
-        testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
+//        releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
+//        testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
         //分包
         compile 'com.android.support:multidex:1.0.1'
         compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'

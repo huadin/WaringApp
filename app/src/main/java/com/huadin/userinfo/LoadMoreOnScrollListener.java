@@ -5,7 +5,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.huadin.adapter.BaseAdapter;
-import com.huadin.adapter.FaultAdapter;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -52,12 +51,12 @@ public class LoadMoreOnScrollListener extends RecyclerView.OnScrollListener
       // 获取总的item
       int mTotalItem = mLayoutManager.getItemCount();
 
-      if (adapter.getLoadMoreStatus() == FaultAdapter.STATUS_READY && mLastVisibleItem >= mTotalItem - 1 && isScrollDown)
+      if (adapter.getLoadMoreStatus() == BaseAdapter.STATUS_READY && mLastVisibleItem >= mTotalItem - 1 && isScrollDown)
       {
         //加载数据
         if (mLoadMoreListener != null)
         {
-          adapter.setLoadMoreStatus(FaultAdapter.STATUS_START);
+          adapter.setLoadMoreStatus(BaseAdapter.STATUS_START);
           mLoadMoreListener.loadMore();
         }
       }

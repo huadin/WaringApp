@@ -117,7 +117,6 @@ public class RegisterFragment extends BaseFragment implements RegisterContract.V
     {
       showMessage(R.string.password_reset_success);
     }
-    //TODO 弹出后自动登录
     pop();
   }
 

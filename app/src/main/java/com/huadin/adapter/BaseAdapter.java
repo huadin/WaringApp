@@ -18,9 +18,10 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public abstract class BaseAdapter<T> extends RecyclerView.Adapter<ViewHolder>
 {
   private static final int TYPE_LOAD_MORE = -1;//加载更多
-  private static final int STATUS_END = -2;
-  private static final int STATUS_READY = -3;
-  private static final int STATUS_START = -4;
+  private static final int STATUS_END = -2;//加载结束
+  public static final int STATUS_READY = -3;//准备加载
+  public static final int STATUS_START = -4;//加载中
+  public static final int STATUS_FAILED = -5;//加载失败
   private Context mContext;
   private List<T> mDatas;
   private int mStatus = -3;
@@ -102,6 +103,12 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<ViewHolder>
         view.setVisibility(View.VISIBLE);
         bar.setVisibility(View.GONE);
         tv.setText(mContext.getString(R.string.loading_end));
+        mStatus = STATUS_READY;
+        break;
+      case STATUS_FAILED:
+        view.setVisibility(View.VISIBLE);
+        bar.setVisibility(View.GONE);
+        tv.setText(mContext.getString(R.string.loading_failed));
         mStatus = STATUS_READY;
         break;
     }

@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.huadin.adapter.BaseAdapter;
-import com.huadin.adapter.FaultAdapter;
 import com.huadin.adapter.UrgentAdapter_1;
 import com.huadin.base.BaseFragment;
 import com.huadin.bean.ReleaseBean;
@@ -76,7 +75,7 @@ public class UrgentFragment extends BaseFragment implements UrgentContract.View,
 
   private void initAdapter()
   {
-    mAdapter = new UrgentAdapter_1(mContext,mBeanList,R.layout.urgent_item_adapter);
+    mAdapter = new UrgentAdapter_1(mContext, mBeanList, R.layout.urgent_item_adapter);
     mAdapter.setOnItemClickListener(this);
 
     LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
@@ -112,11 +111,11 @@ public class UrgentFragment extends BaseFragment implements UrgentContract.View,
     if (beanList.size() == 0)
     {
       //下拉加载没有数据
-      mAdapter.setLoadMoreStatus(FaultAdapter.STATUS_READY);
+      mAdapter.setLoadMoreStatus(BaseAdapter.STATUS_READY);
       showMessage(R.string.fault_load_more_null);
       return;
     }
-
+    // TODO: 2017/3/9 加載更多失敗沒有處理
     mBeanList.clear();
     mBeanList.addAll(beanList);
     mAdapter.updateAdapter(beanList);
@@ -142,6 +141,12 @@ public class UrgentFragment extends BaseFragment implements UrgentContract.View,
     mRefreshLayout.setRefreshing(false);
     mAdapter.clearAdapterList();
     mEmpty.setVisibility(View.VISIBLE);
+  }
+
+  @Override
+  public void loadMoreFailed()
+  {
+    mAdapter.setLoadMoreStatus(BaseAdapter.STATUS_FAILED);
   }
 
   @Override

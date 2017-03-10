@@ -107,7 +107,6 @@ class RegisterPresenter implements RegisterContract.Presenter
           mTimer.cancel();
         } else
         {
-          // TODO: 2016/12/1 用户注册异常和验证码异常处理
           int code = e.getErrorCode();
           LogUtil.i(TAG, "done: error = " + e.getMessage() + "/ code = " + e.getErrorCode());
           showErrorCode(code);

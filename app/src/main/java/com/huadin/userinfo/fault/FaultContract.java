@@ -29,5 +29,10 @@ public interface FaultContract
      * @param beanList List<ReportBean>
      */
     void querySuccess(List<ReportBean> beanList);
+
+    /**
+     * 加載更多失敗
+     */
+    void loadMoreFailed();
   }
 }

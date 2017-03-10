@@ -62,7 +62,11 @@ public class UrgentPresenter implements UrgentContract.Presenter, OnQueryDataLis
   @Override
   public void loadMore()
   {
-    if (getNetworkStatue()) return;
+    if (getNetworkStatue())
+    {
+      mRepairView.loadMoreFailed();
+      return;
+    }
     mQueryDataUtil.loadMoreData();
     queryData();
   }
@@ -119,5 +123,6 @@ public class UrgentPresenter implements UrgentContract.Presenter, OnQueryDataLis
   public void queryDataError(int errorResId)
   {
     mRepairView.error(errorResId);
+    mRepairView.loadMoreFailed();
   }
 }

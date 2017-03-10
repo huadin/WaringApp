@@ -12,14 +12,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.huadin.adapter.BaseAdapter;
-import com.huadin.adapter.FaultAdapter;
 import com.huadin.adapter.FaultAdapter_1;
 import com.huadin.base.BaseFragment;
 import com.huadin.bean.ReportBean;
 import com.huadin.eventbus.EventCenter;
 import com.huadin.userinfo.LoadMoreOnScrollListener;
 import com.huadin.util.LinearDecoration;
-import com.huadin.util.LogUtil;
 import com.huadin.waringapp.R;
 
 import java.util.ArrayList;
@@ -155,13 +153,19 @@ public class FaultFragment extends BaseFragment implements FaultContract.View,
     if (beanList.size() == 0)
     {
       //下拉加载没有数据
-      mFaultAdapter.setLoadMoreStatus(FaultAdapter.STATUS_READY);
+      mFaultAdapter.setLoadMoreStatus(BaseAdapter.STATUS_READY);
       showMessage(R.string.fault_load_more_null);
       return;
     }
     mBeanList.clear();
     mBeanList.addAll(beanList);
     mFaultAdapter.updateAdapter(beanList);
+  }
+
+  @Override
+  public void loadMoreFailed()
+  {
+    mFaultAdapter.setLoadMoreStatus(BaseAdapter.STATUS_FAILED);
   }
 
   @Override
@@ -175,7 +179,6 @@ public class FaultFragment extends BaseFragment implements FaultContract.View,
   @Override
   public void onItemClick(int position)
   {
-    LogUtil.i(LOG_TAG, "position = " + position);
     ReportBean bean = mBeanList.get(position);
 
     DetailedFaultFragment fragment = DetailedFaultFragment.newInstance(bean, position);

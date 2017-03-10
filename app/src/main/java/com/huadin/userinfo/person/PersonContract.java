@@ -32,6 +32,8 @@ public interface PersonContract
      * 更新权限成功
      */
     void updatePermissionSuccess();
+
+    void loadMoreFailed();
   }
 
   interface Presenter extends UpdateContract.Presenter

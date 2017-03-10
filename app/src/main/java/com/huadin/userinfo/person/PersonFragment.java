@@ -140,6 +140,7 @@ public class PersonFragment extends BaseFragment implements PersonContract.View,
   public void querySuccess(List<Person> personList)
   {
     //查询成功回调
+    // TODO: 2017/3/9 加載更多沒有處理
     mRefresh.setRefreshing(false);
     mEmpty.setVisibility(View.GONE);
     mPersonAdapter.updateAdapter(personList);
@@ -184,6 +185,12 @@ public class PersonFragment extends BaseFragment implements PersonContract.View,
   public void loadMore()
   {
     mPresenter.loadMore();
+  }
+
+  @Override
+  public void loadMoreFailed()
+  {
+    mPersonAdapter.setLoadMoreStatus(BaseAdapter.STATUS_FAILED);
   }
 
   @Override

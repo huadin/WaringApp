@@ -72,7 +72,11 @@ public class FaultPresenter implements FaultContract.Presenter, OnQueryDataListe
   @Override
   public void loadMore()
   {
-    if (getNetworkStatue()) return;
+    if (getNetworkStatue())
+    {
+      mFaultView.loadMoreFailed();
+      return;
+    }
     mQueryDataUtil.loadMoreData();
     queryData();
   }

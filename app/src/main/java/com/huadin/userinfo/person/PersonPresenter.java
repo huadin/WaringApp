@@ -63,7 +63,12 @@ public class PersonPresenter implements PersonContract.Presenter, OnQueryDataLis
   @Override
   public void loadMore()
   {
-    if (getNetworkStatue()) return;
+    if (getNetworkStatue())
+    {
+      mPersonView.loadMoreFailed();
+      return;
+    }
+
     mQueryDataUtil.loadMoreData();
     queryData();
   }
@@ -74,7 +79,7 @@ public class PersonPresenter implements PersonContract.Presenter, OnQueryDataLis
     mPersonView.showLoading();
     // TODO: 2017/3/8 用户权限设置
 //    person.setUserPermission(false);
-    person.update(person.getObjectId(),new UpdateListener()
+    person.update(person.getObjectId(), new UpdateListener()
     {
       @Override
       public void done(BmobException e)

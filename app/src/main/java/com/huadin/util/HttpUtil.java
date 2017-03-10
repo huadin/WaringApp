@@ -299,7 +299,7 @@ public enum HttpUtil
     //保存新数据
     DataSupport.saveAll(beanList);
 
-    //TODO 开始编码解析,MapFragment 还没有创建出来,无发接受到
+    // 开始编码解析,MapFragment 还没有创建出来,无发接受到
     while (!MyApplication.mMapFragmentCreate)
     {
 //      LogUtil.i(TAG, "MapFragment not create");

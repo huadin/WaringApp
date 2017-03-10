@@ -30,6 +30,8 @@ interface UrgentContract
     boolean networkStatus();
 
     void updateSuccess();
+
+    void loadMoreFailed();
   }
 
   interface Presenter extends BasePresenter

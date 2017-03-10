@@ -295,5 +295,6 @@
     <string name="loading_ready">准备加载</string>
     <string name="loading_start">加载中&#8230;</string>
     <string name="loading_end">我是有底线的</string>
+    <string name="loading_failed">加载异常</string>
 
 </resources>
