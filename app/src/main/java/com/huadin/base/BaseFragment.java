@@ -205,11 +205,11 @@ public abstract class BaseFragment extends SupportFragment
   {
     Intent localIntent = new Intent();
     localIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-    if (Build.VERSION.SDK_INT > 9)
-    {
+//    if (Build.VERSION.SDK_INT > 9)
+//    {
       localIntent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
       localIntent.setData(Uri.fromParts("package", mContext.getPackageName(), null));
-    }
+//    }
     startActivity(localIntent);
   }
 

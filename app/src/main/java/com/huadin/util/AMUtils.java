@@ -16,7 +16,7 @@ public class AMUtils
   private static final String FIXED_TELEPHONE = "[0-9]{7,12}";
   /*字母加数字*/
 //  private static final String USER_NAME = "[A-Za-z0-9_\\-\\u4e00-\\u9fa5]{6,20}";包含汉字
-  private static final String USER_NAME = "[A-Za-z0-9_\\-]{6,20}";
+  private static final String USER_NAME = "[A-Za-z0-9_\\-]{5,20}";
 
   private static final String STRING_FILTER = "[^A-Za-z0-9_\\-]";
 

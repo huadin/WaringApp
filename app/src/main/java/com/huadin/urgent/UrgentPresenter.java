@@ -2,9 +2,12 @@ package com.huadin.urgent;
 
 import com.huadin.bean.Person;
 import com.huadin.bean.ReleaseBean;
+import com.huadin.database.WaringAddress;
 import com.huadin.interf.OnQueryDataListener;
 import com.huadin.util.QueryDataUtil;
 import com.huadin.waringapp.R;
+
+import org.litepal.crud.DataSupport;
 
 import java.util.List;
 
@@ -87,9 +90,12 @@ public class UrgentPresenter implements UrgentContract.Presenter, OnQueryDataLis
 
   private BmobQuery<ReleaseBean> getQuery()
   {
+    String defaultAreaId = DataSupport.findFirst(WaringAddress.class).getWaringAreaId();
+    if ("".equals(defaultAreaId)) defaultAreaId = "11401";
+
     int limit = 15;
     BmobQuery<ReleaseBean> query = new BmobQuery<>();
-    String areaId = mPerson != null ? mPerson.getAreaId() : "11405";
+    String areaId = mPerson != null ? mPerson.getAreaId() : defaultAreaId;
     query.addWhereEqualTo("releaseAreaId", areaId);
     query.order("-createdAt");
     query.setLimit(limit);

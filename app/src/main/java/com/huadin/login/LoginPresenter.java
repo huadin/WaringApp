@@ -168,7 +168,6 @@ class LoginPresenter implements LoginContract.Presenter, InstallationListener
     switch (code)
     {
       case 101:
-        mLoginView.hindLoading();
         mLoginView.loginError(R.string.error_code_101);
         break;
     }

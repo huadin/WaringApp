@@ -39,7 +39,7 @@ import butterknife.ButterKnife;
 import cn.bmob.v3.BmobUser;
 import me.yokeyword.fragmentation.SupportFragment;
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener,
+public class   MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener,
         OnFragmentOpenDrawerListener
 
 {

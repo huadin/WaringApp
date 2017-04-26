@@ -31,8 +31,6 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.QueryListener;
 
-import static android.provider.MediaStore.Audio.AudioColumns.TITLE_KEY;
-
 public class PushIntentService extends IntentService
 {
   private static final String TAG = "PushIntentService";
@@ -68,7 +66,16 @@ public class PushIntentService extends IntentService
         //接收管理员发布的信息
         // TODO: 2017/2/8 管理员自己也可以收到消息
         if (startOrStopPush(mContext)) break;
-        if (message.getArea().equals(person.getAreaId()))
+        String areaId;
+        if (person == null)
+        {
+          areaId = DataSupport.findFirst(WaringAddress.class).getWaringAreaId();
+        } else
+        {
+          areaId = person.getAreaId();
+        }
+
+        if (message.getArea().equals(areaId))
         {
           sendNotification(mContext, MainActivity.class, new int[]{Intent.FLAG_ACTIVITY_SINGLE_TOP},
                   R.string.fault_info, R.string.push_release_title, R.string.push_release_content);
