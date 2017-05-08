@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 
 import com.huadin.waringapp.R;
-import com.squareup.leakcanary.LeakCanary;
 
 import org.litepal.LitePal;
 import org.litepal.LitePalApplication;
@@ -26,7 +25,7 @@ public class MyApplication extends LitePalApplication
 
     LitePal.initialize(this);
 
-    LeakCanary.install(this);
+//    LeakCanary.install(this);
 
     configBmob();
 
